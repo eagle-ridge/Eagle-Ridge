@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eagle Ridge Advisory | Technology Consulting for PE & VC</title>
+    <meta name="description" content="Technology consulting and financial services for the PE and VC community. Specialists in cybersecurity compliance frameworks and go-to-market strategy.">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: #1a1a1a;
+            background: #f5f3e8;
+        }
+
+        .skip-link {
+            position: absolute;
+            top: -40px;
+            left: 0;
+            background: #1a1a1a;
+            color: #fff;
+            padding: 8px 16px;
+            text-decoration: none;
+            z-index: 100;
+        }
+
+        .skip-link:focus {
+            top: 0;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        header {
+            padding: 32px 0;
+            border-bottom: 1px solid #d0cdb8;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 24px;
+            font-weight: 600;
+            color: #1a1a1a;
+            letter-spacing: -0.5px;
+        }
+
+        .logo-img {
+            width: 40px;
+            height: 40px;
+        }
+
+        .hero {
+            padding: 120px 0 80px;
+        }
+
+        h1 {
+            font-size: 56px;
+            font-weight: 600;
+            line-height: 1.1;
+            margin-bottom: 24px;
+            letter-spacing: -1px;
+            max-width: 800px;
+        }
+
+        .subtitle {
+            font-size: 24px;
+            color: #2a2a2a;
+            margin-bottom: 48px;
+            max-width: 700px;
+            line-height: 1.4;
+        }
+
+        .services {
+            padding: 80px 0;
+            background: #ffffff;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 48px;
+            margin-top: 48px;
+        }
+
+        .service-card {
+            padding: 32px;
+            background: #f5f3e8;
+            border-radius: 8px;
+            border: 1px solid #e0ddc8;
+        }
+
+        .service-card.primary {
+            background: #1a1a1a;
+            color: #ffffff;
+            border: none;
+        }
+
+        .service-card.primary h2 {
+            color: #ffffff;
+        }
+
+        .service-card.primary p {
+            color: #e5e5e5;
+        }
+
+        .service-card h2 {
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 12px;
+            color: #1a1a1a;
+        }
+
+        .service-card p {
+            color: #4a4a4a;
+            line-height: 1.6;
+        }
+
+        .frameworks {
+            padding: 80px 0;
+        }
+
+        .section-title {
+            font-size: 36px;
+            font-weight: 600;
+            margin-bottom: 16px;
+            letter-spacing: -0.5px;
+        }
+
+        .section-description {
+            font-size: 18px;
+            color: #4a4a4a;
+            margin-bottom: 32px;
+            max-width: 700px;
+        }
+
+        .framework-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+
+        .framework-badge {
+            padding: 12px 24px;
+            background: #e0ddc8;
+            border: 1px solid #d0cdb8;
+            border-radius: 6px;
+            font-weight: 500;
+            color: #1a1a1a;
+            font-size: 16px;
+        }
+
+        .social-proof {
+            padding: 80px 0;
+            background: #ffffff;
+            text-align: center;
+        }
+
+        .social-proof .stat {
+            font-size: 48px;
+            font-weight: 600;
+            color: #1a1a1a;
+            margin-bottom: 8px;
+        }
+
+        .social-proof .stat-label {
+            font-size: 18px;
+            color: #4a4a4a;
+        }
+
+        .cta-section {
+            padding: 80px 0;
+            background: #1a1a1a;
+            color: #ffffff;
+            text-align: center;
+        }
+
+        .cta-section h2 {
+            font-size: 42px;
+            font-weight: 600;
+            margin-bottom: 24px;
+            letter-spacing: -0.5px;
+        }
+
+        .cta-section p {
+            font-size: 20px;
+            color: #e5e5e5;
+            margin-bottom: 32px;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .button {
+            display: inline-block;
+            padding: 16px 32px;
+            text-decoration: none;
+            border-radius: 6px;
+            font-weight: 600;
+            font-size: 18px;
+            transition: transform 0.2s;
+        }
+
+        .button-primary {
+            background: #ffffff;
+            color: #1a1a1a;
+        }
+
+        .button-secondary {
+            background: transparent;
+            color: #ffffff;
+            border: 2px solid #ffffff;
+        }
+
+        .button:hover {
+            transform: translateY(-2px);
+        }
+
+        .button:focus {
+            outline: 3px solid #ffffff;
+            outline-offset: 4px;
+        }
+
+        .button-primary:focus {
+            outline-color: #1a1a1a;
+        }
+
+        a:focus {
+            outline: 2px solid #1a1a1a;
+            outline-offset: 2px;
+        }
+
+        footer {
+            padding: 48px 0;
+            text-align: center;
+            color: #6a6a6a;
+            border-top: 1px solid #d0cdb8;
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 36px;
+            }
+
+            .subtitle {
+                font-size: 18px;
+            }
+
+            .section-title {
+                font-size: 28px;
+            }
+
+            .hero {
+                padding: 60px 0 40px;
+            }
+
+            .services, .frameworks, .cta-section, .social-proof {
+                padding: 48px 0;
+            }
+
+            .services-grid {
+                gap: 32px;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .button {
+                width: 100%;
+                max-width: 300px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <header>
+        <div class="container">
+            <div class="logo">
+                <img src="ERA - 1.png" alt="Eagle Ridge Advisory" class="logo-img">
+                <span>Eagle Ridge Advisory</span>
+            </div>
+        </div>
+    </header>
+
+    <main id="main-content">
+        <section class="hero">
+            <div class="container">
+                <h1>Technology consulting for portfolio companies and investment firms.</h1>
+                <p class="subtitle">We run technical due diligence on acquisitions and build compliance roadmaps for portfolio companies targeting government and enterprise contracts.</p>
+            </div>
+        </section>
+
+        <section class="services">
+            <div class="container">
+                <h2 class="section-title">What We Do</h2>
+                <div class="services-grid">
+                    <div class="service-card primary">
+                        <h2>Cybersecurity Due Diligence</h2>
+                        <p>Technical assessment and risk evaluation for portfolio companies. We identify gaps, quantify remediation costs, and build implementation roadmaps that align with deal timelines.</p>
+                    </div>
+                    <div class="service-card">
+                        <h2>Compliance Implementation</h2>
+                        <p>End-to-end support for ISO 27001, SOC 2 Type 2, CMMC, and FedRAMP certification. We handle documentation, controls implementation, and audit preparation.</p>
+                    </div>
+                    <div class="service-card">
+                        <h2>Go-to-Market Strategy</h2>
+                        <p>Business development and market analysis for technology companies. We help portfolio companies identify opportunities, build sales infrastructure, and accelerate growth.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="frameworks">
+            <div class="container">
+                <h2 class="section-title">Compliance Frameworks</h2>
+                <p class="section-description">We implement and audit against industry-standard security frameworks required for government and enterprise contracts.</p>
+                <div class="framework-list">
+                    <div class="framework-badge">ISO 27001</div>
+                    <div class="framework-badge">SOC 2 Type 2</div>
+                    <div class="framework-badge">CMMC</div>
+                    <div class="framework-badge">FedRAMP</div>
+                    <div class="framework-badge">NIST 800-53</div>
+                    <div class="framework-badge">GDPR</div>
+                </div>
+            </div>
+        </section>
+
+        <section class="social-proof">
+            <div class="container">
+                <div class="stat">15+</div>
+                <div class="stat-label">Portfolio companies advised</div>
+            </div>
+        </section>
+
+        <section class="cta-section">
+            <div class="container">
+                <h2>Let's talk about your portfolio.</h2>
+                <p>Get in touch to discuss due diligence, compliance, or growth strategy.</p>
+                <div class="cta-buttons">
+                    <a href="mailto:contact@eagleridge.io" class="button button-primary" aria-label="Email Eagle Ridge Advisory at contact@eagleridge.io">Email us at contact@eagleridge.io</a>
+                    <a href="#" class="button button-secondary" aria-label="Download due diligence checklist">Download our DD checklist</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Eagle Ridge Advisory. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>
