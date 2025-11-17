@@ -12,10 +12,18 @@
 ## Repository Structure
 ```
 Eagle-Ridge/
-├── CLAUDE.md           # This file - Claude Code context
-├── eagleridge_landing.html  # Main landing page
-├── ERA - 1.png        # Logo image
-└── .git/              # Git repository
+├── CLAUDE.md                       # This file - Claude Code context
+├── README.md                       # Project documentation
+├── DOMAIN_REPUTATION_GUIDE.md     # Domain reputation guide
+├── index.html                      # Main landing page
+├── about.html                      # About page
+├── privacy.html                    # Privacy policy page
+├── logo-40.png                     # Optimized logo (40x40px, ~2KB)
+├── logo-80.png                     # Optimized logo retina (80x80px, ~4KB)
+├── logo.png                        # Original logo (1024x1024px)
+├── Geometric Eagle Head Logo.png   # Alternate logo (1024x1024px)
+├── .gitignore                      # Git ignore file
+└── .git/                           # Git repository
 ```
 
 ## Git Workflow - ALWAYS Follow This
@@ -54,7 +62,7 @@ git push origin feature/descriptive-name
 ### Local Development
 ```bash
 # For static HTML, open directly in browser
-open eagleridge_landing.html
+open index.html
 
 # Or use a local server (if python available)
 python3 -m http.server 8000
@@ -239,8 +247,11 @@ gh pr create            # Create pull request
 ```
 
 ### File Paths
-- Landing page: `eagleridge_landing.html`
-- Logo: `ERA - 1.png`
+- Landing page: `index.html`
+- About page: `about.html`
+- Privacy page: `privacy.html`
+- Optimized logos: `logo-40.png`, `logo-80.png`
+- Original logos: `logo.png`, `Geometric Eagle Head Logo.png`
 - Project docs: `CLAUDE.md` (this file)
 
 ---
