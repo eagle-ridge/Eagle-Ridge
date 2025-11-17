@@ -278,6 +278,20 @@
             border-top: 1px solid #d0cdb8;
         }
 
+        .footer-link {
+            color: #3d2817;
+            text-decoration: none;
+            margin: 0 12px;
+        }
+
+        .footer-link:hover {
+            text-decoration: underline;
+        }
+
+        .footer-copyright {
+            margin-top: 16px;
+        }
+
         @media (max-width: 768px) {
             h1 {
                 font-size: 36px;
@@ -311,6 +325,39 @@
             .button {
                 width: 100%;
                 max-width: 300px;
+            }
+        }
+
+        @media print {
+            .skip-link,
+            .cta-section,
+            footer nav {
+                display: none;
+            }
+
+            body {
+                background: white;
+                color: black;
+            }
+
+            .service-card.primary {
+                background: white;
+                color: black;
+                border: 1px solid #d0cdb8;
+            }
+
+            .service-card.primary h3,
+            .service-card.primary p {
+                color: black;
+            }
+
+            a {
+                color: black;
+                text-decoration: underline;
+            }
+
+            .footer-copyright {
+                margin-top: 32px;
             }
         }
     </style>
@@ -395,14 +442,57 @@
 
     <footer>
         <div class="container">
-            <p>
-                <a href="/about.html" style="color: #3d2817; text-decoration: none; margin: 0 12px;">About</a>
-                <a href="/privacy.html" style="color: #3d2817; text-decoration: none; margin: 0 12px;">Privacy Policy</a>
-                <a href="https://www.linkedin.com/company/eagle-ridge-advisory/" target="_blank" rel="noopener noreferrer" style="color: #3d2817; text-decoration: none; margin: 0 12px;">LinkedIn</a>
-                <a href="mailto:contact@eagleridge.io" style="color: #3d2817; text-decoration: none; margin: 0 12px;">Contact</a>
-            </p>
-            <p style="margin-top: 16px;">&copy; 2025 Eagle Ridge Advisory. All rights reserved.</p>
+            <nav aria-label="Footer navigation">
+                <a href="/" class="footer-link">Home</a>
+                <a href="/about.html" class="footer-link">About</a>
+                <a href="/privacy.html" class="footer-link">Privacy Policy</a>
+                <a href="https://www.linkedin.com/company/eagle-ridge-advisory/" target="_blank" rel="noopener noreferrer" class="footer-link">LinkedIn</a>
+                <a href="mailto:contact@eagleridge.io" class="footer-link">Contact</a>
+            </nav>
+            <p class="footer-copyright">&copy; 2025 Eagle Ridge Advisory. All rights reserved.</p>
         </div>
     </footer>
+
+    <!-- Schema.org Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "ProfessionalService",
+        "name": "Eagle Ridge Advisory",
+        "description": "Technology consulting and financial services for the PE and VC community. Specialists in cybersecurity compliance frameworks and go-to-market strategy.",
+        "url": "https://eagleridge.io",
+        "logo": "https://eagleridge.io/logo-512.png",
+        "email": "contact@eagleridge.io",
+        "address": {
+            "@type": "PostalAddress",
+            "addressCountry": "US"
+        },
+        "sameAs": [
+            "https://www.linkedin.com/company/eagle-ridge-advisory/"
+        ],
+        "areaServed": {
+            "@type": "Country",
+            "name": "United States"
+        },
+        "serviceType": [
+            "Cybersecurity Due Diligence",
+            "Compliance Implementation",
+            "Go-to-Market Strategy",
+            "Technology Consulting"
+        ],
+        "knowsAbout": [
+            "ISO 27001",
+            "SOC 2 Type 2",
+            "CMMC",
+            "FedRAMP",
+            "NIST 800-53",
+            "GDPR",
+            "Cybersecurity",
+            "Compliance",
+            "Private Equity",
+            "Venture Capital"
+        ]
+    }
+    </script>
 </body>
 </html>

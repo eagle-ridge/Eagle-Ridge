@@ -189,6 +189,10 @@
             text-decoration: underline;
         }
 
+        .footer-copyright {
+            margin-top: 16px;
+        }
+
         @media (max-width: 768px) {
             h1 {
                 font-size: 32px;
@@ -200,6 +204,28 @@
 
             .expertise-grid {
                 grid-template-columns: 1fr;
+            }
+        }
+
+        @media print {
+            .skip-link,
+            .cta-box,
+            footer nav {
+                display: none;
+            }
+
+            body {
+                background: white;
+                color: black;
+            }
+
+            a {
+                color: black;
+                text-decoration: underline;
+            }
+
+            .footer-copyright {
+                margin-top: 32px;
             }
         }
     </style>
@@ -273,14 +299,14 @@
 
     <footer>
         <div class="container">
-            <p>
+            <nav aria-label="Footer navigation">
                 <a href="/">Home</a>
                 <a href="/about.html">About</a>
                 <a href="/privacy.html">Privacy Policy</a>
                 <a href="https://www.linkedin.com/company/eagle-ridge-advisory/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
                 <a href="mailto:contact@eagleridge.io">Contact</a>
-            </p>
-            <p style="margin-top: 16px;">&copy; 2025 Eagle Ridge Advisory. All rights reserved.</p>
+            </nav>
+            <p class="footer-copyright">&copy; 2025 Eagle Ridge Advisory. All rights reserved.</p>
         </div>
     </footer>
 </body>
