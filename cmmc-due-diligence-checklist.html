@@ -1,0 +1,646 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CMMC Due Diligence Checklist | Eagle Ridge Advisory</title>
+    <meta name="description" content="Comprehensive CMMC due diligence checklist for evaluating defense contractors and portfolio companies.">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+
+    <!-- Theme Color -->
+    <meta name="theme-color" content="#3d2817">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: #3d2817;
+            background: #f9f6ec;
+            padding: 40px 20px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            padding: 60px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 48px;
+            padding-bottom: 24px;
+            border-bottom: 3px solid #3d2817;
+        }
+
+        .logo-section {
+            margin-bottom: 24px;
+        }
+
+        h1 {
+            font-size: 36px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: #3d2817;
+        }
+
+        .subtitle {
+            font-size: 18px;
+            color: #6a6a6a;
+        }
+
+        h2 {
+            font-size: 24px;
+            font-weight: 600;
+            margin-top: 40px;
+            margin-bottom: 16px;
+            color: #3d2817;
+            padding-left: 12px;
+            border-left: 4px solid #3d2817;
+        }
+
+        h3 {
+            font-size: 18px;
+            font-weight: 600;
+            margin-top: 24px;
+            margin-bottom: 12px;
+            color: #3d2817;
+        }
+
+        p {
+            margin-bottom: 16px;
+            color: #4a4a4a;
+        }
+
+        .intro-box {
+            background: #f9f6ec;
+            padding: 24px;
+            margin-bottom: 32px;
+            border-left: 4px solid #3d2817;
+        }
+
+        .level-badge {
+            display: inline-block;
+            padding: 4px 12px;
+            background: #3d2817;
+            color: white;
+            border-radius: 4px;
+            font-size: 14px;
+            font-weight: 600;
+            margin-left: 8px;
+        }
+
+        .checklist {
+            margin-top: 16px;
+            margin-bottom: 32px;
+        }
+
+        .checklist-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 12px;
+            padding: 12px;
+            background: #f9f9f9;
+            border-radius: 4px;
+        }
+
+        .checklist-item input[type="checkbox"] {
+            margin-right: 12px;
+            margin-top: 4px;
+            width: 18px;
+            height: 18px;
+            cursor: pointer;
+        }
+
+        .checklist-item label {
+            flex: 1;
+            cursor: pointer;
+            line-height: 1.5;
+        }
+
+        .critical {
+            border-left: 3px solid #d32f2f;
+        }
+
+        .high {
+            border-left: 3px solid #f57c00;
+        }
+
+        .medium {
+            border-left: 3px solid #fbc02d;
+        }
+
+        .note {
+            background: #e3f2fd;
+            padding: 16px;
+            margin: 16px 0;
+            border-left: 4px solid #2196f3;
+            font-size: 14px;
+        }
+
+        .risk-matrix {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+            margin: 24px 0;
+        }
+
+        .risk-box {
+            padding: 16px;
+            border-radius: 6px;
+            text-align: center;
+        }
+
+        .risk-critical {
+            background: #ffebee;
+            border: 2px solid #d32f2f;
+        }
+
+        .risk-high {
+            background: #fff3e0;
+            border: 2px solid #f57c00;
+        }
+
+        .risk-medium {
+            background: #fffde7;
+            border: 2px solid #fbc02d;
+        }
+
+        footer {
+            margin-top: 48px;
+            padding-top: 24px;
+            border-top: 2px solid #d0cdb8;
+            text-align: center;
+            color: #6a6a6a;
+            font-size: 14px;
+        }
+
+        @media print {
+            body {
+                background: white;
+                padding: 0;
+            }
+
+            .container {
+                box-shadow: none;
+                padding: 20px;
+            }
+
+            .checklist-item {
+                break-inside: avoid;
+            }
+
+            h2 {
+                break-after: avoid;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 30px 20px;
+            }
+
+            h1 {
+                font-size: 28px;
+            }
+
+            h2 {
+                font-size: 20px;
+            }
+
+            .risk-matrix {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo-section">
+                <img src="logo-40.png" srcset="logo-40.png 1x, logo-80.png 2x" alt="Eagle Ridge Advisory" width="50">
+            </div>
+            <h1>CMMC Due Diligence Checklist</h1>
+            <p class="subtitle">Cybersecurity Maturity Model Certification Assessment for Portfolio Companies</p>
+        </header>
+
+        <div class="intro-box">
+            <p><strong>Purpose:</strong> This checklist helps private equity and venture capital firms evaluate cybersecurity maturity and CMMC compliance readiness in defense contractor portfolio companies.</p>
+            <p><strong>Version:</strong> CMMC 2.0 Framework | <strong>Last Updated:</strong> January 2025</p>
+        </div>
+
+        <h2>Executive Summary Questions</h2>
+
+        <div class="checklist">
+            <div class="checklist-item critical">
+                <input type="checkbox" id="exec1">
+                <label for="exec1"><strong>Does the company handle Controlled Unclassified Information (CUI)?</strong> - Determines CMMC level requirement</label>
+            </div>
+            <div class="checklist-item critical">
+                <input type="checkbox" id="exec2">
+                <label for="exec2"><strong>What is the required CMMC level for current/target DoD contracts?</strong> - Level 1 (Foundational), Level 2 (Advanced), or Level 3 (Expert)</label>
+            </div>
+            <div class="checklist-item critical">
+                <input type="checkbox" id="exec3">
+                <label for="exec3"><strong>Has the company achieved CMMC certification?</strong> - Verify certificate status and expiration</label>
+            </div>
+            <div class="checklist-item high">
+                <input type="checkbox" id="exec4">
+                <label for="exec4"><strong>What is the estimated cost to achieve/maintain certification?</strong> - Budget for assessment, remediation, and ongoing compliance</label>
+            </div>
+            <div class="checklist-item high">
+                <input type="checkbox" id="exec5">
+                <label for="exec5"><strong>Timeline to certification?</strong> - Assess gap between current state and required level</label>
+            </div>
+        </div>
+
+        <div class="note">
+            <strong>💡 Key Insight:</strong> CMMC certification is becoming mandatory for DoD contractors. Level 2 certification typically costs $100K-$500K and takes 6-18 months to achieve. This impacts deal valuation and revenue timelines.
+        </div>
+
+        <h2>1. Access Control <span class="level-badge">CRITICAL</span></h2>
+
+        <div class="checklist">
+            <div class="checklist-item critical">
+                <input type="checkbox" id="ac1">
+                <label for="ac1">Limit system access to authorized users and devices</label>
+            </div>
+            <div class="checklist-item critical">
+                <input type="checkbox" id="ac2">
+                <label for="ac2">Multi-factor authentication (MFA) implemented for all privileged accounts</label>
+            </div>
+            <div class="checklist-item critical">
+                <input type="checkbox" id="ac3">
+                <label for="ac3">MFA implemented for all remote access to CUI systems</label>
+            </div>
+            <div class="checklist-item high">
+                <input type="checkbox" id="ac4">
+                <label for="ac4">Role-based access control (RBAC) enforced for CUI systems</label>
+            </div>
+            <div class="checklist-item high">
+                <input type="checkbox" id="ac5">
+                <label for="ac5">Account management procedures (creation, modification, termination)</label>
+            </div>
+            <div class="checklist-item high">
+                <input type="checkbox" id="ac6">
+                <label for="ac6">Privileged account monitoring and audit logging</label>
+            </div>
+            <div class="checklist-item medium">
+                <input type="checkbox" id="ac7">
+                <label for="ac7">Regular access reviews (quarterly minimum for privileged access)</label>
+            </div>
+        </div>
+
+        <h2>2. Asset Management <span class="level-badge">HIGH</span></h2>
+
+        <div class="checklist">
+            <div class="checklist-item high">
+                <input type="checkbox" id="am1">
+                <label for="am1">Complete inventory of hardware assets that store/process CUI</label>
+            </div>
+            <div class="checklist-item high">
+                <input type="checkbox" id="am2">
+                <label for="am2">Complete inventory of software/applications with CUI access</label>
+            </div>
+            <div class="checklist-item high">
+                <input type="checkbox" id="am3">
+                <label for="am3">Asset tracking system with ownership and location</label>
+            </div>
+            <div class="checklist-item medium">
+                <input type="checkbox" id="am4">
+                <label for="am4">Network diagram showing CUI data flows and system boundaries</label>
+            </div>
+            <div class="checklist-item medium">
+                <input type="checkbox" id="am5">
+                <label for="am5">Documented authorized software whitelist</label>
+            </div>
+        </div>
+
+        <h2>3. Audit & Accountability <span class="level-badge">CRITICAL</span></h2>
+
+        <div class="checklist">
+            <div class="checklist-item critical">
+                <input type="checkbox" id="aa1">
+                <label for="aa1">Security event logging enabled for all CUI systems</label>
+            </div>
+            <div class="checklist-item critical">
+                <input type="checkbox" id="aa2">
+                <label for="aa2">Log retention policy (minimum 1 year for CMMC Level 2)</label>
+            </div>
+            <div class="checklist-item high">
+                <input type="checkbox" id="aa3">
+                <label for="aa3">Centralized log collection and SIEM capability</label>
+            </div>
+            <div class="checklist-item high">
+                <input type="checkbox" id="aa4">
+                <label for="aa4">Regular log review process and procedures</label>
+            </div>
+            <div class="checklist-item high">
+                <input type="checkbox" id="aa5">
+                <label for="aa5">Audit log protection (integrity, confidentiality)</label>
+            </div>
+            <div class="checklist-item medium">
+                <input type="checkbox" id="aa6">
+                <label for="aa6">Correlation of audit records across systems</label>
+            </div>
+        </div>
+
+        <h2>4. Configuration Management <span class="level-badge">HIGH</span></h2>
+
+        <div class="checklist">
+            <div class="checklist-item high">
+                <input type="checkbox" id="cm1">
+                <label for="cm1">Baseline configurations established for all CUI systems</label>
+            </div>
+            <div class="checklist-item high">
+                <input type="checkbox" id="cm2">
+                <label for="cm2">Configuration change control process documented and followed</label>
+            </div>
+            <div class="checklist-item high">
+                <input type="checkbox" id="cm3">
+                <label for="cm3">Vulnerability scanning and patch management program</label>
+            </div>
+            <div class="checklist-item critical">
+                <input type="checkbox" id="cm4">
+                <label for="cm4">Critical security patches applied within 30 days (CMMC requirement)</label>
+            </div>
+            <div class="checklist-item high">
+                <input type="checkbox" id="cm5">
+                <label for="cm5">Automated patch deployment capability</label>
+            </div>
+            <div class="checklist-item medium">
+                <input type="checkbox" id="cm6">
+                <label for="cm6">System hardening standards (CIS benchmarks or equivalent)</label>
+            </div>
+        </div>
+
+        <h2>5. Identification & Authentication <span class="level-badge">CRITICAL</span></h2>
+
+        <div class="checklist">
+            <div class="checklist-item critical">
+                <input type="checkbox" id="ia1">
+                <label for="ia1">Unique user identification for all system users</label>
+            </div>
+            <div class="checklist-item critical">
+                <input type="checkbox" id="ia2">
+                <label for="ia2">Password complexity requirements enforced (NIST 800-171)</label>
+            </div>
+            <div class="checklist-item critical">
+                <input type="checkbox" id="ia3">
+                <label for="ia3">Account lockout after failed login attempts</label>
+            </div>
+            <div class="checklist-item high">
+                <input type="checkbox" id="ia4">
+                <label for="ia4">Session timeout for inactive sessions (15 minutes max)</label>
+            </div>
+            <div class="checklist-item high">
+                <input type="checkbox" id="ia5">
+                <label for="ia5">Password manager or secure password storage solution</label>
+            </div>
+        </div>
+
+        <h2>6. Incident Response <span class="level-badge">CRITICAL</span></h2>
+
+        <div class="checklist">
+            <div class="checklist-item critical">
+                <input type="checkbox" id="ir1">
+                <label for="ir1">Documented Incident Response Plan (IRP)</label>
+            </div>
+            <div class="checklist-item critical">
+                <input type="checkbox" id="ir2">
+                <label for="ir2">24/7 incident response capability or retainer with MSSP</label>
+            </div>
+            <div class="checklist-item critical">
+                <input type="checkbox" id="ir3">
+                <label for="ir3">Understanding of DoD breach reporting requirements (72 hours)</label>
+            </div>
+            <div class="checklist-item high">
+                <input type="checkbox" id="ir4">
+                <label for="ir4">IR team identified with defined roles and responsibilities</label>
+            </div>
+            <div class="checklist-item high">
+                <input type="checkbox" id="ir5">
+                <label for="ir5">Incident response exercises conducted (tabletop minimum annually)</label>
+            </div>
+            <div class="checklist-item high">
+                <input type="checkbox" id="ir6">
+                <label for="ir6">Incident tracking system and post-incident review process</label>
+            </div>
+        </div>
+
+        <h2>7. System & Communications Protection <span class="level-badge">CRITICAL</span></h2>
+
+        <div class="checklist">
+            <div class="checklist-item critical">
+                <input type="checkbox" id="sc1">
+                <label for="sc1">Encryption of CUI at rest (FIPS 140-2 validated)</label>
+            </div>
+            <div class="checklist-item critical">
+                <input type="checkbox" id="sc2">
+                <label for="sc2">Encryption of CUI in transit (TLS 1.2 or higher)</label>
+            </div>
+            <div class="checklist-item critical">
+                <input type="checkbox" id="sc3">
+                <label for="sc3">Network segmentation separating CUI from other systems</label>
+            </div>
+            <div class="checklist-item high">
+                <input type="checkbox" id="sc4">
+                <label for="sc4">Boundary protection (firewalls, IDS/IPS)</label>
+            </div>
+            <div class="checklist-item high">
+                <input type="checkbox" id="sc5">
+                <label for="sc5">Secure remote access (VPN with MFA)</label>
+            </div>
+            <div class="checklist-item high">
+                <input type="checkbox" id="sc6">
+                <label for="sc6">Wireless security controls (WPA3 minimum)</label>
+            </div>
+            <div class="checklist-item medium">
+                <input type="checkbox" id="sc7">
+                <label for="sc7">Email security (spam filtering, anti-phishing, DMARC/DKIM/SPF)</label>
+            </div>
+        </div>
+
+        <h2>8. Security Assessment <span class="level-badge">HIGH</span></h2>
+
+        <div class="checklist">
+            <div class="checklist-item high">
+                <input type="checkbox" id="sa1">
+                <label for="sa1">Annual security assessment conducted by third party</label>
+            </div>
+            <div class="checklist-item high">
+                <input type="checkbox" id="sa2">
+                <label for="sa2">Vulnerability scanning (monthly minimum for internet-facing)</label>
+            </div>
+            <div class="checklist-item high">
+                <input type="checkbox" id="sa3">
+                <label for="sa3">Penetration testing (annual minimum)</label>
+            </div>
+            <div class="checklist-item high">
+                <input type="checkbox" id="sa4">
+                <label for="sa4">System Security Plan (SSP) documented and current</label>
+            </div>
+            <div class="checklist-item medium">
+                <input type="checkbox" id="sa5">
+                <label for="sa5">Plan of Action & Milestones (POA&M) for identified gaps</label>
+            </div>
+        </div>
+
+        <h2>9. Personnel Security <span class="level-badge">HIGH</span></h2>
+
+        <div class="checklist">
+            <div class="checklist-item high">
+                <input type="checkbox" id="ps1">
+                <label for="ps1">Background checks for personnel with CUI access</label>
+            </div>
+            <div class="checklist-item high">
+                <input type="checkbox" id="ps2">
+                <label for="ps2">Security awareness training (annual minimum)</label>
+            </div>
+            <div class="checklist-item high">
+                <input type="checkbox" id="ps3">
+                <label for="ps3">Role-based security training for administrators</label>
+            </div>
+            <div class="checklist-item high">
+                <input type="checkbox" id="ps4">
+                <label for="ps4">Insider threat program or monitoring</label>
+            </div>
+            <div class="checklist-item medium">
+                <input type="checkbox" id="ps5">
+                <label for="ps5">Termination procedures (access revocation checklist)</label>
+            </div>
+            <div class="checklist-item medium">
+                <input type="checkbox" id="ps6">
+                <label for="ps6">Phishing simulation testing program</label>
+            </div>
+        </div>
+
+        <h2>10. Physical Protection <span class="level-badge">MEDIUM</span></h2>
+
+        <div class="checklist">
+            <div class="checklist-item high">
+                <input type="checkbox" id="pp1">
+                <label for="pp1">Physical access controls for CUI processing areas</label>
+            </div>
+            <div class="checklist-item medium">
+                <input type="checkbox" id="pp2">
+                <label for="pp2">Visitor access logs and escort procedures</label>
+            </div>
+            <div class="checklist-item medium">
+                <input type="checkbox" id="pp3">
+                <label for="pp3">Physical device protection (locks, security cables)</label>
+            </div>
+            <div class="checklist-item medium">
+                <input type="checkbox" id="pp4">
+                <label for="pp4">Secure media disposal procedures (shredding, degaussing)</label>
+            </div>
+            <div class="checklist-item high">
+                <input type="checkbox" id="pp5">
+                <label for="pp5">Environmental controls (fire suppression, power backup)</label>
+            </div>
+        </div>
+
+        <h2>Financial & Operational Assessment</h2>
+
+        <div class="risk-matrix">
+            <div class="risk-box risk-critical">
+                <h3>Cost Analysis</h3>
+                <p>Estimated certification cost: $______</p>
+                <p>Annual compliance cost: $______</p>
+            </div>
+            <div class="risk-box risk-high">
+                <h3>Timeline</h3>
+                <p>Months to certification: ___</p>
+                <p>Revenue at risk: $______</p>
+            </div>
+            <div class="risk-box risk-medium">
+                <h3>Risk Rating</h3>
+                <p>Overall maturity: ___/5</p>
+                <p>Certification probability: ___%</p>
+            </div>
+        </div>
+
+        <h2>Key Risk Indicators</h2>
+
+        <div class="checklist">
+            <div class="checklist-item critical">
+                <input type="checkbox" id="risk1">
+                <label for="risk1"><strong>Deal Breaker:</strong> No clear path to required CMMC level within deal timeline</label>
+            </div>
+            <div class="checklist-item critical">
+                <input type="checkbox" id="risk2">
+                <label for="risk2"><strong>Deal Breaker:</strong> Previous cybersecurity incidents involving CUI</label>
+            </div>
+            <div class="checklist-item critical">
+                <input type="checkbox" id="risk3">
+                <label for="risk3"><strong>Deal Breaker:</strong> Certification cost exceeds 20% of annual revenue</label>
+            </div>
+            <div class="checklist-item high">
+                <input type="checkbox" id="risk4">
+                <label for="risk4"><strong>Major Risk:</strong> Missing critical controls (encryption, MFA, logging)</label>
+            </div>
+            <div class="checklist-item high">
+                <input type="checkbox" id="risk5">
+                <label for="risk5"><strong>Major Risk:</strong> No dedicated security personnel or budget</label>
+            </div>
+            <div class="checklist-item high">
+                <input type="checkbox" id="risk6">
+                <label for="risk6"><strong>Major Risk:</strong> Legacy systems that cannot meet CMMC requirements</label>
+            </div>
+        </div>
+
+        <div class="note">
+            <strong>📊 Scoring Guidance:</strong>
+            <ul style="margin-top: 8px; margin-left: 20px;">
+                <li><strong>90-100% complete:</strong> Ready for CMMC assessment</li>
+                <li><strong>70-89% complete:</strong> 6-12 months to readiness with focused effort</li>
+                <li><strong>50-69% complete:</strong> 12-18 months to readiness, significant investment required</li>
+                <li><strong>Below 50%:</strong> 18+ months to readiness, consider as post-acquisition value creation opportunity</li>
+            </ul>
+        </div>
+
+        <h2>Recommended Next Steps</h2>
+
+        <div class="checklist">
+            <div class="checklist-item high">
+                <input type="checkbox" id="next1">
+                <label for="next1">Engage CMMC Third-Party Assessment Organization (C3PAO) for gap assessment</label>
+            </div>
+            <div class="checklist-item high">
+                <input type="checkbox" id="next2">
+                <label for="next2">Review DoD contract pipeline and required CMMC levels</label>
+            </div>
+            <div class="checklist-item high">
+                <input type="checkbox" id="next3">
+                <label for="next3">Develop detailed remediation roadmap with costs and timeline</label>
+            </div>
+            <div class="checklist-item medium">
+                <input type="checkbox" id="next4">
+                <label for="next4">Include CMMC compliance milestones in 100-day plan</label>
+            </div>
+            <div class="checklist-item medium">
+                <input type="checkbox" id="next5">
+                <label for="next5">Assess need for CMMC consultant or vCISO during transition</label>
+            </div>
+        </div>
+
+        <footer>
+            <p><strong>Eagle Ridge Advisory</strong></p>
+            <p>Technology Consulting for PE & VC Portfolio Companies</p>
+            <p style="margin-top: 8px;">contact@eagleridge.io | eagleridge.io</p>
+            <p style="margin-top: 16px; font-size: 12px;">© 2025 Eagle Ridge Advisory. This checklist is provided for informational purposes. Consult with qualified cybersecurity professionals for official CMMC assessment.</p>
+        </footer>
+    </div>
+</body>
+</html>
