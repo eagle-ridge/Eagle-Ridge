@@ -1,0 +1,7 @@
+# robots.txt for eagleridge.io
+
+User-agent: *
+Allow: /
+
+# Sitemaps
+Sitemap: https://eagleridge.io/sitemap.xml

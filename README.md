@@ -48,12 +48,26 @@ python3 -m http.server 8000
 
 ```
 Eagle-Ridge/
-├── README.md                      # This file
-├── CLAUDE.md                      # Development context for Claude Code
-├── CNAME                          # Custom domain configuration
-├── index.html                     # Main landing page
-├── logo.png                       # Color-matched eagle logo
-└── Geometric Eagle Head Logo.png  # Original logo file
+├── README.md                       # This file
+├── CLAUDE.md                       # Development context for Claude Code
+├── DOMAIN_REPUTATION_GUIDE.md     # Domain reputation best practices
+├── index.html                      # Main landing page
+├── about.html                      # About page
+├── privacy.html                    # Privacy policy page
+├── sitemap.xml                     # XML sitemap for search engines
+├── robots.txt                      # Robots.txt for crawlers
+├── .gitignore                      # Git ignore configuration
+├── favicon.ico                     # Browser favicon (32x32)
+├── favicon-16x16.png               # Favicon for standard displays
+├── favicon-32x32.png               # Favicon for retina displays
+├── apple-touch-icon.png            # iOS home screen icon (180x180)
+├── android-chrome-192x192.png      # Android icon (192x192)
+├── android-chrome-512x512.png      # Android icon high-res (512x512)
+├── logo-40.png                     # Optimized logo (40x40px, ~2KB)
+├── logo-80.png                     # Optimized logo retina (80x80px, ~4KB)
+├── logo-512.png                    # Logo for social media sharing (512x512)
+├── logo.png                        # Original logo (1024x1024px)
+└── Geometric Eagle Head Logo.png   # Alternate logo (1024x1024px)
 ```
 
 ## Design
