@@ -11,6 +11,8 @@ Static site hosted on GitHub Pages. Three HTML pages, no build tools.
 | `privacy.html` | Privacy policy — includes PostHog tracking disclosure |
 | `logo.png` | Logo (also: `Geometric Eagle Head Logo.png`) |
 | `CNAME` | Custom domain: `eagleridge.io` |
+| `llms.txt` | LLM-readable site summary ([llmstxt.org](https://llmstxt.org/) standard) — update when pages/services change |
+| `.github/workflows/validate-llms-txt.yml` | PR check: validates llms.txt structure, URL liveness, and drift from HTML changes |
 
 ## Do NOT Touch (during routine site edits)
 
