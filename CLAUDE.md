@@ -6,16 +6,15 @@ Static site hosted on GitHub Pages. Three HTML pages, no build tools.
 
 | File | Purpose |
 |------|---------|
-| `index.html` | Homepage — hero (A/B tested), services, frameworks, contact form |
+| `index.html` | Homepage — hero (A/B tested), services, frameworks, social proof, contact form |
 | `about.html` | About page — expertise, clients, approach |
 | `privacy.html` | Privacy policy — includes PostHog tracking disclosure |
 | `logo.png` | Logo (also: `Geometric Eagle Head Logo.png`) |
 | `CNAME` | Custom domain: `eagleridge.io` |
 
-## Do NOT Touch
+## Do NOT Touch (during routine site edits)
 
-- `services/` folder (marketing docs, unrelated to site)
-- `CLAUDE.md`, `README.md`, `DOMAIN_REPUTATION_GUIDE.md`
+- `README.md`, `DOMAIN_REPUTATION_GUIDE.md`
 - Logo files
 
 ## Integrations
@@ -32,13 +31,13 @@ Static site hosted on GitHub Pages. Three HTML pages, no build tools.
 - **Feature flag**: `hero-variant` (ID: 585380), 50/50 split
 - **Variant A** (control): "Eliminate the security poverty line" — unified message
 - **Variant B** (test): "Cybersecurity compliance, made practical" — two audience cards linking to `#contact-form`
-- **Anti-FOUC**: `.hero-variant { display: none }` + `onFeatureFlags` callback + 1.5s fallback
+- **Anti-FOUC**: `.hero-variant { display: none }` + fallback timer (registered first) + `onFeatureFlags` callback (guarded with `typeof`)
 - **Tracking event**: `hero_variant_shown` with `{ variant: 'a' | 'b' }`
 - Use `/posthog-experiment` skill for changes
 
 ### Web3Forms Contact Form
 - **Access key**: `3e6cb410-9c3a-4af7-9a6a-dbf012e8d8a1` (safe in HTML, tied to account)
-- **Endpoint**: `https://api.web3forms.com/submit` (POST, client-side only)
+- **Endpoint**: `https://api.web3forms.com/submit` (submitted via `fetch()`, stays on page)
 - **Subject**: "New Lead for Eagle Ridge"
 - **Spam prevention**: Hidden honeypot checkbox (`botcheck`)
 - **Anchor**: `id="contact-form"` for deep links
