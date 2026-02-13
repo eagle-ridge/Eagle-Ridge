@@ -290,6 +290,49 @@
                 max-width: 300px;
             }
         }
+
+        /* A/B Test: Hide both variants until PostHog decides */
+        .hero-variant { display: none; }
+
+        /* Variant B: Two-column audience cards */
+        .audience-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 32px;
+            margin-top: 48px;
+        }
+
+        .audience-card {
+            padding: 32px;
+            background: #ffffff;
+            border: 1px solid #e0ddc8;
+            border-radius: 8px;
+            text-decoration: none;
+            color: #3d2817;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .audience-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        .audience-card h3 {
+            font-size: 22px;
+            font-weight: 600;
+            margin-bottom: 12px;
+        }
+
+        .audience-card p {
+            color: #4a4a4a;
+            line-height: 1.6;
+        }
+
+        @media (max-width: 768px) {
+            .audience-cards {
+                grid-template-columns: 1fr;
+            }
+        }
     </style>
 </head>
 <body>
@@ -307,8 +350,27 @@
     <main id="main-content">
         <section class="hero">
             <div class="container">
-                <h1>Technology consulting for portfolio companies and investment firms.</h1>
-                <p class="subtitle">We run technical due diligence on acquisitions and build compliance roadmaps for portfolio companies targeting government and enterprise contracts.</p>
+                <!-- Variant A (control): Single unified message -->
+                <div id="hero-variant-a" class="hero-variant">
+                    <h1>Eliminate the security poverty line.</h1>
+                    <p class="subtitle">We help companies implement cybersecurity compliance frameworks — CMMC, SOC 2, ISO 27001, FedRAMP — so they can win government and enterprise contracts without building a security team from scratch.</p>
+                </div>
+
+                <!-- Variant B (test): Universal hero + audience paths -->
+                <div id="hero-variant-b" class="hero-variant">
+                    <h1>Cybersecurity compliance, made practical.</h1>
+                    <p class="subtitle">From first audit to full certification — we get you there.</p>
+                    <div class="audience-cards">
+                        <a href="#contact-form" class="audience-card">
+                            <h3>Small Business Leaders</h3>
+                            <p>Need CMMC, SOC 2, or ISO 27001 to win contracts? We build your compliance program from the ground up — without the overhead of a full security team.</p>
+                        </a>
+                        <a href="#contact-form" class="audience-card">
+                            <h3>PE/VC &amp; Due Diligence Teams</h3>
+                            <p>Evaluating a target's security posture? We run technical due diligence, quantify remediation costs, and build post-acquisition compliance roadmaps.</p>
+                        </a>
+                    </div>
+                </div>
             </div>
         </section>
 
@@ -377,5 +439,34 @@
             <p style="margin-top: 16px;">&copy; 2026 Eagle Ridge Advisory. All rights reserved.</p>
         </div>
     </footer>
+
+    <script>
+        (function() {
+            var shown = false;
+
+            function showVariant(variant) {
+                if (shown) return;
+                shown = true;
+                var el = document.getElementById('hero-variant-' + variant);
+                if (el) el.style.display = 'block';
+                posthog.capture('hero_variant_shown', { variant: variant });
+            }
+
+            // PostHog feature flag callback
+            posthog.onFeatureFlags(function() {
+                var flag = posthog.getFeatureFlag('hero-variant');
+                if (flag === 'test') {
+                    showVariant('b');
+                } else {
+                    showVariant('a');
+                }
+            });
+
+            // Fallback: if PostHog doesn't load within 1.5s, show Variant A
+            setTimeout(function() {
+                if (!shown) showVariant('a');
+            }, 1500);
+        })();
+    </script>
 </body>
 </html>
