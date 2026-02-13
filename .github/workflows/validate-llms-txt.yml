@@ -1,0 +1,119 @@
+name: Validate llms.txt
+
+on:
+  pull_request:
+    paths:
+      - "llms.txt"
+      - "*.html"
+      - ".github/workflows/validate-llms-txt.yml"
+
+jobs:
+  validate:
+    name: Validate llms.txt
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Check llms.txt exists
+        run: |
+          if [ ! -f llms.txt ]; then
+            echo "::error::llms.txt not found in repository root"
+            exit 1
+          fi
+
+      - name: Validate structure
+        run: |
+          errors=0
+
+          # Must start with an H1
+          if ! head -1 llms.txt | grep -qE '^# .+'; then
+            echo "::error file=llms.txt,line=1::llms.txt must start with an H1 header (# Site Name)"
+            errors=$((errors + 1))
+          fi
+
+          # Must have a blockquote summary
+          if ! grep -qE '^> .+' llms.txt; then
+            echo "::error file=llms.txt::llms.txt must include a blockquote (> ...) summary"
+            errors=$((errors + 1))
+          fi
+
+          # Must have a Pages section
+          if ! grep -qE '^## Pages' llms.txt; then
+            echo "::error file=llms.txt::llms.txt must include a '## Pages' section"
+            errors=$((errors + 1))
+          fi
+
+          # Every HTML file in the repo should be referenced
+          for html_file in *.html; do
+            [ "$html_file" = "*.html" ] && continue
+            if [ "$html_file" = "index.html" ]; then
+              pattern="https://eagleridge.io/"
+            else
+              pattern="$html_file"
+            fi
+            if ! grep -q "$pattern" llms.txt; then
+              echo "::warning file=llms.txt::$html_file is not referenced in llms.txt — consider adding it"
+              errors=$((errors + 1))
+            fi
+          done
+
+          # Must not be empty or trivially small (< 5 lines)
+          line_count=$(wc -l < llms.txt)
+          if [ "$line_count" -lt 5 ]; then
+            echo "::error file=llms.txt::llms.txt has only $line_count lines — too sparse to be useful"
+            errors=$((errors + 1))
+          fi
+
+          if [ "$errors" -gt 0 ]; then
+            echo "::error::llms.txt validation found $errors issue(s)"
+            exit 1
+          fi
+
+          echo "llms.txt structure is valid"
+
+      - name: Verify URLs return 200
+        run: |
+          urls=$(grep -oE 'https://eagleridge\.io[^)]*' llms.txt | sort -u)
+          errors=0
+
+          for url in $urls; do
+            # Strip trailing punctuation and fragments for the HTTP check
+            clean_url=$(echo "$url" | sed 's/#.*//')
+            status=$(curl -s -o /dev/null -w '%{http_code}' --max-time 10 "$clean_url" || echo "000")
+            if [ "$status" -ne 200 ]; then
+              echo "::error file=llms.txt::URL $url returned HTTP $status"
+              errors=$((errors + 1))
+            else
+              echo "OK: $url ($status)"
+            fi
+          done
+
+          if [ "$errors" -gt 0 ]; then
+            echo "::error::$errors URL(s) in llms.txt are not reachable"
+            exit 1
+          fi
+
+          echo "All URLs in llms.txt are reachable"
+
+  drift-check:
+    name: Check llms.txt freshness
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Warn if HTML changed without llms.txt update
+        run: |
+          base="${{ github.event.pull_request.base.sha }}"
+          head="${{ github.event.pull_request.head.sha }}"
+
+          html_changed=$(git diff --name-only "$base" "$head" -- '*.html' | wc -l)
+          llms_changed=$(git diff --name-only "$base" "$head" -- 'llms.txt' | wc -l)
+
+          if [ "$html_changed" -gt 0 ] && [ "$llms_changed" -eq 0 ]; then
+            echo "::warning::HTML files were modified but llms.txt was not updated. Please review whether llms.txt needs changes to stay in sync."
+            # Intentionally not failing — this is advisory
+          else
+            echo "No drift detected"
+          fi
