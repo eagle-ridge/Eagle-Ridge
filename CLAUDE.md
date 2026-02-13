@@ -1,248 +1,57 @@
-# CLAUDE.md - Eagle Ridge Advisory Project
+# Eagle Ridge Advisory — eagleridge.io
 
-*This file provides guidance to Claude Code when working with this repository*
+Static site hosted on GitHub Pages. Three HTML pages, no build tools.
 
-## Project Overview
+## Files
 
-**Eagle Ridge Advisory** - Landing page for technology consulting firm specializing in PE/VC portfolio companies.
+| File | Purpose |
+|------|---------|
+| `index.html` | Homepage — hero (A/B tested), services, frameworks, social proof, contact form |
+| `about.html` | About page — expertise, clients, approach |
+| `privacy.html` | Privacy policy — includes PostHog tracking disclosure |
+| `logo.png` | Logo (also: `Geometric Eagle Head Logo.png`) |
+| `CNAME` | Custom domain: `eagleridge.io` |
 
-- **Repository**: https://github.com/eagle-ridge/Eagle-Ridge
-- **Tech Stack**: HTML, CSS, JavaScript (static site)
+## Do NOT Touch (during routine site edits)
 
-## Repository Structure
-```
-Eagle-Ridge/
-├── CLAUDE.md           # This file - Claude Code context
-├── eagleridge_landing.html  # Main landing page
-├── ERA - 1.png        # Logo image
-└── .git/              # Git repository
-```
+- `README.md`, `DOMAIN_REPUTATION_GUIDE.md`
+- Logo files
 
-## Git Workflow - ALWAYS Follow This
+## Integrations
 
-### CRITICAL: Never Work on Main Branch
+### PostHog Analytics
+- **Snippet**: In `<head>` of all 3 pages (loads async, non-blocking)
+- **Project token**: `phc_gKgLr0iMjD1gnLV3yd8lEYWIUWmkIk8BuI6jUG3rTBg` (public, safe in HTML)
+- **Project ID**: `209232`
+- **API key**: `op://Private/PostHog MCP/credential` (use 1Password, never hardcode)
+- **Host**: `https://us.posthog.com`
+
+### A/B Test: Homepage Hero
+- **Experiment**: `eagle-ridge-homepage-hero-experiment` (ID: 358074)
+- **Feature flag**: `hero-variant` (ID: 585380), 50/50 split
+- **Variant A** (control): "Eliminate the security poverty line" — unified message
+- **Variant B** (test): "Cybersecurity compliance, made practical" — two audience cards linking to `#contact-form`
+- **Anti-FOUC**: `.hero-variant { display: none }` + fallback timer (registered first) + `onFeatureFlags` callback (guarded with `typeof`)
+- **Tracking event**: `hero_variant_shown` with `{ variant: 'a' | 'b' }`
+- Use `/posthog-experiment` skill for changes
+
+### Web3Forms Contact Form
+- **Access key**: `3e6cb410-9c3a-4af7-9a6a-dbf012e8d8a1` (safe in HTML, tied to account)
+- **Endpoint**: `https://api.web3forms.com/submit` (submitted via `fetch()`, stays on page)
+- **Subject**: "New Lead for Eagle Ridge"
+- **Spam prevention**: Hidden honeypot checkbox (`botcheck`)
+- **Anchor**: `id="contact-form"` for deep links
+
+## Audience
+
+Two buyer personas:
+1. **Small business CEOs** — need CMMC/SOC 2 compliance to win government contracts
+2. **PE/DD teams** — acquiring companies that need compliance readiness
+
+## Dev Workflow
+
 ```bash
-# ALWAYS check current branch first
-git branch
-
-# ALWAYS create feature branch for changes
-git checkout -b feature/descriptive-name
-
-# ALWAYS pull latest changes first
-git pull origin main
+python3 -m http.server 8000   # Local testing
+# Test A/B: Variant A shows as fallback after 1.5s (no flag configured locally)
+# Test form: Submit manually in browser (Web3Forms blocks server-side requests)
 ```
-
-### Safe Commit Process
-```bash
-# Review changes before committing
-git diff
-
-# Stage changes
-git add .
-
-# Commit with descriptive message
-git commit -m "Action: Clear description of what changed"
-
-# Push to feature branch
-git push origin feature/descriptive-name
-
-# Create PR on GitHub - NEVER push directly to main
-```
-
-## Development Workflow
-
-### Local Development
-```bash
-# For static HTML, open directly in browser
-open eagleridge_landing.html
-
-# Or use a local server (if python available)
-python3 -m http.server 8000
-# Visit http://localhost:8000
-```
-
-### Testing Before Commit
-- Open HTML in multiple browsers
-- Test responsive design on mobile
-- Validate HTML markup
-- Check all links work
-- Test image loading
-
-## Code Style & Standards
-
-### HTML/CSS Guidelines
-- Use semantic HTML5 elements
-- Maintain consistent indentation
-- Keep inline styles minimal (use style tags or external CSS)
-- Optimize images before adding to repo
-- Write accessible markup (alt text, ARIA labels, etc.)
-
-### File Naming
-- Use lowercase with hyphens for files
-- Be descriptive but concise
-- Avoid spaces in filenames (use hyphens or underscores)
-
-## GitHub Best Practices
-
-### Branch Naming
-```bash
-feature/add-contact-form
-fix/logo-alignment
-update/hero-copy
-refactor/css-structure
-```
-
-### Commit Messages
-```bash
-# Good commit messages
-"Add contact form with validation"
-"Fix: Correct logo image path"
-"Update hero section copy"
-"Refactor: Consolidate CSS styles"
-
-# Avoid vague messages
-"updates"
-"fix stuff"
-"changes"
-```
-
-### Pull Request Workflow
-```bash
-# Create PR from command line (requires gh CLI)
-gh pr create --title "Feature: Description" --body "Details about changes"
-
-# View PR status
-gh pr status
-
-# Merge after approval
-gh pr merge
-```
-
-## Security Best Practices
-
-### NEVER Commit These Items
-```bash
-.env                    # Environment variables
-config/secrets.yml      # Any secrets or API keys
-*.log                   # Log files
-.vscode/settings.json   # May contain local paths/tokens
-node_modules/           # Dependencies (if using npm)
-```
-
-### Safe Practices
-- No hardcoded API keys or tokens
-- Use environment variables for sensitive data
-- Review git history before making repo public
-- Use `.gitignore` for local config files
-
-## Common Tasks & Commands
-
-### Creating New Files
-```bash
-# New page
-touch new-page.html
-
-# New stylesheet
-touch assets/css/styles.css
-
-# New directory
-mkdir assets/images
-```
-
-### Git Operations
-```bash
-# View commit history
-git log --oneline
-
-# Check what changed
-git diff
-
-# Undo uncommitted changes
-git checkout -- filename.html
-
-# View branch info
-git branch -v
-
-# Delete local branch
-git branch -d feature/branch-name
-```
-
-### GitHub CLI Commands
-```bash
-# View repository info
-gh repo view
-
-# List open PRs
-gh pr list
-
-# View PR details
-gh pr view 123
-
-# Create issue
-gh issue create
-```
-
-## Emergency Procedures
-
-### If Something Breaks
-```bash
-# Revert last commit (if not pushed)
-git reset --soft HEAD~1
-
-# Revert specific file
-git checkout -- filename.html
-
-# Revert after pushing
-git revert HEAD
-```
-
-### If You Accidentally Commit to Main
-```bash
-# Move changes to new branch
-git branch feature/my-changes
-git reset --hard origin/main
-git checkout feature/my-changes
-```
-
-## Claude Code Best Practices
-
-### Effective Prompts
-```bash
-# Good prompts - specific and contextual
-"Add a contact form section to the landing page"
-"Update the hero section copy to emphasize cybersecurity"
-"Fix responsive layout issues on mobile"
-
-# Avoid vague prompts
-"make it better"
-"add features"
-```
-
-### Multi-Step Workflow Pattern
-1. **Explore**: Read existing files and understand structure
-2. **Plan**: Create detailed plan without writing code
-3. **Implement**: Execute the plan
-4. **Test**: Verify changes work correctly
-5. **Commit**: Create descriptive commit and push to feature branch
-
-## Quick Reference
-
-### Essential Commands
-```bash
-git status              # Check current status
-git branch              # View branches
-git diff                # Review changes
-git add .               # Stage all changes
-git commit -m "msg"     # Commit changes
-git push origin branch  # Push to remote
-gh pr create            # Create pull request
-```
-
-### File Paths
-- Landing page: `eagleridge_landing.html`
-- Logo: `ERA - 1.png`
-- Project docs: `CLAUDE.md` (this file)
-
----
-
-*This file is version-controlled. Update it as the project evolves.*
