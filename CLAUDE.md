@@ -1,6 +1,6 @@
 # Eagle Ridge Advisory — eagleridge.io
 
-Static site hosted on GitHub Pages. Three HTML pages, no build tools.
+Static site hosted on GitHub Pages. Four HTML pages, no build tools.
 
 ## Files
 
@@ -8,6 +8,7 @@ Static site hosted on GitHub Pages. Three HTML pages, no build tools.
 |------|---------|
 | `index.html` | Homepage — hero (A/B tested), services, frameworks, social proof, contact form |
 | `about.html` | About page — expertise, clients, approach |
+| `discovery.html` | SSP intake form — Tally.so embed, unlisted (noindex), shared via direct URL |
 | `privacy.html` | Privacy policy — includes PostHog tracking disclosure |
 | `logo.png` | Logo (also: `Geometric Eagle Head Logo.png`) |
 | `CNAME` | Custom domain: `eagleridge.io` |
@@ -22,11 +23,11 @@ Static site hosted on GitHub Pages. Three HTML pages, no build tools.
 ## Integrations
 
 ### PostHog Analytics
-- **Snippet**: In `<head>` of all 3 pages (loads async, non-blocking)
+- **Snippet**: In `<head>` of all 4 pages (loads async, non-blocking)
 - **Project token**: `phc_gKgLr0iMjD1gnLV3yd8lEYWIUWmkIk8BuI6jUG3rTBg` (public, safe in HTML)
 - **Project ID**: `209232`
 - **API key**: `op://Private/PostHog MCP/credential` (use 1Password, never hardcode)
-- **Host**: `https://us.posthog.com`
+- **Host**: `https://us.i.posthog.com`
 
 ### A/B Test: Homepage Hero
 - **Experiment**: `eagle-ridge-homepage-hero-experiment` (ID: 358074)
@@ -43,6 +44,15 @@ Static site hosted on GitHub Pages. Three HTML pages, no build tools.
 - **Subject**: "New Lead for Eagle Ridge"
 - **Spam prevention**: Hidden honeypot checkbox (`botcheck`)
 - **Anchor**: `id="contact-form"` for deep links
+
+### Tally.so Discovery Form (discovery.html)
+- **Page:** `eagleridge.io/discovery` — unlisted (noindex, nofollow), shared via direct URL with clients
+- **Form:** Embedded via Tally iframe with `transparentBackground=1&dynamicHeight=1` params
+- **Form spec:** `eagle-ridge-methodology/clients/nereid-bio/discovery/tally-form-spec.md`
+- **Notion integration:** Tally auto-creates entries in "SSP Intake Responses" database on submission
+- **Tracking event:** `discovery_page_viewed`
+- **To update form:** Edit in Tally UI (tally.so dashboard). The embed code auto-reflects changes.
+- **Free tier note:** "Made with Tally" badge appears. Removable at €25/mo (Tally Pro).
 
 ## Audience
 
