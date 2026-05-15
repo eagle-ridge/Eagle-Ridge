@@ -32,6 +32,21 @@
             background: #f9f6ec;
         }
 
+        .skip-link {
+            position: absolute;
+            top: -40px;
+            left: 0;
+            background: #3d2817;
+            color: #fff;
+            padding: 8px 16px;
+            text-decoration: none;
+            z-index: 100;
+        }
+
+        .skip-link:focus { top: 0; }
+
+        a:focus { outline: 2px solid #3d2817; outline-offset: 2px; }
+
         .container {
             max-width: 720px;
             margin: 0 auto;
@@ -157,6 +172,7 @@
     </style>
 </head>
 <body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
     <header>
         <div class="container">
             <a href="/" class="logo">
@@ -166,7 +182,7 @@
         </div>
     </header>
 
-    <main>
+    <main id="main-content">
         <article class="container">
             <h1>Nobody Built the First Mile</h1>
             <p class="deck">The structural gap between CMMC assessors and the small defense contractors who need readiness work. And why the window to fix it is closing.</p>
@@ -176,13 +192,13 @@
             <p>The reason is not laziness, and it is not a software problem. It is structural.</p>
 
             <h2>The wall in the middle of the market</h2>
-            <p>103 firms in the country are authorized to assess a contractor against CMMC Level 2. By rule, none of them can also do the readiness work on the same engagement they audit. The firm that can prepare you cannot test you. The firm that tests you cannot prepare you. This is not a bug. It is the independence rule that makes the whole certification mean anything.</p>
+            <p>103 firms in the country are authorized to assess a contractor against CMMC Level 2. By rule, no C3PAO can also do the readiness work on the same engagement it audits. Within that engagement, the firm that prepares you cannot test you. The firm that tests you cannot prepare you. This is not a bug. It is the engagement-level independence rule that makes the whole certification mean anything.</p>
             <p>So a small contractor needing to get ready has to find someone else. That someone has to be experienced enough to know what assessors will accept, cheap enough to fit a contractor with two or three primes on the book, and willing to engage at the size of the work being asked. The number of firms who clear all three bars at once is small. The number who do it consistently for shops under 100 people is smaller.</p>
 
             <h2>Who is in the middle, and why they are not the answer</h2>
             <p>Big 4 federal practices do real CMMC work at hourly rates that put them out of reach for any shop below the $50M-revenue line. Their clients are primes and primes' top tiers, not your shop.</p>
             <p>Tier 2 accounting firms with C3PAO authorization, including Cherry Bekaert, Aprio, Baker Tilly, RSM, and Forvis Mazars, have started to productize SMB readiness. Cherry Bekaert's "CMMC Fasttrack" launched in mid-2025 as an explicit move down-market. These firms are credible and well-staffed. Their entry-level engagements still start at price points that assume 100-employee shops rather than 30-employee shops.</p>
-            <p>Boutique CMMC consulting comes closest. Summit 7, CyberSheath, Redspin, Kieri Solutions, and a handful of others are where the community recommendations cluster. Their typical engagements tend to start around the $30K mark for SMB readiness, and most reserve the deep work for clients who can spend more.</p>
+            <p>Boutique CMMC consulting comes closest. Summit 7, CyberSheath, Redspin, Kieri Solutions, and a handful of others are where the community recommendations cluster. Their typical engagements range from roughly $15K at the low end to $30K and up for fuller SMB readiness packages, depending on the firm and scope. Most reserve the deeper work for clients who can spend more.</p>
             <p>Automation platforms like Vanta, Drata, and Hyperproof sell software, not preparation. They shipped CMMC modules in 2024. The software is real. It does not replace the work of figuring out what you need, why, and how to write it down.</p>
             <p>That leaves Registered Provider Organizations and Registered Practitioners. Roughly 250 RPOs and a few thousand RPs are credentialed to do pre-assessment advisory work. Many of them are excellent. Few of them are economically configured to deliver a complete readiness package to a 30-person shop that needs an SSP, a POA&amp;M, and a remediation plan, end-to-end, for less than the cost of a Sprinter van.</p>
 
@@ -195,14 +211,14 @@
             <h2>The window is closing</h2>
             <p>The reason this is timed and not theoretical: the door does not stay open forever.</p>
             <p>Cherry Bekaert's Fasttrack is one of three or four early moves from accounting-firm C3PAOs to productize SMB readiness. More are coming. Vanta and Drata are publishing CMMC walkthroughs aimed at exactly the small-shop segment. The Secureframe National Cybersecurity Summit in May 2026 framed the direction of the entire compliance industry, in General Nakasone's keynote, as a shift from point-in-time audits to continuous certification. The firms moving fastest toward that posture are the firms most likely to push into the SMB segment as the FedRAMP 20x program proves out the model later this year.</p>
-            <p>The first mile will be served. The only question is whether it is served by firms who understand the texture of a 30-person aerospace shop's day, or by firms who treat that shop as the long tail of a deck slide. We have an opinion about which is better.</p>
+            <p>The first mile will be served. The only question is whether it is served by firms who understand the texture of a 30-person aerospace shop's day, or by firms who treat that shop as the long tail of a deck slide. A Level 2 certification is, operationally, a contract-retention instrument. The prime does not renew a sub who cannot produce one. We have an opinion about which firms should be doing this work.</p>
 
             <h2>What we do</h2>
-            <p>Eagle Ridge prepares small DIB contractors for CMMC Level 2 assessment.</p>
+            <p>Eagle Ridge prepares small DIB contractors for CMMC Level 2 assessment. We sit at one point in a supply-chain certification loop. The prime flows the DFARS clause down. The sub needs readiness. The C3PAO does the assessment. The prime needs confirmation. Our work makes the rest of the loop close.</p>
             <p>A typical first-mile engagement produces a System Security Plan draft, a POA&amp;M aligned to the controls you do not yet meet, and a remediation roadmap that prioritizes the controls that matter most. Scope, evidence collection, and policy alignment work scales from there.</p>
             <p>Pricing runs from $3,000 to $25,000, and at the lower end of that range we are honest about what is and is not in scope. $3K buys you a draft, a remediation plan, and a clear path forward. It does not buy you a fully assessment-ready package with twelve months of evidence and policy training already done. Assessment-ready packages live higher up the range, depending on the size of the shop and the state of the existing program.</p>
             <p>We hand off cleanly when the work is done. The C3PAO who eventually assesses you will not be us. By design.</p>
-            <p>For shops who want to keep the SSP alive between assessments, the way the certification rule actually expects, we are building a retainer-based model that does that work continuously. The SSP that is current the day after you certify is the SSP that earns you a clean reassessment three years later. Most firms do not stay that close to their own SSP after the engagement closes. We are designed to.</p>
+            <p>For shops who want to keep the SSP current between assessments, every engagement includes a 90-day post-certification review and a 12-month drift check. The deliverable at each is a dated attestation of SSP currency, the thing your C3PAO will ask for at reassessment. The SSP that is current the day after you certify is the SSP that earns you a clean reassessment three years later. Most firms do not stay that close to their own SSP after the engagement closes. We are designed to.</p>
 
             <h2>The map this page sits behind</h2>
             <p>We published a map of the CMMC services market at <a href="/market-map.html">eagleridge.io/market-map.html</a>. 89 firms, tools, and authorities. Filter by category, click any cell for details. The map is the inventory. This page is the argument.</p>
