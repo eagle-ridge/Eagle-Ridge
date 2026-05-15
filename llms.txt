@@ -6,6 +6,7 @@
 
 - [Homepage](https://eagleridge.io/): Services overview, compliance frameworks, and contact form
 - [About](https://eagleridge.io/about.html): Expertise, client types, and consulting approach
+- [Market Map](https://eagleridge.io/market-map.html): Eagle Ridge's view of the CMMC services market — 89 firms and platforms mapped by category, with the 0→1 readiness gap for DIB SMBs called out
 - [Privacy Policy](https://eagleridge.io/privacy.html): Data handling and analytics disclosure
 
 ## Services
