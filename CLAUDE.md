@@ -10,6 +10,7 @@ Static site hosted on GitHub Pages. Four HTML pages, no build tools.
 | `about.html` | About page — expertise, clients, approach |
 | `discovery.html` | SSP intake form — Tally.so embed, unlisted (noindex), shared via direct URL |
 | `market-map.html` | Public interactive market map of the CMMC services landscape (89 entities, periodic-table layout). Linked from all page footers. |
+| `nobody-built-the-first-mile.html` | Long-form argument behind the market map. Buyer-first prose, cream/brown palette matching about.html. CTA target from market-map. Linked from all page footers. |
 | `privacy.html` | Privacy policy — includes PostHog tracking disclosure |
 | `logo.png` | Logo (also: `Geometric Eagle Head Logo.png`) |
 | `CNAME` | Custom domain: `eagleridge.io` |

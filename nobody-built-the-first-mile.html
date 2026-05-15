@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nobody Built the First Mile | Eagle Ridge Advisory</title>
+    <meta name="description" content="The structural gap between CMMC assessors and the small defense contractors who need readiness work, and why the window to fix it is closing.">
+    <link rel="canonical" href="https://eagleridge.io/nobody-built-the-first-mile.html">
+    <meta property="og:title" content="Nobody Built the First Mile | Eagle Ridge Advisory">
+    <meta property="og:description" content="The structural gap between CMMC assessors and the small defense contractors who need readiness work, and why the window to fix it is closing.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://eagleridge.io/nobody-built-the-first-mile.html">
+    <meta property="og:image" content="https://eagleridge.io/logo.png">
+    <script>
+        !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.crossOrigin="anonymous",p.async=!0,p.src=s.api_host.replace(".i.posthog.com","-assets.i.posthog.com")+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="init Re Ms Fs Pe Rs Cs capture Ve calculateEventProperties Ds register register_once register_for_session unregister unregister_for_session zs getFeatureFlag getFeatureFlagPayload isFeatureEnabled reloadFeatureFlags updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures on onFeatureFlags onSurveysLoaded onSessionId getSurveys getActiveMatchingSurveys renderSurvey canRenderSurvey canRenderSurveyAsync identify setPersonProperties group resetGroups setPersonPropertiesForFlags resetPersonPropertiesForFlags setGroupPropertiesForFlags resetGroupPropertiesForFlags reset get_distinct_id getGroups get_session_id get_session_replay_url alias set_config startSessionRecording stopSessionRecording sessionRecordingStarted captureException loadToolbar get_property getSessionProperty Ls As createPersonProfile Ns Is Us opt_in_capturing opt_out_capturing has_opted_in_capturing has_opted_out_capturing is_capturing clear_opt_in_out_capturing Os debug I js getPageViewId captureTraceFeedback captureTraceMetric".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
+        posthog.init('phc_gKgLr0iMjD1gnLV3yd8lEYWIUWmkIk8BuI6jUG3rTBg', {
+            api_host: 'https://us.i.posthog.com',
+            person_profiles: 'identified_only',
+            loaded: function(posthog) {
+                posthog.register({ site: 'eagleridge.io' });
+                console.log('PostHog loaded');
+            }
+        });
+    </script>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.65;
+            color: #3d2817;
+            background: #f9f6ec;
+        }
+
+        .container {
+            max-width: 720px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        header {
+            padding: 32px 0;
+            border-bottom: 1px solid #d0cdb8;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 24px;
+            font-weight: 600;
+            color: #3d2817;
+            letter-spacing: -0.5px;
+            text-decoration: none;
+        }
+
+        .logo-img { width: 40px; height: 40px; }
+
+        main { padding: 56px 0 72px; }
+
+        article h1 {
+            font-size: 44px;
+            font-weight: 600;
+            letter-spacing: -0.5px;
+            line-height: 1.15;
+            margin-bottom: 14px;
+        }
+
+        article .deck {
+            font-size: 17px;
+            color: #6a5840;
+            margin-bottom: 36px;
+        }
+
+        article h2 {
+            font-size: 26px;
+            font-weight: 600;
+            letter-spacing: -0.25px;
+            margin-top: 44px;
+            margin-bottom: 16px;
+        }
+
+        article p {
+            margin-bottom: 20px;
+            font-size: 18px;
+            color: #4a4a4a;
+        }
+
+        article p.lead {
+            font-size: 21px;
+            color: #3d2817;
+            line-height: 1.55;
+        }
+
+        article p.close {
+            font-size: 19px;
+            color: #3d2817;
+            margin-top: 36px;
+        }
+
+        article a {
+            color: #3d2817;
+            text-decoration: underline;
+            text-decoration-color: #b39872;
+            text-underline-offset: 3px;
+        }
+
+        article a:hover { text-decoration-color: #3d2817; }
+
+        .cta-box {
+            background: #3d2817;
+            color: #ffffff;
+            padding: 28px 32px;
+            border-radius: 8px;
+            margin: 48px 0 8px;
+        }
+
+        .cta-box p {
+            color: #e5e5e5;
+            font-size: 17px;
+            margin: 0 0 10px;
+        }
+
+        .cta-box p:last-child { margin-bottom: 0; }
+
+        .cta-box a {
+            color: #ffffff;
+            text-decoration: underline;
+            text-decoration-color: #b39872;
+        }
+
+        .cta-box a:hover { text-decoration-color: #ffffff; }
+
+        footer {
+            padding: 48px 0;
+            text-align: center;
+            color: #6a6a6a;
+            border-top: 1px solid #d0cdb8;
+            font-size: 15px;
+        }
+
+        footer a {
+            color: #3d2817;
+            text-decoration: none;
+            margin: 0 12px;
+        }
+
+        footer a:hover { text-decoration: underline; }
+
+        @media (max-width: 720px) {
+            article h1 { font-size: 34px; }
+            article h2 { font-size: 22px; }
+            article p, article p.lead { font-size: 17px; }
+            main { padding: 36px 0 56px; }
+            .cta-box { padding: 22px 24px; }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <a href="/" class="logo">
+                <img src="logo.png" alt="Eagle Ridge Advisory" class="logo-img">
+                <span>Eagle Ridge Advisory</span>
+            </a>
+        </div>
+    </header>
+
+    <main>
+        <article class="container">
+            <h1>Nobody Built the First Mile</h1>
+            <p class="deck">The structural gap between CMMC assessors and the small defense contractors who need readiness work. And why the window to fix it is closing.</p>
+
+            <p class="lead">About 80,000 small defense contractors need CMMC Level 2 certification to keep doing the work they already do. Roughly one percent have it. The other 99 percent are stuck somewhere between knowing they need to start and knowing what starting means.</p>
+
+            <p>The reason is not laziness, and it is not a software problem. It is structural.</p>
+
+            <h2>The wall in the middle of the market</h2>
+            <p>103 firms in the country are authorized to assess a contractor against CMMC Level 2. By rule, none of them can also do the readiness work on the same engagement they audit. The firm that can prepare you cannot test you. The firm that tests you cannot prepare you. This is not a bug. It is the independence rule that makes the whole certification mean anything.</p>
+            <p>So a small contractor needing to get ready has to find someone else. That someone has to be experienced enough to know what assessors will accept, cheap enough to fit a contractor with two or three primes on the book, and willing to engage at the size of the work being asked. The number of firms who clear all three bars at once is small. The number who do it consistently for shops under 100 people is smaller.</p>
+
+            <h2>Who is in the middle, and why they are not the answer</h2>
+            <p>Big 4 federal practices do real CMMC work at hourly rates that put them out of reach for any shop below the $50M-revenue line. Their clients are primes and primes' top tiers, not your shop.</p>
+            <p>Tier 2 accounting firms with C3PAO authorization, including Cherry Bekaert, Aprio, Baker Tilly, RSM, and Forvis Mazars, have started to productize SMB readiness. Cherry Bekaert's "CMMC Fasttrack" launched in mid-2025 as an explicit move down-market. These firms are credible and well-staffed. Their entry-level engagements still start at price points that assume 100-employee shops rather than 30-employee shops.</p>
+            <p>Boutique CMMC consulting comes closest. Summit 7, CyberSheath, Redspin, Kieri Solutions, and a handful of others are where the community recommendations cluster. Their typical engagements tend to start around the $30K mark for SMB readiness, and most reserve the deep work for clients who can spend more.</p>
+            <p>Automation platforms like Vanta, Drata, and Hyperproof sell software, not preparation. They shipped CMMC modules in 2024. The software is real. It does not replace the work of figuring out what you need, why, and how to write it down.</p>
+            <p>That leaves Registered Provider Organizations and Registered Practitioners. Roughly 250 RPOs and a few thousand RPs are credentialed to do pre-assessment advisory work. Many of them are excellent. Few of them are economically configured to deliver a complete readiness package to a 30-person shop that needs an SSP, a POA&amp;M, and a remediation plan, end-to-end, for less than the cost of a Sprinter van.</p>
+
+            <h2>The first mile</h2>
+            <p>The first mile is the segment that needs to go from zero to a defensible Level 2 readiness package. Owner-operator, 20 to 100 people, one to four prime contracts, CUI in CAD files, no full-time security headcount, and a contracting officer who has started asking when the SSP will be ready.</p>
+            <p>This is the segment where every firm in the market either cannot work (the C3PAOs), will not work at the price (Big 4, Tier 2 accounting), is not configured to scale into (boutiques at $30K and up), or is selling something adjacent (SaaS platforms).</p>
+            <p>That segment is who reads this page. If you are the CEO of a 40-person aerospace machine shop, your problem is not finding a list of compliance frameworks. Your problem is finding someone who will sit with you on a Tuesday afternoon and turn your business into a defensible package without charging you what it costs to hire a full-time security director.</p>
+            <p>Nobody built that. We are building it.</p>
+
+            <h2>The window is closing</h2>
+            <p>The reason this is timed and not theoretical: the door does not stay open forever.</p>
+            <p>Cherry Bekaert's Fasttrack is one of three or four early moves from accounting-firm C3PAOs to productize SMB readiness. More are coming. Vanta and Drata are publishing CMMC walkthroughs aimed at exactly the small-shop segment. The Secureframe National Cybersecurity Summit in May 2026 framed the direction of the entire compliance industry, in General Nakasone's keynote, as a shift from point-in-time audits to continuous certification. The firms moving fastest toward that posture are the firms most likely to push into the SMB segment as the FedRAMP 20x program proves out the model later this year.</p>
+            <p>The first mile will be served. The only question is whether it is served by firms who understand the texture of a 30-person aerospace shop's day, or by firms who treat that shop as the long tail of a deck slide. We have an opinion about which is better.</p>
+
+            <h2>What we do</h2>
+            <p>Eagle Ridge prepares small DIB contractors for CMMC Level 2 assessment.</p>
+            <p>A typical first-mile engagement produces a System Security Plan draft, a POA&amp;M aligned to the controls you do not yet meet, and a remediation roadmap that prioritizes the controls that matter most. Scope, evidence collection, and policy alignment work scales from there.</p>
+            <p>Pricing runs from $3,000 to $25,000, and at the lower end of that range we are honest about what is and is not in scope. $3K buys you a draft, a remediation plan, and a clear path forward. It does not buy you a fully assessment-ready package with twelve months of evidence and policy training already done. Assessment-ready packages live higher up the range, depending on the size of the shop and the state of the existing program.</p>
+            <p>We hand off cleanly when the work is done. The C3PAO who eventually assesses you will not be us. By design.</p>
+            <p>For shops who want to keep the SSP alive between assessments, the way the certification rule actually expects, we are building a retainer-based model that does that work continuously. The SSP that is current the day after you certify is the SSP that earns you a clean reassessment three years later. Most firms do not stay that close to their own SSP after the engagement closes. We are designed to.</p>
+
+            <h2>The map this page sits behind</h2>
+            <p>We published a map of the CMMC services market at <a href="/market-map.html">eagleridge.io/market-map.html</a>. 89 firms, tools, and authorities. Filter by category, click any cell for details. The map is the inventory. This page is the argument.</p>
+
+            <div class="cta-box">
+                <p>If you are the CEO of a 30-person shop with two primes asking when your SSP is ready, the next step is short. Write to <a href="mailto:contact@eagleridge.io">contact@eagleridge.io</a>.</p>
+                <p>The reply will not be a pitch deck. It will be a short list of questions and an honest scope estimate.</p>
+            </div>
+
+            <p class="close">Nobody built the first mile. We are building it.</p>
+        </article>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>
+                <a href="/">Home</a>
+                <a href="/about.html">About</a>
+                <a href="/market-map.html">Market Map</a>
+                <a href="/privacy.html">Privacy Policy</a>
+                <a href="https://www.linkedin.com/company/eagle-ridge-advisory/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+                <a href="mailto:contact@eagleridge.io">Contact</a>
+            </p>
+            <p style="margin-top: 16px;">&copy; 2026 Eagle Ridge Advisory. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>
