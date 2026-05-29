@@ -11,6 +11,7 @@ Outputs (committed, served by GitHub Pages):
   - sitemap.xml       XML sitemap for crawlers
   - sitemap.md        human/agent-readable sitemap
 """
+
 from __future__ import annotations
 
 import datetime as dt
@@ -28,7 +29,11 @@ PAGES = [
     ("index.html", "/", "Homepage"),
     ("about.html", "/about.html", "About"),
     ("market-map.html", "/market-map.html", "Market Map"),
-    ("nobody-built-the-first-mile.html", "/nobody-built-the-first-mile.html", "Nobody Built the First Mile"),
+    (
+        "nobody-built-the-first-mile.html",
+        "/nobody-built-the-first-mile.html",
+        "Nobody Built the First Mile",
+    ),
     ("glossary.html", "/glossary.html", "Glossary"),
     ("privacy.html", "/privacy.html", "Privacy Policy"),
 ]
@@ -36,7 +41,7 @@ PAGES = [
 
 def md_path(html_name: str) -> str:
     """Markdown mirror filename for an HTML page."""
-    return html_name[:-len(".html")] + ".md"
+    return html_name[: -len(".html")] + ".md"
 
 
 def extract(html: str) -> tuple[str, str]:
