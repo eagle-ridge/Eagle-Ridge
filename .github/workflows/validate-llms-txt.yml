@@ -43,18 +43,17 @@ jobs:
             errors=$((errors + 1))
           fi
 
-          # Every HTML file in the repo should be referenced
+          # Every public HTML file should be referenced — by either its .html
+          # page or its .md mirror (llms.txt links to the Markdown mirrors).
           for html_file in *.html; do
             [ "$html_file" = "*.html" ] && continue
-            if [ "$html_file" = "index.html" ]; then
-              pattern="https://eagleridge.io/"
-            else
-              pattern="$html_file"
+            [ "$html_file" = "discovery.html" ] && continue  # unlisted intake form (noindex)
+            stem="${html_file%.html}"
+            if grep -qE "(^|/)${stem}\.(md|html)([\")# ]|$)" llms.txt; then
+              continue
             fi
-            if ! grep -q "$pattern" llms.txt; then
-              echo "::warning file=llms.txt::$html_file is not referenced in llms.txt — consider adding it"
-              errors=$((errors + 1))
-            fi
+            echo "::warning file=llms.txt::$html_file (or ${stem}.md) is not referenced in llms.txt — consider adding it"
+            errors=$((errors + 1))
           done
 
           # Must not be empty or trivially small (< 5 lines)
@@ -71,29 +70,38 @@ jobs:
 
           echo "llms.txt structure is valid"
 
-      - name: Verify URLs return 200
+      - name: Verify referenced URLs resolve to repo files
         run: |
+          # Serve the repo locally and probe each referenced URL against the
+          # repo's own files. This validates the links pre-merge (new pages and
+          # .md mirrors aren't live yet) instead of hitting the production site.
+          python3 -m http.server 8080 --directory . &
+          server_pid=$!
+          sleep 2
           urls=$(grep -oE 'https://eagleridge\.io[^)]*' llms.txt | sort -u)
           errors=0
 
           for url in $urls; do
-            # Strip trailing punctuation and fragments for the HTTP check
-            clean_url=$(echo "$url" | sed 's/#.*//')
-            status=$(curl -s -o /dev/null -w '%{http_code}' --max-time 10 "$clean_url" || echo "000")
+            # Map the production URL to a local path; drop the domain and fragment.
+            path=$(echo "$url" | sed -E 's#https://eagleridge\.io##; s/#.*//')
+            [ -z "$path" ] && path="/"
+            status=$(curl -s -o /dev/null -w '%{http_code}' --max-time 10 "http://localhost:8080$path" || echo "000")
             if [ "$status" -ne 200 ]; then
-              echo "::error file=llms.txt::URL $url returned HTTP $status"
+              echo "::error file=llms.txt::$url -> local path '$path' returned HTTP $status"
               errors=$((errors + 1))
             else
               echo "OK: $url ($status)"
             fi
           done
 
+          kill "$server_pid" 2>/dev/null || true
+
           if [ "$errors" -gt 0 ]; then
-            echo "::error::$errors URL(s) in llms.txt are not reachable"
+            echo "::error::$errors referenced URL(s) do not resolve to files in the repo"
             exit 1
           fi
 
-          echo "All URLs in llms.txt are reachable"
+          echo "All referenced URLs resolve to repo files"
 
   drift-check:
     name: Check llms.txt freshness

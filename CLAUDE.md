@@ -1,6 +1,6 @@
 # Eagle Ridge Advisory — eagleridge.io
 
-Static site hosted on GitHub Pages. Four HTML pages, no build tools.
+Static site hosted on GitHub Pages. Hand-written HTML pages, no build tools. `.nojekyll` disables Jekyll so `.md` mirrors are served raw.
 
 ## Files
 
@@ -12,9 +12,16 @@ Static site hosted on GitHub Pages. Four HTML pages, no build tools.
 | `market-map.html` | Public interactive market map of the CMMC services landscape (89 entities, periodic-table layout). Linked from all page footers. |
 | `nobody-built-the-first-mile.html` | Long-form argument behind the market map. Buyer-first prose, cream/brown palette matching about.html. CTA target from market-map. Linked from all page footers. |
 | `privacy.html` | Privacy policy — includes PostHog tracking disclosure |
+| `glossary.html` | CMMC / NIST 800-171 terminology page (DefinedTermSet JSON-LD). Linked from all footers. |
 | `logo.png` | Logo (also: `Geometric Eagle Head Logo.png`) |
 | `CNAME` | Custom domain: `eagleridge.io` |
-| `llms.txt` | LLM-readable site summary ([llmstxt.org](https://llmstxt.org/) standard) — update when pages/services change |
+| `llms.txt` | LLM-readable site summary ([llmstxt.org](https://llmstxt.org/) standard). Page links point to `.md` mirrors — update when pages/services change |
+| `AGENTS.md` | Guidance for AI agents consuming the site (markdown mirrors, sitemaps, JSON-LD) |
+| `robots.txt` | Crawl rules + sitemap pointer; disallows `/discovery.html` |
+| `sitemap.xml`, `sitemap.md` | Generated sitemaps (see generator below) |
+| `*.md` (per page) | Generated Markdown mirrors of each HTML page; declared via `<link rel="alternate" type="text/markdown">` |
+| `.nojekyll` | Disables Jekyll so `.md` mirrors serve as raw static files |
+| `scripts/generate-md-mirrors.py` | Regenerates `.md` mirrors + sitemaps from HTML. Run after editing any page: `uv run --with markdownify --with beautifulsoup4 python scripts/generate-md-mirrors.py` |
 | `.github/workflows/validate-llms-txt.yml` | PR check: validates llms.txt structure, URL liveness, and drift from HTML changes |
 
 ## Do NOT Touch (during routine site edits)

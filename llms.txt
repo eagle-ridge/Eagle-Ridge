@@ -4,11 +4,12 @@
 
 ## Pages
 
-- [Homepage](https://eagleridge.io/): Services overview, compliance frameworks, and contact form
-- [About](https://eagleridge.io/about.html): Expertise, client types, and consulting approach
-- [Market Map](https://eagleridge.io/market-map.html): Eagle Ridge's view of the CMMC services market — 89 firms and platforms mapped by category, with the 0→1 readiness gap for DIB SMBs called out
-- [Nobody Built the First Mile](https://eagleridge.io/nobody-built-the-first-mile.html): Long-form argument behind the market map. The structural gap between CMMC assessors and small DIB contractors who need readiness work, and why the window to fix it is closing
-- [Privacy Policy](https://eagleridge.io/privacy.html): Data handling and analytics disclosure
+- [Homepage](https://eagleridge.io/index.md): Services overview, compliance frameworks, and contact form
+- [About](https://eagleridge.io/about.md): Expertise, client types, and consulting approach
+- [Market Map](https://eagleridge.io/market-map.md): Eagle Ridge's view of the CMMC services market — 89 firms and platforms mapped by category, with the 0→1 readiness gap for DIB SMBs called out
+- [Nobody Built the First Mile](https://eagleridge.io/nobody-built-the-first-mile.md): Long-form argument behind the market map. The structural gap between CMMC assessors and small DIB contractors who need readiness work, and why the window to fix it is closing
+- [Glossary](https://eagleridge.io/glossary.md): Plain-language definitions of CMMC, NIST 800-171, and cybersecurity compliance terms (CUI, FCI, C3PAO, SPRS, POA&M, SSP, DFARS)
+- [Privacy Policy](https://eagleridge.io/privacy.md): Data handling and analytics disclosure
 
 ## Services
 
