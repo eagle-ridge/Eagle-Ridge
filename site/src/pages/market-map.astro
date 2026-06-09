@@ -1,0 +1,638 @@
+---
+// The CMMC market map. Grid, legend, and mobile list are pre-rendered at
+// build time from src/data/market-map-entities.json; one client script adds
+// filter/search/detail-card interactivity.
+//
+// PARITY-CRITICAL: the grid containers carry data-md-exclude so the markdown
+// mirror stays byte-stable (the old page rendered them client-side, so they
+// never appeared in the mirror). Page copy below is ported verbatim from
+// market-map.html — the spec rules still stand: no em dashes in body copy,
+// the "prepare you / test you" repetition is deliberate.
+import BaseLayout from '../layouts/BaseLayout.astro';
+import data from '../data/market-map-entities.json';
+
+const CATS = data.cats as Record<string, { label: string; fill: string; text: string; border: string }>;
+const E = data.entities as Array<{
+  n: number; s: string; name: string; cat: string; row: number; col: number;
+  target: string; fw: string; cmmc: string; price: string; notes: string;
+  conf: string; gap?: boolean;
+}>;
+
+const mainEls = E.filter((e) => e.row <= 7);
+const series1 = E.filter((e) => e.row === 8);
+const series2 = E.filter((e) => e.row === 9);
+const series3 = E.filter((e) => e.row === 10);
+
+const catEntries = Object.entries(CATS);
+
+function cellStyle(e: (typeof E)[number], useGridPos: boolean): string {
+  const c = CATS[e.cat];
+  let s = `background-color:${c.fill};border-color:${c.border};color:${c.text};grid-column:${e.col};`;
+  if (useGridPos) s += `grid-row:${e.row};`;
+  return s;
+}
+
+const title = 'The CMMC market map | Eagle Ridge Advisory';
+const description =
+  'Compare 89 CMMC providers, assessors, and tools serving the defense industrial base. Find where your firm fits and what it should cost.';
+
+const jsonLd = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'CollectionPage',
+  name: title,
+  url: 'https://eagleridge.io/market-map',
+  description,
+  isPartOf: {
+    '@type': 'WebSite',
+    name: 'Eagle Ridge Advisory',
+    url: 'https://eagleridge.io/',
+  },
+});
+---
+
+<BaseLayout title={title} description={description} path="/market-map" ogType="article">
+  <Fragment slot="head">
+    <script type="application/ld+json" set:html={jsonLd} />
+    <meta property="og:image" content="https://eagleridge.io/logo.png">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.4.0/dist/tabler-icons.min.css">
+  </Fragment>
+
+  <div class="map-body">
+    <div class="wrap">
+
+      <header class="page">
+        <h1>The CMMC market map</h1>
+        <p class="meta">v1.1 &middot; May 2026 &middot; Market data current at publication; pricing is directional.</p>
+      </header>
+
+      <section class="lead">
+        <p class="first-mile">About 80,000 small defense contractors need CMMC Level 2 certification. Roughly one percent have it.</p>
+        <p>The reason is structural. Only 103 firms in the country are authorized to do the assessment, and by rule none of them can also do the readiness work on the same engagement. The firm that can prepare you cannot test you. The firm that tests you cannot prepare you. Most small contractors land between those two firms, paying both, without a clear path through either.</p>
+        <p>This map is the whole market in one view. Tap any cell for what the firm or tool does, who it serves, and what it costs.</p>
+      </section>
+
+      <h2 class="sr-only">Interactive periodic table of the CMMC services market. 89 firms, tools, and authorities organized by category. Filter by category, search by name, click any cell for details.</h2>
+
+      <div class="controls">
+        <input type="text" id="search" placeholder="Search by name or symbol...">
+        <button id="reset" type="button">Reset</button>
+      </div>
+
+      <div class="legend" id="legend" data-md-exclude>
+        {catEntries.map(([key, c]) => (
+          <button type="button" class="legend-item" aria-pressed="false" data-cat={key}>
+            <span class="legend-dot" style={`background:${c.fill};border:1px solid ${c.border}`}></span>
+            <span>{c.label}</span>
+          </button>
+        ))}
+      </div>
+
+      <div class="periodic" id="main" data-md-exclude>
+        {mainEls.map((e) => (
+          <button type="button" class={'el' + (e.gap ? ' gap' : '')} style={cellStyle(e, true)} title={e.name} aria-label={e.name} data-num={e.n}>
+            {e.gap && <i class="ti ti-sparkles sparkle" aria-hidden="true"></i>}
+            <span class="num">{e.n}</span>
+            <span class="sym">{e.s}</span>
+          </button>
+        ))}
+      </div>
+      <p class="series-label">Tier 1 federal &amp; Big 4 consulting</p>
+      <div class="series" id="series-1" data-md-exclude>
+        {series1.map((e) => (
+          <button type="button" class={'el' + (e.gap ? ' gap' : '')} style={cellStyle(e, false)} title={e.name} aria-label={e.name} data-num={e.n}>
+            {e.gap && <i class="ti ti-sparkles sparkle" aria-hidden="true"></i>}
+            <span class="num">{e.n}</span>
+            <span class="sym">{e.s}</span>
+          </button>
+        ))}
+      </div>
+      <p class="series-label">Tier 2 regional advisory (C3PAO + RPO hybrids)</p>
+      <div class="series" id="series-2" data-md-exclude>
+        {series2.map((e) => (
+          <button type="button" class={'el' + (e.gap ? ' gap' : '')} style={cellStyle(e, false)} title={e.name} aria-label={e.name} data-num={e.n}>
+            {e.gap && <i class="ti ti-sparkles sparkle" aria-hidden="true"></i>}
+            <span class="num">{e.n}</span>
+            <span class="sym">{e.s}</span>
+          </button>
+        ))}
+      </div>
+      <p class="series-label">Boutique CMMC consulting &amp; MSSPs</p>
+      <div class="series" id="series-3" data-md-exclude>
+        {series3.map((e) => (
+          <button type="button" class={'el' + (e.gap ? ' gap' : '')} style={cellStyle(e, false)} title={e.name} aria-label={e.name} data-num={e.n}>
+            {e.gap && <i class="ti ti-sparkles sparkle" aria-hidden="true"></i>}
+            <span class="num">{e.n}</span>
+            <span class="sym">{e.s}</span>
+          </button>
+        ))}
+      </div>
+
+      <div class="mobile-view" id="mobile-view" aria-hidden="true">
+        <p class="mobile-hint">Tap a firm for details. (The full periodic grid is available on larger screens.)</p>
+        <div id="mobile-groups" data-md-exclude>
+          {catEntries.map(([key, c]) => {
+            const inCat = E.filter((e) => e.cat === key);
+            if (!inCat.length) return null;
+            return (
+              <div class="mobile-cat-group" data-cat={key}>
+                <p class="mobile-cat-label" style={`color:${c.text}`}>{c.label}</p>
+                <div class="mobile-cells">
+                  {inCat.map((e) => (
+                    <button type="button" class={'mobile-cell' + (e.gap ? ' gap' : '')} style={`border-color:${c.border};color:${c.text}`} data-num={e.n}>
+                      <span class="sym" style={`background:${c.fill};border-color:${c.border};color:${c.text}`}>{e.s}</span>
+                      <span>{e.name}</span>
+                    </button>
+                  ))}
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      </div>
+
+      <div class="detail" id="detail" role="region" aria-live="polite"></div>
+
+      <section class="methodology">
+        <h2>Methodology and confidence</h2>
+        <p>The map includes 89 entities selected to capture the structural competition in CMMC-relevant GRC services for DIB contractors. Inclusion criteria: the firm or product is (a) a regulatory authority in the CMMC ecosystem, (b) a buyer or demand-creation actor, (c) an automation, enterprise, or CMMC-native software vendor that competes for DIB attention, or (d) a services firm credibly delivering CMMC readiness or assessment work. The map is exclusionary by design: it does not catalog point security tools (firewalls, SIEMs, endpoint), cloud infrastructure providers below the FedRAMP layer, or pure compliance-document templates.</p>
+        <p><strong>How to read this.</strong> Per-cell notes describe stated focus and segment fit. Pricing is directional. Published assessment bands are sourced. Consulting hourly rates and SaaS annual bands anchor to mid-2025 public listings and may drift. The cells are not editorial verdicts on individual firms.</p>
+        <p><strong>On AI use.</strong> Eagle Ridge uses LLMs internally to accelerate control-narrative drafting and gap analysis. All output is reviewed by a Registered Provider. Client CUI and Security Protection Data (per 32 CFR &sect;170.4) is never sent to commercial LLMs.</p>
+        <p>Each element carries a confidence tag:</p>
+        <ul>
+          <li><strong>High.</strong> Sourced from primary materials (firm press releases, regulator filings, official accreditation records) and corroborated.</li>
+          <li><strong>Medium.</strong> Sourced from secondary aggregators or single primary sources. Positioning claims involve judgment.</li>
+          <li><strong>Low.</strong> Informed estimate. Verification incomplete. Pricing or capability claims should be treated as directional.</li>
+        </ul>
+        <p>The 103 C3PAO count and the ~1% Level 2 certification rate reflect the most recent public reporting at time of writing<sup><a href="#s8">8</a></sup>. Tier 2 advisory row entries received the deepest verification pass; other entries draw from earlier research and remain subject to update. Corrections welcome at <a href="mailto:contact@eagleridge.io">contact@eagleridge.io</a>.</p>
+      </section>
+
+      <div class="cta">
+        <p>If you are trying to work out where your firm fits in this market and want a second pair of eyes on it, write to <a href="mailto:contact@eagleridge.io">contact@eagleridge.io</a>.</p>
+        <p>For the longer argument behind this map, read <a href="https://eagleridge.io/nobody-built-the-first-mile">Nobody Built the First Mile</a>.</p>
+      </div>
+
+      <section class="sources" id="sources">
+        <h2>Sources</h2>
+        <ol>
+          <li id="s1">
+            <strong>The Cyber AB &mdash; Pre-Authorized C3PAOs &amp; Authorization Requirements.</strong>
+            The Cybersecurity Maturity Model Certification Accreditation Body, Inc. Official directory and authorization criteria for C3PAOs.
+            <a href="https://cyberab.org/Pre-Authorized-C3PAOs">cyberab.org/Pre-Authorized-C3PAOs</a>
+            &middot; <a href="https://cyberab.org/Portals/0/Documents/R2001-C3PAO%20Authorization%20Requirements%20JAN2026.pdf">R2001 Authorization Requirements (Jan 2026)</a>
+            <span class="conf high">High confidence</span>
+          </li>
+          <li id="s2">
+            <strong>Cherry Bekaert Secures Reauthorization as CMMC Third-Party Assessment Organization.</strong>
+            PRNewswire, January 16, 2025. Authorization ID C0125-CBA-034. Documents reauthorization under updated 32 CFR Part 170 framework.
+            <a href="https://www.prnewswire.com/news-releases/cherry-bekaert-secures-reauthorization-as-cmmc-third-party-assessment-organization-302353419.html">prnewswire.com</a>
+            <span class="conf high">High confidence</span>
+          </li>
+          <li id="s3">
+            <strong>Cherry Bekaert Collaborates With Lifeline Data Centers for Streamlined CMMC Compliance.</strong>
+            PRNewswire, August 26, 2025. Describes "CMMC Fasttrack Implementation" model targeting SMBs.
+            <a href="https://www.prnewswire.com/news-releases/cherry-bekaert-collaborates-with-lifeline-data-centers-for-streamlined-cmmc-compliance-302538030.html">prnewswire.com</a>
+            <span class="conf high">High confidence</span>
+          </li>
+          <li id="s4">
+            <strong>Aprio Earns C3PAO Status to Lead CMMC Assessments and 3PAO Status to Lead FedRAMP Assessments.</strong>
+            Aprio firm news, June 2025. Confirms dual authorization as one of ~12 firms.
+            <a href="https://www.aprio.com/aprio-earns-c3pao-status-to-lead-cmmc-assessments-and-3pao-status-to-lead-fedramp-assessments-and-strengthen-federal-compliance-services-ins-firmnews/">aprio.com</a>
+            <span class="conf high">High confidence</span>
+          </li>
+          <li id="s5">
+            <strong>Baker Tilly Achieves Cybersecurity Maturity Model Certification Third-Party Assessor Accreditation.</strong>
+            BusinessWire, April 27, 2021. Confirms C3PAO via Baker Tilly Data Systems subsidiary (now Baker Tilly Beers &amp; Cutler, LLC).
+            <a href="https://www.businesswire.com/news/home/20210427005083/en/Baker-Tilly-Achieves-Cybersecurity-Maturity-Model-Certification-Third-Party-Assessor-Accreditation">businesswire.com</a>
+            <span class="conf high">High confidence</span>
+          </li>
+          <li id="s6">
+            <strong>Schneider Downs Achieves C3PAO Authorization to Conduct CMMC Certifications.</strong>
+            Schneider Downs newsroom, February 2025. Among first 54 nationwide C3PAOs authorized.
+            <a href="https://schneiderdowns.com/schneider-downs-c3pao-authorization-cmmc-certifications/">schneiderdowns.com</a>
+            <span class="conf high">High confidence</span>
+          </li>
+          <li id="s7">
+            <strong>CMMC C3PAO List &mdash; Authorized Assessors.</strong>
+            Secureframe directory of accredited C3PAOs sourced from Cyber AB Marketplace. Confirms RSM US LLP, Forvis Mazars, HORNE LLP, and others as authorized.
+            <a href="https://secureframe.com/hub/cmmc/c3pao-list">secureframe.com/hub/cmmc/c3pao-list</a>
+            <span class="conf medium">Medium confidence (secondary aggregator)</span>
+          </li>
+          <li id="s8">
+            <strong>CMMC &mdash; Low Compliance Rate, Few C3PAOs Hamper Pentagon Program.</strong>
+            ExecutiveGov, early November 2026. Cites the Cyber AB on 103 authorized C3PAOs and reports ~1% Level 2 certification rate among ~100,000 DIB contractors.
+            <a href="https://www.executivegov.com/articles/cmmc-dow-cybersecurity-c3pao-cio">executivegov.com</a>
+            <span class="conf high">High confidence</span>
+          </li>
+          <li id="s9">
+            <strong>Understanding CMMC Levels: Best Practices for Compliance Readiness.</strong>
+            Aprio Insights, December 2025. Cites "over 80,000 contractors are expected to fall under Level 2," and assessment availability constraints.
+            <a href="https://www.aprio.com/insights-events/understanding-cmmc-levels-best-practices-for-compliance-readiness-ins-article-tech/">aprio.com</a>
+            <span class="conf high">High confidence</span>
+          </li>
+          <li id="s10">
+            <strong>How to Choose a C3PAO for CMMC Level 2: Key Criteria.</strong>
+            Elevate Consult, April 2026. Pricing data: Level 2 assessments $30K&ndash;$100K typical; $30K&ndash;$50K for 1&ndash;50 employee organizations; $120K&ndash;$150K+ for 500+.
+            <a href="https://elevateconsult.com/insights/how-to-choose-the-right-c3pao-for-your-cmmc-level-2-assessment-essential-criteria/">elevateconsult.com</a>
+            <span class="conf medium">Medium confidence</span>
+          </li>
+          <li id="s11">
+            <strong>SC&amp;H Group services &mdash; Cybersecurity Advisory &amp; Assessment.</strong>
+            Firm services page. Cyber sits within Risk practice; no C3PAO or RPO designation visible in public materials.
+            <a href="https://www.schgroup.com/services/risk/cybersecurity-advisory-assessment/">schgroup.com</a>
+            <span class="conf high">High confidence (corroborated absence)</span>
+          </li>
+          <li id="s12">
+            <strong>Eagle Ridge Advisory &mdash; engagement record.</strong>
+            Internal proof point. CMMC Level 2 SSP deliverable at proof-of-concept pricing for an SMB DIB contractor (Nereid Biomaterials, 2026). Validates the readiness-layer thesis at the low end of the SMB segment.
+            <span class="conf high">High confidence (primary, internal)</span>
+          </li>
+        </ol>
+      </section>
+
+      <div class="cta">
+        <p>If you are trying to work out where your firm fits in this market and want a second pair of eyes on it, write to <a href="mailto:contact@eagleridge.io">contact@eagleridge.io</a>.</p>
+        <p>For the longer argument behind this map, read <a href="https://eagleridge.io/nobody-built-the-first-mile">Nobody Built the First Mile</a>.</p>
+      </div>
+
+    </div>
+  </div>
+</BaseLayout>
+
+<style is:global>
+  /* Map page styles, ported from market-map.html and restyled to brand
+     tokens. Category cell colors are data encoding, kept as-is from the
+     source data (see MIGRATION-NOTES). is:global because the detail card is
+     built by the client script and scoped styles would not match it. */
+  .map-body { font-size: 15px; line-height: 1.55; }
+  .map-body .wrap { max-width: 880px; margin: 0 auto; padding: 32px 24px 64px; }
+
+  .map-body header.page { padding: 0 0 24px; margin-bottom: 32px; border-bottom: 1px solid var(--er-rule); }
+  .map-body header.page h1 { font-size: var(--er-text-h1); font-weight: 400; margin: 0 0 6px; letter-spacing: var(--er-tracking-tight); }
+  .map-body header.page p.meta { margin: 12px 0 0; font-family: var(--er-font-mono); font-size: 12px; color: var(--er-mute); }
+
+  .map-body section.lead { margin: 0 0 32px; }
+  .map-body section.lead p { margin: 0 0 12px; font-size: 15px; line-height: 1.65; color: var(--er-ink-soft); }
+  .map-body section.lead p.first-mile { font-weight: 300; font-size: var(--er-text-lede); color: var(--er-ink); line-height: 1.5; }
+
+  .map-body .controls { display: flex; gap: 10px; margin: 0 0 14px; align-items: center; flex-wrap: wrap; }
+  .map-body .controls input[type="text"] {
+    flex: 1; min-width: 200px; height: 36px; padding: 0 12px;
+    border: var(--er-border); border-radius: var(--er-radius-md);
+    font-family: var(--er-font-sans); font-size: 14px; color: var(--er-ink); background: var(--er-paper);
+  }
+  .map-body .controls input[type="text"]:focus { outline: none; border-color: var(--er-accent); box-shadow: 0 0 0 2px rgba(74, 47, 34, 0.12); }
+  .map-body .controls button {
+    height: 36px; padding: 0 14px;
+    border: var(--er-border); border-radius: var(--er-radius-md);
+    background: var(--er-paper); color: var(--er-ink);
+    font-family: var(--er-font-sans); font-size: 13px; font-weight: 500;
+    cursor: pointer;
+  }
+  .map-body .controls button:hover { background: var(--er-bg); }
+  .map-body .controls button:active { transform: scale(0.98); }
+
+  .map-body .legend { display: flex; flex-wrap: wrap; gap: 6px; margin: 0 0 18px; font-size: 11px; }
+  .map-body .legend-item {
+    display: inline-flex; align-items: center; gap: 6px;
+    padding: 4px 9px;
+    border-radius: var(--er-radius-md); cursor: pointer;
+    border: var(--er-border); background: var(--er-paper);
+    user-select: none; color: var(--er-ink-soft);
+    transition: opacity 0.15s ease;
+    font: inherit; margin: 0;
+    appearance: none; -webkit-appearance: none;
+  }
+  .map-body .legend-item:hover { border-color: var(--er-mute); }
+  .map-body .legend-item:focus-visible { outline: 2px solid var(--er-accent); outline-offset: 2px; }
+  .map-body .legend-item.dim { opacity: 0.35; }
+  .map-body .legend-dot { width: 10px; height: 10px; border-radius: 2px; flex-shrink: 0; }
+
+  .map-body .periodic { display: grid; grid-template-columns: repeat(18, 1fr); grid-auto-rows: 40px; gap: 3px; margin: 4px 0 12px; }
+  .map-body .series-label { font-family: var(--er-font-mono); font-size: 11px; color: var(--er-mute); margin: 14px 0 5px; font-weight: 500; letter-spacing: 0.04em; text-transform: uppercase; }
+  .map-body .series { display: grid; grid-template-columns: repeat(18, 1fr); grid-auto-rows: 40px; gap: 3px; }
+
+  .map-body .el {
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    border-radius: 3px; border: 1px solid;
+    cursor: pointer; position: relative;
+    transition: transform 0.12s ease;
+    overflow: hidden;
+    font: inherit; padding: 0; margin: 0;
+    appearance: none; -webkit-appearance: none;
+  }
+  .map-body .el:hover { transform: scale(1.18); z-index: 5; box-shadow: var(--er-shadow-md); }
+  .map-body .el:focus-visible { outline: 2px solid var(--er-accent); outline-offset: 2px; z-index: 5; }
+  .map-body .el.dim { opacity: 0.35; pointer-events: none; }
+  .map-body .el.selected { outline: 2px solid var(--er-ink); outline-offset: 1px; z-index: 4; }
+  .map-body .el .num { position: absolute; top: 2px; right: 3px; font-size: 7px; font-weight: 400; opacity: 0.7; line-height: 1; }
+  .map-body .el .sym { font-size: 12px; font-weight: 600; line-height: 1; }
+  .map-body .el.gap { border-style: dashed; border-width: 2px; animation: er-pulse 2.4s ease-in-out infinite; }
+  .map-body .el.gap .sparkle { position: absolute; top: -1px; left: 2px; font-size: 9px; color: #854F0B; }
+  @keyframes er-pulse { 0%,100% { box-shadow: 0 0 0 0 rgba(186,117,23,0.6); } 50% { box-shadow: 0 0 0 5px rgba(186,117,23,0); } }
+
+  .map-body .mobile-view { display: none; }
+  .map-body .mobile-view .mobile-hint { font-size: 12px; color: var(--er-mute); margin: 0 0 12px; font-style: italic; }
+  .map-body .mobile-view .mobile-cat-group { margin-bottom: 18px; }
+  .map-body .mobile-view .mobile-cat-label {
+    font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.04em;
+    margin: 0 0 6px;
+  }
+  .map-body .mobile-view .mobile-cells { display: flex; flex-wrap: wrap; gap: 6px; }
+  .map-body .mobile-view .mobile-cell {
+    display: inline-flex; align-items: center; gap: 6px;
+    padding: 6px 10px;
+    border-radius: var(--er-radius-md);
+    border: 1px solid;
+    background: var(--er-paper);
+    cursor: pointer;
+    font-size: 13px;
+    font-family: inherit;
+  }
+  .map-body .mobile-view .mobile-cell:active { transform: scale(0.97); }
+  .map-body .mobile-view .mobile-cell:focus-visible { outline: 2px solid var(--er-accent); outline-offset: 2px; }
+  .map-body .mobile-view .mobile-cell .sym {
+    font-weight: 600;
+    padding: 2px 6px;
+    border-radius: 3px;
+    border: 1px solid;
+    font-size: 11px;
+  }
+  .map-body .mobile-view .mobile-cell.gap { border-style: dashed; }
+
+  .map-body .detail {
+    margin: 18px 0 0;
+    padding: 18px 20px;
+    background: var(--er-paper);
+    border: var(--er-border); border-radius: var(--er-radius-lg);
+    display: none;
+  }
+  .map-body .detail.show { display: block; }
+  .map-body .detail-header { display: flex; align-items: center; gap: 14px; margin-bottom: 14px; }
+  .map-body .detail-sym {
+    width: 64px; height: 64px;
+    border-radius: var(--er-radius-lg); border: 1px solid;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    position: relative; flex-shrink: 0;
+  }
+  .map-body .detail-sym .num { position: absolute; top: 4px; right: 6px; font-size: 10px; opacity: 0.75; }
+  .map-body .detail-sym .sym { font-size: 24px; font-weight: 600; }
+  .map-body .detail-meta { flex: 1; min-width: 0; }
+  .map-body .detail-name { font-size: 19px; font-weight: 600; margin: 0; color: var(--er-ink); }
+  .map-body .detail-cat { font-size: 13px; color: var(--er-mute); margin: 3px 0 0; }
+  .map-body .detail-close {
+    cursor: pointer; background: transparent;
+    border: var(--er-border); width: 32px; height: 32px;
+    border-radius: var(--er-radius-md);
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0; color: var(--er-ink);
+  }
+  .map-body .detail-close:hover { background: var(--er-bg); }
+  .map-body .detail-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: 12px 0; }
+  .map-body .detail-field { padding: 10px 14px; background: var(--er-bg); border-radius: var(--er-radius-md); }
+  .map-body .detail-field .label { font-family: var(--er-font-mono); font-size: 11px; color: var(--er-mute); margin-bottom: 4px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.04em; }
+  .map-body .detail-field .value { font-size: 13px; color: var(--er-ink); }
+  .map-body .detail-notes { font-size: 14px; line-height: 1.65; padding: 12px 0 0; border-top: 1px solid var(--er-rule); margin-top: 12px; }
+  .map-body .detail-notes sup { font-size: 10px; font-weight: 500; }
+  .map-body .detail-notes sup a { color: var(--er-accent); text-decoration: none; padding: 0 2px; }
+  .map-body .detail-notes sup a:hover { text-decoration: underline; }
+  .map-body .conf { display: inline-block; font-size: 10px; padding: 2px 8px; border-radius: 4px; margin-left: 10px; vertical-align: 2px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.04em; }
+  .map-body .conf.high { background: #EAF3DE; color: #27500A; }
+  .map-body .conf.medium { background: #FAEEDA; color: #633806; }
+  .map-body .conf.low { background: #F1EFE8; color: #444441; }
+
+  .map-body section.methodology { margin: 56px 0 32px; padding: 24px 0 0; border-top: 1px solid var(--er-rule); }
+  .map-body section.methodology h2 { font-size: var(--er-text-h3); font-weight: 400; margin: 0 0 12px; }
+  .map-body section.methodology p { margin: 0 0 12px; color: var(--er-ink-soft); line-height: 1.65; }
+  .map-body section.methodology ul { margin: 0 0 14px; padding-left: 20px; }
+  .map-body section.methodology li { margin-bottom: 6px; color: var(--er-ink-soft); line-height: 1.55; }
+
+  .map-body .cta {
+    padding: 18px 0;
+    margin: 32px 0;
+    border-top: 1px solid var(--er-rule);
+    border-bottom: 1px solid var(--er-rule);
+  }
+  .map-body .cta p { margin: 0 0 10px; font-size: 15px; line-height: 1.65; color: var(--er-ink-soft); }
+  .map-body .cta p:last-child { margin-bottom: 0; }
+  .map-body .cta a { color: var(--er-accent); text-decoration: none; }
+  .map-body .cta a:hover { text-decoration: underline; }
+
+  .map-body section.sources { margin: 32px 0; padding: 24px 0 0; border-top: 1px solid var(--er-rule); }
+  .map-body section.sources h2 { font-size: var(--er-text-h3); font-weight: 400; margin: 0 0 14px; }
+  .map-body section.sources ol { padding-left: 28px; margin: 0; }
+  .map-body section.sources li { margin-bottom: 12px; line-height: 1.55; font-size: 13px; color: var(--er-ink-soft); }
+  .map-body section.sources li strong { color: var(--er-ink); }
+  .map-body section.sources li a { color: var(--er-accent); text-decoration: none; word-break: break-word; }
+  .map-body section.sources li a:hover { text-decoration: underline; }
+  .map-body section.sources li .conf { margin-left: 8px; }
+  .map-body section.sources li:target { background: #FAEEDA; padding: 8px 10px; border-radius: var(--er-radius-md); margin-left: -10px; }
+
+  @media (max-width: 720px) {
+    .map-body .wrap { padding: 20px 14px 40px; }
+    .map-body .detail-grid { grid-template-columns: 1fr; }
+  }
+
+  @media (max-width: 640px) {
+    .map-body .periodic, .map-body .series, .map-body .series-label, .map-body .controls button#reset { display: none; }
+    .map-body .mobile-view { display: block; }
+    .map-body .legend { font-size: 12px; }
+  }
+
+  @media print {
+    .map-body .controls, .map-body .detail-close, .map-body .legend-item { cursor: default; }
+    .map-body .el:hover { transform: none; box-shadow: none; }
+    .map-body .detail { break-inside: avoid; }
+    .map-body a { color: var(--er-ink); text-decoration: underline; }
+  }
+</style>
+
+<script>
+  // Interactivity island: filter, search, detail card, Escape-close.
+  // The grid is pre-rendered at build time; this script only wires events
+  // and renders the detail card. Ported from market-map.html's inline IIFE.
+  //
+  // All rendered HTML is built from the build-time JSON constants below.
+  // Search input is matched via String.includes() only — never rendered as
+  // HTML. htmlFrag() uses Range.createContextualFragment for HTML-entity and
+  // footnote markup inside the trusted constant strings. Never pass
+  // user-supplied input to htmlFrag().
+  import data from '../data/market-map-entities.json';
+
+  type Entity = {
+    n: number; s: string; name: string; cat: string; row: number; col: number;
+    target: string; fw: string; cmmc: string; price: string; notes: string;
+    conf: string; gap?: boolean;
+  };
+  const CATS = data.cats as Record<string, { label: string; fill: string; text: string; border: string }>;
+  const E = data.entities as Entity[];
+
+  function htmlFrag(html: string | null | undefined): DocumentFragment {
+    if (html == null) return document.createDocumentFragment();
+    const range = document.createRange();
+    range.selectNode(document.body);
+    return range.createContextualFragment(html);
+  }
+
+  function el(
+    tag: string,
+    attrs?: Record<string, any> | null,
+    children?: Array<Node | string | null>,
+  ): HTMLElement {
+    const node = document.createElement(tag);
+    if (attrs) {
+      for (const k in attrs) {
+        if (k === 'style') Object.assign(node.style, attrs.style);
+        else if (k === 'class') node.className = attrs[k];
+        else if (k.startsWith('on')) node.addEventListener(k.slice(2), attrs[k]);
+        else node.setAttribute(k, attrs[k]);
+      }
+    }
+    if (children) {
+      for (const c of children) {
+        if (c == null) continue;
+        if (typeof c === 'string') node.appendChild(document.createTextNode(c));
+        else node.appendChild(c);
+      }
+    }
+    return node;
+  }
+
+  const detail = document.getElementById('detail');
+  const legend = document.getElementById('legend');
+  const searchInput = document.getElementById('search') as HTMLInputElement | null;
+  const resetBtn = document.getElementById('reset');
+  if (detail && legend && searchInput && resetBtn) {
+    const allCells = document.querySelectorAll<HTMLElement>('.el, .mobile-cell');
+    const legendItems = legend.querySelectorAll<HTMLElement>('.legend-item');
+    const mobileGroupNodes = document.querySelectorAll<HTMLElement>('.mobile-cat-group');
+
+    let activeCat: string | null = null;
+
+    allCells.forEach((node) => {
+      node.addEventListener('click', () => {
+        const e = E.find((x) => x.n === Number(node.dataset.num));
+        if (e) showDetail(e);
+      });
+    });
+
+    legendItems.forEach((li) => {
+      li.addEventListener('click', () => toggleCat(li.dataset.cat ?? null));
+    });
+
+    // Compose both filters into one predicate so search and legend can coexist.
+    function applyFilters() {
+      const q = searchInput!.value.trim().toLowerCase();
+      allCells.forEach((node) => {
+        const e = E.find((x) => x.n === Number(node.dataset.num));
+        if (!e) return;
+        const catHit = !activeCat || e.cat === activeCat;
+        const searchHit =
+          !q ||
+          e.name.toLowerCase().includes(q) ||
+          e.s.toLowerCase().includes(q) ||
+          e.cat.includes(q) ||
+          e.notes.toLowerCase().includes(q);
+        node.classList.toggle('dim', !(catHit && searchHit));
+      });
+      mobileGroupNodes.forEach((g) => {
+        const hasVisible = g.querySelectorAll('.mobile-cell:not(.dim)').length > 0;
+        g.style.display = hasVisible ? '' : 'none';
+      });
+    }
+
+    function toggleCat(key: string | null) {
+      activeCat = activeCat === key ? null : key;
+      legendItems.forEach((li) => {
+        const isActive = li.dataset.cat === activeCat;
+        li.classList.toggle('dim', activeCat !== null && !isActive);
+        li.setAttribute('aria-pressed', String(isActive));
+      });
+      applyFilters();
+    }
+
+    searchInput.addEventListener('input', applyFilters);
+
+    resetBtn.addEventListener('click', () => {
+      searchInput!.value = '';
+      activeCat = null;
+      legendItems.forEach((li) => {
+        li.classList.remove('dim');
+        li.setAttribute('aria-pressed', 'false');
+      });
+      allCells.forEach((node) => node.classList.remove('selected'));
+      detail!.classList.remove('show');
+      applyFilters();
+    });
+
+    // Escape closes the detail panel.
+    document.addEventListener('keydown', (ev) => {
+      if (ev.key !== 'Escape') return;
+      if (!detail!.classList.contains('show')) return;
+      detail!.classList.remove('show');
+      allCells.forEach((node) => node.classList.remove('selected'));
+    });
+
+    function showDetail(e: Entity) {
+      allCells.forEach((node) => {
+        node.classList.toggle('selected', Number(node.dataset.num) === e.n);
+      });
+      const cat = CATS[e.cat];
+      const d = detail!;
+      while (d.firstChild) d.removeChild(d.firstChild);
+
+      const header = el('div', { class: 'detail-header' });
+      const sym = el('div', {
+        class: 'detail-sym',
+        style: { background: cat.fill, borderColor: cat.border, color: cat.text },
+      });
+      sym.appendChild(el('span', { class: 'num' }, [String(e.n)]));
+      sym.appendChild(el('span', { class: 'sym' }, [e.s]));
+      header.appendChild(sym);
+
+      const meta = el('div', { class: 'detail-meta' });
+      const nameP = el('p', { class: 'detail-name' }, [e.name]);
+      nameP.appendChild(el('span', { class: 'conf ' + e.conf }, [e.conf]));
+      meta.appendChild(nameP);
+      meta.appendChild(el('p', { class: 'detail-cat' }, [cat.label]));
+      header.appendChild(meta);
+
+      const closeBtn = el('button', {
+        class: 'detail-close',
+        type: 'button',
+        'aria-label': 'Close',
+        onclick: () => {
+          d.classList.remove('show');
+          allCells.forEach((node) => node.classList.remove('selected'));
+        },
+      });
+      closeBtn.appendChild(el('i', { class: 'ti ti-x', 'aria-hidden': 'true' }));
+      header.appendChild(closeBtn);
+      d.appendChild(header);
+
+      const grid = el('div', { class: 'detail-grid' });
+      // target, cmmc, price, notes may contain HTML entities or footnote markup → fragment
+      function field(label: string, value: string, allowHtml: boolean) {
+        const f = el('div', { class: 'detail-field' });
+        f.appendChild(el('div', { class: 'label' }, [label]));
+        const v = el('div', { class: 'value' });
+        if (allowHtml) v.appendChild(htmlFrag(value));
+        else v.appendChild(document.createTextNode(value));
+        f.appendChild(v);
+        return f;
+      }
+      grid.appendChild(field('Target customer', e.target, true));
+      grid.appendChild(field('CMMC L2 fit', e.cmmc, true));
+      grid.appendChild(field('Frameworks', e.fw, false));
+      grid.appendChild(field('Typical pricing', e.price, true));
+      d.appendChild(grid);
+
+      const notes = el('div', { class: 'detail-notes' });
+      notes.appendChild(htmlFrag(e.notes));
+      d.appendChild(notes);
+
+      d.classList.add('show');
+      d.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      closeBtn.focus();
+    }
+  }
+</script>
