@@ -6,8 +6,8 @@ Static site hosted on GitHub Pages. Hand-written HTML pages, no build tools. `.n
 
 | File | Purpose |
 |------|---------|
-| `index.html` | Homepage — hero (A/B tested), services, frameworks, social proof, contact form |
-| `about.html` | About page — expertise, clients, approach |
+| `index.html` | Homepage — hero, services (GRC readiness), frameworks, social proof, contact form |
+| `about.html` | About page — GRC readiness positioning, clients (small-business CEOs), approach |
 | `discovery.html` | SSP intake form — Tally.so embed, unlisted (noindex), shared via direct URL |
 | `market-map.html` | Public interactive market map of the CMMC services landscape (89 entities, periodic-table layout). Linked from all page footers. |
 | `nobody-built-the-first-mile.html` | Long-form argument behind the market map. Buyer-first prose, cream/brown palette matching about.html. CTA target from market-map. Linked from all page footers. |
@@ -32,20 +32,13 @@ Static site hosted on GitHub Pages. Hand-written HTML pages, no build tools. `.n
 ## Integrations
 
 ### PostHog Analytics
-- **Snippet**: In `<head>` of all 4 pages (loads async, non-blocking)
+- **Snippet**: In `<head>` of all pages (loads async, non-blocking)
 - **Project token**: `phc_gKgLr0iMjD1gnLV3yd8lEYWIUWmkIk8BuI6jUG3rTBg` (public, safe in HTML)
 - **Project ID**: `209232`
 - **API key**: `op://Private/PostHog MCP/credential` (use 1Password, never hardcode)
 - **Host**: `https://us.i.posthog.com`
 
-### A/B Test: Homepage Hero
-- **Experiment**: `eagle-ridge-homepage-hero-experiment` (ID: 358074)
-- **Feature flag**: `hero-variant` (ID: 585380), 50/50 split
-- **Variant A** (control): "Eliminate the security poverty line" — unified message
-- **Variant B** (test): "Cybersecurity compliance, made practical" — two audience cards linking to `#contact-form`
-- **Anti-FOUC**: `.hero-variant { display: none }` + fallback timer (registered first) + `onFeatureFlags` callback (guarded with `typeof`)
-- **Tracking event**: `hero_variant_shown` with `{ variant: 'a' | 'b' }`
-- Use `/posthog-experiment` skill for changes
+> **Note:** The homepage hero A/B test (experiment `eagle-ridge-homepage-hero-experiment` / flag `hero-variant`) was **retired June 2026**. The hero is now a single static message ("Win the contract. Be ready to pass."). The variant markup, `.hero-variant` hide-CSS, and `onFeatureFlags` routing JS were removed from `index.html`. The PostHog experiment/flag can be archived in the dashboard; no live code references it.
 
 ### Web3Forms Contact Form
 - **Access key**: `3e6cb410-9c3a-4af7-9a6a-dbf012e8d8a1` (safe in HTML, tied to account)
@@ -65,14 +58,23 @@ Static site hosted on GitHub Pages. Hand-written HTML pages, no build tools. `.n
 
 ## Audience
 
-Two buyer personas:
-1. **Small business CEOs** — need CMMC/SOC 2 compliance to win government contracts
-2. **PE/DD teams** — acquiring companies that need compliance readiness
+Primary buyer persona: **small-business CEOs** — founder-led teams without a dedicated
+security/compliance function who need CMMC, SOC 2, or ISO 27001 to win or keep government
+and enterprise contracts.
+
+Positioning is **GRC readiness**: we take companies through the full readiness lifecycle
+(gap assessment → remediation → SSP → SPRS → evidence → ConMon) so they're prepared before
+they're assessed. Key framing: a C3PAO cannot perform readiness AND the assessment for the
+same client, so Eagle Ridge is the upstream readiness partner, not a competitor to assessors.
+
+Copy guidance: lead with plain language for the CEO (avoid jargon like "GRC", "remediation",
+"POA&M" in headline copy); "GRC readiness" is fine as a category label in service/SEO copy and
+in partner/industry contexts. PE/VC and due-diligence framing was removed June 2026 — do not
+reintroduce it without direction.
 
 ## Dev Workflow
 
 ```bash
 python3 -m http.server 8000   # Local testing
-# Test A/B: Variant A shows as fallback after 1.5s (no flag configured locally)
 # Test form: Submit manually in browser (Web3Forms blocks server-side requests)
 ```

@@ -1,35 +1,24 @@
 <!-- Markdown mirror of https://eagleridge.io/ -->
 
-# Eagle Ridge Advisory | Cybersecurity Compliance for Business & PE
+# Eagle Ridge Advisory | GRC Readiness for CMMC & Compliance
 
-# Eliminate the security poverty line.
+# Win the contract. Be ready to pass.
 
-We help companies implement cybersecurity compliance frameworks — CMMC, SOC 2, ISO 27001, FedRAMP — so they can win government and enterprise contracts without building a security team from scratch.
-
-# Cybersecurity compliance, made practical.
-
-From first audit to full certification — we get you there.
-
-[### Small Business Leaders
-
-Need CMMC, SOC 2, or ISO 27001 to win contracts? We build your compliance program from the ground up — without the overhead of a full security team.](#contact-form)
-[### PE/VC & Due Diligence Teams
-
-Evaluating a target's security posture? We run technical due diligence, quantify remediation costs, and build post-acquisition compliance roadmaps.](#contact-form)
+We get you ready for CMMC and other compliance frameworks — gaps found, fixed, and documented — so when it's time to be assessed, there are no surprises.
 
 ## What We Do
 
-## Cybersecurity Due Diligence
+## GRC Readiness
 
-Technical assessment and risk evaluation for portfolio companies. We identify gaps, quantify remediation costs, and build implementation roadmaps that align with deal timelines.
+Most companies aren't ready when it's time to be assessed — and finding out the hard way costs time, money, and the contract clock. We take you through the whole readiness lifecycle: find the gaps, fix them with you, and document everything, so you're prepared before anyone grades you.
 
-## Compliance Implementation
+## What You Get
 
-End-to-end support for ISO 27001, SOC 2 Type 2, CMMC, and FedRAMP certification. We handle documentation, controls implementation, and audit preparation.
+A gap assessment against all 110 controls, a prioritized remediation plan with real costs, a findings report, your System Security Plan and SPRS score, an evidence inventory, and a continuous-monitoring plan to stay compliant after you pass.
 
-## Go-to-Market Strategy
+## Built for Small Teams
 
-Business development and market analysis for technology companies. We help portfolio companies identify opportunities, build sales infrastructure, and accelerate growth.
+You don't need a security department to win government and enterprise contracts. We do the heavy lifting — drafting policies, standing up tooling, and documenting controls — sized for a company your size, not an enterprise.
 
 ## Compliance Frameworks
 
@@ -53,7 +42,7 @@ Companies advised
 
 ## Let's talk about your compliance needs.
 
-Get in touch to discuss due diligence, compliance, or growth strategy.
+Get in touch to find out where you stand and what it takes to be ready.
 
 Name
 
