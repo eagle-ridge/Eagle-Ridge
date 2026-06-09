@@ -125,6 +125,8 @@ a { color: var(--er-accent); }
   font-size: 12px;
   letter-spacing: 0.08em;
   text-transform: uppercase;
+  /* --er-mute fails WCAG 4.5:1 at this size on --er-bg */
+  color: var(--er-ink-soft);
 }
 
 /* ---- section scaffolding (rules over boxes) ---- */
@@ -233,7 +235,8 @@ a { color: var(--er-accent); }
   font-size: 12px;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: var(--er-mute);
+  /* --er-mute fails WCAG 4.5:1 at label sizes; ink-soft reads as muted */
+  color: var(--er-ink-soft);
 }
 
 /* ---- buttons ---- */

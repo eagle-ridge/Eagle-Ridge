@@ -25,6 +25,17 @@ Plan: `~/.claude/plans/can-we-just-do-bubbly-bubble.md` · Requirements: `REBUIL
 - **Dark CTA band retired:** the old homepage's dark-brown contact band conflicted with the brand kit's language ("rules over boxes", one accent per view) and produced contrast failures with the new palette. The contact section is now a parchment section; the services grid's primary umber panel is the single accent area on the homepage.
 - **Glossary "due diligence" mention kept:** the SOC 2 definition's "often requested in commercial due diligence" is factual glossary content, parity-locked — not positioning copy.
 
+## Final audit (P6, 2026-06-09 — served via `wrangler pages dev`)
+
+- **Parity oracle:** index.md byte-identical to baseline; all other mirrors differ only by the enumerated allowed diffs (mirror-header URL, `.html`→clean links). No D10 emphasis instances were applied.
+- **JS audit:** dist ships exactly one JS file (the market-map island, ~32KB incl. entity data) + the PostHog inline snippet. Nothing else.
+- **Lighthouse (≥95 gate):** home 99 perf / 100 a11y / 100 SEO; about 100 / 100 / 100. Required `build.inlineStylesheets: 'always'` (kills the render-blocking CSS request) and the contrast fixes below.
+- **WCAG note — brand-kit deviation:** `--er-mute` (#8B7D6E) fails 4.5:1 on paper backgrounds at label sizes (12px). Small labels (footer colophon, stat labels, form labels) use `--er-ink-soft` instead. Reserve `--er-mute` for larger or non-essential text.
+- **Redirects:** Cloudflare Pages serves `.html` → clean URL as an automatic **308** (its pretty-URL redirect takes precedence over the explicit `_redirects` 301s). 308 is also a permanent redirect and SEO-equivalent; the `_redirects` file stays as explicit intent. Verified in-browser: `/glossary.html` lands on `/glossary`.
+- **Link check:** linkinator over the served site — 28 links, 0 broken. (The live GitHub Pages site already serves extensionless URLs, so absolute clean-URL references resolve even pre-cutover.)
+- **Browser end-to-end:** all six pages rendered and console-clean (only the intentional "PostHog loaded" log). Market map: search (notes-inclusive), legend filter with `aria-pressed`, detail card (HTML entities + footnote links render), Escape-close all verified. Contact form: real Web3Forms submission succeeded — stays on page, success status shown (one test email sent, labeled "Astro Rebuild Test (ignore)"). `window.posthog` loaded.
+- **Console-error count:** 0 across all pages.
+
 ## Pre-build findings
 
 - Committed `market-map.md` was stale: `market-map.html` had gained the "On AI use" paragraph without mirror regeneration. Mirror regenerated 2026-06-09 and committed; `parity-baseline/` snapshots the regenerated (correct) state.

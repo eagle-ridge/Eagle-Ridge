@@ -10,6 +10,8 @@ export default defineConfig({
   compressHTML: false,
   build: {
     format: 'file',
+    // No render-blocking stylesheet request; font URLs discovered in HTML.
+    inlineStylesheets: 'always',
   },
   markdown: {
     // Copy is parity-locked; the pipeline must not rewrite quotes/dashes.

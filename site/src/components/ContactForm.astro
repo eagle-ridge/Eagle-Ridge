@@ -31,7 +31,8 @@
         letter-spacing: 0.14em;
         text-transform: uppercase;
         margin-bottom: 6px;
-        color: var(--er-mute);
+        /* --er-mute fails WCAG 4.5:1 at label sizes */
+        color: var(--er-ink-soft);
     }
     .contact-form input,
     .contact-form textarea {
