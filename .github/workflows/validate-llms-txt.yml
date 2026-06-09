@@ -3,21 +3,42 @@ name: Validate llms.txt
 on:
   pull_request:
     paths:
-      - "llms.txt"
-      - "*.html"
+      - "site/**"
+      - "parity-baseline/**"
       - ".github/workflows/validate-llms-txt.yml"
 
 jobs:
   validate:
     name: Validate llms.txt
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: site
     steps:
       - uses: actions/checkout@v4
 
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: site/package-lock.json
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: |
+          npm ci
+          python3 -m pip install -r scripts/requirements.txt
+
+      - name: Build site (includes mirror + sitemap generation)
+        run: npm run build
+
       - name: Check llms.txt exists
         run: |
-          if [ ! -f llms.txt ]; then
-            echo "::error::llms.txt not found in repository root"
+          if [ ! -f public/llms.txt ]; then
+            echo "::error::site/public/llms.txt not found"
             exit 1
           fi
 
@@ -26,40 +47,39 @@ jobs:
           errors=0
 
           # Must start with an H1
-          if ! head -1 llms.txt | grep -qE '^# .+'; then
-            echo "::error file=llms.txt,line=1::llms.txt must start with an H1 header (# Site Name)"
+          if ! head -1 public/llms.txt | grep -qE '^# .+'; then
+            echo "::error file=site/public/llms.txt,line=1::llms.txt must start with an H1 header (# Site Name)"
             errors=$((errors + 1))
           fi
 
           # Must have a blockquote summary
-          if ! grep -qE '^> .+' llms.txt; then
-            echo "::error file=llms.txt::llms.txt must include a blockquote (> ...) summary"
+          if ! grep -qE '^> .+' public/llms.txt; then
+            echo "::error file=site/public/llms.txt::llms.txt must include a blockquote (> ...) summary"
             errors=$((errors + 1))
           fi
 
           # Must have a Pages section
-          if ! grep -qE '^## Pages' llms.txt; then
-            echo "::error file=llms.txt::llms.txt must include a '## Pages' section"
+          if ! grep -qE '^## Pages' public/llms.txt; then
+            echo "::error file=site/public/llms.txt::llms.txt must include a '## Pages' section"
             errors=$((errors + 1))
           fi
 
-          # Every public HTML file should be referenced — by either its .html
-          # page or its .md mirror (llms.txt links to the Markdown mirrors).
-          for html_file in *.html; do
-            [ "$html_file" = "*.html" ] && continue
-            [ "$html_file" = "discovery.html" ] && continue  # unlisted intake form (noindex)
-            stem="${html_file%.html}"
-            if grep -qE "(^|/)${stem}\.(md|html)([\")# ]|$)" llms.txt; then
+          # Every built page should be referenced — by either its clean URL
+          # or its .md mirror (llms.txt links to the Markdown mirrors).
+          for html_file in dist/*.html; do
+            name=$(basename "$html_file")
+            stem="${name%.html}"
+            if grep -qE "(^|/)${stem}\.(md|html)([\")# ]|$)|eagleridge\.io/${stem}([\")# )]|$)" public/llms.txt; then
               continue
             fi
-            echo "::warning file=llms.txt::$html_file (or ${stem}.md) is not referenced in llms.txt — consider adding it"
+            echo "::warning file=site/public/llms.txt::$name (or ${stem}.md) is not referenced in llms.txt — consider adding it"
             errors=$((errors + 1))
           done
 
           # Must not be empty or trivially small (< 5 lines)
-          line_count=$(wc -l < llms.txt)
+          line_count=$(wc -l < public/llms.txt)
           if [ "$line_count" -lt 5 ]; then
-            echo "::error file=llms.txt::llms.txt has only $line_count lines — too sparse to be useful"
+            echo "::error file=site/public/llms.txt::llms.txt has only $line_count lines — too sparse to be useful"
             errors=$((errors + 1))
           fi
 
@@ -70,24 +90,26 @@ jobs:
 
           echo "llms.txt structure is valid"
 
-      - name: Verify referenced URLs resolve to repo files
+      - name: Verify referenced URLs resolve to built files
         run: |
-          # Serve the repo locally and probe each referenced URL against the
-          # repo's own files. This validates the links pre-merge (new pages and
-          # .md mirrors aren't live yet) instead of hitting the production site.
-          python3 -m http.server 8080 --directory . &
+          # Serve the build output and probe each referenced URL. Clean URLs
+          # (no extension) map to <path>.html, mirroring Cloudflare Pages'
+          # pretty-URL serving of format:'file' output.
+          python3 -m http.server 8080 --directory dist &
           server_pid=$!
           sleep 2
-          urls=$(grep -oE 'https://eagleridge\.io[^)]*' llms.txt | sort -u)
+          urls=$(grep -oE 'https://eagleridge\.io[^)]*' public/llms.txt | sort -u)
           errors=0
 
           for url in $urls; do
-            # Map the production URL to a local path; drop the domain and fragment.
             path=$(echo "$url" | sed -E 's#https://eagleridge\.io##; s/#.*//')
             [ -z "$path" ] && path="/"
+            if [ "$path" != "/" ] && ! echo "$path" | grep -qE '\.[a-z]+$'; then
+              path="${path}.html"
+            fi
             status=$(curl -s -o /dev/null -w '%{http_code}' --max-time 10 "http://localhost:8080$path" || echo "000")
             if [ "$status" -ne 200 ]; then
-              echo "::error file=llms.txt::$url -> local path '$path' returned HTTP $status"
+              echo "::error file=site/public/llms.txt::$url -> local path '$path' returned HTTP $status"
               errors=$((errors + 1))
             else
               echo "OK: $url ($status)"
@@ -97,11 +119,43 @@ jobs:
           kill "$server_pid" 2>/dev/null || true
 
           if [ "$errors" -gt 0 ]; then
-            echo "::error::$errors referenced URL(s) do not resolve to files in the repo"
+            echo "::error::$errors referenced URL(s) do not resolve to built files"
             exit 1
           fi
 
-          echo "All referenced URLs resolve to repo files"
+          echo "All referenced URLs resolve to built files"
+
+      - name: Content parity vs baseline
+        run: |
+          # The parity oracle: each built .md mirror must equal its snapshot
+          # in parity-baseline/ after normalizing the enumerated allowed
+          # diffs (.html → clean URLs). See MIGRATION-NOTES.md.
+          errors=0
+          for baseline in ../parity-baseline/*.md; do
+            name=$(basename "$baseline")
+            built="dist/$name"
+            if [ ! -f "$built" ]; then
+              echo "::error::$built missing from build output"
+              errors=$((errors + 1))
+              continue
+            fi
+            # Normalize allowed diffs in the baseline: internal .html URLs
+            # become clean URLs (covers the mirror-header comment too).
+            if ! sed -E 's#(eagleridge\.io/[a-z0-9-]+)\.html#\1#g; s#\((/[a-z0-9-]+)\.html([#)])#(\1\2#g' "$baseline" | diff -u - "$built" > /tmp/parity-diff.txt; then
+              echo "::error::content drift in $name (beyond allowed diffs):"
+              cat /tmp/parity-diff.txt
+              errors=$((errors + 1))
+            else
+              echo "OK: $name matches baseline"
+            fi
+          done
+
+          if [ "$errors" -gt 0 ]; then
+            echo "::error::parity check failed for $errors page(s)"
+            exit 1
+          fi
+
+          echo "All mirrors match the parity baseline"
 
   drift-check:
     name: Check llms.txt freshness
@@ -111,16 +165,19 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Warn if HTML changed without llms.txt update
+      - name: Warn if page sources changed without llms.txt update
+        env:
+          BASE_SHA: ${{ github.event.pull_request.base.sha }}
+          HEAD_SHA: ${{ github.event.pull_request.head.sha }}
         run: |
-          base="${{ github.event.pull_request.base.sha }}"
-          head="${{ github.event.pull_request.head.sha }}"
+          base="$BASE_SHA"
+          head="$HEAD_SHA"
 
-          html_changed=$(git diff --name-only "$base" "$head" -- '*.html' | wc -l)
-          llms_changed=$(git diff --name-only "$base" "$head" -- 'llms.txt' | wc -l)
+          src_changed=$(git diff --name-only "$base" "$head" -- 'site/src/pages/**' 'site/src/content/**' | wc -l)
+          llms_changed=$(git diff --name-only "$base" "$head" -- 'site/public/llms.txt' | wc -l)
 
-          if [ "$html_changed" -gt 0 ] && [ "$llms_changed" -eq 0 ]; then
-            echo "::warning::HTML files were modified but llms.txt was not updated. Please review whether llms.txt needs changes to stay in sync."
+          if [ "$src_changed" -gt 0 ] && [ "$llms_changed" -eq 0 ]; then
+            echo "::warning::Page sources were modified but site/public/llms.txt was not updated. Please review whether llms.txt needs changes to stay in sync."
             # Intentionally not failing — this is advisory
           else
             echo "No drift detected"
