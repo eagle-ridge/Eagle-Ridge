@@ -18,6 +18,13 @@ Plan: `~/.claude/plans/can-we-just-do-bubbly-bubble.md` · Requirements: `REBUIL
 | D9 | Fonts self-hosted via @fontsource (Newsreader 400+italic, Plex Sans 300/400/500, Plex Mono 400/500); Bricolage Grotesque skipped | Lighthouse ≥95 + no third-party font request; exact families/weights from the kit. |
 | D10 | Signature `<em>` emphasis (one italic umber word in a headline) allowed as enumerated parity diff | Renders as `*word*` in mirrors; permitted only where asterisk-stripped text is byte-identical. Fable-applied only; instances logged below. |
 
+## Build notes (P3/P4)
+
+- **JSON-LD description swaps (D6 scope):** the source JSON-LD on index (`Organization`) and about (`AboutPage`) still carried retired PE/due-diligence copy in their `description` values (head-only, invisible to the mirror oracle). Both now use their page's meta description. All other JSON-LD keys/values are semantically identical to source (verified programmatically).
+- **AGENTS.md intro:** old file described Eagle Ridge as serving "private-equity portfolio companies" — rewritten to the GRC-readiness framing.
+- **Dark CTA band retired:** the old homepage's dark-brown contact band conflicted with the brand kit's language ("rules over boxes", one accent per view) and produced contrast failures with the new palette. The contact section is now a parchment section; the services grid's primary umber panel is the single accent area on the homepage.
+- **Glossary "due diligence" mention kept:** the SOC 2 definition's "often requested in commercial due diligence" is factual glossary content, parity-locked — not positioning copy.
+
 ## Pre-build findings
 
 - Committed `market-map.md` was stale: `market-map.html` had gained the "On AI use" paragraph without mirror regeneration. Mirror regenerated 2026-06-09 and committed; `parity-baseline/` snapshots the regenerated (correct) state.

@@ -11,4 +11,8 @@ export default defineConfig({
   build: {
     format: 'file',
   },
+  markdown: {
+    // Copy is parity-locked; the pipeline must not rewrite quotes/dashes.
+    smartypants: false,
+  },
 });
