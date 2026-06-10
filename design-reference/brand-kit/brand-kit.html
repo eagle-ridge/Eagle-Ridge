@@ -1,0 +1,323 @@
+<!doctype html>
+<html lang="en" data-theme="parchment">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Eagle Ridge — Brand Kit</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;0,6..72,600;0,6..72,700;1,6..72,300;1,6..72,400;1,6..72,500&family=IBM+Plex+Sans:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500&family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,600;12..96,700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="tokens.css">
+<style>
+  * { box-sizing: border-box; }
+  html, body { margin: 0; }
+  body {
+    background: var(--er-bg);
+    color: var(--er-ink);
+    font-family: var(--er-font-sans);
+    -webkit-font-smoothing: antialiased;
+  }
+  .wrap { max-width: 1120px; margin: 0 auto; padding: 0 var(--er-gutter); }
+
+  /* ---- masthead ---- */
+  header.mast {
+    border-bottom: 1px solid var(--er-rule);
+  }
+  .mast-top {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 22px 0; font-family: var(--er-font-mono);
+    font-size: 12px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--er-mute);
+  }
+  .mast-top .lockup { display: flex; align-items: center; gap: 12px; color: var(--er-ink); }
+  .mast-top .lockup img { width: 26px; height: 26px; }
+  .mast-top .lockup span { letter-spacing: 0.18em; font-weight: 500; }
+  .mast-hero { padding: 88px 0 76px; }
+  .mast-hero .er-eyebrow { margin-bottom: 26px; }
+  .mast-hero h1 {
+    font-family: var(--er-font-serif); font-weight: 400; margin: 0;
+    font-size: clamp(3rem, 7vw, 5.5rem); line-height: 1.02; letter-spacing: -0.03em;
+    color: var(--er-ink); text-wrap: balance;
+  }
+  .mast-hero h1 em { font-style: italic; color: var(--er-accent); }
+  .mast-hero p {
+    font-weight: 300; font-size: clamp(1.1rem, 1.6vw, 1.4rem); line-height: 1.5;
+    color: var(--er-ink-soft); max-width: 60ch; margin: 30px 0 0; text-wrap: pretty;
+  }
+
+  /* ---- section scaffolding ---- */
+  section.block { padding: 72px 0; border-bottom: 1px solid var(--er-rule); }
+  .sec-head {
+    display: grid; grid-template-columns: 240px 1fr; gap: 40px; align-items: baseline;
+    margin-bottom: 44px;
+  }
+  .sec-head .kicker {
+    font-family: var(--er-font-mono); font-size: 12px; letter-spacing: 0.14em;
+    text-transform: uppercase; color: var(--er-accent);
+  }
+  .sec-head h2 {
+    font-family: var(--er-font-serif); font-weight: 400; margin: 0;
+    font-size: clamp(1.7rem, 3vw, 2.4rem); line-height: 1.08; letter-spacing: -0.02em;
+  }
+  .sec-head p { margin: 14px 0 0; color: var(--er-ink-soft); font-size: 1rem; max-width: 56ch; line-height: 1.55; }
+  @media (max-width: 720px) { .sec-head { grid-template-columns: 1fr; gap: 12px; } }
+
+  /* ---- swatches ---- */
+  .swatches { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; }
+  @media (max-width: 860px) { .swatches { grid-template-columns: repeat(2, 1fr); } }
+  .sw { border: 1px solid var(--er-rule); border-radius: var(--er-radius-md); overflow: hidden; background: var(--er-paper); }
+  .sw .chip { height: 96px; }
+  .sw .meta { padding: 12px 14px; }
+  .sw .name { font-size: 13px; font-weight: 500; }
+  .sw .hex { font-family: var(--er-font-mono); font-size: 12px; color: var(--er-mute); margin-top: 4px; }
+  .sw .role { font-size: 12px; color: var(--er-mute); margin-top: 6px; line-height: 1.4; }
+
+  /* theme strips */
+  .themes { display: grid; gap: 14px; margin-top: 30px; }
+  .theme-row { display: grid; grid-template-columns: 120px 1fr; gap: 18px; align-items: center; }
+  .theme-row .tname { font-family: var(--er-font-mono); font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--er-mute); }
+  .theme-strip { display: flex; height: 44px; border: 1px solid var(--er-rule); border-radius: var(--er-radius-sm); overflow: hidden; }
+  .theme-strip span { flex: 1; }
+
+  /* ---- type specimens ---- */
+  .specimen { border-top: 1px solid var(--er-rule); padding: 26px 0; display: grid; grid-template-columns: 200px 1fr; gap: 32px; align-items: baseline; }
+  .specimen:first-of-type { border-top: none; }
+  .specimen .label { font-family: var(--er-font-mono); font-size: 12px; color: var(--er-mute); line-height: 1.6; }
+  .specimen .label b { color: var(--er-ink); font-weight: 500; display: block; font-family: var(--er-font-sans); font-size: 13px; }
+  @media (max-width: 720px) { .specimen { grid-template-columns: 1fr; gap: 8px; } }
+  .sp-display { font-family: var(--er-font-serif); font-weight: 400; font-size: 56px; line-height: 1.02; letter-spacing: -0.03em; }
+  .sp-display em { font-style: italic; color: var(--er-accent); }
+  .sp-h2 { font-family: var(--er-font-serif); font-weight: 400; font-size: 38px; line-height: 1.08; letter-spacing: -0.02em; }
+  .sp-lede { font-family: var(--er-font-sans); font-weight: 300; font-size: 22px; line-height: 1.45; color: var(--er-ink-soft); }
+  .sp-body { font-family: var(--er-font-sans); font-weight: 400; font-size: 17px; line-height: 1.55; color: var(--er-ink-soft); max-width: 60ch; }
+  .sp-mono { font-family: var(--er-font-mono); font-size: 14px; color: var(--er-ink-soft); }
+
+  /* ---- components ---- */
+  .comp-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; }
+  @media (max-width: 860px) { .comp-grid { grid-template-columns: 1fr; } }
+  .panel { background: var(--er-paper); border: 1px solid var(--er-rule); border-radius: var(--er-radius-md); padding: 28px 30px; }
+  .panel .er-eyebrow { margin-bottom: 16px; }
+  .panel h3 { font-family: var(--er-font-serif); font-weight: 400; font-size: 28px; margin: 0 0 10px; letter-spacing: -0.015em; }
+  .panel h3 em { font-style: italic; color: var(--er-accent); }
+  .panel p { color: var(--er-ink-soft); font-size: 15px; line-height: 1.55; margin: 0; }
+  .btn-row { display: flex; gap: 14px; flex-wrap: wrap; margin-top: 22px; align-items: center; }
+
+  .statcard { background: var(--er-paper); border: 1px solid var(--er-rule); border-radius: var(--er-radius-md); padding: 28px 30px; }
+  .statcard .label { font-family: var(--er-font-mono); font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--er-mute); }
+  .statcard .val { font-family: var(--er-font-serif); font-weight: 400; font-size: 64px; line-height: 1; letter-spacing: -0.02em; margin-top: 14px; font-feature-settings: "tnum","lnum"; }
+  .statcard .val .gold { color: var(--er-gold); }
+  .statcard .note { font-size: 14px; color: var(--er-ink-soft); margin-top: 12px; line-height: 1.45; }
+
+  /* ---- logo bay ---- */
+  .logobay { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+  @media (max-width: 720px) { .logobay { grid-template-columns: 1fr; } }
+  .logo-tile { border: 1px solid var(--er-rule); border-radius: var(--er-radius-md); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 18px; padding: 48px; min-height: 200px; }
+  .logo-tile.light { background: var(--er-paper); }
+  .logo-tile.dark  { background: #14110C; }
+  .logo-tile img { width: 84px; height: 84px; }
+  .logo-tile .word { font-family: var(--er-font-sans); font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; font-size: 15px; }
+  .logo-tile.light .word { color: var(--er-ink); }
+  .logo-tile.dark .word { color: #EDE4D2; }
+  .logo-tile .cap { font-family: var(--er-font-mono); font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--er-mute); }
+
+  /* ---- token table ---- */
+  .tok { width: 100%; border-collapse: collapse; font-size: 14px; }
+  .tok th { text-align: left; font-family: var(--er-font-mono); font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--er-mute); font-weight: 500; padding: 0 0 14px; border-bottom: 1px solid var(--er-rule); }
+  .tok td { padding: 13px 0; border-bottom: 1px solid var(--er-rule); vertical-align: middle; }
+  .tok td.var { font-family: var(--er-font-mono); color: var(--er-accent); }
+  .tok td.val { font-family: var(--er-font-mono); color: var(--er-ink-soft); }
+  .tok td.dot span { display: inline-block; width: 22px; height: 22px; border-radius: 3px; border: 1px solid var(--er-rule); vertical-align: middle; }
+
+  footer.foot { padding: 40px 0 70px; font-family: var(--er-font-mono); font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--er-mute); display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
+</style>
+</head>
+<body>
+
+<header class="mast">
+  <div class="wrap">
+    <div class="mast-top">
+      <div class="lockup"><img src="assets/eagle-ridge-mark.png" alt="Eagle Ridge mark"><span>Eagle Ridge</span></div>
+      <div>Brand Kit · v1.0 · for eagleridge.io</div>
+    </div>
+    <div class="mast-hero">
+      <p class="er-eyebrow">Brand &amp; Design System</p>
+      <h1>The institutional <em>face</em><br>of Eagle Ridge.</h1>
+      <p>A complete handoff: color, type, logo, components, and drop-in tokens. Pair this page with <code style="font-family:var(--er-font-mono);font-size:0.85em;">tokens.css</code>, <code style="font-family:var(--er-font-mono);font-size:0.85em;">tokens.json</code>, and <code style="font-family:var(--er-font-mono);font-size:0.85em;">BRAND_KIT.md</code> in this folder.</p>
+    </div>
+  </div>
+</header>
+
+<!-- COLOR -->
+<section class="block">
+  <div class="wrap">
+    <div class="sec-head">
+      <div>
+        <div class="kicker">01 / Color</div>
+      </div>
+      <div>
+        <h2>Paper and ink, warmed by umber.</h2>
+        <p>Default theme is Parchment. Backgrounds are warm paper tones — never pure white. One accent per view; gold is a garnish, never a fill.</p>
+      </div>
+    </div>
+
+    <div class="swatches">
+      <div class="sw"><div class="chip" style="background:var(--er-bg)"></div><div class="meta"><div class="name">Background</div><div class="hex">#F6F2EA</div><div class="role">Page — warm paper</div></div></div>
+      <div class="sw"><div class="chip" style="background:var(--er-paper)"></div><div class="meta"><div class="name">Paper</div><div class="hex">#FAF7F0</div><div class="role">Cards, surfaces</div></div></div>
+      <div class="sw"><div class="chip" style="background:var(--er-ink)"></div><div class="meta"><div class="name">Ink</div><div class="hex">#1A1614</div><div class="role">Headlines, primary</div></div></div>
+      <div class="sw"><div class="chip" style="background:var(--er-ink-soft)"></div><div class="meta"><div class="name">Ink Soft</div><div class="hex">#44372F</div><div class="role">Body copy</div></div></div>
+      <div class="sw"><div class="chip" style="background:var(--er-mute)"></div><div class="meta"><div class="name">Mute</div><div class="hex">#8B7D6E</div><div class="role">Captions, meta</div></div></div>
+      <div class="sw"><div class="chip" style="background:var(--er-rule)"></div><div class="meta"><div class="name">Rule</div><div class="hex">#D9D0BF</div><div class="role">Hairlines, borders</div></div></div>
+      <div class="sw"><div class="chip" style="background:var(--er-accent)"></div><div class="meta"><div class="name">Accent</div><div class="hex">#4A2F22</div><div class="role">Umber — primary</div></div></div>
+      <div class="sw"><div class="chip" style="background:var(--er-gold)"></div><div class="meta"><div class="name">Gold</div><div class="hex">#B08A4E</div><div class="role">Emphasis only</div></div></div>
+    </div>
+
+    <div class="themes">
+      <div class="theme-row">
+        <div class="tname">Parchment</div>
+        <div class="theme-strip"><span style="background:#F6F2EA"></span><span style="background:#FAF7F0"></span><span style="background:#D9D0BF"></span><span style="background:#8B7D6E"></span><span style="background:#4A2F22"></span><span style="background:#B08A4E"></span><span style="background:#1A1614"></span></div>
+      </div>
+      <div class="theme-row">
+        <div class="tname">Slate</div>
+        <div class="theme-strip"><span style="background:#E5E9ED"></span><span style="background:#EEF1F4"></span><span style="background:#C4CCD3"></span><span style="background:#7A8898"></span><span style="background:#2D5F78"></span><span style="background:#8B7340"></span><span style="background:#14202B"></span></div>
+      </div>
+      <div class="theme-row">
+        <div class="tname">Bone</div>
+        <div class="theme-strip"><span style="background:#F3EFE8"></span><span style="background:#FFFFFF"></span><span style="background:#D6CFC4"></span><span style="background:#8E8479"></span><span style="background:#B14E26"></span><span style="background:#B14E26"></span><span style="background:#15110E"></span></div>
+      </div>
+      <div class="theme-row">
+        <div class="tname">Onyx</div>
+        <div class="theme-strip"><span style="background:#14110C"></span><span style="background:#1D1913"></span><span style="background:rgba(237,228,210,0.16)"></span><span style="background:#7E7361"></span><span style="background:#C29554"></span><span style="background:#C29554"></span><span style="background:#EDE4D2"></span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TYPE -->
+<section class="block">
+  <div class="wrap">
+    <div class="sec-head">
+      <div><div class="kicker">02 / Type</div></div>
+      <div>
+        <h2>Newsreader sets the tone; Plex does the work.</h2>
+        <p>Serif display with italic emphasis in umber is the signature. IBM Plex Sans carries UI and body; IBM Plex Mono labels everything precise.</p>
+      </div>
+    </div>
+
+    <div class="specimen">
+      <div class="label"><b>Display</b>Newsreader · 400<br>−0.028em tracking</div>
+      <div class="sp-display">CMMC is the wedge. <em>GRC is the market.</em></div>
+    </div>
+    <div class="specimen">
+      <div class="label"><b>Headline H2</b>Newsreader · 400</div>
+      <div class="sp-h2">Margin without the remediation theater.</div>
+    </div>
+    <div class="specimen">
+      <div class="label"><b>Lede</b>IBM Plex Sans · 300</div>
+      <div class="sp-lede">Eagle Ridge gets small defense contractors compliance-ready without the six-figure budgets the market assumes are required.</div>
+    </div>
+    <div class="specimen">
+      <div class="label"><b>Body</b>IBM Plex Sans · 400<br>line-height 1.55</div>
+      <div class="sp-body">The cost narrative around CMMC is wrong. The line items that drive small contractors out of the market — six-figure remediation budgets — overstate what is actually required to reach a passing posture.</div>
+    </div>
+    <div class="specimen">
+      <div class="label"><b>Eyebrow</b>Plex Sans · 500<br>uppercase · 0.22em</div>
+      <div><span class="er-eyebrow">What we do</span></div>
+    </div>
+    <div class="specimen">
+      <div class="label"><b>Mono label</b>IBM Plex Mono · 400/500</div>
+      <div class="sp-mono">07 · TRACTION&nbsp;&nbsp;|&nbsp;&nbsp;Source: Paramify market data</div>
+    </div>
+  </div>
+</section>
+
+<!-- LOGO -->
+<section class="block">
+  <div class="wrap">
+    <div class="sec-head">
+      <div><div class="kicker">03 / Logo</div></div>
+      <div>
+        <h2>A geometric sentinel.</h2>
+        <p>The eagle-head mark in umber. Keep clear space, never recolor to pure white on dark, never stretch or add shadow. Wordmark is Plex Sans 500, uppercase, 0.18em tracking.</p>
+      </div>
+    </div>
+    <div class="logobay">
+      <div class="logo-tile light">
+        <img src="assets/eagle-ridge-mark.png" alt="Eagle Ridge mark on light">
+        <div class="word">Eagle Ridge</div>
+        <div class="cap">On parchment</div>
+      </div>
+      <div class="logo-tile dark">
+        <img src="assets/eagle-ridge-mark.png" alt="Eagle Ridge mark on dark">
+        <div class="word">Eagle Ridge</div>
+        <div class="cap">On onyx</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- COMPONENTS -->
+<section class="block">
+  <div class="wrap">
+    <div class="sec-head">
+      <div><div class="kicker">04 / Components</div></div>
+      <div>
+        <h2>Rules over boxes. Tone over elevation.</h2>
+        <p>Hairline dividers separate content; shadows are barely there; radii are near-square. Buttons are small and confident — solid umber or ghost.</p>
+      </div>
+    </div>
+
+    <div class="comp-grid">
+      <div class="panel">
+        <div class="er-eyebrow">Readiness</div>
+        <h3>Get <em>credible</em> in weeks, not quarters.</h3>
+        <p>A panel: paper surface, hairline border, 4px radius. Serif heading with one italic umber word. This is the default content container.</p>
+        <div class="btn-row">
+          <a class="er-btn" href="#">Book a review</a>
+          <a class="er-btn er-btn--ghost" href="#">See the methodology</a>
+        </div>
+      </div>
+      <div class="statcard">
+        <div class="label">Median time to passing SSP</div>
+        <div class="val">3<span class="gold">×</span> faster</div>
+        <div class="note">Tabular figures, serif numerals, gold reserved for the single operative glyph. Cite the source in a mono footnote beneath.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TOKENS -->
+<section class="block">
+  <div class="wrap">
+    <div class="sec-head">
+      <div><div class="kicker">05 / Tokens</div></div>
+      <div>
+        <h2>Wire it up.</h2>
+        <p>Link <span class="sp-mono">tokens.css</span> and build with the <span class="sp-mono">--er-*</span> variables. Set a theme with <span class="sp-mono">data-theme</span> on &lt;html&gt;.</p>
+      </div>
+    </div>
+    <table class="tok">
+      <thead><tr><th></th><th>Variable</th><th>Value</th><th>Role</th></tr></thead>
+      <tbody>
+        <tr><td class="dot"><span style="background:#4A2F22"></span></td><td class="var">--er-accent</td><td class="val">#4A2F22</td><td>Brand primary · links, buttons, italic emphasis</td></tr>
+        <tr><td class="dot"><span style="background:#1A1614"></span></td><td class="var">--er-ink</td><td class="val">#1A1614</td><td>Headlines &amp; primary text</td></tr>
+        <tr><td class="dot"><span style="background:#F6F2EA"></span></td><td class="var">--er-bg</td><td class="val">#F6F2EA</td><td>Page background</td></tr>
+        <tr><td class="dot"><span style="background:#FAF7F0"></span></td><td class="var">--er-paper</td><td class="val">#FAF7F0</td><td>Card / surface</td></tr>
+        <tr><td class="dot"><span style="background:#D9D0BF"></span></td><td class="var">--er-rule</td><td class="val">#D9D0BF</td><td>Hairline border</td></tr>
+        <tr><td class="dot"><span style="border-style:dashed"></span></td><td class="var">--er-font-serif</td><td class="val">Newsreader</td><td>Display / headline</td></tr>
+        <tr><td class="dot"><span style="border-style:dashed"></span></td><td class="var">--er-font-sans</td><td class="val">IBM Plex Sans</td><td>UI / body</td></tr>
+        <tr><td class="dot"><span style="border-style:dashed"></span></td><td class="var">--er-font-mono</td><td class="val">IBM Plex Mono</td><td>Labels / data</td></tr>
+        <tr><td class="dot"><span style="border-style:dashed"></span></td><td class="var">--er-radius-md</td><td class="val">4px</td><td>Default radius (near-square)</td></tr>
+        <tr><td class="dot"><span style="border-style:dashed"></span></td><td class="var">--er-maxw</td><td class="val">1200px</td><td>Container max width</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<footer class="foot">
+  <div class="wrap" style="display:flex; justify-content:space-between; width:100%; flex-wrap:wrap; gap:12px;">
+    <div>Eagle Ridge · Brand Kit v1.0</div>
+    <div>tokens.css · tokens.json · BRAND_KIT.md · assets/eagle-ridge-mark.png</div>
+  </div>
+</footer>
+
+</body>
+</html>

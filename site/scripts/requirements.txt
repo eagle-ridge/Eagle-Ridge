@@ -1,0 +1,4 @@
+# Pinned to the versions that generated parity-baseline/ (2026-06-09).
+# Bumping these can change markdownify output and break the parity oracle.
+beautifulsoup4==4.14.3
+markdownify==1.2.2

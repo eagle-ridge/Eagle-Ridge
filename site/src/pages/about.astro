@@ -1,0 +1,142 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const title = 'About | Eagle Ridge Advisory';
+const description = 'About Eagle Ridge Advisory — GRC readiness for small businesses pursuing CMMC, SOC 2, and ISO 27001 to win government and enterprise contracts.';
+
+const jsonLd = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'AboutPage',
+  name: 'About Eagle Ridge Advisory',
+  url: 'https://eagleridge.io/about',
+  // Stale due-diligence copy in the source JSON-LD replaced with the page's
+  // meta description (same treatment as index — see MIGRATION-NOTES D6).
+  description,
+  about: {
+    '@type': 'Organization',
+    name: 'Eagle Ridge Advisory',
+    url: 'https://eagleridge.io/',
+    logo: 'https://eagleridge.io/logo.png',
+    sameAs: ['https://www.linkedin.com/company/eagle-ridge-advisory/'],
+  },
+});
+---
+
+<BaseLayout title={title} description={description} path="/about">
+  <Fragment slot="head">
+    <script type="application/ld+json" set:html={jsonLd} />
+  </Fragment>
+
+  <div class="prose container">
+    <h1>About Eagle Ridge Advisory</h1>
+    <p>Eagle Ridge Advisory gets small businesses ready for the cybersecurity compliance frameworks that unlock government and enterprise contracts — without the overhead of a full security team.</p>
+
+    <h2>What We Do</h2>
+    <p>Most small companies aren't ready when it's time to be assessed. We close that gap. We take you through the whole readiness lifecycle — find what's missing, fix it with you, and document everything — so you're prepared before anyone grades you.</p>
+
+    <div class="expertise-grid">
+      <div class="expertise-card">
+        <h3>GRC Readiness</h3>
+        <p>End-to-end readiness for CMMC, SOC 2, and ISO 27001. Gap assessment, remediation, policies, controls, and evidence — so when it's time to be assessed, there are no surprises.</p>
+      </div>
+      <div class="expertise-card">
+        <h3>What You Get</h3>
+        <p>A gap assessment against every control, a prioritized remediation plan with real costs, a findings report, your System Security Plan and score, an evidence inventory, and a plan to stay compliant afterward.</p>
+      </div>
+      <div class="expertise-card">
+        <h3>Built for Small Teams</h3>
+        <p>You don't need a security department to win contracts. We size the work to a company your size and do the heavy lifting — drafting policies, standing up tooling, documenting controls.</p>
+      </div>
+    </div>
+
+    <h2>Our Expertise</h2>
+    <p>We bring deep experience in:</p>
+    <ul>
+      <li>Cybersecurity frameworks (NIST 800-53, ISO 27001, CMMC, FedRAMP)</li>
+      <li>Cloud infrastructure security (AWS, Azure, GCP)</li>
+      <li>Regulatory compliance (GDPR, HIPAA, SOC 2)</li>
+      <li>DevSecOps and secure software development</li>
+      <li>Government contracting and acquisition processes</li>
+    </ul>
+
+    <h2>Who We Serve</h2>
+    <p>Our clients are:</p>
+    <ul>
+      <li>Small businesses that need CMMC to win or keep a government contract</li>
+      <li>Startups and SMBs pursuing SOC 2 or ISO 27001 to land enterprise customers</li>
+      <li>Founder-led teams without a dedicated security or compliance function</li>
+    </ul>
+
+    <h2>Our Approach</h2>
+    <p>We believe in practical, business-focused solutions. Our recommendations balance security best practices with operational realities, ensuring you can implement changes without disrupting how you run your business.</p>
+
+    <div class="cta-box">
+      <p>Ready to find out where you stand?</p>
+      <a href="mailto:contact@eagleridge.io">Get in Touch</a>
+    </div>
+  </div>
+</BaseLayout>
+
+<style>
+  .expertise-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: var(--er-space-3);
+    margin: var(--er-space-4) 0;
+  }
+
+  .expertise-card {
+    background: var(--er-paper);
+    padding: var(--er-space-4);
+    border-radius: var(--er-radius-md);
+    border: var(--er-border);
+  }
+
+  .expertise-card h3 {
+    font-size: var(--er-text-h3);
+    margin-top: 0;
+    margin-bottom: var(--er-space-1);
+  }
+
+  .expertise-card p {
+    margin: 0;
+    font-size: var(--er-text-small);
+    line-height: var(--er-leading-body);
+    color: var(--er-ink-soft);
+  }
+
+  .cta-box {
+    background: var(--er-accent);
+    color: var(--er-bg);
+    border-radius: var(--er-radius-md);
+    padding: var(--er-space-4);
+    margin: var(--er-space-4) 0;
+    text-align: center;
+  }
+
+  .cta-box p {
+    color: var(--er-bg);
+    margin: 0 0 var(--er-space-2);
+  }
+
+  .cta-box a {
+    display: inline-block;
+    margin-top: var(--er-space-2);
+    padding: 0.75rem 1.5rem;
+    background: var(--er-bg);
+    color: var(--er-accent);
+    text-decoration: none;
+    border-radius: var(--er-radius-md);
+    font-weight: 500;
+  }
+
+  .cta-box a:hover {
+    background: var(--er-rule);
+  }
+
+  @media (max-width: 768px) {
+    .expertise-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

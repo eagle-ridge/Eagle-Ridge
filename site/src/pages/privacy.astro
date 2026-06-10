@@ -1,0 +1,30 @@
+---
+import { getEntry, render } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const entry = await getEntry('pages', 'privacy');
+if (!entry) throw new Error('privacy content entry missing');
+const { Content } = await render(entry);
+---
+
+<BaseLayout title={entry.data.title} description={entry.data.description} path="/privacy">
+  <Fragment slot="head">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebPage",
+      "name": "Privacy Policy | Eagle Ridge Advisory",
+      "url": "https://eagleridge.io/privacy",
+      "description": "How Eagle Ridge Advisory handles data and analytics, including PostHog tracking disclosure.",
+      "isPartOf": {
+        "@type": "WebSite",
+        "name": "Eagle Ridge Advisory",
+        "url": "https://eagleridge.io/"
+      }
+    }
+    </script>
+  </Fragment>
+  <article class="prose container">
+    <Content />
+  </article>
+</BaseLayout>

@@ -1,0 +1,187 @@
+/* ============================================================
+   EAGLE RIDGE — Brand Design Tokens
+   Drop-in CSS custom properties for eagleridge.io
+   ------------------------------------------------------------
+   Source of truth: institutional pitch deck.
+   Default theme is "Parchment". Three alternates are provided
+   as [data-theme] blocks — set on <html> or <body>.
+   ============================================================ */
+
+:root {
+  /* ---- Color · Parchment (default / light) ---- */
+  --er-bg:        #F6F2EA;  /* page background — warm paper      */
+  --er-paper:     #FAF7F0;  /* raised surfaces, cards            */
+  --er-ink:       #1A1614;  /* primary text, headlines           */
+  --er-ink-soft:  #44372F;  /* body copy, secondary text         */
+  --er-mute:      #8B7D6E;  /* captions, labels, meta            */
+  --er-rule:      #D9D0BF;  /* hairlines, borders, dividers      */
+  --er-accent:    #4A2F22;  /* deep umber — brand primary        */
+  --er-gold:      #B08A4E;  /* gold — sparingly, for emphasis    */
+
+  /* ---- Type families ---- */
+  --er-font-serif: "Newsreader", Georgia, "Times New Roman", serif;          /* display / editorial */
+  --er-font-sans:  "IBM Plex Sans", system-ui, -apple-system, sans-serif;    /* UI / body           */
+  --er-font-mono:  "IBM Plex Mono", "SFMono-Regular", ui-monospace, monospace;/* labels / data       */
+  --er-font-grotesk: "Bricolage Grotesque", var(--er-font-sans);             /* alt display voice   */
+
+  /* ---- Web type scale (rem, 16px base) ---- */
+  --er-text-display: clamp(2.75rem, 6vw, 5rem);   /* hero headline   — Newsreader 400 */
+  --er-text-h1:      clamp(2.25rem, 4.5vw, 3.5rem);
+  --er-text-h2:      clamp(1.75rem, 3vw, 2.5rem);
+  --er-text-h3:      1.5rem;
+  --er-text-lede:    clamp(1.125rem, 1.6vw, 1.375rem); /* intro paragraph — Sans 300   */
+  --er-text-body:    1.0625rem;                    /* 17px body                       */
+  --er-text-small:   0.9375rem;                    /* 15px secondary                  */
+  --er-text-eyebrow: 0.8125rem;                    /* 13px uppercase label            */
+
+  /* ---- Type detail ---- */
+  --er-tracking-display: -0.028em;  /* tighten large serif            */
+  --er-tracking-tight:   -0.015em;
+  --er-tracking-eyebrow:  0.22em;   /* open up uppercase labels       */
+  --er-leading-tight:  1.06;
+  --er-leading-body:   1.55;
+
+  /* ---- Spacing scale (8px rhythm) ---- */
+  --er-space-1: 0.5rem;
+  --er-space-2: 1rem;
+  --er-space-3: 1.5rem;
+  --er-space-4: 2rem;
+  --er-space-5: 3rem;
+  --er-space-6: 4.5rem;
+  --er-space-7: 7rem;
+
+  /* ---- Radius — restrained, near-square ---- */
+  --er-radius-sm: 2px;
+  --er-radius-md: 4px;
+  --er-radius-lg: 8px;
+
+  /* ---- Borders & shadows ---- */
+  --er-border:   1px solid var(--er-rule);
+  --er-shadow-sm: 0 1px 2px rgba(26, 22, 20, 0.05);
+  --er-shadow-md: 0 8px 28px rgba(26, 22, 20, 0.08);
+
+  /* ---- Layout ---- */
+  --er-maxw: 1200px;
+  --er-gutter: clamp(1.25rem, 5vw, 5rem);
+}
+
+/* ---- Theme · Slate (cool, institutional) ---- */
+[data-theme="slate"] {
+  --er-bg:       #E5E9ED;
+  --er-paper:    #EEF1F4;
+  --er-ink:      #14202B;
+  --er-ink-soft: #34475A;
+  --er-mute:     #7A8898;
+  --er-rule:     #C4CCD3;
+  --er-accent:   #2D5F78;
+  --er-gold:     #8B7340;
+}
+
+/* ---- Theme · Bone (bright, high-contrast, vermilion accent) ---- */
+[data-theme="bone"] {
+  --er-bg:       #F3EFE8;
+  --er-paper:    #FFFFFF;
+  --er-ink:      #15110E;
+  --er-ink-soft: #3D352D;
+  --er-mute:     #8E8479;
+  --er-rule:     #D6CFC4;
+  --er-accent:   #B14E26;
+  --er-gold:     #B14E26;
+}
+
+/* ---- Theme · Onyx (dark) ---- */
+[data-theme="onyx"] {
+  --er-bg:       #14110C;
+  --er-paper:    #1D1913;
+  --er-ink:      #EDE4D2;
+  --er-ink-soft: #C9BFA9;
+  --er-mute:     #7E7361;
+  --er-rule:     rgba(237, 228, 210, 0.16);
+  --er-accent:   #C29554;
+  --er-gold:     #C29554;
+}
+
+/* ============================================================
+   Base element styles — opt-in starting point.
+   Remove if you have your own reset/typography layer.
+   ============================================================ */
+
+.er-eyebrow {
+  font-family: var(--er-font-sans);
+  font-size: var(--er-text-eyebrow);
+  font-weight: 500;
+  letter-spacing: var(--er-tracking-eyebrow);
+  text-transform: uppercase;
+  color: var(--er-accent);
+}
+
+.er-display {
+  font-family: var(--er-font-serif);
+  font-weight: 400;
+  font-size: var(--er-text-display);
+  line-height: var(--er-leading-tight);
+  letter-spacing: var(--er-tracking-display);
+  color: var(--er-ink);
+}
+/* Italic emphasis inside a serif headline reads as the house accent */
+.er-display em,
+.er-h2 em { font-style: italic; color: var(--er-accent); }
+
+.er-h2 {
+  font-family: var(--er-font-serif);
+  font-weight: 400;
+  font-size: var(--er-text-h2);
+  line-height: var(--er-leading-tight);
+  letter-spacing: var(--er-tracking-tight);
+  color: var(--er-ink);
+}
+
+.er-lede {
+  font-family: var(--er-font-sans);
+  font-weight: 300;
+  font-size: var(--er-text-lede);
+  line-height: 1.5;
+  color: var(--er-ink-soft);
+  text-wrap: pretty;
+}
+
+.er-body {
+  font-family: var(--er-font-sans);
+  font-weight: 400;
+  font-size: var(--er-text-body);
+  line-height: var(--er-leading-body);
+  color: var(--er-ink-soft);
+  text-wrap: pretty;
+}
+
+.er-mono {
+  font-family: var(--er-font-mono);
+  font-size: var(--er-text-small);
+  letter-spacing: 0;
+}
+
+/* Buttons */
+.er-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  white-space: nowrap;
+  font-family: var(--er-font-sans);
+  font-weight: 500;
+  font-size: var(--er-text-small);
+  letter-spacing: 0.01em;
+  padding: 0.75rem 1.5rem;
+  border-radius: var(--er-radius-md);
+  border: 1px solid var(--er-accent);
+  background: var(--er-accent);
+  color: var(--er-bg);
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s, border-color 0.15s;
+}
+.er-btn:hover { background: var(--er-ink); border-color: var(--er-ink); }
+
+.er-btn--ghost {
+  background: transparent;
+  color: var(--er-accent);
+}
+.er-btn--ghost:hover { background: var(--er-accent); color: var(--er-bg); }

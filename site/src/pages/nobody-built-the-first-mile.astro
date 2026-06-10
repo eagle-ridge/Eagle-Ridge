@@ -1,0 +1,58 @@
+---
+import { getEntry, render } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const entry = await getEntry('pages', 'nobody-built-the-first-mile');
+if (!entry) throw new Error('first-mile content entry missing');
+const { Content } = await render(entry);
+
+const jsonLd = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  'headline': 'Nobody Built the First Mile',
+  'url': 'https://eagleridge.io/nobody-built-the-first-mile',
+  'description': 'The structural gap between CMMC assessors and the small defense contractors who need readiness work, and why the window to fix it is closing.',
+  'author': {
+    '@type': 'Organization',
+    'name': 'Eagle Ridge Advisory',
+    'url': 'https://eagleridge.io/'
+  },
+  'publisher': {
+    '@type': 'Organization',
+    'name': 'Eagle Ridge Advisory',
+    'logo': {
+      '@type': 'ImageObject',
+      'url': 'https://eagleridge.io/logo.png'
+    }
+  }
+});
+---
+
+<BaseLayout title={entry.data.title} description={entry.data.description} path="/nobody-built-the-first-mile" ogType="article">
+  <Fragment slot="head">
+    <script type="application/ld+json" set:html={jsonLd} />
+  </Fragment>
+  <article class="prose container">
+    <Content />
+  </article>
+</BaseLayout>
+
+<style>
+  .deck {
+    font-size: var(--er-text-lede);
+    color: var(--er-ink-soft);
+    margin-bottom: var(--er-space-4);
+  }
+
+  .lead {
+    font-size: calc(var(--er-text-body) * 1.17);
+    color: var(--er-ink);
+    line-height: 1.55;
+  }
+
+  .close {
+    font-size: calc(var(--er-text-body) * 1.06);
+    color: var(--er-ink);
+    margin-top: var(--er-space-5);
+  }
+</style>

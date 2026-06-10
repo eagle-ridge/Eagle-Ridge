@@ -1,0 +1,32 @@
+# Eagle Ridge Advisory
+
+> GRC readiness for small businesses pursuing government and enterprise contracts. We get you ready for CMMC, SOC 2, and ISO 27001 — gaps found, fixed, and documented — so you're prepared before you're assessed.
+
+## Pages
+
+- [Homepage](https://eagleridge.io/index.md): Services overview, compliance frameworks, and contact form
+- [About](https://eagleridge.io/about.md): GRC readiness positioning, who we serve, and consulting approach
+- [Market Map](https://eagleridge.io/market-map.md): Eagle Ridge's view of the CMMC services market — 89 firms and platforms mapped by category, with the 0→1 readiness gap for DIB SMBs called out
+- [Nobody Built the First Mile](https://eagleridge.io/nobody-built-the-first-mile.md): Long-form argument behind the market map. The structural gap between CMMC assessors and small DIB contractors who need readiness work, and why the window to fix it is closing
+- [Glossary](https://eagleridge.io/glossary.md): Plain-language definitions of CMMC, NIST 800-171, and cybersecurity compliance terms (CUI, FCI, C3PAO, SPRS, POA&M, SSP, DFARS)
+- [Privacy Policy](https://eagleridge.io/privacy.md): Data handling and analytics disclosure
+
+## Services
+
+- **GRC Readiness**: The whole readiness lifecycle — find the gaps, fix them with you, and document everything, so you're prepared before anyone grades you.
+- **What You Get**: A gap assessment against all 110 controls, a prioritized remediation plan with real costs, a findings report, your System Security Plan and SPRS score, an evidence inventory, and a continuous-monitoring plan to stay compliant after you're assessed.
+- **Built for Small Teams**: Policies drafted, tooling stood up, and controls documented — sized for a company your size, not an enterprise.
+
+## Compliance Frameworks
+
+ISO 27001, SOC 2 Type 2, CMMC, FedRAMP, NIST 800-53, GDPR
+
+## Who We Serve
+
+- Small-business CEOs — founder-led teams without a dedicated security/compliance function who need CMMC, SOC 2, or ISO 27001 to win or keep government and enterprise contracts
+
+## Contact
+
+- Email: contact@eagleridge.io
+- LinkedIn: https://www.linkedin.com/company/eagle-ridge-advisory/
+- Contact form: https://eagleridge.io/#contact-form
