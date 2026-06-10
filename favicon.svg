@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <style>
+    .s { fill: none; stroke: #3d2817; stroke-width: 8.5; }
+    .f { fill: #3d2817; stroke: none; }
+    @media (prefers-color-scheme: dark) {
+      .s { stroke: #f5efe8; }
+      .f { fill: #f5efe8; }
+    }
+  </style>
+  <!-- Outer eagle head frame: left side, top, curved skull, right side, beak notch, lower right diagonal, bottom -->
+  <path class="s" stroke-linejoin="round"
+        d="M 8 92 L 8 8 L 56 8 Q 82 8 82 34 L 82 43 L 95 52 L 82 61 L 82 73 L 56 92 Z"/>
+  <!-- Horizontal brow line -->
+  <line class="s" stroke-linecap="square" x1="8" y1="38" x2="82" y2="38"/>
+  <!-- Eye ring -->
+  <circle class="s" cx="38" cy="54" r="12"/>
+  <!-- Eye pupil -->
+  <circle class="f" cx="38" cy="54" r="5"/>
+  <!-- Lower body diagonal -->
+  <line class="s" stroke-linecap="round" x1="52" y1="63" x2="73" y2="82"/>
+</svg>
