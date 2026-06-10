@@ -83,6 +83,9 @@ def extract(html: str) -> tuple[str, str]:
 def write_mirror(html_name: str, public_path: str) -> bool:
     src = DIST / html_name
     if not src.exists():
+        # Fail-soft so partial builds work. The CI parity job is the hard
+        # gate: it errors if any parity-baseline/*.md lacks a built mirror.
+        # If you add a page to PAGES, add its baseline file too.
         print(f"  WARNING: {html_name} not built yet — skipping mirror")
         return False
     html = src.read_text(encoding="utf-8")

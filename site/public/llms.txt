@@ -14,7 +14,7 @@
 ## Services
 
 - **GRC Readiness**: The whole readiness lifecycle — find the gaps, fix them with you, and document everything, so you're prepared before anyone grades you.
-- **What You Get**: A gap assessment against all 110 controls, a prioritized remediation plan with real costs, a findings report, your System Security Plan and SPRS score, an evidence inventory, and a continuous-monitoring plan to stay compliant after you pass.
+- **What You Get**: A gap assessment against all 110 controls, a prioritized remediation plan with real costs, a findings report, your System Security Plan and SPRS score, an evidence inventory, and a continuous-monitoring plan to stay compliant after you're assessed.
 - **Built for Small Teams**: Policies drafted, tooling stood up, and controls documented — sized for a company your size, not an enterprise.
 
 ## Compliance Frameworks
