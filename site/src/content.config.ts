@@ -11,4 +11,19 @@ const pages = defineCollection({
   }),
 });
 
-export const collections = { pages };
+// Dated long-form articles, auto-listed by the Insights hub. Each .md lives in
+// src/content/articles/ and renders via src/pages/insights/[...slug].astro.
+const articles = defineCollection({
+  loader: glob({ pattern: '**/*.md', base: './src/content/articles' }),
+  schema: z.object({
+    title: z.string(),
+    description: z.string(),
+    pubDate: z.date(),
+    updatedDate: z.date().optional(),
+    author: z.string().default('Eagle Ridge Advisory'),
+    draft: z.boolean().default(false),
+    tags: z.array(z.string()).default([]),
+  }),
+});
+
+export const collections = { pages, articles };
