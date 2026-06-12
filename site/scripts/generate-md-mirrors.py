@@ -38,6 +38,11 @@ PAGES = [
         "/nobody-built-the-first-mile",
         "Nobody Built the First Mile",
     ),
+    (
+        "compliance-should-just-work.html",
+        "/compliance-should-just-work",
+        "Compliance should just work",
+    ),
     ("glossary.html", "/glossary", "Glossary"),
     ("privacy.html", "/privacy", "Privacy Policy"),
 ]
