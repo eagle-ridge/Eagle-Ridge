@@ -1,0 +1,97 @@
+---
+import { getCollection, render } from 'astro:content';
+import type { GetStaticPaths } from 'astro';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+export const getStaticPaths = (async () => {
+	const articles = await getCollection('articles');
+	return articles
+		.filter((entry) => !entry.data.draft)
+		.map((entry) => ({
+			params: { slug: entry.id },
+			props: { entry },
+		}));
+}) satisfies GetStaticPaths;
+
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+
+// timeZone:'UTC' so a date-only pubDate (parsed as UTC midnight) displays as
+// the day the author typed, regardless of the build machine's timezone.
+const dateFmt = new Intl.DateTimeFormat('en-US', {
+	year: 'numeric',
+	month: 'long',
+	day: 'numeric',
+	timeZone: 'UTC',
+});
+const isoDate = (d: Date) => d.toISOString().slice(0, 10);
+
+const published = entry.data.pubDate;
+const modified = entry.data.updatedDate ?? entry.data.pubDate;
+const url = `https://eagleridge.io/insights/${entry.id}`;
+
+const jsonLd = JSON.stringify({
+	"@context": "https://schema.org",
+	"@type": "BlogPosting",
+	"headline": entry.data.title,
+	"description": entry.data.description,
+	"datePublished": isoDate(published),
+	"dateModified": isoDate(modified),
+	"author": {
+		"@type": "Organization",
+		"name": "Eagle Ridge Advisory",
+	},
+	"url": url,
+});
+---
+
+<BaseLayout
+	title={`${entry.data.title} — Eagle Ridge Advisory`}
+	description={entry.data.description}
+	path={`/insights/${entry.id}`}
+	ogType="article"
+>
+	<Fragment slot="head">
+		<script type="application/ld+json" set:html={jsonLd} />
+	</Fragment>
+
+	<article class="prose container">
+		<h1>{entry.data.title}</h1>
+		<p class="byline">
+			<time datetime={isoDate(published)}>{dateFmt.format(published)}</time>
+			<span aria-hidden="true"> · </span>
+			{entry.data.author}
+		</p>
+		<Content />
+		<p class="back" data-md-exclude>
+			<a href="/insights"><span aria-hidden="true">←</span> Back to Insights</a>
+		</p>
+	</article>
+</BaseLayout>
+
+<style>
+	.byline {
+		font-family: var(--er-font-mono);
+		font-size: var(--er-text-small);
+		letter-spacing: 0;
+		color: var(--er-mute);
+		margin: 0 0 var(--er-space-4);
+	}
+
+	.back {
+		margin-top: var(--er-space-5);
+		padding-top: var(--er-space-3);
+		border-top: var(--er-border);
+	}
+	.back a {
+		font-family: var(--er-font-mono);
+		font-size: var(--er-text-small);
+		text-transform: uppercase;
+		letter-spacing: 0.08em;
+		color: var(--er-accent);
+		text-decoration: none;
+	}
+	.back a:hover {
+		color: var(--er-ink);
+	}
+</style>
