@@ -46,7 +46,7 @@ const jsonLd = JSON.stringify({
 ---
 
 <BaseLayout
-	title={entry.data.title}
+	title={`${entry.data.title} — Eagle Ridge Advisory`}
 	description={entry.data.description}
 	path={`/insights/${entry.id}`}
 	ogType="article"
@@ -63,7 +63,7 @@ const jsonLd = JSON.stringify({
 			{entry.data.author}
 		</p>
 		<Content />
-		<p class="back">
+		<p class="back" data-md-exclude>
 			<a href="/insights"><span aria-hidden="true">←</span> Back to Insights</a>
 		</p>
 	</article>

@@ -27,6 +27,10 @@ from markdownify import markdownify
 
 DIST = pathlib.Path(__file__).resolve().parent.parent / "dist"
 BASE_URL = "https://eagleridge.io"
+# Fallback when a page has no <title>. For fixed PAGES this is harmless, but a
+# discovered article should never legitimately be just the site name — see the
+# hard check in discover_insights().
+DEFAULT_TITLE = "Eagle Ridge Advisory"
 
 # (dist html filename, public path, sitemap label). Order = sitemap order.
 PAGES = [
@@ -54,7 +58,7 @@ def extract(html: str) -> tuple[str, str]:
     soup = BeautifulSoup(html, "html.parser")
 
     title_tag = soup.find("title")
-    title = title_tag.get_text(strip=True) if title_tag else "Eagle Ridge Advisory"
+    title = title_tag.get_text(strip=True) if title_tag else DEFAULT_TITLE
 
     for tag in soup.select("[data-md-exclude]"):
         tag.decompose()
@@ -145,12 +149,22 @@ def discover_insights() -> list[tuple[str, str, str]]:
     """
     insights_dir = DIST / "insights"
     if not insights_dir.is_dir():
+        print("  no dist/insights/ — 0 articles discovered")
         return []
     discovered = []
     for html_file in sorted(insights_dir.glob("*.html")):
         slug = html_file.stem
         title, _ = extract(html_file.read_text(encoding="utf-8"))
+        # Discovered articles have no parity baseline backstopping them, so a
+        # blank or fallback title would ship a garbage mirror + sitemap label
+        # with a green CI. Fail loud instead.
+        if not title.strip() or title == DEFAULT_TITLE:
+            raise SystemExit(
+                f"ERROR: dist/insights/{html_file.name} has no usable <title> "
+                f"(got {title!r}) — cannot generate a mirror for it"
+            )
         discovered.append((f"insights/{html_file.name}", f"/insights/{slug}", title))
+    print(f"  discovered {len(discovered)} insights article(s)")
     return discovered
 
 
