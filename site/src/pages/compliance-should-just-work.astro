@@ -9,8 +9,9 @@
 // .md mirror is clean prose + Notes (the figures are script-driven SVG that does
 // not serialize to meaningful markdown). See scripts/generate-md-mirrors.py.
 //
-// Source verification: all 16 footnotes were independently checked against
-// primary sources before publish. Corrections applied vs. the draft: SOC 2 CC6.1
+// Source verification: all 17 numbered notes (plus the † colophon) were
+// independently checked against primary sources before publish. Corrections
+// applied vs. the draft: SOC 2 CC6.1
 // maps to ISO 27001 A.5.15 (not A.8.1); the "$2.5B market" figure was stale and
 // is now hedged; the Bek pull-quote is verbatim (confirmed). Strategy sections
 // were reframed from lock-in language to customer-benefit framing.
@@ -129,8 +130,8 @@ const jsonLd = JSON.stringify({
       <figure class="fig" id="fig3" data-md-exclude>
         <div class="fig-label">// Fig. 3 &nbsp;·&nbsp; The Compliance Tax Is Regressive</div>
         <div class="slider-wrap">
-          <span>Firm size</span>
-          <input type="range" id="sizeSlider" min="0" max="100" value="12" aria-label="Firm size">
+          <span id="firmSizeLabel">Firm size</span>
+          <input type="range" id="sizeSlider" min="0" max="100" value="12" aria-labelledby="firmSizeLabel">
           <span class="readout" id="sizeReadout"></span>
         </div>
         <svg viewBox="0 0 700 300" xmlns="http://www.w3.org/2000/svg" aria-label="Cost per employee falls as firm size rises">
@@ -189,7 +190,7 @@ const jsonLd = JSON.stringify({
         <cite>Julien Bek · <a href="https://www.sequoiacap.com/article/services-the-new-software/">Services: The New Software</a> · Sequoia Capital, 2026<sup class="fnref" id="r15a"><a href="#fn15">15</a></sup></cite>
       </div>
 
-      <p>Sequoia’s arithmetic is that for every dollar spent on software, six are spent on services.<sup class="fnref" id="r15b"><a href="#fn15">15</a></sup> That six-to-one ratio is the whole opening. Compliance readiness is roughly 70% intelligence — gap analysis, policy drafting, control mapping, evidence collection, rules-based work that AI can now do autonomously — and 30% judgement, which stays human for now.<sup class="fnref" id="r16"><a href="#fn16">16</a></sup> AI did not make compliance dashboards better; it made the <em>service</em> deliverable at software margins. The incumbents see it too, and they are adding agents as fast as they can. But they face a real dilemma: selling the work means cannibalizing the tool revenue their existing customers pay for. A pure autopilot has no installed base to protect. The race is on, and it will be decided by trust and by data — which is fitting, given the subject.</p>
+      <p>Sequoia’s arithmetic is that for every dollar spent on software, six are spent on services.<sup class="fnref" id="r15b"><a href="#fn15">15</a></sup> That six-to-one ratio is the whole opening. Compliance readiness is, by our estimate, roughly 70% intelligence — gap analysis, policy drafting, control mapping, evidence collection, rules-based work that AI can now do autonomously — and 30% judgement, which stays human for now.<sup class="fnref" id="r16"><a href="#fn16">16</a></sup> AI did not make compliance dashboards better; it made the <em>service</em> deliverable at software margins. The incumbents see it too, and they are adding agents as fast as they can. But they face a real dilemma: selling the work means cannibalizing the tool revenue their existing customers pay for. A pure autopilot has no installed base to protect. The race is on, and it will be decided by trust and by data — which is fitting, given the subject.</p>
 
       <h2><span class="pilcrow">§</span>Why it gets cheaper every time</h2>
 
@@ -222,7 +223,7 @@ const jsonLd = JSON.stringify({
 
       <h2><span class="pilcrow">§</span>Where we come in</h2>
 
-      <p>Eagle Ridge is not building a compliance tool. We are building a compliance services company that runs on AI — an autopilot, not a copilot. The customer does not buy a dashboard. The customer buys the outcome, in four words: <em>you are audit-ready.</em></p>
+      <p>Eagle Ridge is not building a compliance tool. We are building a compliance services company that runs on AI — an autopilot, not a copilot. The customer does not buy a dashboard. The customer buys the outcome, in four words: <em>you are audit-ready.</em> The intelligence is the AI's; the judgement — holding every artifact to the standard the assessor will actually apply — stays human. Proof that cannot survive that scrutiny is not proof, which is the whole argument of this essay.</p>
 
       <figure class="fig" id="fig6" data-md-exclude>
         <div class="fig-label">// Fig. 6 &nbsp;·&nbsp; The Ladder</div>
@@ -232,12 +233,12 @@ const jsonLd = JSON.stringify({
           <button class="rung" data-i="2" type="button"><span class="num">03 · Platform</span><span class="nm">Compliance Runs</span></button>
         </div>
         <div class="rung-detail" id="rungDetail"></div>
-        <figcaption style="margin-top:20px"><span class="fn">Fig. 6</span>Click a rung. Readiness is the wedge, not the ceiling: the engagement that replaces a $50–150k consulting project earns the right to keep the continuous compliance function running — the proof of trust, kept fresh, forever.</figcaption>
+        <figcaption style="margin-top:20px"><span class="fn">Fig. 6</span>Click a rung. Readiness is the wedge, not the ceiling: the engagement that replaces a $50–150k consulting project earns the right to keep the continuous compliance function running — the proof of trust, kept fresh for as long as you need it.</figcaption>
       </figure>
 
       <p>We start where the budget already exists. Companies already pay outside consultants for readiness; there is an existing line item and an accepted habit of buying the outcome externally. We do that work at a fraction of the cost and the calendar time. Getting a company ready teaches the system its stack, its policies, its evidence chain — so the second framework costs less than the first, and staying compliant becomes something the customer never thinks about again. Compliance recedes to where it belongs: infrastructure. Present, load-bearing, and silent.</p>
 
-      <p>The deepest version of the thesis is the one the philosophers were pointing at all along. The world does not need more rituals of verification; it needs proof that tracks reality — continuous, cryptographic where possible, and cheap enough that a fifteen-person machine shop can afford to be trusted. Trust is the technology that lets strangers cooperate. We intend to make manufacturing it cost almost nothing.</p>
+      <p>The deepest version of the thesis is the one the philosophers were pointing at all along. The world does not need more rituals of verification; it needs proof that tracks reality — continuous, cryptographic where possible, and cheap enough that a fifteen-person machine shop can afford to prove it. Trust is the technology that lets strangers cooperate. We intend to make manufacturing it cost almost nothing.</p>
 
       <p>The question has never been whether AI can do this work. The question is whether you sell the tool or sell the work. <b>We sell the work.</b></p>
 
@@ -286,7 +287,7 @@ const jsonLd = JSON.stringify({
       {yr:"2025", name:"CMMC", note:"Self-attestation failed — POA&Ms dated 2099"}
     ];
     const g = document.getElementById('strata');
-    if(!g) return;
+    if(!g){ console.warn('[fig2] #strata missing — figure not initialized'); return; }
     const ns = "http://www.w3.org/2000/svg";
     const baseY = 290, layerH = 30, x0 = 40, xMax = 680;
     strata.forEach((s,i)=>{
@@ -326,7 +327,7 @@ const jsonLd = JSON.stringify({
     const drop = document.getElementById('taxDrop');
     const val = document.getElementById('taxValue');
     const curve = document.getElementById('taxCurve');
-    if(!slider) return;
+    if(!slider || !readout || !dot || !drop || !val || !curve){ console.warn('[fig3] missing element — figure not initialized'); return; }
     const FIXED = 105000;
     const x0=60, x1=670, y0=250, yTop=40;
     const emp = t => Math.round(10*Math.pow(200, t));
@@ -362,7 +363,7 @@ const jsonLd = JSON.stringify({
           dot=document.getElementById('postureDot'),
           ticksG=document.getElementById('auditTicks'),
           midLabel=document.getElementById('midLabel');
-    if(!snapBtn) return;
+    if(!snapBtn || !liveBtn || !runBtn || !line || !dot || !ticksG || !midLabel){ console.warn('[fig4] missing element — figure not initialized'); return; }
     const ns="http://www.w3.org/2000/svg";
     let mode='snap', anim=null;
     const x0=40,x1=680,yReq=80,yLow=230;
@@ -437,7 +438,7 @@ const jsonLd = JSON.stringify({
     ];
     const detail=document.getElementById('rungDetail');
     const rungs=[...document.querySelectorAll('.manifesto .rung')];
-    if(!detail || !rungs.length) return;
+    if(!detail || !rungs.length){ console.warn('[fig6] missing element — figure not initialized'); return; }
     function show(i){
       rungs.forEach((r,j)=>r.classList.toggle('active',i===j));
       detail.innerHTML='<span class="ttl">'+details[i].ttl+'</span>'+details[i].txt;
