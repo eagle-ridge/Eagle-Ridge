@@ -1,0 +1,56 @@
+name: Deploy to Cloudflare Pages
+
+# The eagleridge Pages project is a direct-upload project (not git-connected),
+# so this workflow is what makes pushes to main actually deploy. It builds the
+# Astro site in site/ (Node + Python md-mirror generator) and uploads dist/ to
+# the `eagleridge` project via wrangler.
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "site/**"
+      - ".github/workflows/deploy.yml"
+  workflow_dispatch: {}
+
+concurrency:
+  group: pages-deploy
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      deployments: write
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: site/package-lock.json
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install Node dependencies
+        working-directory: site
+        run: npm ci
+
+      - name: Install Python dependencies (pinned — see scripts/requirements.txt)
+        working-directory: site
+        run: python -m pip install -r scripts/requirements.txt
+
+      - name: Build (astro build + md mirrors)
+        working-directory: site
+        run: npm run build
+
+      - name: Deploy dist to Cloudflare Pages
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          command: pages deploy site/dist --project-name eagleridge --branch main

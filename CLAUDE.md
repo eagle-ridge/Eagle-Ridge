@@ -1,8 +1,33 @@
 # Eagle Ridge Advisory — eagleridge.io
 
-Static site hosted on GitHub Pages. Hand-written HTML pages, no build tools. `.nojekyll` disables Jekyll so `.md` mirrors are served raw.
+**Astro site in `site/`, hosted on Cloudflare Pages** (project `eagleridge` → `eagleridge-7z4.pages.dev`). DNS cut over from GitHub Pages on 2026-06-13. The pages/mirrors/tables below describe the **legacy root HTML** site, kept for parity/history; the live site is built from `site/src/`.
 
-## Files
+## Deploy — automated via GitHub Actions
+
+Pushes to `main` that touch `site/**` trigger [`.github/workflows/deploy.yml`](.github/workflows/deploy.yml), which builds the Astro site and uploads `site/dist` to the `eagleridge` Pages project via `wrangler`. **The Pages project is direct-upload, NOT git-connected** — Cloudflare does not rebuild on push by itself; the Action is what deploys. Repo secrets `CLOUDFLARE_API_TOKEN` + `CLOUDFLARE_ACCOUNT_ID` drive it.
+
+### Manual deploy / local repro
+
+```bash
+npm install --prefix site
+env -C site npx astro build
+env -C site uv run --with markdownify==1.2.2 --with beautifulsoup4==4.14.3 \
+  python scripts/generate-md-mirrors.py            # regenerates site/dist/*.md + sitemaps
+# (npm run build does astro build + the generator, but needs the python deps installed)
+
+CF_TOKEN=$(op item get "Dash Cloudflare API Credential" --vault "Developer Vault" --fields credential --reveal)
+CLOUDFLARE_API_TOKEN="$CF_TOKEN" CLOUDFLARE_ACCOUNT_ID=702342b70e150343381e0829834cbcc7 \
+  env -C site npx wrangler pages deploy dist --project-name eagleridge --branch main
+```
+
+### Cloudflare facts
+
+- Account `702342b70e150343381e0829834cbcc7`; zone `eagleridge.io` = `064d7b70f67f32d15f2afbeb10a915f6`.
+- API token: `op://Developer Vault/Dash Cloudflare API Credential/credential` (Zone DNS edit + Pages edit). The older `Cloudflare Worker API` item is Workers-scoped and will NOT work for DNS/Pages.
+- DNS: apex `eagleridge.io` + `www` are proxied CNAMEs → `eagleridge-7z4.pages.dev`. Custom domains are registered on the Pages project; a `deactivated` status means DNS isn't pointing at the project.
+- Legacy GitHub Pages (root HTML / `CNAME` / `.nojekyll`) is retired and no longer served — safe to archive in a follow-up; left in place for now.
+
+## Files (legacy root HTML — historical)
 
 | File | Purpose |
 |------|---------|
