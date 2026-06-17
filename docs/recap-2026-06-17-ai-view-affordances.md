@@ -70,3 +70,26 @@ Commit: `4f57e4e` — pushed to `feature/insights-hub-and-nav` (PR **#28**).
 - Python mirror script deps:
   `uvx --with beautifulsoup4 --with markdownify python3 scripts/generate-md-mirrors.py`
   (pinned in `site/scripts/requirements.txt`).
+
+## Update — 2026-06-17 (later): reviewed, fixed, merged, deployed
+
+PR #28 went through a multi-agent review (`/review-pr`: code, silent-failure,
+type-design, comment). It converged on one real cluster in the Send-to-LLM
+handler. Shipped the fix as commit `f02ac1b`, then **squash-merged PR #28**
+(merge commit `499fe7f`) — Cloudflare deploy Action succeeded and the new code
+is **verified live** on `eagleridge.io/insights/readiness-before-the-assessment`.
+
+Fix (`site/src/pages/insights/[...slug].astro`), closing open-decision #3 / issue #35:
+- **Gemini → clipboard fallback.** Gemini has no documented `?q=` prefill, so it
+  now copies the prompt to the clipboard and opens a blank Gemini. Claude/ChatGPT
+  keep `?q=`. The undocumented param is gone.
+- **No more lying success toast.** `window.open` returns `null` (doesn't throw) on
+  popup-block, so the old `try/catch` couldn't catch it. Now surfaces an honest
+  "Popup blocked — the article is at <url>".
+- `dest` narrowed `Record<string,string>` → `'Claude' | 'ChatGPT'` literal; unknown
+  model degrades with a message, not an `"undefined"+q` tab.
+- DOM bindings → `querySelector<T>()` + one null-guard that logs and disables
+  controls instead of an uncaught `TypeError` killing both. `.send` captured once.
+
+Deferred (consciously, not blockers): #36 (md-preview vs twin format), #37
+(send-menu keyboard semantics + `pubDate` upper bound — low-priority review nits).
