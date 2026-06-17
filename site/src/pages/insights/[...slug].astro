@@ -28,7 +28,34 @@ const isoDate = (d: Date) => d.toISOString().slice(0, 10);
 
 const published = entry.data.pubDate;
 const modified = entry.data.updatedDate ?? entry.data.pubDate;
-const url = `https://eagleridge.io/insights/${entry.id}`;
+const path = `/insights/${entry.id}`;
+const url = `https://eagleridge.io${path}`;
+// The .md twin: generated at build time by scripts/generate-md-mirrors.py
+// (auto-discovers dist/insights/*.html). "Send to LLM" hands over this URL;
+// the in-page markdown view below is a styled preview of the same artifact.
+const mdUrl = `${url}.md`;
+
+// ~200 wpm reading estimate from the raw markdown body.
+const words = entry.body?.trim().split(/\s+/).filter(Boolean).length ?? 0;
+const readingMin = Math.max(1, Math.round(words / 200));
+
+// Light, build-time syntax styling for the markdown preview. Escape first,
+// then wrap headings / links / emphasis — the markdown metacharacters survive
+// HTML-escaping (only & < > are replaced), so the regexes stay safe.
+const esc = (s: string) =>
+	s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+const highlightMd = (src: string) =>
+	esc(src)
+		.split('\n')
+		.map((line) => {
+			const h = line.match(/^(#{1,6})\s+(.*)$/);
+			if (h) return `<span class="md-h">${h[1]} </span>${h[2]}`;
+			return line
+				.replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<span class="md-link">[$1]($2)</span>')
+				.replace(/\*\*([^*]+)\*\*/g, '<span class="md-strong">**$1**</span>');
+		})
+		.join('\n');
+const mdBody = highlightMd(entry.body ?? '');
 
 const jsonLd = JSON.stringify({
 	"@context": "https://schema.org",
@@ -48,50 +75,337 @@ const jsonLd = JSON.stringify({
 <BaseLayout
 	title={`${entry.data.title} — Eagle Ridge Advisory`}
 	description={entry.data.description}
-	path={`/insights/${entry.id}`}
+	path={path}
 	ogType="article"
 >
 	<Fragment slot="head">
 		<script type="application/ld+json" set:html={jsonLd} />
 	</Fragment>
 
-	<article class="prose container">
+	<article class="prose container article" data-md-url={mdUrl}>
+		<p class="eyebrow-mono">Insights</p>
 		<h1>{entry.data.title}</h1>
-		<p class="byline">
-			<time datetime={isoDate(published)}>{dateFmt.format(published)}</time>
-			<span aria-hidden="true"> · </span>
-			{entry.data.author}
-		</p>
-		<Content />
-		<p class="back" data-md-exclude>
-			<a href="/insights"><span aria-hidden="true">←</span> Back to Insights</a>
-		</p>
+
+		<!-- meta block: byline (tier 1) + AI affordances (tier 2), riding a hairline -->
+		<div class="meta">
+			<p class="byline">By {entry.data.author}<span class="sep"> · </span><time datetime={isoDate(published)}>{dateFmt.format(published)}</time><span class="sep"> · </span>{readingMin} min read</p>
+
+			<div class="controls" data-md-exclude>
+				<button type="button" class="ctl md-toggle" aria-pressed="false">
+					<span class="when-page">
+						<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m18 16 4-4-4-4"/><path d="m6 8-4 4 4 4"/><path d="m14.5 4-5 16"/></svg>View as Markdown
+					</span>
+					<span class="when-md">
+						<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/><path d="M16 13H8"/><path d="M16 17H8"/><path d="M10 9H8"/></svg>View as page
+					</span>
+				</button>
+
+				<span class="ctl-divider" aria-hidden="true"></span>
+
+				<div class="send">
+					<button type="button" class="ctl send-trigger" aria-haspopup="menu" aria-expanded="false">
+						<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9.937 15.5A2 2 0 0 0 8.5 14.063l-6.135-1.582a.5.5 0 0 1 0-.962L8.5 9.936A2 2 0 0 0 9.937 8.5l1.582-6.135a.5.5 0 0 1 .962 0L14.063 8.5A2 2 0 0 0 15.5 9.937l6.135 1.581a.5.5 0 0 1 0 .964L15.5 14.063a2 2 0 0 0-1.437 1.437l-1.582 6.135a.5.5 0 0 1-.962 0z"/><path d="M20 3v4"/><path d="M22 5h-4"/><path d="M4 17v2"/><path d="M5 18H3"/></svg>Send to LLM
+						<svg class="chev" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+					</button>
+					<div class="send-menu" role="menu" aria-label="Open this article in an AI assistant" hidden>
+						<p class="send-menu-label">Open the .md in</p>
+						<button type="button" role="menuitem" data-model="Claude">Claude <span class="tag">.md</span></button>
+						<button type="button" role="menuitem" data-model="ChatGPT">ChatGPT <span class="tag">.md</span></button>
+						<button type="button" role="menuitem" data-model="Gemini">Gemini <span class="tag">.md</span></button>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<p class="sent" hidden data-md-exclude><span class="dot" aria-hidden="true"></span><span class="sent-text"></span></p>
+		<p class="sr-only" aria-live="polite" data-md-exclude></p>
+
+		<!-- page view -->
+		<div class="view view-page">
+			<Content />
+			<p class="back" data-md-exclude>
+				<a href="/insights"><span aria-hidden="true">←</span> Back to Insights</a>
+			</p>
+		</div>
+
+		<!-- markdown view: a styled preview of the .md twin -->
+		<div class="view view-md" data-md-exclude hidden>
+			<div class="md-head">
+				<span class="dot" aria-hidden="true"></span>
+				<span class="md-path">{path}<span class="md-ext">.md</span></span>
+				<span class="md-reads">What the AI reads</span>
+			</div>
+			<div class="md-panel">
+				<div class="md-fence">---</div>
+				<div><span class="md-key">title:</span> {entry.data.title}</div>
+				<div><span class="md-key">date:</span> {isoDate(published)}</div>
+				<div><span class="md-key">author:</span> {entry.data.author}</div>
+				<div><span class="md-key">url:</span> {path}</div>
+				<div class="md-fence">---</div>
+				<pre class="md-content" set:html={mdBody} />
+			</div>
+		</div>
 	</article>
 </BaseLayout>
 
+<script>
+	const article = document.querySelector('.article') as HTMLElement | null;
+	if (article) {
+		const mdUrl = article.dataset.mdUrl ?? '';
+		const toggle = article.querySelector('.md-toggle') as HTMLButtonElement;
+		const pageView = article.querySelector('.view-page') as HTMLElement;
+		const mdView = article.querySelector('.view-md') as HTMLElement;
+		const sendTrigger = article.querySelector('.send-trigger') as HTMLButtonElement;
+		const sendMenu = article.querySelector('.send-menu') as HTMLElement;
+		const sent = article.querySelector('.sent') as HTMLElement;
+		const sentText = article.querySelector('.sent-text') as HTMLElement;
+		const live = article.querySelector('[aria-live]') as HTMLElement;
+
+		// --- view toggle (URL-addressable via ?view=markdown) ---
+		const fade = (el: HTMLElement) => {
+			el.hidden = false;
+			el.classList.remove('fade-in');
+			void el.offsetWidth; // restart the animation
+			el.classList.add('fade-in');
+		};
+		const setView = (md: boolean, pushUrl = true) => {
+			toggle.setAttribute('aria-pressed', String(md));
+			if (md) { pageView.hidden = true; fade(mdView); }
+			else { mdView.hidden = true; fade(pageView); }
+			if (pushUrl) {
+				try {
+					const u = new URL(window.location.href);
+					if (md) u.searchParams.set('view', 'markdown');
+					else u.searchParams.delete('view');
+					history.replaceState({}, '', u);
+				} catch (e) { /* sandboxed iframe: no-op */ }
+			}
+		};
+		toggle.addEventListener('click', () =>
+			setView(toggle.getAttribute('aria-pressed') !== 'true')
+		);
+		// restore from URL on load
+		try {
+			const v = new URLSearchParams(window.location.search).get('view');
+			if (v === 'markdown' || v === 'md') setView(true, false);
+		} catch (e) { /* no-op */ }
+
+		// --- Send to LLM menu ---
+		const openSend = (open: boolean) => {
+			sendTrigger.setAttribute('aria-expanded', String(open));
+			sendMenu.hidden = !open;
+		};
+		sendTrigger.addEventListener('click', (e) => {
+			e.stopPropagation();
+			openSend(sendTrigger.getAttribute('aria-expanded') !== 'true');
+		});
+		document.addEventListener('click', (e) => {
+			if (!sendMenu.hidden && !article.querySelector('.send')!.contains(e.target as Node)) {
+				openSend(false);
+			}
+		});
+		document.addEventListener('keydown', (e) => {
+			if (e.key === 'Escape') openSend(false);
+		});
+
+		let clearTimer: number | undefined;
+		const dest: Record<string, string> = {
+			// Claude and ChatGPT honor ?q= prefill; Gemini's is undocumented —
+			// verify before relying on it (README open decision #3).
+			Claude: 'https://claude.ai/new?q=',
+			ChatGPT: 'https://chatgpt.com/?q=',
+			Gemini: 'https://gemini.google.com/app?q=',
+		};
+		sendMenu.querySelectorAll('[data-model]').forEach((btn) =>
+			btn.addEventListener('click', () => {
+				const model = (btn as HTMLElement).dataset.model!;
+				const q = encodeURIComponent('Please read and summarize this article: ' + mdUrl);
+				try { window.open(dest[model] + q, '_blank', 'noopener,noreferrer'); } catch (e) { /* no-op */ }
+				openSend(false);
+				const file = mdUrl.split('/').pop();
+				sentText.textContent = `Opening ${file} in ${model}…`;
+				sent.hidden = false;
+				live.textContent = `Opening ${file} in ${model}`;
+				clearTimeout(clearTimer);
+				clearTimer = window.setTimeout(() => { sent.hidden = true; live.textContent = ''; }, 2800);
+			})
+		);
+	}
+</script>
+
 <style>
+	.eyebrow-mono {
+		font-family: var(--er-font-mono);
+		font-size: 12px;
+		letter-spacing: 0.16em;
+		text-transform: uppercase;
+		color: var(--er-accent);
+		margin: 0 0 16px;
+	}
+	.article h1 { margin-bottom: 0; }
+
+	/* ---- meta block (byline + controls, on a hairline) ---- */
+	.meta {
+		display: flex;
+		align-items: baseline;
+		justify-content: space-between;
+		gap: 14px 28px;
+		flex-wrap: wrap;
+		margin: 24px 0 0;
+		padding: 0 0 14px;
+		border-bottom: 1px solid var(--er-rule);
+	}
 	.byline {
 		font-family: var(--er-font-mono);
-		font-size: var(--er-text-small);
-		letter-spacing: 0;
-		color: var(--er-mute);
-		margin: 0 0 var(--er-space-4);
+		font-size: 12px;
+		letter-spacing: 0.06em;
+		color: var(--er-ink-soft);
+		margin: 0;
+		white-space: nowrap;
+	}
+	.byline .sep { color: var(--er-mute); }
+
+	.controls { display: flex; align-items: center; gap: 20px; flex-shrink: 0; }
+	.ctl {
+		display: inline-flex;
+		align-items: center;
+		gap: 8px;
+		min-height: 24px;
+		padding: 0;
+		border: 0;
+		background: transparent;
+		cursor: pointer;
+		font-family: var(--er-font-mono);
+		font-size: 11px;
+		letter-spacing: 0.14em;
+		text-transform: uppercase;
+		color: var(--er-ink-soft);
+		white-space: nowrap;
+		transition: color var(--er-dur-fast) var(--er-ease);
+	}
+	.ctl:hover { color: var(--er-accent); }
+	.ctl:focus-visible { outline: 2px solid var(--er-accent); outline-offset: 3px; border-radius: 2px; }
+	.ctl svg { flex-shrink: 0; }
+	.ctl-divider { width: 1px; height: 14px; background: var(--er-rule); flex-shrink: 0; }
+
+	/* label/icon swap driven purely by aria-pressed — no JS needed */
+	.md-toggle .when-page, .md-toggle .when-md { display: inline-flex; align-items: center; gap: 8px; }
+	.md-toggle .when-md { display: none; }
+	.md-toggle[aria-pressed="true"] .when-page { display: none; }
+	.md-toggle[aria-pressed="true"] .when-md { display: inline-flex; }
+
+	/* ---- send menu ---- */
+	.send { position: relative; }
+	.send-menu {
+		position: absolute;
+		top: calc(100% + 10px);
+		right: 0;
+		min-width: 236px;
+		background: var(--er-paper);
+		border: 1px solid var(--er-rule);
+		border-radius: var(--er-radius-md);
+		box-shadow: var(--er-shadow-md);
+		padding: 6px;
+		z-index: 6;
+		animation: er-fade-in var(--er-dur-fast) var(--er-ease);
+	}
+	.send-menu-label {
+		font-family: var(--er-font-mono);
+		font-size: 10px;
+		letter-spacing: 0.14em;
+		text-transform: uppercase;
+		color: var(--er-ink-soft);
+		margin: 4px 13px 6px;
+	}
+	.send-menu [role="menuitem"] {
+		display: flex;
+		align-items: center;
+		gap: 12px;
+		width: 100%;
+		min-height: 44px;
+		padding: 0 13px;
+		border: 0;
+		background: transparent;
+		color: var(--er-ink);
+		font-family: var(--er-font-sans);
+		font-size: 14px;
+		text-align: left;
+		cursor: pointer;
+		border-radius: var(--er-radius-sm);
+	}
+	.send-menu [role="menuitem"]:hover,
+	.send-menu [role="menuitem"]:focus-visible {
+		background: var(--surface-sunken);
+		outline: none;
+	}
+	.send-menu [role="menuitem"]:focus-visible { box-shadow: inset 2px 0 0 var(--er-accent); }
+	.send-menu .tag {
+		font-family: var(--er-font-mono);
+		font-size: 10px;
+		letter-spacing: 0.08em;
+		color: var(--er-ink-soft);
+		margin-left: auto;
 	}
 
-	.back {
-		margin-top: var(--er-space-5);
-		padding-top: var(--er-space-3);
-		border-top: var(--er-border);
-	}
-	.back a {
+	/* ---- send confirmation ---- */
+	.sent {
+		display: inline-flex;
+		align-items: center;
+		gap: 8px;
 		font-family: var(--er-font-mono);
-		font-size: var(--er-text-small);
-		text-transform: uppercase;
-		letter-spacing: 0.08em;
-		color: var(--er-accent);
-		text-decoration: none;
+		font-size: 11px;
+		letter-spacing: 0.04em;
+		color: var(--er-ink-soft);
+		margin: 16px 0 0;
 	}
-	.back a:hover {
-		color: var(--er-ink);
+	.dot { width: 7px; height: 7px; border-radius: 50%; background: var(--status-ok); flex-shrink: 0; }
+
+	/* ---- view cross-fade ---- */
+	.view.fade-in { animation: er-fade-in var(--er-dur-base) var(--er-ease); }
+	.view-page { margin-top: 30px; }
+	.view-md { margin-top: 30px; }
+
+	/* ---- markdown preview ---- */
+	.md-head { display: flex; align-items: center; gap: 9px; margin: 0 0 16px; }
+	.md-path {
+		font-family: var(--er-font-mono);
+		font-size: 11px;
+		letter-spacing: 0.08em;
+		color: var(--er-ink-soft);
+	}
+	.md-ext { color: var(--er-accent); }
+	.md-reads {
+		font-family: var(--er-font-mono);
+		font-size: 10px;
+		letter-spacing: 0.14em;
+		text-transform: uppercase;
+		color: var(--er-ink-soft);
+		margin-left: auto;
+	}
+	.md-panel {
+		background: var(--surface-sunken);
+		border: 1px solid var(--er-rule);
+		border-radius: var(--er-radius-md);
+		padding: 24px 26px;
+		font-family: var(--er-font-mono);
+		font-size: 13.5px;
+		line-height: 1.85;
+		color: var(--er-ink-soft);
+		overflow-x: auto;
+	}
+	.md-fence { color: var(--er-gold); }
+	.md-key { color: var(--er-mute); }
+	.md-content {
+		margin: 16px 0 0;
+		font: inherit;
+		white-space: pre-wrap;
+		color: inherit;
+	}
+	.md-content :global(.md-h) { color: var(--er-accent); font-weight: 500; }
+	.md-content :global(.md-link) { color: var(--er-accent); }
+	.md-content :global(.md-strong) { color: var(--er-ink); }
+
+	@media (prefers-reduced-motion: reduce) {
+		.view.fade-in, .send-menu { animation: none; }
 	}
 </style>

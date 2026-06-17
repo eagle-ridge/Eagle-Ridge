@@ -63,6 +63,14 @@
   /* ---- Layout ---- */
   --er-maxw: 1200px;
   --er-gutter: clamp(1.25rem, 5vw, 5rem);
+
+  /* ---- Surfaces ---- */
+  --surface-sunken: #EFE9DC;  /* recessed panel — markdown view, code wells */
+
+  /* ---- Motion ---- */
+  --er-ease: cubic-bezier(0.4, 0, 0.2, 1);
+  --er-dur-fast: 0.15s;  /* hovers, menus */
+  --er-dur-base: 0.25s;  /* view cross-fade */
 }
 
 /* ---- Theme · Slate (cool, institutional) ---- */

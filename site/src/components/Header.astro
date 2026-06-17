@@ -1,6 +1,7 @@
 ---
 // Site masthead per brand kit: mark + uppercase wordmark lockup, mono tagline.
-// Primary nav (About · Insights · Contact) added right of the lockup.
+// Primary nav (About · Insights · Contact) right of the lockup on desktop;
+// collapses to a hamburger + stacked panel at <=720px (see global.css).
 interface Props {
 	currentPath?: string;
 }
@@ -10,6 +11,11 @@ const { currentPath = '' } = Astro.props;
 // article routes (/insights/<slug>). Contact is an in-page anchor, never current.
 const isAbout = currentPath === '/about';
 const isInsights = currentPath === '/insights' || currentPath.startsWith('/insights/');
+const links = [
+	{ href: '/about', label: 'About', current: isAbout },
+	{ href: '/insights', label: 'Insights', current: isInsights },
+	{ href: '/#contact-form', label: 'Contact', current: false },
+];
 ---
 <header class="site-header">
 	<div class="container">
@@ -17,13 +23,61 @@ const isInsights = currentPath === '/insights' || currentPath.startsWith('/insig
 			<img src="/eagle-ridge-mark.png" alt="" width="28" height="28">
 			<span>Eagle Ridge Advisory</span>
 		</a>
+
 		<div class="masthead-right">
 			<nav class="site-nav" aria-label="Primary">
-				<a href="/about" aria-current={isAbout ? 'page' : undefined}>About</a>
-				<a href="/insights" aria-current={isInsights ? 'page' : undefined}>Insights</a>
-				<a href="/#contact-form">Contact</a>
+				{links.map((l) => (
+					<a href={l.href} aria-current={l.current ? 'page' : undefined}>{l.label}</a>
+				))}
 			</nav>
 			<div class="tagline">GRC Readiness</div>
 		</div>
+
+		<button
+			type="button"
+			class="nav-toggle"
+			aria-label="Menu"
+			aria-expanded="false"
+			aria-controls="mobile-nav"
+		>
+			<svg class="icon-menu" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true"><line x1="4" x2="20" y1="6" y2="6"/><line x1="4" x2="20" y1="12" y2="12"/><line x1="4" x2="20" y1="18" y2="18"/></svg>
+			<svg class="icon-x" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+		</button>
 	</div>
+
+	<nav id="mobile-nav" class="mobile-nav" aria-label="Primary" hidden>
+		{links.map((l) => (
+			<a href={l.href} aria-current={l.current ? 'page' : undefined}>{l.label}</a>
+		))}
+		<span class="mobile-tagline">GRC Readiness</span>
+	</nav>
 </header>
+
+<script>
+	const header = document.currentScript?.closest('.site-header')
+		?? document.querySelector('.site-header');
+	const toggle = header?.querySelector('.nav-toggle') as HTMLButtonElement | null;
+	const panel = header?.querySelector('.mobile-nav') as HTMLElement | null;
+
+	if (toggle && panel) {
+		const setOpen = (open: boolean) => {
+			toggle.setAttribute('aria-expanded', String(open));
+			toggle.classList.toggle('is-open', open);
+			panel.hidden = !open;
+		};
+		toggle.addEventListener('click', () => {
+			setOpen(toggle.getAttribute('aria-expanded') !== 'true');
+		});
+		// Tapping a link closes the panel.
+		panel.querySelectorAll('a').forEach((a) =>
+			a.addEventListener('click', () => setOpen(false))
+		);
+		// Escape closes; crossing back to desktop force-closes.
+		document.addEventListener('keydown', (e) => {
+			if (e.key === 'Escape') setOpen(false);
+		});
+		window.matchMedia('(min-width: 721px)').addEventListener('change', (e) => {
+			if (e.matches) setOpen(false);
+		});
+	}
+</script>
