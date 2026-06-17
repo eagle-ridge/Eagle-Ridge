@@ -11,11 +11,19 @@ const { currentPath = '' } = Astro.props;
 // article routes (/insights/<slug>). Contact is an in-page anchor, never current.
 const isAbout = currentPath === '/about';
 const isInsights = currentPath === '/insights' || currentPath.startsWith('/insights/');
-const links = [
+const primary = [
 	{ href: '/about', label: 'About', current: isAbout },
 	{ href: '/insights', label: 'Insights', current: isInsights },
-	{ href: '/#contact-form', label: 'Contact', current: false },
 ];
+// Reference cluster, grouped under a "Resources" disclosure on desktop and a
+// stacked group on mobile. Exact hrefs → exact-match active state.
+const resources = [
+	{ href: '/market-map', label: 'Market Map' },
+	{ href: '/glossary', label: 'Glossary' },
+	{ href: '/nobody-built-the-first-mile', label: 'First Mile' },
+	{ href: '/compliance-should-just-work', label: 'Manifesto' },
+];
+const isResource = resources.some((r) => r.href === currentPath);
 ---
 <header class="site-header">
 	<div class="container">
@@ -26,9 +34,26 @@ const links = [
 
 		<div class="masthead-right">
 			<nav class="site-nav" aria-label="Primary">
-				{links.map((l) => (
+				{primary.map((l) => (
 					<a href={l.href} aria-current={l.current ? 'page' : undefined}>{l.label}</a>
 				))}
+				<div class="nav-resources-wrap">
+					<button
+						type="button"
+						class:list={['nav-resources', { 'is-active': isResource }]}
+						aria-expanded="false"
+						aria-controls="resources-menu"
+					>
+						Resources
+						<svg class="chev" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+					</button>
+					<div id="resources-menu" class="resources-menu" hidden>
+						{resources.map((r) => (
+							<a href={r.href} aria-current={r.href === currentPath ? 'page' : undefined}>{r.label}</a>
+						))}
+					</div>
+				</div>
+				<a href="/#contact-form">Contact</a>
 			</nav>
 			<div class="tagline">GRC Readiness</div>
 		</div>
@@ -46,9 +71,14 @@ const links = [
 	</div>
 
 	<nav id="mobile-nav" class="mobile-nav" aria-label="Primary" hidden>
-		{links.map((l) => (
+		{primary.map((l) => (
 			<a href={l.href} aria-current={l.current ? 'page' : undefined}>{l.label}</a>
 		))}
+		<span class="mobile-group">Resources</span>
+		{resources.map((r) => (
+			<a href={r.href} aria-current={r.href === currentPath ? 'page' : undefined}>{r.label}</a>
+		))}
+		<a href="/#contact-form">Contact</a>
 		<span class="mobile-tagline">GRC Readiness</span>
 	</nav>
 </header>
@@ -78,6 +108,38 @@ const links = [
 		});
 		window.matchMedia('(min-width: 721px)').addEventListener('change', (e) => {
 			if (e.matches) setOpen(false);
+		});
+	}
+
+	// Desktop "Resources" disclosure (plain button + aria-expanded; NOT role=menu).
+	const resTrigger = header?.querySelector('.nav-resources') as HTMLButtonElement | null;
+	const resWrap = header?.querySelector('.nav-resources-wrap') as HTMLElement | null;
+	const resMenu = header?.querySelector('#resources-menu') as HTMLElement | null;
+
+	if (resTrigger && resWrap && resMenu) {
+		const isOpen = () => resTrigger.getAttribute('aria-expanded') === 'true';
+		const setResOpen = (open: boolean) => {
+			resTrigger.setAttribute('aria-expanded', String(open));
+			resMenu.hidden = !open;
+		};
+		resTrigger.addEventListener('click', () => setResOpen(!isOpen()));
+		// Close on outside-click — test against this disclosure's own wrapper so it
+		// coexists with the other global click handlers on the page.
+		document.addEventListener('click', (e) => {
+			if (isOpen() && !resWrap.contains(e.target as Node)) setResOpen(false);
+		});
+		// Escape closes and returns focus to the trigger — but only when open, so it
+		// doesn't swallow Escape / steal focus when the panel is already closed.
+		document.addEventListener('keydown', (e) => {
+			if (e.key === 'Escape' && isOpen()) {
+				e.preventDefault();
+				setResOpen(false);
+				resTrigger.focus();
+			}
+		});
+		// Crossing to mobile (panel is hidden there) force-closes for clean state.
+		window.matchMedia('(max-width: 720px)').addEventListener('change', (e) => {
+			if (e.matches) setResOpen(false);
 		});
 	}
 </script>
