@@ -6,6 +6,7 @@
 
 - [Homepage](https://eagleridge.io/index.md): Services overview, compliance frameworks, and contact form
 - [About](https://eagleridge.io/about.md): GRC readiness positioning, who we serve, and consulting approach
+- [Insights](https://eagleridge.io/insights.md): Articles on CMMC and compliance readiness for small-business contractors — new thinking on getting ready before you're assessed
 - [Market Map](https://eagleridge.io/market-map.md): Eagle Ridge's view of the CMMC services market — 89 firms and platforms mapped by category, with the 0→1 readiness gap for DIB SMBs called out
 - [Nobody Built the First Mile](https://eagleridge.io/nobody-built-the-first-mile.md): Long-form argument behind the market map. The structural gap between CMMC assessors and small DIB contractors who need readiness work, and why the window to fix it is closing
 - [Compliance should just work](https://eagleridge.io/compliance-should-just-work.md): A first-principles manifesto on trust, verification, and the economics of GRC — why point-in-time compliance is a regressive tax on small firms, and why the proof of trust is shifting to continuous, AI-delivered, outcome-based readiness
