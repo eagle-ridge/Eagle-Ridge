@@ -149,17 +149,21 @@ const jsonLd = JSON.stringify({
 </BaseLayout>
 
 <script>
-	const article = document.querySelector('.article') as HTMLElement | null;
-	if (article) {
-		const mdUrl = article.dataset.mdUrl ?? '';
-		const toggle = article.querySelector('.md-toggle') as HTMLButtonElement;
-		const pageView = article.querySelector('.view-page') as HTMLElement;
-		const mdView = article.querySelector('.view-md') as HTMLElement;
-		const sendTrigger = article.querySelector('.send-trigger') as HTMLButtonElement;
-		const sendMenu = article.querySelector('.send-menu') as HTMLElement;
-		const sent = article.querySelector('.sent') as HTMLElement;
-		const sentText = article.querySelector('.sent-text') as HTMLElement;
-		const live = article.querySelector('[aria-live]') as HTMLElement;
+	const article = document.querySelector<HTMLElement>('.article');
+	const mdUrl = article?.dataset.mdUrl ?? '';
+	const toggle = article?.querySelector<HTMLButtonElement>('.md-toggle');
+	const pageView = article?.querySelector<HTMLElement>('.view-page');
+	const mdView = article?.querySelector<HTMLElement>('.view-md');
+	const sendWrap = article?.querySelector<HTMLElement>('.send');
+	const sendTrigger = article?.querySelector<HTMLButtonElement>('.send-trigger');
+	const sendMenu = article?.querySelector<HTMLElement>('.send-menu');
+	const sent = article?.querySelector<HTMLElement>('.sent');
+	const sentText = article?.querySelector<HTMLElement>('.sent-text');
+	const live = article?.querySelector<HTMLElement>('[aria-live]');
+	// Bail loudly (not silently) if any control is missing — the article still reads.
+	if (!toggle || !pageView || !mdView || !sendWrap || !sendTrigger || !sendMenu || !sent || !sentText || !live) {
+		if (article) console.error('[insights] article controls missing — interactive controls disabled');
+	} else {
 
 		// --- view toggle (URL-addressable via ?view=markdown) ---
 		const fade = (el: HTMLElement) => {
@@ -200,34 +204,50 @@ const jsonLd = JSON.stringify({
 			openSend(sendTrigger.getAttribute('aria-expanded') !== 'true');
 		});
 		document.addEventListener('click', (e) => {
-			if (!sendMenu.hidden && !article.querySelector('.send')!.contains(e.target as Node)) {
-				openSend(false);
-			}
+			if (!sendMenu.hidden && !sendWrap.contains(e.target as Node)) openSend(false);
 		});
 		document.addEventListener('keydown', (e) => {
 			if (e.key === 'Escape') openSend(false);
 		});
 
 		let clearTimer: number | undefined;
-		const dest: Record<string, string> = {
-			// Claude and ChatGPT honor ?q= prefill; Gemini's is undocumented —
-			// verify before relying on it (README open decision #3).
+		const notify = (msg: string) => {
+			sentText.textContent = msg;
+			sent.hidden = false;
+			live.textContent = msg;
+			clearTimeout(clearTimer);
+			clearTimer = window.setTimeout(() => { sent.hidden = true; live.textContent = ''; }, 2800);
+		};
+
+		// Claude and ChatGPT honor a ?q= prefill. Gemini has no documented prefill
+		// param, so we copy the prompt to the clipboard and open a blank Gemini.
+		const prefill: Record<'Claude' | 'ChatGPT', string> = {
 			Claude: 'https://claude.ai/new?q=',
 			ChatGPT: 'https://chatgpt.com/?q=',
-			Gemini: 'https://gemini.google.com/app?q=',
 		};
-		sendMenu.querySelectorAll('[data-model]').forEach((btn) =>
-			btn.addEventListener('click', () => {
-				const model = (btn as HTMLElement).dataset.model!;
-				const q = encodeURIComponent('Please read and summarize this article: ' + mdUrl);
-				try { window.open(dest[model] + q, '_blank', 'noopener,noreferrer'); } catch (e) { /* no-op */ }
+		sendMenu.querySelectorAll<HTMLElement>('[data-model]').forEach((btn) =>
+			btn.addEventListener('click', async () => {
+				const model = btn.dataset.model ?? '';
+				const prompt = 'Please read and summarize this article: ' + mdUrl;
+				const file = mdUrl.split('/').pop() || 'the article';
 				openSend(false);
-				const file = mdUrl.split('/').pop();
-				sentText.textContent = `Opening ${file} in ${model}…`;
-				sent.hidden = false;
-				live.textContent = `Opening ${file} in ${model}`;
-				clearTimeout(clearTimer);
-				clearTimer = window.setTimeout(() => { sent.hidden = true; live.textContent = ''; }, 2800);
+
+				if (model === 'Gemini') {
+					try {
+						await navigator.clipboard.writeText(prompt);
+						window.open('https://gemini.google.com/app', '_blank', 'noopener,noreferrer');
+						notify('Prompt copied — paste it into Gemini');
+					} catch {
+						notify(`Couldn't copy — the article is at ${mdUrl}`);
+					}
+					return;
+				}
+
+				const base = prefill[model as 'Claude' | 'ChatGPT'];
+				if (!base) { notify(`Couldn't open ${model} — the article is at ${mdUrl}`); return; }
+				// window.open returns null (it does not throw) when a popup is blocked.
+				const win = window.open(base + encodeURIComponent(prompt), '_blank', 'noopener,noreferrer');
+				notify(win ? `Opening ${file} in ${model}…` : `Popup blocked — the article is at ${mdUrl}`);
 			})
 		);
 	}
