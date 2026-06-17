@@ -1,6 +1,6 @@
 # Eagle Ridge Advisory — eagleridge.io
 
-**Astro site in `site/`, hosted on Cloudflare Pages** (project `eagleridge` → `eagleridge-7z4.pages.dev`). DNS cut over from GitHub Pages on 2026-06-13. The pages/mirrors/tables below describe the **legacy root HTML** site, kept for parity/history; the live site is built from `site/src/`.
+**Astro site in `site/`, hosted on Cloudflare Pages** (project `eagleridge` → `eagleridge-7z4.pages.dev`). DNS cut over from GitHub Pages on 2026-06-13. The live site is built from `site/src/`; the legacy root-HTML site was deleted in the cleanup PR (recover from git history if ever needed — see `MIGRATION-NOTES.md`).
 
 ## Deploy — automated via GitHub Actions
 
@@ -25,29 +25,25 @@ CLOUDFLARE_API_TOKEN="$CF_TOKEN" CLOUDFLARE_ACCOUNT_ID=702342b70e150343381e08298
 - Account `702342b70e150343381e0829834cbcc7`; zone `eagleridge.io` = `064d7b70f67f32d15f2afbeb10a915f6`.
 - API token: `op://Developer Vault/Dash Cloudflare API Credential/credential` (Zone DNS edit + Pages edit). The older `Cloudflare Worker API` item is Workers-scoped and will NOT work for DNS/Pages.
 - DNS: apex `eagleridge.io` + `www` are proxied CNAMEs → `eagleridge-7z4.pages.dev`. Custom domains are registered on the Pages project; a `deactivated` status means DNS isn't pointing at the project.
-- Legacy GitHub Pages (root HTML / `CNAME` / `.nojekyll`) is retired and no longer served — safe to archive in a follow-up; left in place for now.
+- Legacy GitHub Pages (root HTML / `CNAME` / `.nojekyll`) is retired and no longer served. The root-HTML site + its `.md` mirrors, sitemaps, `llms.txt`/`robots.txt`/`AGENTS.md`, and the root generator were **deleted** in the cleanup PR. GitHub Pages may still be enabled in repo settings, but DNS bypasses it so it serves nothing.
 
-## Files (legacy root HTML — historical)
+## Files (live site — all under `site/`)
 
-| File | Purpose |
+The live site is entirely `site/`-based. Source pages live in `site/src/pages/`, content collections in `site/src/content/`, components in `site/src/components/`, styles in `site/src/styles/`. Build output goes to `site/dist/` (deployed to Cloudflare Pages).
+
+| Path | Purpose |
 |------|---------|
-| `index.html` | Homepage — hero, services (GRC readiness), frameworks, social proof, contact form |
-| `about.html` | About page — GRC readiness positioning, clients (small-business CEOs), approach |
-| `discovery.html` | SSP intake form — Tally.so embed, unlisted (noindex), shared via direct URL |
-| `market-map.html` | Public interactive market map of the CMMC services landscape (89 entities, periodic-table layout). Linked from all page footers. |
-| `nobody-built-the-first-mile.html` | Long-form argument behind the market map. Buyer-first prose, cream/brown palette matching about.html. CTA target from market-map. Linked from all page footers. |
-| `privacy.html` | Privacy policy — includes PostHog tracking disclosure |
-| `glossary.html` | CMMC / NIST 800-171 terminology page (DefinedTermSet JSON-LD). Linked from all footers. |
-| `logo.png` | Logo (also: `Geometric Eagle Head Logo.png`) |
-| `CNAME` | Custom domain: `eagleridge.io` |
-| `llms.txt` | LLM-readable site summary ([llmstxt.org](https://llmstxt.org/) standard). Page links point to `.md` mirrors — update when pages/services change |
-| `AGENTS.md` | Guidance for AI agents consuming the site (markdown mirrors, sitemaps, JSON-LD) |
-| `robots.txt` | Crawl rules + sitemap pointer; disallows `/discovery.html` |
-| `sitemap.xml`, `sitemap.md` | Generated sitemaps (see generator below) |
-| `*.md` (per page) | Generated Markdown mirrors of each HTML page; declared via `<link rel="alternate" type="text/markdown">` |
-| `.nojekyll` | Disables Jekyll so `.md` mirrors serve as raw static files |
-| `scripts/generate-md-mirrors.py` | Regenerates `.md` mirrors + sitemaps from HTML. Run after editing any page: `uv run --with markdownify --with beautifulsoup4 python scripts/generate-md-mirrors.py` |
-| `.github/workflows/validate-llms-txt.yml` | PR check: validates llms.txt structure, URL liveness, and drift from HTML changes |
+| `site/src/pages/*.astro` | Pages: `index`, `about`, `market-map`, `glossary`, `privacy`, `nobody-built-the-first-mile`, `compliance-should-just-work` (manifesto), `insights` (hub) + `insights/[...slug]` (articles) |
+| `site/src/content/pages/*.md` | Long-form prose for glossary / privacy / first-mile |
+| `site/src/content/articles/*.md` | Dated Insights articles (auto-listed by the hub) |
+| `site/src/data/market-map-entities.json` | Market-map periodic-table data (89 entities) |
+| `site/src/components/` | `Header.astro` (masthead + nav), `Footer.astro`, `ContactForm.astro` |
+| `site/src/layouts/BaseLayout.astro` | Wraps every page: head, meta, canonical, JSON-LD, PostHog, header/footer |
+| `site/public/` | Served static files: `llms.txt`, `robots.txt`, `AGENTS.md`, `_redirects` (301s old `.html` → clean URLs — **load-bearing for SEO**), favicons, logo, mark |
+| `site/scripts/generate-md-mirrors.py` | Post-build: regenerates `site/dist/*.md` mirrors + sitemaps. Runs inside `npm run build` (deps pinned in `site/scripts/requirements.txt`). |
+| `parity-baseline/*.md` | Mirror snapshots the CI parity oracle diffs against (repo root; **do not delete**) |
+| `.github/workflows/deploy.yml` | Builds `site/` + deploys `site/dist` to Cloudflare Pages on `site/**` pushes to `main` |
+| `.github/workflows/validate-llms-txt.yml` | PR check: validates `site/public/llms.txt` structure, URL liveness, and `.md` mirror parity |
 
 ## Do NOT Touch (during routine site edits)
 

@@ -74,3 +74,7 @@ NOT allowed: privacy "Last Updated" changes, heading-level changes, em dashes, r
 - [ ] DNS cutover per README checklist (GitHub Pages stays live until then).
 - [ ] Archive the retired PostHog experiment `eagle-ridge-homepage-hero-experiment` / flag `hero-variant` in the dashboard (no code references it).
 - [ ] Decide on `/discovery` re-add once the Tally form is built (spec: `eagle-ridge-methodology/clients/nereid-bio/discovery/tally-form-spec.md`).
+
+## Post-cutover cleanup (2026-06-17)
+
+The legacy root-HTML site (HTML pages, `.md` mirrors, sitemaps, `llms.txt`/`robots.txt`/`AGENTS.md`, `CNAME`, `.nojekyll`, root `scripts/generate-md-mirrors.py`, and stale `REBUILD-PROMPT*`/`pr-description.md`) was deleted now that the Astro site in `site/` has been live on Cloudflare Pages since the 2026-06-13 cutover. **Recover any of it from commit `92ffb7a` (the commit immediately before the deletion).** Live equivalents live under `site/public/` and `site/scripts/`; `parity-baseline/` was kept (CI parity oracle).

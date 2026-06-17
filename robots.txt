@@ -1,5 +1,0 @@
-User-agent: *
-Allow: /
-Disallow: /discovery.html
-
-Sitemap: https://eagleridge.io/sitemap.xml

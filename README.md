@@ -1,68 +1,60 @@
 # Eagle Ridge Advisory
 
-Technology consulting for portfolio companies and investment firms.
+GRC readiness for small-business CEOs — get prepared to pass CMMC, SOC 2, or
+ISO 27001 before you're assessed.
 
 ## Overview
 
-Eagle Ridge Advisory specializes in cybersecurity due diligence, compliance implementation, and go-to-market strategy for the PE and VC community. We help portfolio companies achieve enterprise and government readiness through technical assessments and compliance frameworks.
+Eagle Ridge Advisory takes founder-led teams through the full compliance
+readiness lifecycle — gap assessment → remediation → SSP → SPRS → evidence →
+continuous monitoring — so they're ready before a C3PAO or auditor shows up.
+Because a C3PAO cannot perform readiness *and* the assessment for the same
+client, Eagle Ridge is the upstream readiness partner, not a competitor to
+assessors.
 
-## Services
-
-### Cybersecurity Due Diligence
-Technical assessment and risk evaluation for portfolio companies. We identify gaps, quantify remediation costs, and build implementation roadmaps that align with deal timelines.
-
-### Compliance Implementation
-End-to-end support for:
-- ISO 27001
-- SOC 2 Type 2
-- CMMC
-- FedRAMP
-- NIST 800-53
-- GDPR
-
-### Go-to-Market Strategy
-Business development and market analysis for technology companies. We help portfolio companies identify opportunities, build sales infrastructure, and accelerate growth.
+Frameworks: CMMC / NIST 800-171, SOC 2, ISO 27001.
 
 ## Website
 
-This repository contains the static landing page for Eagle Ridge Advisory.
+The live site is **[eagleridge.io](https://eagleridge.io)**, built with **Astro**
+in [`site/`](site/) and hosted on **Cloudflare Pages**.
 
-**Live Site:** [eagleridge.io](https://eagleridge.io)
+### Tech stack
+- Astro (static site generation)
+- Cloudflare Pages (hosting; DNS cut over from GitHub Pages 2026-06-13)
+- A Python post-build step generates `.md` mirrors + sitemaps for LLM/agent
+  readability (`site/scripts/generate-md-mirrors.py`)
 
-### Tech Stack
-- HTML5
-- CSS3 (custom styles)
-- Static hosting via GitHub Pages
-
-### Local Development
-
-Open `index.html` directly in your browser, or run a local server:
+### Local development
 
 ```bash
-# Using Python
-python3 -m http.server 8000
-# Visit http://localhost:8000
+cd site
+npm install
+npm run dev      # local dev server
+npm run build    # astro build + .md mirror generation (output in site/dist)
 ```
 
-## Project Structure
+### Deployment
+
+Automated. Pushes to `main` that touch `site/**` trigger
+[`.github/workflows/deploy.yml`](.github/workflows/deploy.yml), which builds the
+Astro site and uploads `site/dist` to the `eagleridge` Cloudflare Pages project
+via `wrangler`. The Pages project is direct-upload (not git-connected), so the
+Action is what deploys. See [`CLAUDE.md`](CLAUDE.md) for the full deploy runbook
+and Cloudflare facts.
+
+## Project structure
 
 ```
 Eagle-Ridge/
-├── README.md                      # This file
-├── CLAUDE.md                      # Development context for Claude Code
-├── CNAME                          # Custom domain configuration
-├── index.html                     # Main landing page
-├── logo.png                       # Color-matched eagle logo
-└── Geometric Eagle Head Logo.png  # Original logo file
+├── site/                 # Astro source — the live site (pages, components, content)
+├── parity-baseline/      # .md mirror snapshots (CI parity oracle)
+├── docs/                 # session recaps, design briefs
+├── design-reference/     # brand kit
+├── CLAUDE.md             # deploy runbook + project context for Claude Code
+├── MIGRATION-NOTES.md    # Astro rebuild decision log
+└── README.md             # this file
 ```
-
-## Design
-
-The site uses a clean, professional design with:
-- **Color Palette:** Warm neutrals with `#3d2817` (dark brown) as primary brand color
-- **Typography:** System fonts for optimal performance and readability
-- **Layout:** Responsive grid system optimized for mobile and desktop
-- **Accessibility:** WCAG 2.1 compliant with semantic HTML and ARIA labels
 
 ## Contact
 
@@ -70,4 +62,4 @@ The site uses a clean, professional design with:
 
 ---
 
-© 2025 Eagle Ridge Advisory. All rights reserved.
+© 2026 Eagle Ridge Advisory. All rights reserved.
