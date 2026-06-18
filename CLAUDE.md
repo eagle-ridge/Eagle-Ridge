@@ -67,7 +67,7 @@ CLOUDFLARE_API_TOKEN="$CF_TOKEN" CLOUDFLARE_ACCOUNT_ID=702342b70e150343381e08298
 - **Anchor**: `id="contact-form"` for deep links
 
 ### Tally.so Discovery Form
-> ⚠️ **Not yet migrated to Astro.** The old `discovery.html` lived only in the legacy root site and was never ported to `site/`. `eagleridge.io/discovery` currently hits the Cloudflare catch-all (serves the homepage), so the intake form is **not live**. To restore it, add `site/src/pages/discovery.astro` with the Tally embed below. Recover the old markup from git history (`git show <pre-2026-06-18>:discovery.html`). Tracked in a GitHub issue.
+> ⚠️ **Not yet migrated to Astro.** The old `discovery.html` lived only in the legacy root site and was never ported to `site/`. `eagleridge.io/discovery` currently hits the Cloudflare catch-all (serves the homepage), so the intake form is **not live**. To restore it, add `site/src/pages/discovery.astro` with the Tally embed below. Recover the old markup from git history (`git show <pre-2026-06-18>:discovery.html`). Tracked in issue #42.
 - **Page (intended):** `eagleridge.io/discovery` — unlisted (noindex, nofollow), shared via direct URL with clients
 - **Form:** Embedded via Tally iframe with `transparentBackground=1&dynamicHeight=1` params
 - **Form spec:** `eagle-ridge-methodology/clients/nereid-bio/discovery/tally-form-spec.md`
