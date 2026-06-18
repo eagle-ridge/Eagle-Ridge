@@ -23,8 +23,12 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         call, so you don't have to fill out a wall of forms.
       </p>
       <!-- ponytail: Cal.com inline embed (vanilla snippet) — self-serve booking
-           with no API/backend. Cal collects name/email and sends the invite. -->
-      <div id="cal-booking" class="cal-embed"></div>
+           with no API/backend. Cal collects name/email and sends the invite.
+           The fallback link shows until the embed reports linkReady (or stays
+           if the third-party script never loads). -->
+      <div id="cal-booking" class="cal-embed">
+        <p id="cal-fallback">Loading available times… <a href="https://cal.com/chris-mcconnell/eagle50">Book here if this doesn't load.</a></p>
+      </div>
 
       <hr class="discovery-rule">
 
@@ -53,9 +57,14 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 <style>
     .cal-embed {
         max-width: 760px;
+        /* loading floor only; the Cal embed self-sizes, so no overflow clip
+           (a clip would nest a scrollbar inside the iframe's own on mobile). */
         min-height: 600px;
         margin-bottom: 48px;
-        overflow: auto;
+    }
+    #cal-fallback {
+        color: var(--er-ink-soft);
+        padding: 16px 0;
     }
     .discovery-rule {
         max-width: 560px;
@@ -117,10 +126,17 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         calLink: "chris-mcconnell/eagle50",
     });
     Cal.ns.eagle50("ui", { hideEventTypeDetails: false, layout: "month_view" });
+    // Hide the loading/fallback link once the embed is actually up. If the
+    // third-party script never loads, the fallback stays and offers a direct link.
+    Cal.ns.eagle50("on", {
+        action: "linkReady",
+        callback: function () { var f = document.getElementById('cal-fallback'); if (f) f.style.display = 'none'; },
+    });
     // ponytail: forward Cal's booking event to PostHog so we can measure conversion.
+    // sendBeacon so the event survives any navigation Cal triggers after booking.
     Cal.ns.eagle50("on", {
         action: "bookingSuccessful",
-        callback: function () { try { posthog.capture('discovery_call_booked'); } catch (e) {} },
+        callback: function () { try { posthog.capture('discovery_call_booked', {}, { transport: 'sendBeacon' }); } catch (e) {} },
     });
 </script>
 
