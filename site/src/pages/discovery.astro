@@ -1,0 +1,129 @@
+---
+// Unlisted discovery intake page. Minimal first-touch Web3Forms capture
+// (name/email/company + an optional one-liner). The deeper intake data is
+// gathered later by a separate follow-up/enrichment flow, not here.
+// Submit handler is copied from ContactForm.astro and decoupled via its own
+// .discovery-form selector — two Web3Forms surfaces don't justify a shared
+// component yet (revisit at a third).
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+  title="Start your discovery | Eagle Ridge Advisory"
+  description="Tell us a little about your company and what you're pursuing. We'll take it from there before your call."
+  path="/discovery"
+  noindex
+>
+  <section class="section">
+    <div class="container">
+      <h1>Let's get you ready.</h1>
+      <p>
+        A few details to start — name, email, and your company. We do the
+        homework before your call, so you don't have to fill out a wall of
+        forms.
+      </p>
+      <form action="https://api.web3forms.com/submit" method="POST" class="discovery-form">
+        <input type="hidden" name="access_key" value="3e6cb410-9c3a-4af7-9a6a-dbf012e8d8a1">
+        <input type="hidden" name="subject" value="New Discovery Intake — Eagle Ridge">
+        <input type="hidden" name="from_name" value="Eagle Ridge Discovery">
+        <div style="display:none"><input type="checkbox" name="botcheck"></div>
+        <label for="name">Name</label>
+        <input type="text" id="name" name="name" required aria-required="true" autocomplete="name">
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" required aria-required="true" autocomplete="email">
+        <label for="company">Company</label>
+        <input type="text" id="company" name="company" required aria-required="true" autocomplete="organization">
+        <label for="pursuing">What are you pursuing? <span class="optional">(optional)</span></label>
+        <input type="text" id="pursuing" name="pursuing" autocomplete="off" placeholder="e.g. CMMC Level 2, SOC 2, a specific contract">
+        <button type="submit" class="btn">Start discovery</button>
+        <p id="form-status" role="alert" aria-live="polite"></p>
+      </form>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+    .discovery-form {
+        max-width: 560px;
+        text-align: left;
+    }
+    .discovery-form label {
+        display: block;
+        font-family: var(--er-font-mono);
+        font-size: 12px;
+        font-weight: 500;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        margin-bottom: 6px;
+        /* --er-mute fails WCAG 4.5:1 at label sizes */
+        color: var(--er-ink-soft);
+    }
+    .discovery-form label .optional {
+        text-transform: none;
+        letter-spacing: normal;
+        color: var(--er-mute);
+    }
+    .discovery-form input {
+        width: 100%;
+        padding: 12px 16px;
+        margin-bottom: 20px;
+        border: var(--er-border);
+        border-radius: var(--er-radius-md);
+        background: var(--er-paper);
+        color: var(--er-ink);
+        font-size: 16px;
+        font-family: var(--er-font-sans);
+    }
+    .discovery-form input:focus {
+        outline: 2px solid var(--er-accent);
+        outline-offset: 1px;
+        border-color: var(--er-accent);
+    }
+    #form-status {
+        margin-top: 16px;
+        font-weight: 500;
+    }
+    #form-status.ok { color: var(--status-ok); }
+    #form-status.err { color: var(--status-err); }
+</style>
+
+<script is:inline>
+    (function() {
+        try { posthog.capture('discovery_page_viewed'); } catch (e) {}
+
+        // Discovery form: submit via fetch to keep user on page.
+        var form = document.querySelector('.discovery-form');
+        if (form) {
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+                var btn = form.querySelector('button[type="submit"]');
+                var status = document.getElementById('form-status');
+                btn.disabled = true;
+                btn.textContent = 'Sending...';
+                status.textContent = '';
+                status.className = '';
+
+                fetch(form.action, { method: 'POST', body: new FormData(form) })
+                    .then(function(res) { return res.json(); })
+                    .then(function(data) {
+                        if (data.success) {
+                            status.textContent = 'Thanks — we’ll be in touch before your call.';
+                            status.className = 'ok';
+                            form.reset();
+                        } else {
+                            status.textContent = 'Something went wrong. Please email contact@eagleridge.io.';
+                            status.className = 'err';
+                        }
+                    })
+                    .catch(function() {
+                        status.textContent = 'Network error. Please email contact@eagleridge.io.';
+                        status.className = 'err';
+                    })
+                    .finally(function() {
+                        btn.disabled = false;
+                        btn.textContent = 'Start discovery';
+                    });
+            });
+        }
+    })();
+</script>

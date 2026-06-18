@@ -66,15 +66,25 @@ CLOUDFLARE_API_TOKEN="$CF_TOKEN" CLOUDFLARE_ACCOUNT_ID=702342b70e150343381e08298
 - **Spam prevention**: Hidden honeypot checkbox (`botcheck`)
 - **Anchor**: `id="contact-form"` for deep links
 
-### Tally.so Discovery Form
-> ⚠️ **Not yet migrated to Astro.** The old `discovery.html` lived only in the legacy root site and was never ported to `site/`. `eagleridge.io/discovery` currently hits the Cloudflare catch-all (serves the homepage), so the intake form is **not live**. To restore it, add `site/src/pages/discovery.astro` with the Tally embed below. Recover the old markup from git history (`git show <pre-2026-06-18>:discovery.html`). Tracked in issue #42.
-- **Page (intended):** `eagleridge.io/discovery` — unlisted (noindex, nofollow), shared via direct URL with clients
-- **Form:** Embedded via Tally iframe with `transparentBackground=1&dynamicHeight=1` params
-- **Form spec:** `eagle-ridge-methodology/clients/nereid-bio/discovery/tally-form-spec.md`
-- **Notion integration:** Tally auto-creates entries in "SSP Intake Responses" database on submission
-- **Tracking event:** `discovery_page_viewed`
-- **To update form:** Edit in Tally UI (tally.so dashboard). The embed code auto-reflects changes.
-- **Free tier note:** "Made with Tally" badge appears. Removable at €25/mo (Tally Pro).
+### Discovery Intake Form (Web3Forms)
+`site/src/pages/discovery.astro` — a minimal first-touch intake landing page. The
+Feb-2026 Tally plan was reversed 2026-06-18 to Web3Forms (same service as the
+contact form); the Tally embed was never built.
+- **Page:** `eagleridge.io/discovery` — unlisted (`noindex, nofollow` via the
+  `BaseLayout` `noindex` prop), shared via direct URL with clients. Not in any nav.
+  Unlisted by convention only — the mirror/sitemap generator's `PAGES` allowlist
+  doesn't include `discovery`, so no `.md` mirror and no sitemap row.
+- **Form:** 3 required fields (name, email, company) + 1 optional ("what are you
+  pursuing?"). Deeper intake is gathered later by a separate enrichment flow, not
+  here. Submits via `fetch()` to `https://api.web3forms.com/submit`, honeypot
+  `botcheck`, stays on page.
+- **Access key:** `3e6cb410-9c3a-4af7-9a6a-dbf012e8d8a1` (shared with the contact
+  form). **Hidden `subject`: "New Discovery Intake — Eagle Ridge"** so intake
+  leads are distinguishable from contact leads in the inbox.
+- **Shared quota:** both forms share the Web3Forms free-tier 250 submissions/month
+  budget. A spam burst on the (leakable) discovery URL can exhaust it and silently
+  drop real leads. Turnstile follow-up tracked separately.
+- **Tracking event:** `discovery_page_viewed` (inline PostHog capture).
 
 ## Audience
 
