@@ -167,7 +167,7 @@ a { color: var(--er-accent); }
 .resources-menu {
   position: absolute;
   top: calc(100% - 4px);
-  right: 0;
+  left: 0;
   z-index: 20;
   display: flex;
   flex-direction: column;
