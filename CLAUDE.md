@@ -66,17 +66,23 @@ CLOUDFLARE_API_TOKEN="$CF_TOKEN" CLOUDFLARE_ACCOUNT_ID=702342b70e150343381e08298
 - **Spam prevention**: Hidden honeypot checkbox (`botcheck`)
 - **Anchor**: `id="contact-form"` for deep links
 
-### Discovery Intake Form (Web3Forms)
-`site/src/pages/discovery.astro` — a minimal first-touch intake landing page. The
-Feb-2026 Tally plan was reversed 2026-06-18 to Web3Forms (same service as the
-contact form); the Tally embed was never built.
+### Discovery Page (Cal.com booking + Web3Forms fallback)
+`site/src/pages/discovery.astro` — an unlisted lead landing page. **Primary action:
+self-serve booking via a Cal.com inline embed; fallback below: a minimal Web3Forms
+intake** for leads not ready to pick a time. The Feb-2026 Tally plan was reversed
+2026-06-18 to Web3Forms (same service as the contact form); the Tally embed was
+never built.
 - **Page:** `eagleridge.io/discovery` — unlisted (`noindex, nofollow` via the
   `BaseLayout` `noindex` prop), shared via direct URL with clients. Not in any nav.
   Unlisted by convention only — the mirror/sitemap generator's `PAGES` allowlist
   doesn't include `discovery`, so no `.md` mirror and no sitemap row.
-- **Form:** 3 required fields (name, email, company) + 1 optional ("what are you
-  pursuing?"). Deeper intake is gathered later by a separate enrichment flow, not
-  here. Submits via `fetch()` to `https://api.web3forms.com/submit`, honeypot
+- **Booking (primary):** Cal.com inline embed (official vanilla snippet, no API/key
+  in page), event `chris-mcconnell/eagle50` (50-min call). Cal collects name/email
+  and sends the invite. A `bookingSuccessful` callback fires a `discovery_call_booked`
+  PostHog event. To change the call, edit the `calLink` in `discovery.astro`.
+- **Form (fallback):** 3 required fields (name, email, company) + 1 optional ("what
+  are you pursuing?"). Deeper intake is gathered later by a separate enrichment flow,
+  not here. Submits via `fetch()` to `https://api.web3forms.com/submit`, honeypot
   `botcheck`, stays on page.
 - **Access key:** `3e6cb410-9c3a-4af7-9a6a-dbf012e8d8a1` (shared with the contact
   form). **Hidden `subject`: "New Discovery Intake — Eagle Ridge"** so intake
