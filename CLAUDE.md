@@ -83,7 +83,7 @@ contact form); the Tally embed was never built.
   leads are distinguishable from contact leads in the inbox.
 - **Shared quota:** both forms share the Web3Forms free-tier 250 submissions/month
   budget. A spam burst on the (leakable) discovery URL can exhaust it and silently
-  drop real leads. Turnstile follow-up tracked separately.
+  drop real leads. Cloudflare Turnstile follow-up: issue #46.
 - **Tracking event:** `discovery_page_viewed` (inline PostHog capture).
 
 ## Audience
