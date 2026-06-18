@@ -25,7 +25,7 @@ CLOUDFLARE_API_TOKEN="$CF_TOKEN" CLOUDFLARE_ACCOUNT_ID=702342b70e150343381e08298
 - Account `702342b70e150343381e0829834cbcc7`; zone `eagleridge.io` = `064d7b70f67f32d15f2afbeb10a915f6`.
 - API token: `op://Developer Vault/Dash Cloudflare API Credential/credential` (Zone DNS edit + Pages edit). The older `Cloudflare Worker API` item is Workers-scoped and will NOT work for DNS/Pages.
 - DNS: apex `eagleridge.io` + `www` are proxied CNAMEs → `eagleridge-7z4.pages.dev`. Custom domains are registered on the Pages project; a `deactivated` status means DNS isn't pointing at the project.
-- Legacy GitHub Pages (root HTML / `CNAME` / `.nojekyll`) is retired and no longer served — safe to archive in a follow-up; left in place for now.
+- Legacy GitHub Pages (root HTML / `CNAME` / `.nojekyll`) is retired and no longer served; the root files were removed 2026-06-18 (see intro). Recover from git history if ever needed.
 
 ## Files & structure (all under `site/`)
 
@@ -35,7 +35,7 @@ CLOUDFLARE_API_TOKEN="$CF_TOKEN" CLOUDFLARE_ACCOUNT_ID=702342b70e150343381e08298
 | `site/src/layouts/BaseLayout.astro` | Shared `<head>` (meta, canonical, favicon links, PostHog snippet) + page chrome |
 | `site/src/components/` | `Header.astro` (nav incl. Resources dropdown), `Footer.astro`, `ContactForm.astro` |
 | `site/src/content/` | Content collections: `pages` + `articles` (Insights hub) |
-| `site/src/styles/global.css` | Global styles (brand palette, nav/dropdown CSS) |
+| `site/src/styles/` | `tokens.css` (brand `--er-*` design tokens) + `global.css` (chrome, nav/dropdown, layout) |
 | `site/public/` | Static passthrough: `favicon.svg`/`favicon.ico` (eagle mark), `logo.png`, `eagle-ridge-mark.png`, `AGENTS.md`, `robots.txt`, `_redirects` (old `.html` → clean URLs), `_headers` |
 | `site/public/llms.txt` | LLM-readable site summary ([llmstxt.org](https://llmstxt.org/) standard) — update when pages/services change |
 | `site/scripts/generate-md-mirrors.py` | Post-build: emits per-page `.md` mirrors + sitemaps into `dist/`. Runs as part of `npm run build`; locally needs `uv run --with markdownify --with beautifulsoup4 python scripts/generate-md-mirrors.py` from `site/` |
