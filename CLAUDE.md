@@ -1,6 +1,6 @@
 # Eagle Ridge Advisory — eagleridge.io
 
-**Astro site in `site/`, hosted on Cloudflare Pages** (project `eagleridge` → `eagleridge-7z4.pages.dev`). DNS cut over from GitHub Pages on 2026-06-13. The pages/mirrors/tables below describe the **legacy root HTML** site, kept for parity/history; the live site is built from `site/src/`.
+**Astro site in `site/`, hosted on Cloudflare Pages** (project `eagleridge` → `eagleridge-7z4.pages.dev`). DNS cut over from GitHub Pages on 2026-06-13. The live site is built **entirely** from `site/src/` — `site/` is the only source of truth. The legacy parallel root-HTML site (root `*.html`, `*.md` mirrors, `CNAME`, `.nojekyll`, root `scripts/`, root `AGENTS.md`/`llms.txt`/`robots.txt`/`sitemap.*`) was removed 2026-06-18; recover from git history if ever needed.
 
 ## Deploy — automated via GitHub Actions
 
@@ -25,29 +25,23 @@ CLOUDFLARE_API_TOKEN="$CF_TOKEN" CLOUDFLARE_ACCOUNT_ID=702342b70e150343381e08298
 - Account `702342b70e150343381e0829834cbcc7`; zone `eagleridge.io` = `064d7b70f67f32d15f2afbeb10a915f6`.
 - API token: `op://Developer Vault/Dash Cloudflare API Credential/credential` (Zone DNS edit + Pages edit). The older `Cloudflare Worker API` item is Workers-scoped and will NOT work for DNS/Pages.
 - DNS: apex `eagleridge.io` + `www` are proxied CNAMEs → `eagleridge-7z4.pages.dev`. Custom domains are registered on the Pages project; a `deactivated` status means DNS isn't pointing at the project.
-- Legacy GitHub Pages (root HTML / `CNAME` / `.nojekyll`) is retired and no longer served — safe to archive in a follow-up; left in place for now.
+- Legacy GitHub Pages (root HTML / `CNAME` / `.nojekyll`) is retired and no longer served; the root files were removed 2026-06-18 (see intro). Recover from git history if ever needed.
 
-## Files (legacy root HTML — historical)
+## Files & structure (all under `site/`)
 
-| File | Purpose |
+| Path | Purpose |
 |------|---------|
-| `index.html` | Homepage — hero, services (GRC readiness), frameworks, social proof, contact form |
-| `about.html` | About page — GRC readiness positioning, clients (small-business CEOs), approach |
-| `discovery.html` | SSP intake form — Tally.so embed, unlisted (noindex), shared via direct URL |
-| `market-map.html` | Public interactive market map of the CMMC services landscape (89 entities, periodic-table layout). Linked from all page footers. |
-| `nobody-built-the-first-mile.html` | Long-form argument behind the market map. Buyer-first prose, cream/brown palette matching about.html. CTA target from market-map. Linked from all page footers. |
-| `privacy.html` | Privacy policy — includes PostHog tracking disclosure |
-| `glossary.html` | CMMC / NIST 800-171 terminology page (DefinedTermSet JSON-LD). Linked from all footers. |
-| `logo.png` | Logo (also: `Geometric Eagle Head Logo.png`) |
-| `CNAME` | Custom domain: `eagleridge.io` |
-| `llms.txt` | LLM-readable site summary ([llmstxt.org](https://llmstxt.org/) standard). Page links point to `.md` mirrors — update when pages/services change |
-| `AGENTS.md` | Guidance for AI agents consuming the site (markdown mirrors, sitemaps, JSON-LD) |
-| `robots.txt` | Crawl rules + sitemap pointer; disallows `/discovery.html` |
-| `sitemap.xml`, `sitemap.md` | Generated sitemaps (see generator below) |
-| `*.md` (per page) | Generated Markdown mirrors of each HTML page; declared via `<link rel="alternate" type="text/markdown">` |
-| `.nojekyll` | Disables Jekyll so `.md` mirrors serve as raw static files |
-| `scripts/generate-md-mirrors.py` | Regenerates `.md` mirrors + sitemaps from HTML. Run after editing any page: `uv run --with markdownify --with beautifulsoup4 python scripts/generate-md-mirrors.py` |
-| `.github/workflows/validate-llms-txt.yml` | PR check: validates llms.txt structure, URL liveness, and drift from HTML changes |
+| `site/src/pages/*.astro` | Routes. `index`, `about`, `market-map`, `nobody-built-the-first-mile` (First Mile), `compliance-should-just-work` (Manifesto), `glossary`, `privacy`, `insights` (hub) + `insights/[...slug]` |
+| `site/src/layouts/BaseLayout.astro` | Shared `<head>` (meta, canonical, favicon links, PostHog snippet) + page chrome |
+| `site/src/components/` | `Header.astro` (nav incl. Resources dropdown), `Footer.astro`, `ContactForm.astro` |
+| `site/src/content/` | Content collections: `pages` + `articles` (Insights hub) |
+| `site/src/styles/` | `tokens.css` (brand `--er-*` design tokens) + `global.css` (chrome, nav/dropdown, layout) |
+| `site/public/` | Static passthrough: `favicon.svg`/`favicon.ico` (eagle mark), `logo.png`, `eagle-ridge-mark.png`, `AGENTS.md`, `robots.txt`, `_redirects` (old `.html` → clean URLs), `_headers` |
+| `site/public/llms.txt` | LLM-readable site summary ([llmstxt.org](https://llmstxt.org/) standard) — update when pages/services change |
+| `site/scripts/generate-md-mirrors.py` | Post-build: emits per-page `.md` mirrors + sitemaps into `dist/`. Runs as part of `npm run build`; locally needs `uv run --with markdownify --with beautifulsoup4 python scripts/generate-md-mirrors.py` from `site/` |
+| `parity-baseline/*.md` (repo root) | **Live** — CI parity oracle. Every built `.md` mirror must byte-match its baseline (after stripping nav/footer/chrome). Do not move. |
+| `.github/workflows/deploy.yml` | Builds `site/` + `wrangler pages deploy` on push to `main` touching `site/**` |
+| `.github/workflows/validate-llms-txt.yml` | PR check: llms.txt structure, URL liveness, and `.md`-mirror parity vs `parity-baseline/` |
 
 ## Do NOT Touch (during routine site edits)
 
@@ -72,8 +66,9 @@ CLOUDFLARE_API_TOKEN="$CF_TOKEN" CLOUDFLARE_ACCOUNT_ID=702342b70e150343381e08298
 - **Spam prevention**: Hidden honeypot checkbox (`botcheck`)
 - **Anchor**: `id="contact-form"` for deep links
 
-### Tally.so Discovery Form (discovery.html)
-- **Page:** `eagleridge.io/discovery` — unlisted (noindex, nofollow), shared via direct URL with clients
+### Tally.so Discovery Form
+> ⚠️ **Not yet migrated to Astro.** The old `discovery.html` lived only in the legacy root site and was never ported to `site/`. `eagleridge.io/discovery` currently hits the Cloudflare catch-all (serves the homepage), so the intake form is **not live**. To restore it, add `site/src/pages/discovery.astro` with the Tally embed below. Recover the old markup from git history (`git show <pre-2026-06-18>:discovery.html`). Tracked in issue #42.
+- **Page (intended):** `eagleridge.io/discovery` — unlisted (noindex, nofollow), shared via direct URL with clients
 - **Form:** Embedded via Tally iframe with `transparentBackground=1&dynamicHeight=1` params
 - **Form spec:** `eagle-ridge-methodology/clients/nereid-bio/discovery/tally-form-spec.md`
 - **Notion integration:** Tally auto-creates entries in "SSP Intake Responses" database on submission
@@ -100,6 +95,8 @@ reintroduce it without direction.
 ## Dev Workflow
 
 ```bash
-python3 -m http.server 8000   # Local testing
-# Test form: Submit manually in browser (Web3Forms blocks server-side requests)
+npm install --prefix site          # first time
+npm run dev --prefix site          # local dev server (Astro, hot reload)
+npm run build --prefix site        # astro build + md-mirror/sitemap generation
+# Test contact form: submit manually in browser (Web3Forms blocks server-side requests)
 ```
