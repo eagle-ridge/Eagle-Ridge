@@ -137,6 +137,30 @@ a { color: var(--er-accent); }
   color: var(--er-ink-soft);
 }
 
+/* ---- "Book a call" CTA: filled pill, distinct from the text nav links.
+   Scoped under .site-nav/.mobile-nav so it outranks the generic `a` rules. ---- */
+.site-nav .nav-cta,
+.mobile-nav .nav-cta {
+  color: var(--er-bg);
+  background: var(--er-accent);
+  border: 1px solid var(--er-accent);
+  border-radius: var(--er-radius-md);
+  padding: 8px 16px;
+  text-decoration: none;
+}
+.site-nav .nav-cta:hover,
+.mobile-nav .nav-cta:hover {
+  color: var(--er-bg);
+  background: var(--er-ink);
+  border-color: var(--er-ink);
+}
+.site-nav .nav-cta:focus-visible,
+.mobile-nav .nav-cta:focus-visible {
+  outline: 2px solid var(--er-ink);
+  outline-offset: 3px;
+}
+.mobile-nav .nav-cta { align-self: flex-start; margin-top: 8px; }
+
 /* ---- desktop "Resources" disclosure ---- */
 .nav-resources-wrap { position: relative; display: inline-flex; }
 .nav-resources {
