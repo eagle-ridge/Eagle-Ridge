@@ -1,6 +1,6 @@
 <!-- Markdown mirror of https://eagleridge.io/cmmc-compliance-consultant -->
 
-# CMMC Compliance Consultant for Small Defense Contractors | Eagle Ridge Advisory
+# CMMC Compliance Consultant for Small Defense Contractors
 
 # CMMC compliance consultant for small defense contractors
 

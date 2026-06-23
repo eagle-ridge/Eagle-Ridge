@@ -1,6 +1,6 @@
 <!-- Markdown mirror of https://eagleridge.io/cmmc-readiness-checklist -->
 
-# CMMC Readiness Checklist for Small Defense Contractors | Eagle Ridge Advisory
+# CMMC Readiness Checklist for Small Defense Contractors
 
 # CMMC readiness checklist
 
@@ -8,7 +8,8 @@ Use this to gauge where you stand before a formal gap assessment. It is
 organized the way we actually run readiness — scope first, then the
 controls, then the paperwork an assessor expects, then how to stay ready.
 It is a starting point, not a substitute for assessing every control that
-applies to you.
+applies to you. When you are ready for that, see how our
+[CMMC readiness consulting](/cmmc-compliance-consultant) works.
 
 ## 1. Scope — know what you are protecting
 
