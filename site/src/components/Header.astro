@@ -11,13 +11,16 @@ const { currentPath = '' } = Astro.props;
 // article routes (/insights/<slug>). Contact is an in-page anchor, never current.
 const isAbout = currentPath === '/about';
 const isInsights = currentPath === '/insights' || currentPath.startsWith('/insights/');
+const isCmmc = currentPath === '/cmmc-compliance-consultant';
 const primary = [
+	{ href: '/cmmc-compliance-consultant', label: 'CMMC', current: isCmmc },
 	{ href: '/about', label: 'About', current: isAbout },
 	{ href: '/insights', label: 'Insights', current: isInsights },
 ];
 // Reference cluster, grouped under a "Resources" disclosure on desktop and a
 // stacked group on mobile. Exact hrefs → exact-match active state.
 const resources = [
+	{ href: '/cmmc-readiness-checklist', label: 'Readiness Checklist' },
 	{ href: '/market-map', label: 'Market Map' },
 	{ href: '/glossary', label: 'Glossary' },
 	{ href: '/nobody-built-the-first-mile', label: 'First Mile' },

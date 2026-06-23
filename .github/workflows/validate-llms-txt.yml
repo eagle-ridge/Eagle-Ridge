@@ -69,6 +69,12 @@ jobs:
           for html_file in dist/*.html; do
             name=$(basename "$html_file")
             stem="${name%.html}"
+            # Unlisted pages (noindex) are deliberately excluded from llms.txt,
+            # the sitemap, and the mirror PAGES list (e.g. /discovery). Don't
+            # flag them as missing references.
+            if grep -q 'name="robots" content="noindex' "$html_file"; then
+              continue
+            fi
             if grep -qE "(^|/)${stem}\.(md|html)([\")# ]|$)|eagleridge\.io/${stem}([\")# )]|$)" public/llms.txt; then
               continue
             fi

@@ -5,6 +5,8 @@
 ## Pages
 
 - [Homepage](https://eagleridge.io/index.md): Services overview, compliance frameworks, and contact form
+- [CMMC Compliance Consultant](https://eagleridge.io/cmmc-compliance-consultant.md): CMMC readiness for small defense contractors — the levels explained, our 5-step process, deliverables (SSP, POA&M, SPRS score), and an FAQ on CMMC, NIST 800-171, timeline, and cost
+- [CMMC Readiness Checklist](https://eagleridge.io/cmmc-readiness-checklist.md): A plain-language, phase-ordered checklist (scope → NIST 800-171 controls → documentation → continuous monitoring) for small DIB contractors to see where they stand before a formal gap assessment
 - [About](https://eagleridge.io/about.md): GRC readiness positioning, who we serve, and consulting approach
 - [Insights](https://eagleridge.io/insights.md): Articles on CMMC and compliance readiness for small-business contractors — new thinking on getting ready before you're assessed
 - [Market Map](https://eagleridge.io/market-map.md): Eagle Ridge's view of the CMMC services market — 89 firms and platforms mapped by category, with the 0→1 readiness gap for DIB SMBs called out

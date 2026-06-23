@@ -35,6 +35,16 @@ DEFAULT_TITLE = "Eagle Ridge Advisory"
 # (dist html filename, public path, sitemap label). Order = sitemap order.
 PAGES = [
     ("index.html", "/", "Homepage"),
+    (
+        "cmmc-compliance-consultant.html",
+        "/cmmc-compliance-consultant",
+        "CMMC Compliance Consultant",
+    ),
+    (
+        "cmmc-readiness-checklist.html",
+        "/cmmc-readiness-checklist",
+        "CMMC Readiness Checklist",
+    ),
     ("about.html", "/about", "About"),
     ("insights.html", "/insights", "Insights"),
     ("market-map.html", "/market-map", "Market Map"),

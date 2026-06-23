@@ -1,0 +1,104 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const title = 'CMMC Readiness Checklist for Small Defense Contractors';
+const description =
+  'A CMMC readiness checklist for small defense contractors: scope, the NIST 800-171 controls, documentation, and how to stay ready before a gap assessment.';
+---
+
+<BaseLayout {title} {description} path="/cmmc-readiness-checklist">
+  <div class="prose container">
+    <h1>CMMC readiness checklist</h1>
+    <p class="lede-text">
+      Use this to gauge where you stand before a formal gap assessment. It is
+      organized the way we actually run readiness — scope first, then the
+      controls, then the paperwork an assessor expects, then how to stay ready.
+      It is a starting point, not a substitute for assessing every control that
+      applies to you. When you are ready for that, see how our
+      <a href="/cmmc-compliance-consultant">CMMC readiness consulting</a> works.
+    </p>
+
+    <h2>1. Scope — know what you are protecting</h2>
+    <ul class="checklist">
+      <li>Identify whether you handle Federal Contract Information (FCI), Controlled Unclassified Information (CUI), or both.</li>
+      <li>Map where that information lives — servers, cloud apps, email, laptops, and any third parties who touch it.</li>
+      <li>Draw your assessment boundary: what is in scope, and what you can carve out.</li>
+      <li>Confirm the CMMC level your contracts actually require (Level 1, 2, or 3).</li>
+    </ul>
+
+    <h2>2. Foundational safeguards (Level 1)</h2>
+    <ul class="checklist">
+      <li>Every user and device is uniquely identified and authenticated.</li>
+      <li>Access is limited to the people and systems that need it (least privilege).</li>
+      <li>Antivirus / endpoint protection is deployed and kept current.</li>
+      <li>You have a routine way to apply security patches and updates.</li>
+      <li>Physical access to systems and media is controlled.</li>
+    </ul>
+
+    <h2>3. The 110 controls (Level 2 / NIST 800-171)</h2>
+    <p>Level 2 means assessing all 110 NIST 800-171 controls across 14 families. The high-value areas to check first:</p>
+    <ul class="checklist">
+      <li>Account management, least privilege, and automatic session lock are in place.</li>
+      <li>Multi-factor authentication is enforced for remote and privileged access.</li>
+      <li>Security events are logged — and the logs are actually reviewed, not just collected.</li>
+      <li>CUI is encrypted at rest and in transit with FIPS-validated cryptography.</li>
+      <li>Removable media and mobile devices are controlled or restricted.</li>
+      <li>You have an incident-response plan, and you have tested it.</li>
+      <li>Security awareness training is delivered and tracked.</li>
+      <li>Configuration baselines exist and changes are managed.</li>
+      <li>Vulnerabilities are scanned for and remediated on a schedule.</li>
+    </ul>
+
+    <h2>4. Documentation assessors expect</h2>
+    <ul class="checklist">
+      <li>A System Security Plan (SSP) that is written, current, and matches reality.</li>
+      <li>A Plan of Action &amp; Milestones (POA&amp;M) for every unmet control, with owners and dates.</li>
+      <li>An evidence inventory mapped to the controls it supports.</li>
+      <li>Your SPRS score calculated and submitted in the DoD system.</li>
+    </ul>
+
+    <h2>5. Stay ready — continuous monitoring</h2>
+    <ul class="checklist">
+      <li>Control reviews are scheduled on a recurring basis, not one-and-done.</li>
+      <li>Logs and alerts are reviewed by a named person.</li>
+      <li>Your change process keeps the SSP current as systems evolve.</li>
+      <li>You have a plan for annual affirmation and reassessment.</li>
+    </ul>
+
+    <div class="cta-box">
+      <p>Checked some boxes and not others? That gap is exactly what we close.</p>
+      <a class="cta-pill" href="https://cal.com/chris-mcconnell/eagle50" target="_blank" rel="noopener" data-cta="book-call" data-cta-loc="checklist-footer">Book a free readiness call</a>
+    </div>
+  </div>
+</BaseLayout>
+
+<style>
+  .checklist {
+    list-style: none;
+    margin: var(--er-space-2) 0 var(--er-space-4);
+    padding: 0;
+  }
+  .checklist li {
+    position: relative;
+    padding-left: 1.9rem;
+    margin-bottom: var(--er-space-2);
+    line-height: var(--er-leading-body);
+  }
+  .checklist li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0.2em;
+    width: 1.05rem;
+    height: 1.05rem;
+    border: 1.5px solid var(--er-accent);
+    border-radius: 3px;
+  }
+  .cta-box {
+    text-align: center;
+  }
+  .cta-box p {
+    color: var(--er-bg);
+    margin: 0 0 var(--er-space-2);
+  }
+</style>

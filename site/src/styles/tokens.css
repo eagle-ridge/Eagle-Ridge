@@ -13,7 +13,7 @@
   --er-paper:     #FAF7F0;  /* raised surfaces, cards            */
   --er-ink:       #1A1614;  /* primary text, headlines           */
   --er-ink-soft:  #44372F;  /* body copy, secondary text         */
-  --er-mute:      #8B7D6E;  /* captions, labels, meta            */
+  --er-mute:      #756857;  /* captions, labels, meta — ~4.8:1 on --er-bg (WCAG AA) */
   --er-rule:      #D9D0BF;  /* hairlines, borders, dividers      */
   --er-accent:    #4A2F22;  /* deep umber — brand primary        */
   --er-gold:      #B08A4E;  /* gold — sparingly, for emphasis    */

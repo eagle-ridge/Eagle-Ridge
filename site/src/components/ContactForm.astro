@@ -14,7 +14,8 @@
     <input type="email" id="email" name="email" required aria-required="true" autocomplete="email">
     <label for="message">Message</label>
     <textarea id="message" name="message" required aria-required="true"></textarea>
-    <button type="submit" class="btn">Send Message</button>
+    <button type="submit" class="btn">See where you stand</button>
+    <p class="form-note">We'll reply within one business day with a short, no-obligation read on where you stand and what readiness would take.</p>
     <p id="form-status" role="alert" aria-live="polite"></p>
 </form>
 
@@ -56,6 +57,12 @@
         min-height: 120px;
         resize: vertical;
     }
+    .form-note {
+        margin: 14px 0 0;
+        font-size: var(--er-text-small);
+        line-height: 1.5;
+        color: var(--er-ink-soft);
+    }
     #form-status {
         margin-top: 16px;
         font-weight: 500;
@@ -96,7 +103,7 @@
                     })
                     .finally(function() {
                         btn.disabled = false;
-                        btn.textContent = 'Send Message';
+                        btn.textContent = 'See where you stand';
                     });
             });
         }

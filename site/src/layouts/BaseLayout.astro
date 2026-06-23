@@ -65,5 +65,20 @@ const mirror = SITE + (path === '/' ? '/index.md' : `${path}.md`);
         <slot />
     </main>
     <Footer />
+    <script is:inline>
+        // CTA click tracking for PostHog funnels. Tags any [data-cta] element
+        // (e.g. the "Book a call" buttons) with a `cta_click` event. No-op when
+        // PostHog isn't loaded. Strip-safe: lives outside <main>, so the .md
+        // mirror generator drops it.
+        document.addEventListener('click', function (e) {
+            var el = e.target.closest && e.target.closest('[data-cta]');
+            if (!el || typeof window.posthog === 'undefined') return;
+            window.posthog.capture('cta_click', {
+                cta: el.getAttribute('data-cta'),
+                location: el.getAttribute('data-cta-loc') || null,
+                path: window.location.pathname,
+            });
+        });
+    </script>
 </body>
 </html>
