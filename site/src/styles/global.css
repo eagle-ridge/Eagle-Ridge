@@ -538,6 +538,26 @@ a { color: var(--er-accent); }
   margin: var(--er-space-4) 0;
 }
 .cta-box a { color: var(--er-bg); }
+/* light pill CTA on the dark accent box; outranks .cta-box a (0,2,0 > 0,1,1) */
+.cta-box .cta-pill {
+  display: inline-block;
+  margin-top: var(--er-space-1);
+  padding: 0.75rem 1.5rem;
+  background: var(--er-bg);
+  color: var(--er-accent);
+  text-decoration: none;
+  border-radius: var(--er-radius-md);
+  font-weight: 500;
+}
+.cta-box .cta-pill:hover { background: var(--er-rule); }
+
+/* lede paragraph on service/content pages (sits inside .prose) */
+.lede-text {
+  font-size: var(--er-text-lede);
+  line-height: 1.5;
+  color: var(--er-ink-soft);
+  max-width: 60ch;
+}
 
 @media (max-width: 768px) {
   .hero { padding: var(--er-space-5) 0; }

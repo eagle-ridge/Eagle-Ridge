@@ -4,27 +4,9 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 const title = 'CMMC Readiness Checklist for Small Defense Contractors | Eagle Ridge Advisory';
 const description =
   'A plain-language CMMC readiness checklist for small defense contractors — scope, the NIST 800-171 controls, the documentation assessors expect, and how to stay ready. Use it to see where you stand before a formal gap assessment.';
-
-const jsonLd = JSON.stringify({
-  '@context': 'https://schema.org',
-  '@type': 'HowTo',
-  name: 'CMMC readiness checklist',
-  description,
-  step: [
-    { '@type': 'HowToStep', name: 'Scope — know what you are protecting' },
-    { '@type': 'HowToStep', name: 'Foundational safeguards (Level 1)' },
-    { '@type': 'HowToStep', name: 'The 110 controls (Level 2 / NIST 800-171)' },
-    { '@type': 'HowToStep', name: 'Documentation assessors expect' },
-    { '@type': 'HowToStep', name: 'Stay ready — continuous monitoring' },
-  ],
-});
 ---
 
 <BaseLayout {title} {description} path="/cmmc-readiness-checklist">
-  <Fragment slot="head">
-    <script type="application/ld+json" set:html={jsonLd} />
-  </Fragment>
-
   <div class="prose container">
     <h1>CMMC readiness checklist</h1>
     <p class="lede-text">
@@ -46,7 +28,6 @@ const jsonLd = JSON.stringify({
     <h2>2. Foundational safeguards (Level 1)</h2>
     <ul class="checklist">
       <li>Every user and device is uniquely identified and authenticated.</li>
-      <li>Multi-factor authentication is on for anything internet-facing.</li>
       <li>Access is limited to the people and systems that need it (least privilege).</li>
       <li>Antivirus / endpoint protection is deployed and kept current.</li>
       <li>You have a routine way to apply security patches and updates.</li>
@@ -57,6 +38,7 @@ const jsonLd = JSON.stringify({
     <p>Level 2 means assessing all 110 NIST 800-171 controls across 14 families. The high-value areas to check first:</p>
     <ul class="checklist">
       <li>Account management, least privilege, and automatic session lock are in place.</li>
+      <li>Multi-factor authentication is enforced for remote and privileged access.</li>
       <li>Security events are logged — and the logs are actually reviewed, not just collected.</li>
       <li>CUI is encrypted at rest and in transit with FIPS-validated cryptography.</li>
       <li>Removable media and mobile devices are controlled or restricted.</li>
@@ -90,12 +72,6 @@ const jsonLd = JSON.stringify({
 </BaseLayout>
 
 <style>
-  .lede-text {
-    font-size: var(--er-text-lede);
-    line-height: 1.5;
-    color: var(--er-ink-soft);
-    max-width: 60ch;
-  }
   .checklist {
     list-style: none;
     margin: var(--er-space-2) 0 var(--er-space-4);
@@ -124,15 +100,4 @@ const jsonLd = JSON.stringify({
     color: var(--er-bg);
     margin: 0 0 var(--er-space-2);
   }
-  .cta-pill {
-    display: inline-block;
-    margin-top: var(--er-space-1);
-    padding: 0.75rem 1.5rem;
-    background: var(--er-bg);
-    color: var(--er-accent) !important;
-    text-decoration: none;
-    border-radius: var(--er-radius-md);
-    font-weight: 500;
-  }
-  .cta-pill:hover { background: var(--er-rule); }
 </style>

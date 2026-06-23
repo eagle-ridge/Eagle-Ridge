@@ -15,6 +15,10 @@ interface Props {
 }
 const { items, heading = 'Frequently asked questions' } = Astro.props;
 
+// Stable, unique id derived from the heading so two <Faq> blocks on one page
+// don't collide on id / aria-labelledby.
+const headingId = 'faq-' + heading.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+
 const jsonLd = JSON.stringify({
   '@context': 'https://schema.org',
   '@type': 'FAQPage',
@@ -26,8 +30,8 @@ const jsonLd = JSON.stringify({
 });
 ---
 
-<section class="faq" aria-labelledby="faq-heading">
-  <h2 id="faq-heading">{heading}</h2>
+<section class="faq" aria-labelledby={headingId}>
+  <h2 id={headingId}>{heading}</h2>
   <dl class="faq-list">
     {items.map((it) => (
       <div class="faq-item">
@@ -36,7 +40,7 @@ const jsonLd = JSON.stringify({
       </div>
     ))}
   </dl>
-  <script type="application/ld+json" set:html={jsonLd} />
+  {items.length > 0 && <script type="application/ld+json" set:html={jsonLd} />}
 </section>
 
 <style>

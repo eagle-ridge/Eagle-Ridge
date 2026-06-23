@@ -35,7 +35,7 @@ Adds the enhanced NIST 800-172 requirements for the most sensitive programs. Gov
 2. **Prioritized remediation plan.** A Plan of Action & Milestones (POA&M) with real costs, sequenced by what matters most.
 3. **Fix the gaps with you.** We draft the policies, stand up the tooling, and document the controls — alongside your team.
 4. **Document & score.** Your System Security Plan (SSP), an evidence inventory, and your SPRS score.
-5. **Assessment-ready & monitored.** You walk in prepared, with a continuous-monitoring plan to stay compliant after you pass.
+5. **Readiness review & monitoring.** You walk in prepared, with a continuous-monitoring plan to help you stay ready afterward.
 
 ## What you walk away with
 

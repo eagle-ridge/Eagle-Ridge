@@ -20,7 +20,6 @@ applies to you.
 ## 2. Foundational safeguards (Level 1)
 
 * Every user and device is uniquely identified and authenticated.
-* Multi-factor authentication is on for anything internet-facing.
 * Access is limited to the people and systems that need it (least privilege).
 * Antivirus / endpoint protection is deployed and kept current.
 * You have a routine way to apply security patches and updates.
@@ -31,6 +30,7 @@ applies to you.
 Level 2 means assessing all 110 NIST 800-171 controls across 14 families. The high-value areas to check first:
 
 * Account management, least privilege, and automatic session lock are in place.
+* Multi-factor authentication is enforced for remote and privileged access.
 * Security events are logged — and the logs are actually reviewed, not just collected.
 * CUI is encrypted at rest and in transit with FIPS-validated cryptography.
 * Removable media and mobile devices are controlled or restricted.
