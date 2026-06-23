@@ -1,0 +1,69 @@
+---
+// Reusable FAQ block. Renders the visible Q&A AND emits matching FAQPage
+// JSON-LD from the SAME `items` array, so the schema can never drift from the
+// copy. Answers are kept visible (not collapsed) — AI answer engines and
+// search cite text that's actually on the page. The JSON-LD <script> is
+// stripped by the .md mirror generator (it drops all <script> tags), so only
+// the visible Q&A lands in the markdown mirror — which is what we want.
+interface FaqItem {
+  q: string;
+  a: string;
+}
+interface Props {
+  items: FaqItem[];
+  heading?: string;
+}
+const { items, heading = 'Frequently asked questions' } = Astro.props;
+
+const jsonLd = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: items.map((it) => ({
+    '@type': 'Question',
+    name: it.q,
+    acceptedAnswer: { '@type': 'Answer', text: it.a },
+  })),
+});
+---
+
+<section class="faq" aria-labelledby="faq-heading">
+  <h2 id="faq-heading">{heading}</h2>
+  <dl class="faq-list">
+    {items.map((it) => (
+      <div class="faq-item">
+        <dt>{it.q}</dt>
+        <dd>{it.a}</dd>
+      </div>
+    ))}
+  </dl>
+  <script type="application/ld+json" set:html={jsonLd} />
+</section>
+
+<style>
+  .faq {
+    max-width: 72ch;
+    margin: 0 auto;
+  }
+  .faq-list {
+    margin: var(--er-space-3) 0 0;
+  }
+  .faq-item {
+    padding: var(--er-space-3) 0;
+    border-top: 1px solid var(--er-rule);
+  }
+  .faq-item:last-child {
+    border-bottom: 1px solid var(--er-rule);
+  }
+  .faq-item dt {
+    font-family: var(--er-font-serif);
+    font-size: var(--er-text-h3);
+    line-height: 1.3;
+    color: var(--er-ink);
+  }
+  .faq-item dd {
+    margin: var(--er-space-1) 0 0;
+    font-size: var(--er-text-body);
+    line-height: var(--er-leading-body);
+    color: var(--er-ink-soft);
+  }
+</style>

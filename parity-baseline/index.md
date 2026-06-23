@@ -6,6 +6,16 @@
 
 We get you ready for CMMC and other compliance frameworks — gaps found, fixed, and documented — so when it's time to be assessed, there are no surprises.
 
+[Book a free readiness call](https://cal.com/chris-mcconnell/eagle50)
+[See our CMMC services](/cmmc-compliance-consultant)
+
+Readiness for
+
+* CMMC Level 1 & 2
+* NIST 800-171
+* SOC 2 Type 2
+* ISO 27001
+
 ## What We Do
 
 ## GRC Readiness
@@ -36,10 +46,6 @@ NIST 800-53
 
 GDPR
 
-15+
-
-Companies advised
-
 ## Let's talk about your compliance needs.
 
 Get in touch to find out where you stand and what it takes to be ready.
@@ -50,4 +56,6 @@ Email
 
 Message
 
-Send Message
+See where you stand
+
+We'll reply within one business day with a short, no-obligation read on where you stand and what readiness would take.
