@@ -669,15 +669,22 @@ const jsonLd = JSON.stringify({
       if (tableBody) {
         if (activeCat) {
           const catLabel = CATS[activeCat]?.label.toLowerCase();
+          if (catLabel === undefined) return;
+          sortCol = null;
+          sortDir = 'asc';
+          tableHeaders.forEach((h) => h.setAttribute('aria-sort', 'none'));
           const rows = Array.from(tableBody.querySelectorAll<HTMLElement>('.table-row'));
           rows.sort((a, b) => {
             const aMatch = a.dataset.cat === catLabel ? 0 : 1;
             const bMatch = b.dataset.cat === catLabel ? 0 : 1;
             if (aMatch !== bMatch) return aMatch - bMatch;
-            return Number(a.dataset.num) - Number(b.dataset.num);
+            return Number(a.dataset.num ?? 0) - Number(b.dataset.num ?? 0);
           });
           rows.forEach((r) => tableBody.appendChild(r));
         } else {
+          sortCol = null;
+          sortDir = 'asc';
+          tableHeaders.forEach((h) => h.setAttribute('aria-sort', 'none'));
           restoreOriginalOrder();
         }
       }
