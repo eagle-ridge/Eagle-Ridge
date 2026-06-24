@@ -35,6 +35,9 @@ jobs:
       - name: Build site (includes mirror + sitemap generation)
         run: npm run build
 
+      - name: Validate entity fields
+        run: npm run check:entities
+
       - name: Check llms.txt exists
         run: |
           if [ ! -f public/llms.txt ]; then

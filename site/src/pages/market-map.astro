@@ -54,7 +54,7 @@ const jsonLd = JSON.stringify({
   <Fragment slot="head">
     <script type="application/ld+json" set:html={jsonLd} />
     <meta property="og:image" content="https://eagleridge.io/logo.png">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.4.0/dist/tabler-icons.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.4.0/dist/tabler-icons.min.css" integrity="sha384-ldmpcx1x0Xzlz3FRdxRDXdddHL6gUAnUo8m6ERvU0MbQIl53rnzI7hCF+Fd8lRsX" crossorigin="anonymous">
   </Fragment>
 
   <div class="map-body">
@@ -164,7 +164,7 @@ const jsonLd = JSON.stringify({
                   <td set:html={e.cmmc} />
                   <td set:html={e.price} />
                   <td>
-                    {e.url && e.url.startsWith('https://') ? (
+                    {e.url && /^https:\/\//.test(e.url) ? (
                       <a href={e.url} target="_blank" rel="noopener noreferrer" class="source-link" onclick="event.stopPropagation()">↗</a>
                     ) : <span>—</span>}
                   </td>
@@ -630,6 +630,7 @@ const jsonLd = JSON.stringify({
       node.addEventListener('click', () => {
         const e = E.find((x) => x.n === Number(node.dataset.num));
         if (e) showDetail(e);
+        else console.warn('market-map: no entity for data-num', node.dataset.num);
       });
     });
 
@@ -682,7 +683,9 @@ const jsonLd = JSON.stringify({
 
     tableHeaders.forEach((th) => {
       th.addEventListener('click', () => {
-        const col = th.dataset.col!;
+        if (!tableBody) return;
+        const col = th.dataset.col;
+        if (!col) return;
         if (sortCol === col) {
           if (sortDir === 'asc') {
             sortDir = 'desc';
@@ -699,13 +702,11 @@ const jsonLd = JSON.stringify({
         }
         tableHeaders.forEach((h) => h.setAttribute('aria-sort', 'none'));
         th.setAttribute('aria-sort', sortDir === 'asc' ? 'ascending' : 'descending');
-
-        if (!tableBody) return;
         const rows = Array.from(tableBody.querySelectorAll<HTMLElement>('.table-row'));
         rows.sort((a, b) => {
           const av = (a.dataset[col] ?? '');
           const bv = (b.dataset[col] ?? '');
-          return sortDir === 'asc' ? av.localeCompare(bv) : bv.localeCompare(av);
+          return sortDir === 'asc' ? av.localeCompare(bv, 'en', { sensitivity: 'base' }) : bv.localeCompare(av, 'en', { sensitivity: 'base' });
         });
         rows.forEach((r) => tableBody.appendChild(r));
       });
@@ -742,7 +743,7 @@ const jsonLd = JSON.stringify({
     if (viewToggle && mapBody) {
       viewToggle.addEventListener('click', () => {
         const isTable = mapBody.dataset.view === 'table';
-        mapBody.dataset.view = isTable ? '' : 'table';
+        if (isTable) delete mapBody.dataset.view; else mapBody.dataset.view = 'table';
         viewToggle.setAttribute('aria-pressed', String(!isTable));
         viewToggle.textContent = isTable ? 'Table view' : 'Grid view';
       });
