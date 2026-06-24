@@ -9,7 +9,8 @@
     "dev": "astro dev",
     "build": "astro build && python3 scripts/generate-md-mirrors.py",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "check:entities": "node scripts/check-entity-fields.mjs"
   },
   "dependencies": {
     "@fontsource/ibm-plex-mono": "5.2.7",
