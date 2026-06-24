@@ -205,6 +205,8 @@ a { color: var(--er-accent); }
   box-shadow: var(--er-shadow-md);
   animation: er-fade-in var(--er-dur-fast) var(--er-ease);
 }
+/* `display: flex` above beats [hidden]'s UA display:none, so it must opt back out. */
+.resources-menu[hidden] { display: none; }
 .resources-menu a {
   font-family: var(--er-font-mono);
   font-size: 12px;
