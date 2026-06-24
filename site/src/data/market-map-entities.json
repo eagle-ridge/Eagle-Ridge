@@ -92,7 +92,8 @@
    "cmmc": "Authority",
    "price": "N/A",
    "notes": "Accreditation body for the CMMC ecosystem; sets rules for C3PAOs and RPOs<sup><a href=\"#s1\">1</a></sup>. 103 authorized C3PAOs as of Nov 2026<sup><a href=\"#s8\">8</a></sup>.",
-   "conf": "high"
+   "conf": "high",
+   "url": "https://cyberab.org"
   },
   {
    "n": 2,
@@ -106,7 +107,8 @@
    "cmmc": "Buyer / issuer",
    "price": "N/A",
    "notes": "Drives CMMC enforcement via 32 CFR (effective Dec 2024) and 48 CFR (effective Nov 2025) clauses now phasing into contracts.",
-   "conf": "high"
+   "conf": "high",
+   "url": "https://www.dodcio.defense.gov/CMMC/"
   },
   {
    "n": 3,
@@ -120,7 +122,8 @@
    "cmmc": "Authority",
    "price": "$30K&ndash;$100K per assessment<sup><a href=\"#s10\">10</a></sup>",
    "notes": "103 authorized C3PAOs<sup><a href=\"#s8\">8</a></sup> serving ~100,000 DIB orgs; ~80,000 of those need Level 2<sup><a href=\"#s9\">9</a></sup>. Only ~1% Level 2 certified to date<sup><a href=\"#s8\">8</a></sup>. The bottleneck. Independence rules: a C3PAO cannot consult on the engagement it assesses.",
-   "conf": "high"
+   "conf": "high",
+   "url": "https://cyberab.org/Marketplace"
   },
   {
    "n": 4,
@@ -134,7 +137,8 @@
    "cmmc": "Pre-CMMC authority",
    "price": "N/A",
    "notes": "DCMA's industrial-base assessment arm. Conducted DIBCAC High pre-CMMC; remains relevant for Level 3 and ongoing DoD-direct audits.",
-   "conf": "high"
+   "conf": "high",
+   "url": "https://www.dcma.mil/DIBCAC/"
   },
   {
    "n": 5,
@@ -148,7 +152,8 @@
    "cmmc": "Medium",
    "price": "~$10K&ndash;$30K/yr",
    "notes": "Category leader. Strong SOC 2 muscle; CMMC coverage shipped 2024. Stated focus is SaaS multi-framework rather than DIB-native readiness.",
-   "conf": "high"
+   "conf": "high",
+   "url": "https://www.vanta.com"
   },
   {
    "n": 6,
@@ -162,7 +167,8 @@
    "cmmc": "Medium",
    "price": "~$15K&ndash;$40K/yr",
    "notes": "Close #2 to Vanta. Stronger FedRAMP story and growing CMMC coverage; SaaS-first by DNA.",
-   "conf": "high"
+   "conf": "high",
+   "url": "https://drata.com"
   },
   {
    "n": 7,
@@ -176,7 +182,8 @@
    "cmmc": "Low&ndash;medium",
    "price": "~$12K&ndash;$35K/yr",
    "notes": "Strong AI/automation story. Partnered with RSM (C3PAO) for streamlined assessments<sup><a href=\"#s7\">7</a></sup>.",
-   "conf": "medium"
+   "conf": "medium",
+   "url": "https://secureframe.com"
   },
   {
    "n": 8,
@@ -190,7 +197,8 @@
    "cmmc": "Low",
    "price": "~$5K&ndash;$20K/yr",
    "notes": "Lower price point, India-heavy. CMMC not a stated focus.",
-   "conf": "medium"
+   "conf": "medium",
+   "url": "https://sprinto.com"
   },
   {
    "n": 9,
@@ -204,7 +212,8 @@
    "cmmc": "Low",
    "price": "~$10K&ndash;$25K/yr",
    "notes": "Formerly Laika. Bundles audit + automation. CMMC not a primary lane.",
-   "conf": "medium"
+   "conf": "medium",
+   "url": "https://thoropass.com"
   },
   {
    "n": 10,
@@ -218,7 +227,8 @@
    "cmmc": "Buyer",
    "price": "N/A",
    "notes": "80,000+ small contractors expected to need Level 2<sup><a href=\"#s9\">9</a></sup>, below the Tier-1 prime line. The unserved 0&rarr;1 segment Eagle Ridge targets.",
-   "conf": "high"
+   "conf": "high",
+   "url": "https://www.acq.osd.mil/cmmc/"
   },
   {
    "n": 11,
@@ -232,7 +242,8 @@
    "cmmc": "Authority",
    "price": "Varies",
    "notes": "Registered Provider Organizations (~250+). Authorized to advise on CMMC but cannot assess. Natural delivery layer.",
-   "conf": "high"
+   "conf": "high",
+   "url": "https://cyberab.org/Marketplace"
   },
   {
    "n": 12,
@@ -246,7 +257,8 @@
    "cmmc": "Authority",
    "price": "N/A",
    "notes": "Registered Practitioners (~5,000+). Individual credential; foundational but rarely sufficient alone.",
-   "conf": "high"
+   "conf": "high",
+   "url": "https://cyberab.org/Marketplace"
   },
   {
    "n": 13,
@@ -260,7 +272,8 @@
    "cmmc": "Low&ndash;medium",
    "price": "~$30K+/yr",
    "notes": "Evidence-graph approach. Strong for complex multi-framework; CMMC not native.",
-   "conf": "medium"
+   "conf": "medium",
+   "url": "https://www.anecdotes.ai"
   },
   {
    "n": 14,
@@ -274,7 +287,8 @@
    "cmmc": "Low&ndash;medium",
    "price": "~$8K&ndash;$25K/yr",
    "notes": "Aggressive on price. CMMC support announced 2024; DIB-specific depth still building.",
-   "conf": "medium"
+   "conf": "medium",
+   "url": "https://www.scrut.io"
   },
   {
    "n": 15,
@@ -288,7 +302,8 @@
    "cmmc": "Low",
    "price": "Freemium / $5K+",
    "notes": "Freemium model disrupting the price floor. CMMC fit limited.",
-   "conf": "low"
+   "conf": "low",
+   "url": "https://trustcloud.ai"
   },
   {
    "n": 16,
@@ -302,7 +317,8 @@
    "cmmc": "Medium",
    "price": "~$10K&ndash;$40K/yr",
    "notes": "Sold through MSSP partners. Decent CMMC coverage; channel-first GTM.",
-   "conf": "medium"
+   "conf": "medium",
+   "url": "https://www.apptega.com"
   },
   {
    "n": 17,
@@ -316,7 +332,8 @@
    "cmmc": "High",
    "price": "~$20K&ndash;$60K/yr",
    "notes": "Stronger NIST/CMMC alignment than the SaaS-first platforms. Workflow-heavy; better fit for orgs already past 0&rarr;1.",
-   "conf": "medium"
+   "conf": "medium",
+   "url": "https://hyperproof.io"
   },
   {
    "n": 18,
@@ -330,7 +347,8 @@
    "cmmc": "Buyer / enforcer",
    "price": "N/A",
    "notes": "Lockheed, Northrop, RTX, etc. Flowing CMMC requirements down to subs. The demand-creation layer.",
-   "conf": "high"
+   "conf": "high",
+   "url": "https://www.acq.osd.mil/cmmc/"
   },
   {
    "n": 19,
@@ -344,7 +362,8 @@
    "cmmc": "Standard source",
    "price": "N/A",
    "notes": "Sets the standards CMMC enforces. Foundational regulatory authority.",
-   "conf": "high"
+   "conf": "high",
+   "url": "https://csrc.nist.gov/pubs/sp/800/171/r3/final"
   },
   {
    "n": 20,
@@ -358,7 +377,8 @@
    "cmmc": "Adjacent",
    "price": "N/A",
    "notes": "DHS cyber arm. Adjacent to CMMC; increasingly relevant for federal supply-chain risk.",
-   "conf": "medium"
+   "conf": "medium",
+   "url": "https://www.cisa.gov"
   },
   {
    "n": 21,
@@ -372,7 +392,8 @@
    "cmmc": "Medium (via partners)",
    "price": "Enterprise (six&ndash;seven figure annual)",
    "notes": "Enterprise GRC heavyweight. Powerful workflow engine, heavy implementation lift. Not targeted at SMBs.",
-   "conf": "high"
+   "conf": "high",
+   "url": "https://www.servicenow.com/products/governance-risk-compliance.html"
   },
   {
    "n": 22,
@@ -386,7 +407,8 @@
    "cmmc": "Medium",
    "price": "Enterprise",
    "notes": "RSA Archer; legacy GRC. Strong risk management, slower pace of innovation.",
-   "conf": "high"
+   "conf": "high",
+   "url": "https://www.archerirm.com"
   },
   {
    "n": 23,
@@ -400,7 +422,8 @@
    "cmmc": "Medium",
    "price": "Enterprise",
    "notes": "Long-standing enterprise IRM. Broad coverage; not federal/DIB-differentiated.",
-   "conf": "medium"
+   "conf": "medium",
+   "url": "https://www.metricstream.com"
   },
   {
    "n": 24,
@@ -414,7 +437,8 @@
    "cmmc": "Low&ndash;medium",
    "price": "Enterprise",
    "notes": "Came from privacy; expanded into GRC. Strong data mapping. CMMC not a core lane.",
-   "conf": "high"
+   "conf": "high",
+   "url": "https://www.onetrust.com"
   },
   {
    "n": 25,
@@ -428,7 +452,8 @@
    "cmmc": "Medium",
    "price": "Enterprise",
    "notes": "Modern IRM; more flexible than Archer. Enterprise-priced.",
-   "conf": "medium"
+   "conf": "medium",
+   "url": "https://www.logicgate.com"
   },
   {
    "n": 26,
@@ -442,7 +467,8 @@
    "cmmc": "Low",
    "price": "Enterprise",
    "notes": "Audit-led platform expanding into GRC. SOX origins; CMMC not a stated focus.",
-   "conf": "high"
+   "conf": "high",
+   "url": "https://www.auditboard.com"
   },
   {
    "n": 27,
@@ -456,7 +482,8 @@
    "cmmc": "None",
    "price": "Enterprise",
    "notes": "Financial reporting / SOX heavyweight. CMMC not in stated scope.",
-   "conf": "medium"
+   "conf": "medium",
+   "url": "https://www.workiva.com"
   },
   {
    "n": 28,
@@ -470,7 +497,8 @@
    "cmmc": "Low",
    "price": "Enterprise",
    "notes": "Galvanize / HighBond acquisition. Strong board-governance angle.",
-   "conf": "medium"
+   "conf": "medium",
+   "url": "https://www.diligent.com"
   },
   {
    "n": 29,
@@ -484,7 +512,8 @@
    "cmmc": "Low",
    "price": "Enterprise",
    "notes": "Legacy enterprise GRC. Strong in banking; limited DIB footprint.",
-   "conf": "medium"
+   "conf": "medium",
+   "url": "https://www.ibm.com/products/openpages-with-watson"
   },
   {
    "n": 30,
@@ -498,7 +527,8 @@
    "cmmc": "None",
    "price": "Enterprise",
    "notes": "Bolted onto SAP installs. DIB SMB is not a stated segment.",
-   "conf": "medium"
+   "conf": "medium",
+   "url": "https://www.sap.com/products/financial-management/grc.html"
   },
   {
    "n": 31,
@@ -512,7 +542,8 @@
    "cmmc": "High",
    "price": "~$3K&ndash;$15K/yr",
    "notes": "CMMC-native tool. Strong on 110-control mapping; lighter on broader GRC and continuous monitoring.",
-   "conf": "medium"
+   "conf": "medium",
+   "url": "https://www.futurefeed.co"
   },
   {
    "n": 32,
@@ -526,7 +557,8 @@
    "cmmc": "High",
    "price": "~$1K&ndash;$10K (templates)",
    "notes": "Policy templates (Secure Controls Framework). Document-first, not SaaS. Heavily used by RPOs.",
-   "conf": "high"
+   "conf": "high",
+   "url": "https://www.complianceforge.com"
   },
   {
    "n": 33,
@@ -540,7 +572,8 @@
    "cmmc": "High",
    "price": "~$2K&ndash;$10K/yr",
    "notes": "DIB-focused, SMB-friendly. Strong template library; lighter on continuous monitoring.",
-   "conf": "medium"
+   "conf": "medium",
+   "url": "https://www.totemtech.com"
   },
   {
    "n": 34,
@@ -554,7 +587,8 @@
    "cmmc": "High",
    "price": "~$5K&ndash;$25K/yr",
    "notes": "Adaptive Risk Model. Stronger on quantification than peers.",
-   "conf": "low"
+   "conf": "low",
+   "url": "https://www.cyturus.com"
   },
   {
    "n": 35,
@@ -568,7 +602,8 @@
    "cmmc": "High (supply chain)",
    "price": "Per-license",
    "notes": "DIB identity + supply-chain federation. Mandated by some primes; quasi-infrastructure.",
-   "conf": "medium"
+   "conf": "medium",
+   "url": "https://www.exostar.com"
   },
   {
    "n": 36,
@@ -582,7 +617,8 @@
    "cmmc": "Buyer",
    "price": "N/A",
    "notes": "Tier 2&ndash;N subcontractors. Where the 0&rarr;1 readiness gap is most acute.",
-   "conf": "high"
+   "conf": "high",
+   "url": "https://www.acq.osd.mil/cmmc/"
   },
   {
    "n": 37,
@@ -596,7 +632,8 @@
    "cmmc": "Oversight",
    "price": "N/A",
    "notes": "Government Accountability Office. Issues critical reports on DoD cybersecurity progress.",
-   "conf": "medium"
+   "conf": "medium",
+   "url": "https://www.gao.gov"
   },
   {
    "n": 38,
@@ -610,7 +647,8 @@
    "cmmc": "Standards body",
    "price": "Cert fees",
    "notes": "Professional standards body. Frameworks and credentials feed the practitioner layer.",
-   "conf": "high"
+   "conf": "high",
+   "url": "https://www.isaca.org"
   },
   {
    "n": 39,
@@ -625,7 +663,8 @@
    "price": "$5K Full Prep + $1&ndash;1.5K/mo retainer",
    "notes": "Agent-native 0&rarr;1 CMMC readiness for DIB SMBs: SSP draft + SPRS submission; POA&amp;M-to-Conditional path via retainer. Operates in the space between authority frameworks on the left, automation platforms on the right, Big 4 above, and Tier 2 C3PAO/RPOs adjacent. Independent of C3PAO conflict rules. Prepares clients to be assessed by Cherry Bekaert, Aprio, RSM, Baker Tilly, and others. Field-tested on the Nereid Biomaterials engagement at proof-of-concept pricing<sup><a href=\"#s12\">12</a></sup>.",
    "conf": "high",
-   "gap": true
+   "gap": true,
+   "url": "https://eagleridge.io"
   },
   {
    "n": 40,
@@ -639,7 +678,8 @@
    "cmmc": "High (data layer)",
    "price": "Per-seat",
    "notes": "Email/data encryption with strong DIB footprint.",
-   "conf": "high"
+   "conf": "high",
+   "url": "https://www.virtru.com"
   },
   {
    "n": 41,
@@ -653,7 +693,8 @@
    "cmmc": "High",
    "price": "~$25&ndash;$60/user/mo",
    "notes": "End-to-end encrypted email/files for CUI. Strong DIB SMB fit; lighter lift than GCC High.",
-   "conf": "high"
+   "conf": "high",
+   "url": "https://www.preveil.com"
   },
   {
    "n": 42,
@@ -667,7 +708,8 @@
    "cmmc": "High (foundational)",
    "price": "~$30&ndash;$60+/user/mo",
    "notes": "Microsoft Government Community Cloud High. De facto requirement for many DIB contractors handling CUI.",
-   "conf": "high"
+   "conf": "high",
+   "url": "https://www.microsoft.com/en-us/microsoft-365/government/compare-office-365-government-plans"
   },
   {
    "n": 43,
@@ -681,7 +723,8 @@
    "cmmc": "Medium",
    "price": "~$20&ndash;$50/user/mo",
    "notes": "Email security incumbent. CMMC-adjacent via DLP and email controls.",
-   "conf": "medium"
+   "conf": "medium",
+   "url": "https://www.proofpoint.com"
   },
   {
    "n": 44,
@@ -695,7 +738,8 @@
    "cmmc": "Medium&ndash;high",
    "price": "~$3&ndash;$9/user/mo",
    "notes": "Cisco-owned MFA. Core control for the AC/IA family. Practical CMMC building block.",
-   "conf": "medium"
+   "conf": "medium",
+   "url": "https://duo.com"
   },
   {
    "n": 45,
@@ -709,7 +753,8 @@
    "cmmc": "Adjacent buyer",
    "price": "N/A",
    "notes": "Homeland Security cyber demand. Adjacent ecosystem; future CMMC-like requirements possible.",
-   "conf": "low"
+   "conf": "low",
+   "url": "https://www.cisa.gov"
   },
   {
    "n": 46,
@@ -723,7 +768,8 @@
    "cmmc": "Adjacent",
    "price": "Enterprise",
    "notes": "Security-ratings leader. Used by primes to assess subs; outside-in only.",
-   "conf": "high"
+   "conf": "high",
+   "url": "https://www.bitsight.com"
   },
   {
    "n": 47,
@@ -737,7 +783,8 @@
    "cmmc": "Adjacent",
    "price": "Enterprise",
    "notes": "Direct BitSight competitor. Same outside-in model; expanding into questionnaire automation.",
-   "conf": "high"
+   "conf": "high",
+   "url": "https://securityscorecard.com"
   },
   {
    "n": 48,
@@ -751,7 +798,8 @@
    "cmmc": "Adjacent",
    "price": "Mid-market",
    "notes": "Combines TPRM with attack-surface management. Mid-market friendly.",
-   "conf": "medium"
+   "conf": "medium",
+   "url": "https://www.upguard.com"
   },
   {
    "n": 49,
@@ -765,7 +813,8 @@
    "cmmc": "Adjacent",
    "price": "Enterprise",
    "notes": "Questionnaire automation for TPRM. Workflow-heavy.",
-   "conf": "low"
+   "conf": "low",
+   "url": "https://www.panorays.com"
   },
   {
    "n": 50,
@@ -779,7 +828,8 @@
    "cmmc": "Adjacent",
    "price": "Enterprise",
    "notes": "Program-led TPRM. Enterprise-focused.",
-   "conf": "low"
+   "conf": "low",
+   "url": "https://www.prevalent.net"
   },
   {
    "n": 51,
@@ -793,7 +843,8 @@
    "cmmc": "Adjacent buyer",
    "price": "N/A",
    "notes": "General Services Administration. Civilian contracting hub; FedRAMP authority.",
-   "conf": "medium"
+   "conf": "medium",
+   "url": "https://www.gsa.gov"
   },
   {
    "n": 52,
@@ -807,7 +858,8 @@
    "cmmc": "None",
    "price": "Enterprise",
    "notes": "Privacy-program-management heritage. Adjacent to but outside the CMMC stack.",
-   "conf": "medium"
+   "conf": "medium",
+   "url": "https://trustarc.com"
   },
   {
    "n": 53,
@@ -821,7 +873,8 @@
    "cmmc": "Low",
    "price": "Enterprise",
    "notes": "Privacy + data-security convergence. Enterprise-focused.",
-   "conf": "low"
+   "conf": "low",
+   "url": "https://securiti.ai"
   },
   {
    "n": 54,
@@ -835,7 +888,8 @@
    "cmmc": "Low",
    "price": "Enterprise",
    "notes": "Data discovery and classification. CMMC-adjacent via CUI identification.",
-   "conf": "low"
+   "conf": "low",
+   "url": "https://bigid.com"
   },
   {
    "n": 55,
@@ -849,7 +903,8 @@
    "cmmc": "None",
    "price": "Mid-market",
    "notes": "Subject-rights automation. Privacy-focused; CMMC not in stated scope.",
-   "conf": "low"
+   "conf": "low",
+   "url": "https://www.datagrail.io"
   },
   {
    "n": 56,
@@ -863,7 +918,8 @@
    "cmmc": "None",
    "price": "Mid-market",
    "notes": "Mid-market privacy. Affordable but narrow.",
-   "conf": "low"
+   "conf": "low",
+   "url": "https://www.osano.com"
   },
   {
    "n": 57,
@@ -877,7 +933,8 @@
    "cmmc": "Funding adjacent",
    "price": "N/A",
    "notes": "Small Business Innovation Research / STTR. Funding source for DIB-adjacent innovation.",
-   "conf": "medium"
+   "conf": "medium",
+   "url": "https://www.sbir.gov"
   },
   {
    "n": 58,
@@ -891,7 +948,8 @@
    "cmmc": "Medium (top-of-market)",
    "price": "Top-of-market",
    "notes": "Big 4 federal practice. Active in CMMC at the prime level; SMB DIB is not the served segment.",
-   "conf": "high"
+   "conf": "high",
+   "url": "https://www2.deloitte.com/us/en/pages/risk/solutions/cyber-risk-services.html"
   },
   {
    "n": 59,
@@ -905,7 +963,8 @@
    "cmmc": "Medium",
    "price": "Top-of-market",
    "notes": "Big 4. Federal compliance practice; targets large enterprise rather than DIB SMB.",
-   "conf": "high"
+   "conf": "high",
+   "url": "https://kpmg.com/us/en/capabilities-services/advisory-services/cyber-security.html"
   },
   {
    "n": 60,
@@ -919,7 +978,8 @@
    "cmmc": "Medium",
    "price": "Top-of-market",
    "notes": "Big 4. Enterprise-focused; DIB SMB readiness is not a stated lane.",
-   "conf": "high"
+   "conf": "high",
+   "url": "https://www.pwc.com/us/en/services/consulting/cybersecurity-risk-regulatory.html"
   },
   {
    "n": 61,
@@ -933,7 +993,8 @@
    "cmmc": "Medium",
    "price": "Top-of-market",
    "notes": "Big 4. Same shape as peers. Top-of-market focus.",
-   "conf": "high"
+   "conf": "high",
+   "url": "https://www.ey.com/en_us/cybersecurity"
   },
   {
    "n": 62,
@@ -947,7 +1008,8 @@
    "cmmc": "High (for primes)",
    "price": "Top-of-market federal",
    "notes": "Largest federal systems integrator. Deep DoD relationships; DIB SMB is not the served segment.",
-   "conf": "high"
+   "conf": "high",
+   "url": "https://www.accenturefederal.com"
   },
   {
    "n": 63,
@@ -961,7 +1023,8 @@
    "cmmc": "High (also C3PAO)",
    "price": "Top-of-market federal",
    "notes": "Defense-native consulting. Also a C3PAO. Stated focus is CMMC strategy work at scale, not SMB readiness delivery.",
-   "conf": "high"
+   "conf": "high",
+   "url": "https://www.boozallen.com/expertise/digital/cybersecurity.html"
   },
   {
    "n": 64,
@@ -975,7 +1038,8 @@
    "cmmc": "High (federal)",
    "price": "Top-of-market federal",
    "notes": "Federal systems integrator. Builds and operates federal systems; SMB advisory not a stated lane.",
-   "conf": "high"
+   "conf": "high",
+   "url": "https://www.leidos.com/capabilities/cybersecurity"
   },
   {
    "n": 65,
@@ -989,7 +1053,8 @@
    "cmmc": "High",
    "price": "Top-of-market federal",
    "notes": "Federal services. Same shape as Leidos.",
-   "conf": "high"
+   "conf": "high",
+   "url": "https://www.saic.com/what-we-do/technology/cybersecurity"
   },
   {
    "n": 66,
@@ -1003,7 +1068,8 @@
    "cmmc": "Medium&ndash;high",
    "price": "Top-of-market federal",
    "notes": "Federal services with strong IC presence.",
-   "conf": "medium"
+   "conf": "medium",
+   "url": "https://www.caci.com/cybersecurity"
   },
   {
    "n": 67,
@@ -1017,7 +1083,8 @@
    "cmmc": "Medium",
    "price": "Top-of-market",
    "notes": "Federal advisory, spun out of PwC. Compliance-adjacent.",
-   "conf": "medium"
+   "conf": "medium",
+   "url": "https://guidehouse.com/services/advanced-solutions/cybersecurity"
   },
   {
    "n": 68,
@@ -1031,7 +1098,8 @@
    "cmmc": "Medium&ndash;high",
    "price": "Top-of-market federal",
    "notes": "Federal services. Cyber capabilities; not the SMB advisory layer.",
-   "conf": "medium"
+   "conf": "medium",
+   "url": "https://www.mantech.com/capabilities/cyber"
   },
   {
    "n": 69,
@@ -1045,7 +1113,8 @@
    "cmmc": "Medium",
    "price": "Top-of-market federal",
    "notes": "General Dynamics IT. Federal services prime.",
-   "conf": "medium"
+   "conf": "medium",
+   "url": "https://www.gdit.com/capabilities/cybersecurity/"
   },
   {
    "n": 82,
@@ -1059,7 +1128,8 @@
    "cmmc": "High (C3PAO + RPO)",
    "price": "$30K&ndash;$100K assessment<sup><a href=\"#s10\">10</a></sup>",
    "notes": "Top 25 US firm. C3PAO since Dec 2022, reauthorized Jan 2025<sup><a href=\"#s2\">2</a></sup>. Aug 2025 Lifeline Data Centers alliance markets &lsquo;CMMC Fasttrack Implementation&rsquo; for SMBs<sup><a href=\"#s3\">3</a></sup>. An explicit move down-market. Among the most structurally complete competitors: C3PAO + RPO + GovCon client base + SMB product motion. Independence rules prevent them from consulting on engagements they assess.",
-   "conf": "high"
+   "conf": "high",
+   "url": "https://www.cbh.com/service/technology-risk-cybersecurity/cmmc/"
   },
   {
    "n": 83,
@@ -1073,7 +1143,8 @@
    "cmmc": "High (C3PAO)",
    "price": "Mid-market advisory",
    "notes": "Top 5 US accounting firm. Authorized C3PAO<sup><a href=\"#s7\">7</a></sup>. Secureframe partner enabling streamlined assessments. Broad risk advisory practice with global reach; CMMC is one of many compliance offerings.",
-   "conf": "high"
+   "conf": "high",
+   "url": "https://rsmus.com/services/risk-advisory/technology-risk/cmmc.html"
   },
   {
    "n": 84,
@@ -1087,7 +1158,8 @@
    "cmmc": "High (C3PAO)",
    "price": "Mid-market advisory",
    "notes": "Top 10 US firm formed by 2024 FORVIS-Mazars merger. Authorized C3PAO<sup><a href=\"#s7\">7</a></sup>. International reach via Mazars network.",
-   "conf": "high"
+   "conf": "high",
+   "url": "https://www.forvismazars.com/us/en/services/assurance/cybersecurity-and-cmmc"
   },
   {
    "n": 85,
@@ -1101,7 +1173,8 @@
    "cmmc": "High (C3PAO)",
    "price": "Mid-market advisory",
    "notes": "Mid-sized US firm. CMMC offered as a component of government services and risk advisory practice<sup><a href=\"#s7\">7</a></sup>. Less marketing surface than peers but in the C3PAO pool.",
-   "conf": "medium"
+   "conf": "medium",
+   "url": "https://www.horne-llp.com/services/government-services/cmmc/"
   },
   {
    "n": 86,
@@ -1115,7 +1188,8 @@
    "cmmc": "High (C3PAO + 3PAO dual)",
    "price": "Mid-market advisory",
    "notes": "Top 25 US firm. C3PAO + FedRAMP 3PAO since June 2025<sup><a href=\"#s4\">4</a></sup>. One of only ~12 firms with both designations. Markets as &lsquo;audit partner not just assessor.&rsquo; Strong PNW + tech sector presence. Built proprietary CMMC Accelerator for gap analysis.",
-   "conf": "high"
+   "conf": "high",
+   "url": "https://www.aprio.com/services/risk-advisory/cmmc/"
   },
   {
    "n": 87,
@@ -1129,7 +1203,8 @@
    "cmmc": "High (C3PAO via subsidiary)",
    "price": "Mid-market advisory",
    "notes": "Top 10 US firm. C3PAO since April 2021 via Baker Tilly Data Systems (now Baker Tilly Beers &amp; Cutler, LLC)<sup><a href=\"#s5\">5</a></sup>. Matt Gilbert (CMMC Leader) was one of the first 100 provisional assessors. 800+ self-reported GovCon clients. Likely the largest installed base in this tier.",
-   "conf": "high"
+   "conf": "high",
+   "url": "https://www.bakertilly.com/specializations/cmmc"
   },
   {
    "n": 88,
@@ -1143,12 +1218,13 @@
    "cmmc": "High (C3PAO)",
    "price": "Regional advisory",
    "notes": "Top 60 US CPA firm. C3PAO since Feb 2025<sup><a href=\"#s6\">6</a></sup>. Among the first 54 nationwide authorizations. Regional focus on PA/OH/WV/NY/MD/DC. CCPs and CCAs in-house.",
-   "conf": "high"
+   "conf": "high",
+   "url": "https://schneiderdowns.com/our-services/cybersecurity/cmmc-consulting/"
   },
   {
    "n": 89,
    "s": "Sh",
-   "name": "SC&amp;H Group",
+   "name": "SC&H Group",
    "cat": "tier2",
    "row": 9,
    "col": 11,
@@ -1157,7 +1233,8 @@
    "cmmc": "Adjacent (no C3PAO)",
    "price": "Mid-market advisory",
    "notes": "Mid-market advisory firm; 450+ employees, MD-HQ. Government Contracting is a named industry vertical. Cyber sits inside Risk practice but no C3PAO designation is visible in public materials<sup><a href=\"#s11\">11</a></sup>. Surfaces CMMC adjacent to existing client relationships rather than as a lead offering. Likely RPO-track.",
-   "conf": "medium"
+   "conf": "medium",
+   "url": "https://www.schgroup.com/services/risk/cybersecurity-advisory-assessment/"
   },
   {
    "n": 70,
@@ -1171,7 +1248,8 @@
    "cmmc": "High",
    "price": "Boutique advisory",
    "notes": "Microsoft-aligned CMMC specialist. Strong GCC High implementation footprint.",
-   "conf": "high"
+   "conf": "high",
+   "url": "https://www.summit7.us"
   },
   {
    "n": 71,
@@ -1185,7 +1263,8 @@
    "cmmc": "High",
    "price": "Boutique advisory",
    "notes": "DIB-native consulting + managed services. One of the more visible CMMC RPOs.",
-   "conf": "high"
+   "conf": "high",
+   "url": "https://cybersheath.com"
   },
   {
    "n": 72,
@@ -1199,7 +1278,8 @@
    "cmmc": "High",
    "price": "Boutique advisory",
    "notes": "DIB SMB advisory with GovCon ERP heritage (Deltek). Strong vertical fit.",
-   "conf": "medium"
+   "conf": "medium",
+   "url": "https://neosystemscorp.com"
   },
   {
    "n": 73,
@@ -1213,7 +1293,8 @@
    "cmmc": "High (also C3PAO)",
    "price": "$15K&ndash;$75K/assessment",
    "notes": "Among the first authorized C3PAOs (June 2021). Bridges consulting + assessment.",
-   "conf": "high"
+   "conf": "high",
+   "url": "https://www.redspin.com"
   },
   {
    "n": 74,
@@ -1227,7 +1308,8 @@
    "cmmc": "Medium",
    "price": "Boutique advisory",
    "notes": "Mixed healthcare/DIB compliance. Generalist boutique.",
-   "conf": "low"
+   "conf": "low",
+   "url": "https://etactics.com"
   },
   {
    "n": 75,
@@ -1241,7 +1323,8 @@
    "cmmc": "High (also C3PAO)",
    "price": "Specialty advisory",
    "notes": "Larger specialty firm; strong FedRAMP/3PAO presence. Coalfire Federal authorized as C3PAO Jan 2025. Above the SMB price point.",
-   "conf": "high"
+   "conf": "high",
+   "url": "https://www.coalfire.com"
   },
   {
    "n": 76,
@@ -1255,7 +1338,8 @@
    "cmmc": "Medium&ndash;high (C3PAO)",
    "price": "Specialty advisory",
    "notes": "Audit firm with strong assurance practice. C3PAO. Mid-large oriented rather than SMB.",
-   "conf": "high"
+   "conf": "high",
+   "url": "https://www.schellman.com"
   },
   {
    "n": 77,
@@ -1269,7 +1353,8 @@
    "cmmc": "Medium (controls support)",
    "price": "Mid-market MDR",
    "notes": "Concierge MDR. Supports detection controls; not GRC-native.",
-   "conf": "high"
+   "conf": "high",
+   "url": "https://arcticwolf.com"
   },
   {
    "n": 78,
@@ -1283,7 +1368,8 @@
    "cmmc": "Medium",
    "price": "Per-endpoint",
    "notes": "EDR/XDR leader. Controls-layer foundational, not GRC delivery.",
-   "conf": "high"
+   "conf": "high",
+   "url": "https://www.crowdstrike.com"
   },
   {
    "n": 79,
@@ -1297,7 +1383,8 @@
    "cmmc": "Low&ndash;medium",
    "price": "Mid-market MSSP",
    "notes": "Long-running MSSP. Diversified; CMMC not a stated lead.",
-   "conf": "medium"
+   "conf": "medium",
+   "url": "https://www.trustwave.com"
   },
   {
    "n": 80,
@@ -1311,7 +1398,8 @@
    "cmmc": "Medium",
    "price": "Mid-market MDR",
    "notes": "Vulnerability management + MDR. Adjacent to CMMC controls layer.",
-   "conf": "high"
+   "conf": "high",
+   "url": "https://www.rapid7.com"
   },
   {
    "n": 81,
@@ -1325,7 +1413,8 @@
    "cmmc": "Medium",
    "price": "Varies",
    "notes": "Mega-reseller + services. Channel for many GRC products; mixed advisory layer.",
-   "conf": "medium"
+   "conf": "medium",
+   "url": "https://www.optiv.com"
   }
  ]
 }
