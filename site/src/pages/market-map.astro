@@ -666,6 +666,21 @@ const jsonLd = JSON.stringify({
         li.setAttribute('aria-pressed', String(isActive));
       });
       applyFilters();
+      if (tableBody) {
+        if (activeCat) {
+          const catLabel = CATS[activeCat]?.label.toLowerCase();
+          const rows = Array.from(tableBody.querySelectorAll<HTMLElement>('.table-row'));
+          rows.sort((a, b) => {
+            const aMatch = a.dataset.cat === catLabel ? 0 : 1;
+            const bMatch = b.dataset.cat === catLabel ? 0 : 1;
+            if (aMatch !== bMatch) return aMatch - bMatch;
+            return Number(a.dataset.num) - Number(b.dataset.num);
+          });
+          rows.forEach((r) => tableBody.appendChild(r));
+        } else {
+          restoreOriginalOrder();
+        }
+      }
     }
 
     searchInput.addEventListener('input', applyFilters);
