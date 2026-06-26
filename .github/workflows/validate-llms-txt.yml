@@ -150,6 +150,10 @@ jobs:
             fi
             # Normalize allowed diffs in the baseline: internal .html URLs
             # become clean URLs (covers the mirror-header comment too).
+            # NOTE: the slug charset [a-z0-9-]+ assumes single-segment, lowercase
+            # kebab-case slugs (e.g. /market-map.html). It does NOT match a '/',
+            # so nested paths like /insights/<slug>.html are left untouched here —
+            # those baselines must already store the clean (extensionless) URL.
             if ! sed -E 's#(eagleridge\.io/[a-z0-9-]+)\.html#\1#g; s#\((/[a-z0-9-]+)\.html([#)])#(\1\2#g' "$baseline" | diff -u - "$built" > /tmp/parity-diff.txt; then
               echo "::error::content drift in $name (beyond allowed diffs):"
               cat /tmp/parity-diff.txt
