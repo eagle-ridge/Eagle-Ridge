@@ -70,7 +70,7 @@ NOT allowed: privacy "Last Updated" changes, heading-level changes, em dashes, r
 
 ## Manual steps for Chris (after PR review)
 
-- [ ] Create the Cloudflare Pages project (Git-connected): root dir `site/`, build command per README, output `dist`.
-- [ ] DNS cutover per README checklist (GitHub Pages stays live until then).
-- [ ] Archive the retired PostHog experiment `eagle-ridge-homepage-hero-experiment` / flag `hero-variant` in the dashboard (no code references it).
-- [ ] Decide on `/discovery` re-add once the Tally form is built (spec: `eagle-ridge-methodology/clients/nereid-bio/discovery/tally-form-spec.md`).
+- [x] Create the Cloudflare Pages project: root dir `site/`, output `dist`. **Done** — note it ended up **direct-upload** (deploy via `.github/workflows/deploy.yml` + `wrangler`), not Git-connected as originally planned.
+- [x] DNS cutover per README checklist. **Done 2026-06-13** — apex + `www` proxied to `eagleridge-7z4.pages.dev`; GitHub Pages retired and disabled 2026-06-26.
+- [x] Archive the retired PostHog experiment `eagle-ridge-homepage-hero-experiment` / flag `hero-variant`. **Done 2026-06-26** — experiment ended (`stopped_early`) and archived; `hero-variant` flag disabled + archived (no code references it).
+- [x] Decide on `/discovery` re-add. **Done** — re-added as `site/src/pages/discovery.astro` (Cal.com booking + Web3Forms fallback); the Tally plan was reversed 2026-06-18.
