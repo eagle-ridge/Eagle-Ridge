@@ -44,6 +44,10 @@ jobs:
         working-directory: site
         run: python -m pip install -r scripts/requirements.txt
 
+      - name: Validate entity fields (HTML allowlist + https url enforcement)
+        working-directory: site
+        run: npm run check:entities
+
       - name: Build (astro build + md mirrors)
         working-directory: site
         run: npm run build
