@@ -48,6 +48,7 @@ PAGES = [
     ("about.html", "/about", "About"),
     ("insights.html", "/insights", "Insights"),
     ("market-map.html", "/market-map", "Market Map"),
+    ("grc-tools.html", "/grc-tools", "GRC Tools Index"),
     (
         "nobody-built-the-first-mile.html",
         "/nobody-built-the-first-mile",
