@@ -11,7 +11,6 @@ This map is the whole market in one view. Tap any cell for what the firm or tool
 ## Interactive periodic table of the CMMC services market. 89 firms, tools, and authorities organized by category. Filter by category, search by name, click any cell for details.
 
 Table view
-
 Reset
 
 Tier 1 federal & Big 4 consulting
