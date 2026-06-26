@@ -49,16 +49,8 @@ PAGES = [
     ("insights.html", "/insights", "Insights"),
     ("market-map.html", "/market-map", "Market Map"),
     ("grc-tools.html", "/grc-tools", "GRC Tools Index"),
-    (
-        "nobody-built-the-first-mile.html",
-        "/nobody-built-the-first-mile",
-        "Nobody Built the First Mile",
-    ),
-    (
-        "compliance-should-just-work.html",
-        "/compliance-should-just-work",
-        "Compliance should just work",
-    ),
+    # nobody-built-the-first-mile + compliance-should-just-work now live under
+    # /insights/ and are auto-discovered by discover_insights() — no fixed entry.
     ("glossary.html", "/glossary", "Glossary"),
     ("privacy.html", "/privacy", "Privacy Policy"),
 ]

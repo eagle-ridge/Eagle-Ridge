@@ -508,7 +508,7 @@ No. A tool helps you track and document controls, but it will not close gaps, wr
 
 We index software tools and platforms — compliance automation, enterprise GRC, CMMC-native tooling, data protection, third-party risk, and privacy. Consulting firms, C3PAOs, MSSPs, and standards bodies are not tools; they sit on the [CMMC market map](/market-map) instead. Pricing tiers (FREE, $, $$, $$$) are directional, not quotes. Each entry shows when we last reviewed it; the list is refreshed on a rolling basis. Spotted something wrong or missing? Tell us at [contact@eagleridge.io](mailto:contact@eagleridge.io).
 
-Our point of view: tooling documents readiness, it does not produce it. The gap most small defense contractors hit is the work between "we bought a tool" and "we can pass an assessment." For the longer argument, read [Nobody Built the First Mile](/nobody-built-the-first-mile).
+Our point of view: tooling documents readiness, it does not produce it. The gap most small defense contractors hit is the work between "we bought a tool" and "we can pass an assessment." For the longer argument, read [Nobody Built the First Mile](/insights/nobody-built-the-first-mile).
 
 **Need to actually be ready, not just tooled up?** Eagle Ridge takes small businesses through the whole CMMC readiness lifecycle — gaps found, fixed, and documented, with your SSP and SPRS score in hand — so you are prepared before you are assessed.
 

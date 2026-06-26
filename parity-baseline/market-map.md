@@ -39,7 +39,7 @@ The 103 C3PAO count and the ~1% Level 2 certification rate reflect the most rece
 
 If you are trying to work out where your firm fits in this market and want a second pair of eyes on it, write to [contact@eagleridge.io](mailto:contact@eagleridge.io).
 
-For the longer argument behind this map, read [Nobody Built the First Mile](https://eagleridge.io/nobody-built-the-first-mile.html).
+For the longer argument behind this map, read [Nobody Built the First Mile](https://eagleridge.io/insights/nobody-built-the-first-mile).
 
 ## Sources
 
@@ -94,4 +94,4 @@ For the longer argument behind this map, read [Nobody Built the First Mile](http
 
 If you are trying to work out where your firm fits in this market and want a second pair of eyes on it, write to [contact@eagleridge.io](mailto:contact@eagleridge.io).
 
-For the longer argument behind this map, read [Nobody Built the First Mile](https://eagleridge.io/nobody-built-the-first-mile.html).
+For the longer argument behind this map, read [Nobody Built the First Mile](https://eagleridge.io/insights/nobody-built-the-first-mile).
