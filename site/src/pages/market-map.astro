@@ -566,9 +566,9 @@ const jsonLd = JSON.stringify({
   //
   // All rendered HTML is built from the build-time JSON constants below.
   // Search input is matched via String.includes() only — never rendered as
-  // HTML. htmlFrag() uses Range.createContextualFragment for HTML-entity and
-  // footnote markup inside the trusted constant strings. Never pass
-  // user-supplied input to htmlFrag().
+  // HTML. htmlFrag() parses HTML-entity and footnote markup inside the trusted
+  // constant strings via an inert <template>. Never pass user-supplied input to
+  // htmlFrag().
   import data from '../data/market-map-entities.json';
 
   type Entity = {
@@ -581,9 +581,11 @@ const jsonLd = JSON.stringify({
 
   function htmlFrag(html: string | null | undefined): DocumentFragment {
     if (html == null) return document.createDocumentFragment();
-    const range = document.createRange();
-    range.selectNode(document.body);
-    return range.createContextualFragment(html);
+    // <template> is inert: scripts never execute from its content, unlike
+    // Range.createContextualFragment which runs <script> in some old browsers.
+    const t = document.createElement('template');
+    t.innerHTML = html;
+    return t.content;
   }
 
   function el(
@@ -678,7 +680,7 @@ const jsonLd = JSON.stringify({
             const aMatch = a.dataset.cat === catLabel ? 0 : 1;
             const bMatch = b.dataset.cat === catLabel ? 0 : 1;
             if (aMatch !== bMatch) return aMatch - bMatch;
-            return Number(a.dataset.num ?? 0) - Number(b.dataset.num ?? 0);
+            return Number(a.dataset.num) - Number(b.dataset.num);
           });
           rows.forEach((r) => tableBody.appendChild(r));
         } else {
