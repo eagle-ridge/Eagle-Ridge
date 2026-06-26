@@ -1,6 +1,6 @@
 ---
 import { getEntry, render } from 'astro:content';
-import BaseLayout from '../layouts/BaseLayout.astro';
+import BaseLayout from '../../layouts/BaseLayout.astro';
 
 const entry = await getEntry('pages', 'nobody-built-the-first-mile');
 if (!entry) throw new Error('first-mile content entry missing');
@@ -10,7 +10,7 @@ const jsonLd = JSON.stringify({
   '@context': 'https://schema.org',
   '@type': 'Article',
   'headline': 'Nobody Built the First Mile',
-  'url': 'https://eagleridge.io/nobody-built-the-first-mile',
+  'url': 'https://eagleridge.io/insights/nobody-built-the-first-mile',
   'description': 'The structural gap between CMMC assessors and the small defense contractors who need readiness work, and why the window to fix it is closing.',
   'author': {
     '@type': 'Organization',
@@ -28,7 +28,7 @@ const jsonLd = JSON.stringify({
 });
 ---
 
-<BaseLayout title={entry.data.title} description={entry.data.description} path="/nobody-built-the-first-mile" ogType="article">
+<BaseLayout title={entry.data.title} description={entry.data.description} path="/insights/nobody-built-the-first-mile" ogType="article">
   <Fragment slot="head">
     <script type="application/ld+json" set:html={jsonLd} />
   </Fragment>

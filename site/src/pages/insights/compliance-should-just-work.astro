@@ -15,7 +15,7 @@
 // maps to ISO 27001 A.5.15 (not A.8.1); the "$2.5B market" figure was stale and
 // is now hedged; the Bek pull-quote is verbatim (confirmed). Strategy sections
 // were reframed from lock-in language to customer-benefit framing.
-import BaseLayout from '../layouts/BaseLayout.astro';
+import BaseLayout from '../../layouts/BaseLayout.astro';
 // Extra font weights the essay uses beyond BaseLayout's defaults.
 import '@fontsource/newsreader/500.css';
 import '@fontsource/newsreader/500-italic.css';
@@ -29,7 +29,7 @@ const jsonLd = JSON.stringify({
   '@context': 'https://schema.org',
   '@type': 'Article',
   headline: 'Compliance should just work',
-  url: 'https://eagleridge.io/compliance-should-just-work',
+  url: 'https://eagleridge.io/insights/compliance-should-just-work',
   description,
   datePublished: '2026-06-12',
   author: {
@@ -45,7 +45,7 @@ const jsonLd = JSON.stringify({
 });
 ---
 
-<BaseLayout title={title} description={description} path="/compliance-should-just-work" ogType="article">
+<BaseLayout title={title} description={description} path="/insights/compliance-should-just-work" ogType="article">
   <Fragment slot="head">
     <script type="application/ld+json" set:html={jsonLd} />
     <meta property="og:image" content="https://eagleridge.io/logo.png">

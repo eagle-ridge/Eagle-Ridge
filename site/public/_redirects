@@ -1,6 +1,9 @@
 /index.html / 301
 /about.html /about 301
 /market-map.html /market-map 301
-/nobody-built-the-first-mile.html /nobody-built-the-first-mile 301
+/nobody-built-the-first-mile.html /insights/nobody-built-the-first-mile 301
+/nobody-built-the-first-mile /insights/nobody-built-the-first-mile 301
+/compliance-should-just-work.html /insights/compliance-should-just-work 301
+/compliance-should-just-work /insights/compliance-should-just-work 301
 /glossary.html /glossary 301
 /privacy.html /privacy 301
