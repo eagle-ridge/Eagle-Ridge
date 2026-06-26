@@ -680,7 +680,7 @@ const jsonLd = JSON.stringify({
             const aMatch = a.dataset.cat === catLabel ? 0 : 1;
             const bMatch = b.dataset.cat === catLabel ? 0 : 1;
             if (aMatch !== bMatch) return aMatch - bMatch;
-            return Number(a.dataset.num ?? 0) - Number(b.dataset.num ?? 0);
+            return Number(a.dataset.num) - Number(b.dataset.num);
           });
           rows.forEach((r) => tableBody.appendChild(r));
         } else {
@@ -701,7 +701,7 @@ const jsonLd = JSON.stringify({
     function restoreOriginalOrder() {
       if (!tableBody) return;
       const rows = Array.from(tableBody.querySelectorAll<HTMLElement>('.table-row'));
-      rows.sort((a, b) => Number(a.dataset.num ?? 0) - Number(b.dataset.num ?? 0));
+      rows.sort((a, b) => Number(a.dataset.num) - Number(b.dataset.num));
       rows.forEach((r) => tableBody.appendChild(r));
     }
 
