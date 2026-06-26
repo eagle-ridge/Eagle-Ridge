@@ -48,6 +48,11 @@ const jsonLd = JSON.stringify({
     url: 'https://eagleridge.io/',
   },
 });
+
+// Rendered twice (after the methodology section and after Sources). Single
+// source of truth so the copy can't drift between the two placements.
+const cta = `<p>If you are trying to work out where your firm fits in this market and want a second pair of eyes on it, write to <a href="mailto:contact@eagleridge.io">contact@eagleridge.io</a>.</p>
+        <p>For the longer argument behind this map, read <a href="https://eagleridge.io/insights/nobody-built-the-first-mile">Nobody Built the First Mile</a>.</p>`;
 ---
 
 <BaseLayout title={title} description={description} path="/market-map" ogType="article">
@@ -215,10 +220,7 @@ const jsonLd = JSON.stringify({
         <p>The 103 C3PAO count and the ~1% Level 2 certification rate reflect the most recent public reporting at time of writing<sup><a href="#s8">8</a></sup>. Tier 2 advisory row entries received the deepest verification pass; other entries draw from earlier research and remain subject to update. Corrections welcome at <a href="mailto:contact@eagleridge.io">contact@eagleridge.io</a>.</p>
       </section>
 
-      <div class="cta">
-        <p>If you are trying to work out where your firm fits in this market and want a second pair of eyes on it, write to <a href="mailto:contact@eagleridge.io">contact@eagleridge.io</a>.</p>
-        <p>For the longer argument behind this map, read <a href="https://eagleridge.io/insights/nobody-built-the-first-mile">Nobody Built the First Mile</a>.</p>
-      </div>
+      <div class="cta" set:html={cta}></div>
 
       <section class="sources" id="sources">
         <h2>Sources</h2>
@@ -298,10 +300,7 @@ const jsonLd = JSON.stringify({
         </ol>
       </section>
 
-      <div class="cta">
-        <p>If you are trying to work out where your firm fits in this market and want a second pair of eyes on it, write to <a href="mailto:contact@eagleridge.io">contact@eagleridge.io</a>.</p>
-        <p>For the longer argument behind this map, read <a href="https://eagleridge.io/insights/nobody-built-the-first-mile">Nobody Built the First Mile</a>.</p>
-      </div>
+      <div class="cta" set:html={cta}></div>
 
     </div>
   </div>
