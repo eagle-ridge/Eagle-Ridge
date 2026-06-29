@@ -2,9 +2,36 @@
 import { getCollection } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
 
-const articles = (await getCollection('articles'))
-	.filter((entry) => !entry.data.draft)
-	.sort((a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime());
+// Bespoke essays that live as standalone .astro pages under src/pages/insights/
+// (interactive figures / custom layout) aren't in the `articles` collection, so
+// they'd never appear here. List them so the index is complete.
+// ponytail: 2 hand-maintained entries — keep title/description/pubDate in sync
+// with each page's jsonLd. Promote to the collection only if these multiply.
+const standalone = [
+	{
+		id: 'compliance-should-just-work',
+		data: {
+			title: 'Compliance should just work',
+			description:
+				'A first-principles essay on trust, verification, and why the proof of trust is about to be rebuilt.',
+			pubDate: new Date('2026-06-12'),
+		},
+	},
+	{
+		id: 'nobody-built-the-first-mile',
+		data: {
+			title: 'Nobody Built the First Mile',
+			description:
+				'The structural gap between CMMC assessors and the small defense contractors who need readiness work, and why the window to fix it is closing.',
+			pubDate: new Date('2026-06-09'),
+		},
+	},
+];
+
+const articles = [
+	...(await getCollection('articles')).filter((entry) => !entry.data.draft),
+	...standalone,
+].sort((a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime());
 
 // timeZone:'UTC' so a date-only pubDate (parsed as UTC midnight) displays as
 // the day the author typed, regardless of the build machine's timezone.
