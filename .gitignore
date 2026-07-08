@@ -42,3 +42,6 @@ yarn-error.log*
 
 # Tooling artifacts
 .grepai/
+
+# Claude Code local (per-user) settings
+.claude/settings.local.json
