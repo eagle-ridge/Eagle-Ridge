@@ -27,10 +27,10 @@ Software helps you track and document controls. It does not, by itself, get you 
 3. [Oneleet↗](https://www.oneleet.com/)
    Compliance automation
 
-   All-in-one, security-first compliance combining automation, security testing, and auditor partnerships.
+   Security-first compliance automation combining real penetration testing, evidence collection, and auditor partnerships across 13+ frameworks including SOC 2, ISO 27001, FedRAMP, HIPAA, and GDPR.
 
    SMB
-   SOC 2 ISO 27001
+   SOC 2 ISO 27001 HIPAA GDPR PCI DSS FedRAMP
 
    $$
 4. [Scrut Automation↗](https://scrut.io/)
@@ -72,12 +72,12 @@ Software helps you track and document controls. It does not, by itself, get you 
 8. [TrustCloud↗](https://www.trustcloud.ai/)
    Compliance automation
 
-   Freemium compliance automation disrupting the price floor; CMMC fit is limited.
+   AI-native GRC platform with continuous control monitoring across SOC 2, ISO 27001, CMMC, HIPAA, and HITRUST; evolved beyond its original freemium model toward enterprise-focused pricing.
 
    SMB
-   SOC 2 ISO 27001 HIPAA
+   SOC 2 ISO 27001 HIPAA CMMC GDPR
 
-   FREE
+   $$
 9. [Vanta↗](https://www.vanta.com/)
    Compliance automation
 
@@ -105,16 +105,7 @@ Software helps you track and document controls. It does not, by itself, get you 
     Vendor risk
 
     $$$
-12. [AuditBoard↗](https://www.auditboard.com/)
-    Enterprise GRC
-
-    Audit-led platform with SOX origins expanding into GRC; CMMC is not a stated focus.
-
-    Enterprise
-    SOC 2 ISO 27001
-
-    $$$
-13. [Centraleyes↗](https://www.centraleyes.com/)
+12. [Centraleyes↗](https://www.centraleyes.com/)
     Enterprise GRC
 
     Integrated, AI-powered GRC that maps controls across common frameworks with built-in third-party risk workflows.
@@ -123,7 +114,7 @@ Software helps you track and document controls. It does not, by itself, get you 
     SOC 2 ISO 27001 GDPR Vendor risk
 
     $$
-14. [Diligent↗](https://www.diligent.com/)
+13. [Diligent↗](https://www.diligent.com/)
     Enterprise GRC
 
     Board-governance-led GRC (Galvanize/HighBond) with an enterprise sales motion.
@@ -131,7 +122,7 @@ Software helps you track and document controls. It does not, by itself, get you 
     Enterprise
 
     $$$
-15. [Hyperproof↗](https://hyperproof.io/)
+14. [Hyperproof↗](https://hyperproof.io/)
     Enterprise GRC
 
     Workflow-heavy GRC with stronger NIST/CMMC alignment than the SaaS-first platforms; a better fit for orgs already past 0 to 1.
@@ -140,7 +131,7 @@ Software helps you track and document controls. It does not, by itself, get you 
     NIST 800-171 CMMC FedRAMP SOC 2 ISO 27001 PCI DSS
 
     $$$
-16. [IBM OpenPages↗](https://www.ibm.com/products/openpages)
+15. [IBM OpenPages↗](https://www.ibm.com/products/openpages)
     Enterprise GRC
 
     Legacy enterprise GRC strong in banking and regulated industries; limited DIB footprint.
@@ -148,7 +139,7 @@ Software helps you track and document controls. It does not, by itself, get you 
     Enterprise
 
     $$$
-17. [LogicGate↗](https://www.logicgate.com/)
+16. [LogicGate↗](https://www.logicgate.com/)
     Enterprise GRC
 
     Modern, configurable no-code IRM; more flexible than Archer and enterprise-priced.
@@ -157,7 +148,7 @@ Software helps you track and document controls. It does not, by itself, get you 
     Vendor risk SOC 2 ISO 27001
 
     $$$
-18. [MetricStream↗](https://www.metricstream.com/)
+17. [MetricStream↗](https://www.metricstream.com/)
     Enterprise GRC
 
     Long-standing enterprise IRM with broad coverage; not federal or DIB-differentiated.
@@ -165,7 +156,7 @@ Software helps you track and document controls. It does not, by itself, get you 
     Enterprise
 
     $$$
-19. [OneTrust↗](https://www.onetrust.com/)
+18. [OneTrust↗](https://www.onetrust.com/)
     Enterprise GRC
 
     Came from privacy and expanded into GRC with strong data mapping; CMMC is not a core lane.
@@ -174,15 +165,15 @@ Software helps you track and document controls. It does not, by itself, get you 
     GDPR Privacy Vendor risk
 
     $$$
-20. [Optro↗](https://optro.ai/)
+19. [Optro↗](https://optro.ai/)
     Enterprise GRC
 
-    Agentic, AI-powered GRC for audit, cyber risk, compliance, and AI governance, built on a unified data core.
+    Agentic, AI-powered enterprise GRC platform (formerly AuditBoard) for audit, cyber risk, compliance, and AI governance; Forrester Wave and Gartner Magic Quadrant leader.
 
     Enterprise
 
     $$$
-21. [Risk Cognizance↗](https://riskcognizance.com/)
+20. [Risk Cognizance↗](https://riskcognizance.com/)
     Enterprise GRC
 
     AI-powered GRC spanning ERM, audit, policy, and third-party risk; multi-framework including CMMC, and sold to enterprises and MSSPs.
@@ -191,7 +182,7 @@ Software helps you track and document controls. It does not, by itself, get you 
     SOC 2 ISO 27001 HIPAA PCI DSS CMMC NIST 800-171 GDPR Vendor risk
 
     $$
-22. [SAP GRC↗](https://www.sap.com/products/financial-management/grc.html)
+21. [SAP GRC↗](https://www.sap.com/products/financial-management/grc.html)
     Enterprise GRC
 
     GRC and access controls bolted onto SAP installs; DIB SMB is not a stated segment.
@@ -199,7 +190,7 @@ Software helps you track and document controls. It does not, by itself, get you 
     Enterprise
 
     $$$
-23. [ServiceNow GRC↗](https://www.servicenow.com/products/governance-risk-and-compliance.html)
+22. [ServiceNow GRC↗](https://www.servicenow.com/products/governance-risk-and-compliance.html)
     Enterprise GRC
 
     Enterprise GRC heavyweight with a powerful workflow engine and heavy implementation lift; not targeted at SMBs.
@@ -207,7 +198,7 @@ Software helps you track and document controls. It does not, by itself, get you 
     Enterprise
 
     $$$
-24. [SimpleRisk↗](https://www.simplerisk.com/)
+23. [SimpleRisk↗](https://www.simplerisk.com/)
     Enterprise GRC
 
     Affordable, fast-to-deploy GRC for governance, risk, and compliance, including vendor assessments; offers an open-source core.
@@ -216,7 +207,7 @@ Software helps you track and document controls. It does not, by itself, get you 
     Vendor risk
 
     $
-25. [SmartSuite↗](https://www.smartsuite.com/)
+24. [SmartSuite↗](https://www.smartsuite.com/)
     Enterprise GRC
 
     Work-OS platform with a Connected GRC solution spanning risk, compliance, audit, third-party risk, and privacy.
@@ -225,7 +216,7 @@ Software helps you track and document controls. It does not, by itself, get you 
     Vendor risk Privacy
 
     $$
-26. [Workiva↗](https://www.workiva.com/)
+25. [Workiva↗](https://www.workiva.com/)
     Enterprise GRC
 
     Financial-reporting and SOX heavyweight for public companies; CMMC is out of scope.
@@ -233,7 +224,7 @@ Software helps you track and document controls. It does not, by itself, get you 
     Enterprise
 
     $$$
-27. [ZenGRC↗](https://www.zengrc.com/)
+26. [ZenGRC↗](https://www.zengrc.com/)
     Enterprise GRC
 
     GRC platform (ZenGRC by Reciprocity, formerly ROAR) for risk and compliance management, now with agentic-AI features; entry tier starts around $2.5k/mo.
@@ -242,7 +233,7 @@ Software helps you track and document controls. It does not, by itself, get you 
     SOC 2 ISO 27001 PCI DSS
 
     $$$
-28. [ComplianceForge↗](https://complianceforge.com/)
+27. [ComplianceForge↗](https://complianceforge.com/)
     CMMC-native
 
     Policy and document templates built on the Secure Controls Framework; document-first rather than SaaS, and heavily used by RPOs.
@@ -251,16 +242,16 @@ Software helps you track and document controls. It does not, by itself, get you 
     NIST 800-171 CMMC ISO 27001
 
     $
-29. [Cyturus↗](https://cyturus.com/)
+28. [Cyturus↗](https://cyturus.com/)
     CMMC-native
 
-    CMMC and risk tool built around an Adaptive Risk Model; stronger on quantification than peers.
+    CMMC and risk management platform built on a Living Control Set architecture with multi-framework support and third-party risk capabilities; stronger on risk quantification than most CMMC-native peers.
 
     SMB
     NIST 800-171 CMMC
 
     $$
-30. [Exostar↗](https://www.exostar.com/)
+29. [Exostar↗](https://www.exostar.com/)
     CMMC-native
 
     DIB identity and supply-chain federation mandated by some primes; functions as quasi-infrastructure for the defense supply chain.
@@ -269,7 +260,7 @@ Software helps you track and document controls. It does not, by itself, get you 
     CMMC CUI/ITAR
 
     $$
-31. [FutureFeed↗](https://futurefeed.co/)
+30. [FutureFeed↗](https://futurefeed.co/)
     CMMC-native
 
     CMMC-native tool strong on 110-control mapping and SPRS score tracking; lighter on broader GRC and continuous monitoring.
@@ -278,7 +269,7 @@ Software helps you track and document controls. It does not, by itself, get you 
     NIST 800-171 CMMC
 
     $
-32. [Greypike↗](https://greypike.com/)
+31. [Greypike↗](https://greypike.com/)
     CMMC-native
 
     End-to-end CMMC compliance with a certified-enclave and scope-reduction approach plus managed compliance.
@@ -287,7 +278,7 @@ Software helps you track and document controls. It does not, by itself, get you 
     CMMC NIST 800-171
 
     $$
-33. [IntelliGRC↗](https://intelligrc.com/)
+32. [IntelliGRC↗](https://intelligrc.com/)
     CMMC-native
 
     GRC tool purpose-built for CMMC and compliance automation for defense contractors.
@@ -296,16 +287,16 @@ Software helps you track and document controls. It does not, by itself, get you 
     CMMC NIST 800-171
 
     $$
-34. [Paramify↗](https://www.paramify.com/)
+33. [Paramify↗](https://www.paramify.com/)
     CMMC-native
 
-    Compliance automation that generates federal packages (such as the SSP) and collects evidence for FedRAMP, FISMA, and CMMC.
+    Compliance automation for generating federal packages (SSP, POA&M) for FedRAMP, CMMC, FISMA, and DoD ATO programs; achieved FedRAMP 20x Class C certification and raised $12M Series A.
 
     Enterprise
     CMMC FedRAMP NIST 800-171
 
     $$
-35. [Totem↗](https://www.totem.tech/)
+34. [Totem↗](https://www.totem.tech/)
     CMMC-native
 
     DIB-focused, SMB-friendly CMMC tool with a strong template library; lighter on continuous monitoring.
@@ -314,7 +305,7 @@ Software helps you track and document controls. It does not, by itself, get you 
     NIST 800-171 CMMC
 
     $
-36. [Duo Security↗](https://duo.com/)
+35. [Duo Security↗](https://duo.com/)
     Data protection
 
     Cisco-owned MFA; a practical building block for the CMMC access-control and identification families.
@@ -323,7 +314,7 @@ Software helps you track and document controls. It does not, by itself, get you 
     NIST 800-171 CMMC
 
     $
-37. [Microsoft GCC High↗](https://www.microsoft.com/en-us/microsoft-365/government)
+36. [Microsoft GCC High↗](https://www.microsoft.com/en-us/microsoft-365/government)
     Data protection
 
     Microsoft Government Community Cloud High; a de facto requirement for many DIB contractors handling CUI.
@@ -332,7 +323,7 @@ Software helps you track and document controls. It does not, by itself, get you 
     FedRAMP CMMC CUI/ITAR
 
     $$$
-38. [PreVeil↗](https://www.preveil.com/)
+37. [PreVeil↗](https://www.preveil.com/)
     Data protection
 
     End-to-end encrypted email and files for CUI; a strong DIB SMB fit with a lighter lift than GCC High.
@@ -341,7 +332,7 @@ Software helps you track and document controls. It does not, by itself, get you 
     CMMC CUI/ITAR
 
     $$
-39. [Proofpoint↗](https://www.proofpoint.com/)
+38. [Proofpoint↗](https://www.proofpoint.com/)
     Data protection
 
     Email-security incumbent; CMMC-adjacent via DLP and email controls.
@@ -350,7 +341,7 @@ Software helps you track and document controls. It does not, by itself, get you 
     NIST 800-171
 
     $$
-40. [Virtru↗](https://www.virtru.com/)
+39. [Virtru↗](https://www.virtru.com/)
     Data protection
 
     Email and data encryption with a strong DIB footprint for protecting CUI.
@@ -359,7 +350,7 @@ Software helps you track and document controls. It does not, by itself, get you 
     CMMC CUI/ITAR
 
     $$
-41. [BitSight↗](https://www.bitsight.com/)
+40. [BitSight↗](https://www.bitsight.com/)
     Third-party risk
 
     Security-ratings leader used by primes to assess subs; outside-in only.
@@ -368,7 +359,7 @@ Software helps you track and document controls. It does not, by itself, get you 
     Vendor risk
 
     $$$
-42. [Panorays↗](https://www.panorays.com/)
+41. [Panorays↗](https://www.panorays.com/)
     Third-party risk
 
     Questionnaire automation for third-party risk; workflow-heavy.
@@ -377,7 +368,7 @@ Software helps you track and document controls. It does not, by itself, get you 
     Vendor risk
 
     $$$
-43. [Prevalent↗](https://www.prevalent.net/)
+42. [Prevalent↗](https://www.prevalent.net/)
     Third-party risk
 
     Program-led, enterprise-focused third-party risk management.
@@ -386,7 +377,7 @@ Software helps you track and document controls. It does not, by itself, get you 
     Vendor risk
 
     $$$
-44. [SecurityScorecard↗](https://securityscorecard.com/)
+43. [SecurityScorecard↗](https://securityscorecard.com/)
     Third-party risk
 
     Direct BitSight competitor on the same outside-in ratings model; expanding into questionnaire automation.
@@ -395,7 +386,7 @@ Software helps you track and document controls. It does not, by itself, get you 
     Vendor risk
 
     $$$
-45. [UpGuard↗](https://www.upguard.com/)
+44. [UpGuard↗](https://www.upguard.com/)
     Third-party risk
 
     Combines third-party risk with attack-surface management; mid-market friendly.
@@ -404,7 +395,7 @@ Software helps you track and document controls. It does not, by itself, get you 
     Vendor risk
 
     $$
-46. [BigID↗](https://bigid.com/)
+45. [BigID↗](https://bigid.com/)
     Privacy management
 
     Data discovery and classification; CMMC-adjacent via CUI identification.
@@ -413,7 +404,7 @@ Software helps you track and document controls. It does not, by itself, get you 
     Privacy GDPR
 
     $$$
-47. [DataGrail↗](https://www.datagrail.io/)
+46. [DataGrail↗](https://www.datagrail.io/)
     Privacy management
 
     Subject-rights and DSAR automation; privacy-focused, with CMMC out of scope.
@@ -422,7 +413,7 @@ Software helps you track and document controls. It does not, by itself, get you 
     Privacy GDPR
 
     $$
-48. [Osano↗](https://www.osano.com/)
+47. [Osano↗](https://www.osano.com/)
     Privacy management
 
     Affordable mid-market privacy (cookie, consent, DSAR) with a narrow scope.
@@ -431,7 +422,7 @@ Software helps you track and document controls. It does not, by itself, get you 
     Privacy GDPR
 
     $$
-49. [Securiti↗](https://securiti.ai/)
+48. [Securiti↗](https://securiti.ai/)
     Privacy management
 
     Privacy and data-security convergence; enterprise-focused.
@@ -440,7 +431,7 @@ Software helps you track and document controls. It does not, by itself, get you 
     Privacy GDPR
 
     $$$
-50. [TrustArc↗](https://trustarc.com/)
+49. [TrustArc↗](https://trustarc.com/)
     Privacy management
 
     Privacy-program-management heritage; adjacent to but outside the CMMC stack.
@@ -449,7 +440,7 @@ Software helps you track and document controls. It does not, by itself, get you 
     Privacy GDPR
 
     $$$
-51. [CISO Assistant↗](https://intuitem.com/ciso-assistant/)
+50. [CISO Assistant↗](https://intuitem.com/ciso-assistant/)
     Open-source GRC
 
     The leading open-source GRC platform (by intuitem) covering risk, compliance, audit, and third-party risk across 150+ frameworks, with a free community edition and a paid Pro tier.
@@ -458,7 +449,7 @@ Software helps you track and document controls. It does not, by itself, get you 
     ISO 27001 SOC 2 CMMC GDPR
 
     FREE
-52. [eramba↗](https://www.eramba.org/)
+51. [eramba↗](https://www.eramba.org/)
     Open-source GRC
 
     Open-source GRC platform for risk, controls, policies, and audits, with paid enterprise support.
@@ -471,7 +462,7 @@ Software helps you track and document controls. It does not, by itself, get you 
 ## Browse by category
 
 * **Compliance automation** — 9 tools
-* **Enterprise GRC** — 18 tools
+* **Enterprise GRC** — 17 tools
 * **CMMC-native** — 8 tools
 * **Data protection** — 5 tools
 * **Third-party risk** — 5 tools
@@ -480,7 +471,7 @@ Software helps you track and document controls. It does not, by itself, get you 
 
 ## All tools, A→Z
 
-[Anecdotes](https://www.anecdotes.ai/) · [Apptega](https://www.apptega.com/) · [Archer](https://www.archerirm.com/) · [AuditBoard](https://www.auditboard.com/) · [BigID](https://bigid.com/) · [BitSight](https://www.bitsight.com/) · [Centraleyes](https://www.centraleyes.com/) · [CISO Assistant](https://intuitem.com/ciso-assistant/) · [ComplianceForge](https://complianceforge.com/) · [Cyturus](https://cyturus.com/) · [DataGrail](https://www.datagrail.io/) · [Diligent](https://www.diligent.com/) · [Drata](https://drata.com/) · [Duo Security](https://duo.com/) · [eramba](https://www.eramba.org/) · [Exostar](https://www.exostar.com/) · [FutureFeed](https://futurefeed.co/) · [Greypike](https://greypike.com/) · [Hyperproof](https://hyperproof.io/) · [IBM OpenPages](https://www.ibm.com/products/openpages) · [IntelliGRC](https://intelligrc.com/) · [LogicGate](https://www.logicgate.com/) · [MetricStream](https://www.metricstream.com/) · [Microsoft GCC High](https://www.microsoft.com/en-us/microsoft-365/government) · [Oneleet](https://www.oneleet.com/) · [OneTrust](https://www.onetrust.com/) · [Optro](https://optro.ai/) · [Osano](https://www.osano.com/) · [Panorays](https://www.panorays.com/) · [Paramify](https://www.paramify.com/) · [Prevalent](https://www.prevalent.net/) · [PreVeil](https://www.preveil.com/) · [Proofpoint](https://www.proofpoint.com/) · [Risk Cognizance](https://riskcognizance.com/) · [SAP GRC](https://www.sap.com/products/financial-management/grc.html) · [Scrut Automation](https://scrut.io/) · [Secureframe](https://secureframe.com/) · [Securiti](https://securiti.ai/) · [SecurityScorecard](https://securityscorecard.com/) · [ServiceNow GRC](https://www.servicenow.com/products/governance-risk-and-compliance.html) · [SimpleRisk](https://www.simplerisk.com/) · [SmartSuite](https://www.smartsuite.com/) · [Sprinto](https://sprinto.com/) · [Thoropass](https://thoropass.com/) · [Totem](https://www.totem.tech/) · [TrustArc](https://trustarc.com/) · [TrustCloud](https://www.trustcloud.ai/) · [UpGuard](https://www.upguard.com/) · [Vanta](https://www.vanta.com/) · [Virtru](https://www.virtru.com/) · [Workiva](https://www.workiva.com/) · [ZenGRC](https://www.zengrc.com/)
+[Anecdotes](https://www.anecdotes.ai/) · [Apptega](https://www.apptega.com/) · [Archer](https://www.archerirm.com/) · [BigID](https://bigid.com/) · [BitSight](https://www.bitsight.com/) · [Centraleyes](https://www.centraleyes.com/) · [CISO Assistant](https://intuitem.com/ciso-assistant/) · [ComplianceForge](https://complianceforge.com/) · [Cyturus](https://cyturus.com/) · [DataGrail](https://www.datagrail.io/) · [Diligent](https://www.diligent.com/) · [Drata](https://drata.com/) · [Duo Security](https://duo.com/) · [eramba](https://www.eramba.org/) · [Exostar](https://www.exostar.com/) · [FutureFeed](https://futurefeed.co/) · [Greypike](https://greypike.com/) · [Hyperproof](https://hyperproof.io/) · [IBM OpenPages](https://www.ibm.com/products/openpages) · [IntelliGRC](https://intelligrc.com/) · [LogicGate](https://www.logicgate.com/) · [MetricStream](https://www.metricstream.com/) · [Microsoft GCC High](https://www.microsoft.com/en-us/microsoft-365/government) · [Oneleet](https://www.oneleet.com/) · [OneTrust](https://www.onetrust.com/) · [Optro](https://optro.ai/) · [Osano](https://www.osano.com/) · [Panorays](https://www.panorays.com/) · [Paramify](https://www.paramify.com/) · [Prevalent](https://www.prevalent.net/) · [PreVeil](https://www.preveil.com/) · [Proofpoint](https://www.proofpoint.com/) · [Risk Cognizance](https://riskcognizance.com/) · [SAP GRC](https://www.sap.com/products/financial-management/grc.html) · [Scrut Automation](https://scrut.io/) · [Secureframe](https://secureframe.com/) · [Securiti](https://securiti.ai/) · [SecurityScorecard](https://securityscorecard.com/) · [ServiceNow GRC](https://www.servicenow.com/products/governance-risk-and-compliance.html) · [SimpleRisk](https://www.simplerisk.com/) · [SmartSuite](https://www.smartsuite.com/) · [Sprinto](https://sprinto.com/) · [Thoropass](https://thoropass.com/) · [Totem](https://www.totem.tech/) · [TrustArc](https://trustarc.com/) · [TrustCloud](https://www.trustcloud.ai/) · [UpGuard](https://www.upguard.com/) · [Vanta](https://www.vanta.com/) · [Virtru](https://www.virtru.com/) · [Workiva](https://www.workiva.com/) · [ZenGRC](https://www.zengrc.com/)
 
 ## Frequently asked questions
 
