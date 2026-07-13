@@ -610,5 +610,41 @@
     "website": "https://www.zengrc.com/",
     "lastReviewed": "2026-06-19",
     "published": true
+  },
+  {
+    "id": "mycroft",
+    "name": "Mycroft",
+    "type": "CMMC-native",
+    "priceTag": "$$",
+    "blurb": "End-to-end CMMC automation platform that handles documentation, implementation, continuous SPRS submission, and C3PAO audit coordination for defense contractors.",
+    "frameworks": ["CMMC", "NIST 800-171"],
+    "market": "Mid-market",
+    "website": "https://www.mycroft.io/",
+    "lastReviewed": "2026-07-13",
+    "published": true
+  },
+  {
+    "id": "scytale",
+    "name": "Scytale",
+    "type": "Compliance automation",
+    "priceTag": "$$",
+    "blurb": "AI-powered compliance automation platform backed by dedicated GRC experts, with continuous control monitoring and 80+ frameworks including CMMC; serves companies from first audit to enterprise scale.",
+    "frameworks": ["SOC 2", "ISO 27001", "HIPAA", "PCI DSS", "CMMC", "GDPR"],
+    "market": "Mid-market",
+    "website": "https://scytale.ai/",
+    "lastReviewed": "2026-07-13",
+    "published": true
+  },
+  {
+    "id": "opengrc",
+    "name": "OpenGRC",
+    "type": "Open-source GRC",
+    "priceTag": "FREE",
+    "blurb": "Open-source, self-hosted GRC platform for audit management, risk tracking, and compliance controls, with a free community edition and commercial enterprise tiers; targets SMBs and MSSPs avoiding legacy platform costs.",
+    "frameworks": [],
+    "market": "SMB",
+    "website": "https://opengrc.com/",
+    "lastReviewed": "2026-07-13",
+    "published": true
   }
 ]
