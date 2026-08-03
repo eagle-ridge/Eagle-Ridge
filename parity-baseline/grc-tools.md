@@ -398,7 +398,7 @@ Software helps you track and document controls. It does not, by itself, get you 
 45. [SecurityScorecard↗](https://securityscorecard.com/)
     Third-party risk
 
-    Direct BitSight competitor on the same outside-in ratings model; expanding into questionnaire automation.
+    Direct BitSight competitor on the same outside-in ratings model; acquired HyperComply (AI-powered questionnaire automation) and Driftnet (real-time internet scanning) in May 2026, broadening from security ratings into active supply-chain risk management.
 
     Enterprise
     Vendor risk

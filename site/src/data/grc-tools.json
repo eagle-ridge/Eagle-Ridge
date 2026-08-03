@@ -68,7 +68,7 @@
     "frameworks": ["SOC 2", "ISO 27001", "FedRAMP"],
     "market": "Enterprise",
     "website": "https://www.anecdotes.ai/",
-    "lastReviewed": "2026-06-19",
+    "lastReviewed": "2026-08-03",
     "published": true
   },
   {
@@ -128,7 +128,7 @@
     "frameworks": [],
     "market": "Enterprise",
     "website": "https://www.servicenow.com/products/governance-risk-and-compliance.html",
-    "lastReviewed": "2026-06-19",
+    "lastReviewed": "2026-08-03",
     "published": true
   },
   {
@@ -140,7 +140,7 @@
     "frameworks": ["Vendor risk"],
     "market": "Enterprise",
     "website": "https://www.archerirm.com/",
-    "lastReviewed": "2026-06-19",
+    "lastReviewed": "2026-08-03",
     "published": true
   },
   {
@@ -152,7 +152,7 @@
     "frameworks": [],
     "market": "Enterprise",
     "website": "https://www.metricstream.com/",
-    "lastReviewed": "2026-06-19",
+    "lastReviewed": "2026-08-03",
     "published": true
   },
   {
@@ -188,7 +188,7 @@
     "frameworks": [],
     "market": "Enterprise",
     "website": "https://www.workiva.com/",
-    "lastReviewed": "2026-06-19",
+    "lastReviewed": "2026-08-03",
     "published": true
   },
   {
@@ -212,7 +212,7 @@
     "frameworks": [],
     "market": "Enterprise",
     "website": "https://www.ibm.com/products/openpages",
-    "lastReviewed": "2026-06-19",
+    "lastReviewed": "2026-08-03",
     "published": true
   },
   {
@@ -344,7 +344,7 @@
     "frameworks": ["NIST 800-171", "CMMC"],
     "market": "SMB",
     "website": "https://duo.com/",
-    "lastReviewed": "2026-06-19",
+    "lastReviewed": "2026-08-03",
     "published": true
   },
   {
@@ -356,7 +356,7 @@
     "frameworks": ["Vendor risk"],
     "market": "Enterprise",
     "website": "https://www.bitsight.com/",
-    "lastReviewed": "2026-06-19",
+    "lastReviewed": "2026-08-03",
     "published": true
   },
   {
@@ -364,11 +364,11 @@
     "name": "SecurityScorecard",
     "type": "Third-party risk",
     "priceTag": "$$$",
-    "blurb": "Direct BitSight competitor on the same outside-in ratings model; expanding into questionnaire automation.",
+    "blurb": "Direct BitSight competitor on the same outside-in ratings model; acquired HyperComply (AI-powered questionnaire automation) and Driftnet (real-time internet scanning) in May 2026, broadening from security ratings into active supply-chain risk management.",
     "frameworks": ["Vendor risk"],
     "market": "Enterprise",
     "website": "https://securityscorecard.com/",
-    "lastReviewed": "2026-06-19",
+    "lastReviewed": "2026-08-03",
     "published": true
   },
   {
@@ -500,7 +500,7 @@
     "frameworks": ["SOC 2", "ISO 27001", "PCI DSS", "GDPR"],
     "market": "Mid-market",
     "website": "https://www.eramba.org/",
-    "lastReviewed": "2026-06-19",
+    "lastReviewed": "2026-08-03",
     "published": true
   },
   {
