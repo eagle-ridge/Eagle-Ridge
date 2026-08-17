@@ -80,7 +80,7 @@
     "frameworks": ["SOC 2", "ISO 27001", "HIPAA", "CMMC", "GDPR"],
     "market": "Mid-market",
     "website": "https://scrut.io/",
-    "lastReviewed": "2026-07-13",
+    "lastReviewed": "2026-08-17",
     "published": true
   },
   {
@@ -164,7 +164,7 @@
     "frameworks": ["GDPR", "Privacy", "Vendor risk"],
     "market": "Enterprise",
     "website": "https://www.onetrust.com/",
-    "lastReviewed": "2026-06-19",
+    "lastReviewed": "2026-08-10",
     "published": true
   },
   {
@@ -176,7 +176,7 @@
     "frameworks": ["Vendor risk", "SOC 2", "ISO 27001"],
     "market": "Enterprise",
     "website": "https://www.logicgate.com/",
-    "lastReviewed": "2026-06-19",
+    "lastReviewed": "2026-08-10",
     "published": true
   },
   {
@@ -200,7 +200,7 @@
     "frameworks": [],
     "market": "Enterprise",
     "website": "https://www.diligent.com/",
-    "lastReviewed": "2026-06-19",
+    "lastReviewed": "2026-08-10",
     "published": true
   },
   {
@@ -224,7 +224,7 @@
     "frameworks": [],
     "market": "Enterprise",
     "website": "https://www.sap.com/products/financial-management/grc.html",
-    "lastReviewed": "2026-06-19",
+    "lastReviewed": "2026-08-17",
     "published": true
   },
   {
@@ -236,7 +236,7 @@
     "frameworks": ["NIST 800-171", "CMMC"],
     "market": "Mid-market",
     "website": "https://futurefeed.co/",
-    "lastReviewed": "2026-07-13",
+    "lastReviewed": "2026-08-17",
     "published": true
   },
   {
@@ -260,7 +260,7 @@
     "frameworks": ["NIST 800-171", "CMMC"],
     "market": "SMB",
     "website": "https://www.totem.tech/",
-    "lastReviewed": "2026-07-13",
+    "lastReviewed": "2026-08-17",
     "published": true
   },
   {
@@ -272,7 +272,7 @@
     "frameworks": ["NIST 800-171", "CMMC"],
     "market": "SMB",
     "website": "https://cyturus.com/",
-    "lastReviewed": "2026-07-13",
+    "lastReviewed": "2026-08-17",
     "published": true
   },
   {
@@ -320,7 +320,7 @@
     "frameworks": ["FedRAMP", "CMMC", "CUI/ITAR"],
     "market": "Mid-market",
     "website": "https://www.microsoft.com/en-us/microsoft-365/government",
-    "lastReviewed": "2026-06-19",
+    "lastReviewed": "2026-08-17",
     "published": true
   },
   {
@@ -332,7 +332,7 @@
     "frameworks": ["NIST 800-171"],
     "market": "Enterprise",
     "website": "https://www.proofpoint.com/",
-    "lastReviewed": "2026-06-19",
+    "lastReviewed": "2026-08-10",
     "published": true
   },
   {
@@ -404,7 +404,7 @@
     "frameworks": ["Vendor risk"],
     "market": "Enterprise",
     "website": "https://www.prevalent.net/",
-    "lastReviewed": "2026-06-19",
+    "lastReviewed": "2026-08-10",
     "published": true
   },
   {
@@ -416,7 +416,7 @@
     "frameworks": ["Privacy", "GDPR"],
     "market": "Enterprise",
     "website": "https://trustarc.com/",
-    "lastReviewed": "2026-06-19",
+    "lastReviewed": "2026-08-10",
     "published": true
   },
   {
@@ -428,7 +428,7 @@
     "frameworks": ["Privacy", "GDPR"],
     "market": "Enterprise",
     "website": "https://securiti.ai/",
-    "lastReviewed": "2026-06-19",
+    "lastReviewed": "2026-08-10",
     "published": true
   },
   {
@@ -440,7 +440,7 @@
     "frameworks": ["Privacy", "GDPR"],
     "market": "Enterprise",
     "website": "https://bigid.com/",
-    "lastReviewed": "2026-06-19",
+    "lastReviewed": "2026-08-10",
     "published": true
   },
   {
@@ -452,7 +452,7 @@
     "frameworks": ["Privacy", "GDPR"],
     "market": "Mid-market",
     "website": "https://www.datagrail.io/",
-    "lastReviewed": "2026-06-19",
+    "lastReviewed": "2026-08-10",
     "published": true
   },
   {
@@ -464,7 +464,7 @@
     "frameworks": ["Privacy", "GDPR"],
     "market": "Mid-market",
     "website": "https://www.osano.com/",
-    "lastReviewed": "2026-06-19",
+    "lastReviewed": "2026-08-10",
     "published": true
   },
   {
@@ -524,7 +524,7 @@
     "frameworks": ["SOC 2", "ISO 27001", "HIPAA", "PCI DSS", "CMMC", "NIST 800-171", "GDPR", "Vendor risk"],
     "market": "Enterprise",
     "website": "https://riskcognizance.com/",
-    "lastReviewed": "2026-06-19",
+    "lastReviewed": "2026-08-17",
     "published": true
   },
   {
@@ -536,7 +536,7 @@
     "frameworks": ["CMMC", "NIST 800-171"],
     "market": "SMB",
     "website": "https://intelligrc.com/",
-    "lastReviewed": "2026-07-13",
+    "lastReviewed": "2026-08-17",
     "published": true
   },
   {
@@ -596,7 +596,7 @@
     "frameworks": ["Vendor risk", "Privacy"],
     "market": "Enterprise",
     "website": "https://www.smartsuite.com/",
-    "lastReviewed": "2026-06-19",
+    "lastReviewed": "2026-08-17",
     "published": true
   },
   {
@@ -620,7 +620,7 @@
     "frameworks": ["CMMC", "NIST 800-171"],
     "market": "Mid-market",
     "website": "https://www.mycroft.io/",
-    "lastReviewed": "2026-07-13",
+    "lastReviewed": "2026-08-17",
     "published": true
   },
   {
