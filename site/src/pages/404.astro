@@ -1,0 +1,34 @@
+---
+// Real 404 page. Its presence as dist/404.html makes Cloudflare Pages return
+// an actual HTTP 404 status for unknown paths instead of a soft-404 (200 +
+// app shell). Written for both humans and agents: short, with pointers to
+// the machine-readable entry points. noindex keeps it out of llms.txt,
+// sitemaps, and the .md-mirror pipeline (PAGES allowlist doesn't include it).
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const title = 'Page not found | Eagle Ridge Advisory';
+const description = 'This page does not exist. Find what you need via the sitemap, llms.txt, or the homepage.';
+---
+
+<BaseLayout title={title} description={description} path="/404" noindex={true}>
+  <div class="prose container">
+    <h1>404 — Page not found</h1>
+    <p>Nothing exists at this address on eagleridge.io. The page may have moved, or the URL may be mistyped.</p>
+
+    <h2>Where to go instead</h2>
+    <ul>
+      <li><a href="/">Homepage</a> — what Eagle Ridge Advisory does and who we serve</li>
+      <li><a href="/cmmc-compliance-consultant">CMMC services</a> — readiness for small defense contractors</li>
+      <li><a href="/insights">Insights</a> — articles on CMMC and compliance readiness</li>
+      <li><a href="/contact">Contact</a> — book a call or send a message</li>
+    </ul>
+
+    <h2>For agents and crawlers</h2>
+    <ul>
+      <li><a href="/llms.txt">/llms.txt</a> — machine-readable site guide and page list</li>
+      <li><a href="/sitemap.md">/sitemap.md</a> — markdown sitemap (every page has a <code>.md</code> mirror)</li>
+      <li><a href="/sitemap.xml">/sitemap.xml</a> — XML sitemap</li>
+      <li><a href="/AGENTS.md">/AGENTS.md</a> — how to consume this site programmatically</li>
+    </ul>
+  </div>
+</BaseLayout>

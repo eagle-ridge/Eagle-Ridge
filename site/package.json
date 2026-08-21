@@ -10,7 +10,9 @@
     "build": "astro build && python3 scripts/generate-md-mirrors.py",
     "preview": "astro preview",
     "astro": "astro",
-    "check:entities": "node scripts/check-entity-fields.mjs"
+    "test": "node --test scripts/*.test.mjs",
+    "check:entities": "node scripts/check-entity-fields.mjs",
+    "check:agent-readiness": "node scripts/verify-agent-readiness.mjs"
   },
   "dependencies": {
     "@fontsource/ibm-plex-mono": "5.2.7",
