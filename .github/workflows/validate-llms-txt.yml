@@ -38,6 +38,12 @@ jobs:
       - name: Validate entity fields
         run: npm run check:entities
 
+      - name: Middleware unit tests (markdown negotiation + 404s)
+        run: npm test
+
+      - name: Agent-readiness invariants (404 page, metadata, schema, contact, llms.txt)
+        run: npm run check:agent-readiness
+
       - name: Check llms.txt exists
         run: |
           if [ ! -f public/llms.txt ]; then

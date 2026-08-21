@@ -52,9 +52,19 @@ jobs:
         working-directory: site
         run: npm run build
 
+      - name: Run tests (middleware + agent-readiness invariants)
+        working-directory: site
+        run: |
+          npm test
+          npm run check:agent-readiness
+
+      # workingDirectory matters: wrangler picks up the Pages Functions in
+      # site/functions/ (markdown content negotiation) only when it runs from
+      # site/ — same shape as the documented manual deploy (`env -C site ...`).
       - name: Deploy dist to Cloudflare Pages
         uses: cloudflare/wrangler-action@v3
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          command: pages deploy site/dist --project-name eagleridge --branch main
+          workingDirectory: site
+          command: pages deploy dist --project-name eagleridge --branch main

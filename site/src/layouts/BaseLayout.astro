@@ -30,6 +30,7 @@ const { title, description, path, ogType = 'website', noindex = false } = Astro.
 const SITE = 'https://eagleridge.io';
 const canonical = SITE + (path === '/' ? '/' : path);
 const mirror = SITE + (path === '/' ? '/index.md' : `${path}.md`);
+const ogImage = SITE + '/logo.png'; // 512x512 eagle mark
 ---
 
 <!DOCTYPE html>
@@ -50,6 +51,15 @@ const mirror = SITE + (path === '/' ? '/index.md' : `${path}.md`);
     <meta property="og:url" content={canonical}>
     <meta property="og:title" content={title}>
     <meta property="og:description" content={description}>
+    <meta property="og:site_name" content="Eagle Ridge Advisory">
+    <meta property="og:image" content={ogImage}>
+    <meta property="og:image:width" content="512">
+    <meta property="og:image:height" content="512">
+    <meta property="og:image:alt" content="Eagle Ridge Advisory eagle mark">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content={title}>
+    <meta name="twitter:description" content={description}>
+    <meta name="twitter:image" content={ogImage}>
     {!noindex && <link rel="alternate" type="text/markdown" href={mirror} />}
     <link rel="preload" href={newsreader400} as="font" type="font/woff2" crossorigin />
     <link rel="preload" href={plexSans400} as="font" type="font/woff2" crossorigin />

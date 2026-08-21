@@ -46,6 +46,7 @@ PAGES = [
         "CMMC Readiness Checklist",
     ),
     ("about.html", "/about", "About"),
+    ("contact.html", "/contact", "Contact"),
     ("insights.html", "/insights", "Insights"),
     ("market-map.html", "/market-map", "Market Map"),
     ("grc-tools.html", "/grc-tools", "GRC Tools Index"),

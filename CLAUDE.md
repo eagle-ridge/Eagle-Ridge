@@ -31,7 +31,9 @@ CLOUDFLARE_API_TOKEN="$CF_TOKEN" CLOUDFLARE_ACCOUNT_ID=702342b70e150343381e08298
 
 | Path | Purpose |
 |------|---------|
-| `site/src/pages/*.astro` | Routes. `index`, `about`, `market-map`, `nobody-built-the-first-mile` (First Mile), `compliance-should-just-work` (Manifesto), `glossary`, `privacy`, `insights` (hub) + `insights/[...slug]` |
+| `site/src/pages/*.astro` | Routes. `index`, `about`, `contact`, `market-map`, `nobody-built-the-first-mile` (First Mile), `compliance-should-just-work` (Manifesto), `glossary`, `privacy`, `insights` (hub) + `insights/[...slug]`, `404` (real 404 status on Pages — do not add to PAGES/llms.txt, it's noindex) |
+| `site/functions/_middleware.js` | Cloudflare Pages Function: markdown content negotiation (`Accept: text/markdown` → serves the `.md` mirror with `Vary: Accept`; 406 for unsupported types) + markdown 404 bodies. Unit-tested by `site/scripts/middleware.test.mjs` (`npm test`). Deployed because wrangler runs from `site/` (CI sets `workingDirectory: site`) — keep it that way or Functions silently stop shipping |
+| `site/scripts/verify-agent-readiness.mjs` | Post-build gate (`npm run check:agent-readiness`): 404 page, homepage metadata/schema, contact page, llms.txt when-to-use section, sitemap coverage. Runs in both workflows |
 | `site/src/layouts/BaseLayout.astro` | Shared `<head>` (meta, canonical, favicon links, PostHog snippet) + page chrome |
 | `site/src/components/` | `Header.astro` (nav incl. Resources dropdown), `Footer.astro`, `ContactForm.astro` |
 | `site/src/content/` | Content collections: `pages` + `articles` (Insights hub) |

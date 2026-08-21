@@ -1,0 +1,65 @@
+---
+// Contact trust-anchor page: the canonical place to reach Eagle Ridge —
+// booking link first, Web3Forms message form as the alternative, plus
+// direct email/LinkedIn. Listed in PAGES (md mirror + sitemap) and llms.txt.
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ContactForm from '../components/ContactForm.astro';
+
+const title = 'Contact | Eagle Ridge Advisory';
+const description = 'Contact Eagle Ridge Advisory — book a free readiness call or send a message about CMMC, SOC 2, or ISO 27001 readiness for your company.';
+
+const jsonLd = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'ContactPage',
+  name: 'Contact Eagle Ridge Advisory',
+  url: 'https://eagleridge.io/contact',
+  description,
+  about: {
+    '@type': 'Organization',
+    name: 'Eagle Ridge Advisory',
+    url: 'https://eagleridge.io/',
+    email: 'contact@eagleridge.io',
+    contactPoint: {
+      '@type': 'ContactPoint',
+      email: 'contact@eagleridge.io',
+      contactType: 'sales',
+      url: 'https://eagleridge.io/contact',
+      availableLanguage: 'English',
+    },
+  },
+});
+---
+
+<BaseLayout title={title} description={description} path="/contact">
+  <Fragment slot="head">
+    <script type="application/ld+json" set:html={jsonLd} />
+  </Fragment>
+
+  <div class="prose container">
+    <h1>Contact Eagle Ridge Advisory</h1>
+    <p>Whether you're facing a CMMC deadline in a contract, an enterprise customer asking for SOC 2, or you simply want to know where you stand, the fastest way to find out is a short conversation. No pitch deck, no obligation — just a straight read on your gap and what closing it would take.</p>
+
+    <h2>Book a free readiness call</h2>
+    <p>Pick a time that works for you. In 50 minutes we'll walk through your contract requirements, your current security posture, and what a realistic readiness path looks like for a company your size.</p>
+    <p><a class="btn" href="https://cal.com/chris-mcconnell/eagle50" target="_blank" rel="noopener" data-cta="book-call" data-cta-loc="contact-page">Book a free readiness call</a></p>
+
+    <h2>Send a message</h2>
+    <p>Not ready to pick a time? Tell us a little about your situation and we'll reply within one business day.</p>
+    <ContactForm />
+
+    <h2>Other ways to reach us</h2>
+    <ul>
+      <li>Email: <a href="mailto:contact@eagleridge.io">contact@eagleridge.io</a></li>
+      <li>LinkedIn: <a href="https://www.linkedin.com/company/eagle-ridge-advisory/" target="_blank" rel="noopener noreferrer">Eagle Ridge Advisory</a></li>
+    </ul>
+
+    <h2>What happens next</h2>
+    <p>Every inquiry gets a reply from a person, not an autoresponder. If we're a fit, the next step is usually a short gap conversation; if we're not — for example, if you need a certification assessment rather than readiness — we'll point you in the right direction. A C3PAO can't do both readiness and your assessment, which is exactly why we stay on the readiness side.</p>
+  </div>
+</BaseLayout>
+
+<style>
+  .prose :global(.contact-form) {
+    margin-top: var(--er-space-3);
+  }
+</style>

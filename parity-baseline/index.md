@@ -18,15 +18,15 @@ Readiness for
 
 ## What We Do
 
-## GRC Readiness
+### GRC Readiness
 
 Most companies aren't ready when it's time to be assessed — and finding out the hard way costs time, money, and the contract clock. We take you through the whole readiness lifecycle: find the gaps, fix them with you, and document everything, so you're prepared before anyone grades you.
 
-## What You Get
+### What You Get
 
 A gap assessment against all 110 controls, a prioritized remediation plan with real costs, a findings report, your System Security Plan and SPRS score, an evidence inventory, and a continuous-monitoring plan to stay compliant after you pass.
 
-## Built for Small Teams
+### Built for Small Teams
 
 You don't need a security department to win government and enterprise contracts. We do the heavy lifting — drafting policies, standing up tooling, and documenting controls — sized for a company your size, not an enterprise.
 

@@ -8,8 +8,9 @@ interface Props {
 const { currentPath = '' } = Astro.props;
 
 // aria-current="page" marks the active page link. Insights stays active across
-// article routes (/insights/<slug>). Contact is an in-page anchor, never current.
+// article routes (/insights/<slug>).
 const isAbout = currentPath === '/about';
+const isContact = currentPath === '/contact';
 const isInsights = currentPath === '/insights' || currentPath.startsWith('/insights/');
 const isCmmc = currentPath === '/cmmc-compliance-consultant';
 const primary = [
@@ -57,7 +58,7 @@ const isResource = resources.some((r) => r.href === currentPath);
 						))}
 					</div>
 				</div>
-				<a href="/#contact-form">Contact</a>
+				<a href="/contact" aria-current={isContact ? 'page' : undefined}>Contact</a>
 				<a class="nav-cta" href="https://cal.com/chris-mcconnell/eagle50" target="_blank" rel="noopener">Book a call</a>
 			</nav>
 			<div class="tagline">GRC Readiness</div>
@@ -83,7 +84,7 @@ const isResource = resources.some((r) => r.href === currentPath);
 		{resources.map((r) => (
 			<a href={r.href} aria-current={r.href === currentPath ? 'page' : undefined}>{r.label}</a>
 		))}
-		<a href="/#contact-form">Contact</a>
+		<a href="/contact" aria-current={isContact ? 'page' : undefined}>Contact</a>
 		<a class="nav-cta" href="https://cal.com/chris-mcconnell/eagle50" target="_blank" rel="noopener">Book a call</a>
 		<span class="mobile-tagline">GRC Readiness</span>
 	</nav>
