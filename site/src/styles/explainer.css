@@ -27,7 +27,7 @@
 .explainer .figtag { font-family: var(--er-font-mono); font-size: 12px; letter-spacing: .12em;
   text-transform: uppercase; color: var(--er-mute); margin: 28px 0 8px; }
 .explainer figure { margin: 0; overflow-x: auto; }
-.explainer figure svg { display: block; max-width: 100%; height: auto; }
+.explainer figure svg { display: block; max-width: 100%; min-width: 680px; height: auto; } /* min-width: narrow screens scroll the figure instead of shrinking labels to fuzz */
 .explainer figcaption { font-family: var(--er-font-sans); font-size: 14px; color: var(--er-mute);
   margin-top: 10px; max-width: 640px; }
 .explainer .cols { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; margin-top: 24px; }
