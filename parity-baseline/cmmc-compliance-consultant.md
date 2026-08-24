@@ -34,7 +34,7 @@ Adds the enhanced NIST 800-172 requirements for the most sensitive programs. Gov
 1. **Scope & gap assessment.** We define your FCI/CUI boundary and assess every control that applies to you.
 2. **Prioritized remediation plan.** A Plan of Action & Milestones (POA&M) with real costs, sequenced by what matters most.
 3. **Fix the gaps with you.** We draft the policies, stand up the tooling, and document the controls — alongside your team.
-4. **Document & score.** Your System Security Plan (SSP), an evidence inventory, and your SPRS score.
+4. **Document & score.** Your System Security Plan (SSP), an evidence inventory, and your SPRS score. See [what the engagement does to that score](/path-to-88).
 5. **Readiness review & monitoring.** You walk in prepared, with a continuous-monitoring plan to help you stay ready afterward.
 
 ## What you walk away with
@@ -56,7 +56,7 @@ controls — sized for a company your size, not an enterprise.
 ## Frameworks we support
 
 CMMC and the NIST standards behind it — 800-171 and 800-53 — are our core
-competency. We also support readiness for SOC 2 Type 2, ISO 27001, and
+competency. We also support readiness for [SOC 2 Type 2](/soc2-observation-window), ISO 27001, and
 FedRAMP when your contracts or enterprise customers require them.
 
 ## CMMC readiness — frequently asked questions

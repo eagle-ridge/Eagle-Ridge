@@ -50,6 +50,12 @@ PAGES = [
     ("insights.html", "/insights", "Insights"),
     ("market-map.html", "/market-map", "Market Map"),
     ("grc-tools.html", "/grc-tools", "GRC Tools Index"),
+    ("path-to-88.html", "/path-to-88", "The Path to 88"),
+    (
+        "soc2-observation-window.html",
+        "/soc2-observation-window",
+        "The Observation Window",
+    ),
     # nobody-built-the-first-mile + compliance-should-just-work now live under
     # /insights/ and are auto-discovered by discover_insights() — no fixed entry.
     ("glossary.html", "/glossary", "Glossary"),
