@@ -118,3 +118,9 @@ npm run dev --prefix site          # local dev server (Astro, hot reload)
 npm run build --prefix site        # astro build + md-mirror/sitemap generation
 # Test contact form: submit manually in browser (Web3Forms blocks server-side requests)
 ```
+
+## Plans (`plans/`)
+
+- Filenames: `<hex>-<slug>.md`, hex ID is 3 lowercase digits (`004`, `005` … `009`, `00a`, `00b` … `0ff`).
+- Next ID = 1 + the highest ID across `origin/main` AND every open PR (`gh pr list`), not just your checkout. Two branches picking the same number is how 004 collided.
+- Never renumber a merged plan.
