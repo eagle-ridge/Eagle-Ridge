@@ -177,7 +177,7 @@ Software helps you track and document controls. It does not, by itself, get you 
 20. [Optro↗](https://optro.ai/)
     Enterprise GRC
 
-    Agentic, AI-powered enterprise GRC platform (formerly AuditBoard) for audit, cyber risk, compliance, and AI governance; Forrester Wave and Gartner Magic Quadrant leader.
+    Agentic, AI-powered enterprise GRC platform (formerly AuditBoard) for audit, cyber risk, compliance, and AI governance; acquired Midship in 2026 to add autonomous controls testing (automates up to 87% of controls management) and launched an MCP server for GRC data; Gartner Magic Quadrant and Forrester Wave leader.
 
     Enterprise
 
@@ -479,7 +479,7 @@ Software helps you track and document controls. It does not, by itself, get you 
 54. [OpenGRC↗](https://opengrc.com/)
     Open-source GRC
 
-    Open-source, self-hosted GRC platform for audit management, risk tracking, and compliance controls, with a free community edition and commercial enterprise tiers; targets SMBs and MSSPs avoiding legacy platform costs.
+    Self-hosted GRC platform for audit management, risk tracking, and compliance controls; the community edition is free for non-commercial use (relicensed from MIT to CC-BY-NC-SA in April 2025); commercial enterprise tiers start at $4,500/yr.
 
     SMB
 
