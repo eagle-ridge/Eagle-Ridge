@@ -37,7 +37,7 @@
   /* ---- Type detail ---- */
   --er-tracking-display: -0.028em;  /* tighten large serif            */
   --er-tracking-tight:   -0.015em;
-  --er-tracking-eyebrow:  0.22em;   /* open up uppercase labels       */
+  --er-tracking-eyebrow:  0.05em;   /* uppercase labels — tight, not tracked-out */
   --er-leading-tight:  1.06;
   --er-leading-body:   1.55;
 
