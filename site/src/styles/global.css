@@ -92,7 +92,7 @@ a { color: var(--er-accent); }
   font-family: var(--er-font-sans);
   font-weight: 500;
   font-size: 15px;
-  letter-spacing: 0.18em;
+  letter-spacing: 0.06em;
   text-transform: uppercase;
 }
 /* lockup left; nav + tagline grouped right */
@@ -108,9 +108,10 @@ a { color: var(--er-accent); }
   gap: 24px;
 }
 .site-nav a {
-  font-family: var(--er-font-mono);
+  font-family: var(--er-font-sans);
   font-size: 12px;
-  letter-spacing: 0.16em;
+  font-weight: 500;
+  letter-spacing: 0.05em;
   text-transform: uppercase;
   /* --er-ink-soft clears WCAG AA (4.5:1) on the header background */
   color: var(--er-ink-soft);
@@ -129,9 +130,10 @@ a { color: var(--er-accent); }
   text-decoration-thickness: 1.5px;
 }
 .site-header .tagline {
-  font-family: var(--er-font-mono);
+  font-family: var(--er-font-sans);
   font-size: 12px;
-  letter-spacing: 0.16em;
+  font-weight: 500;
+  letter-spacing: 0.05em;
   text-transform: uppercase;
   /* --er-mute fails WCAG 4.5:1 at this size; ink-soft reads as muted but passes */
   color: var(--er-ink-soft);
@@ -164,9 +166,10 @@ a { color: var(--er-accent); }
 /* ---- desktop "Resources" disclosure ---- */
 .nav-resources-wrap { position: relative; display: inline-flex; }
 .nav-resources {
-  font-family: var(--er-font-mono);
+  font-family: var(--er-font-sans);
   font-size: 12px;
-  letter-spacing: 0.16em;
+  font-weight: 500;
+  letter-spacing: 0.05em;
   text-transform: uppercase;
   color: var(--er-ink-soft);
   background: transparent;
@@ -208,9 +211,10 @@ a { color: var(--er-accent); }
 /* `display: flex` above beats [hidden]'s UA display:none, so it must opt back out. */
 .resources-menu[hidden] { display: none; }
 .resources-menu a {
-  font-family: var(--er-font-mono);
+  font-family: var(--er-font-sans);
   font-size: 12px;
-  letter-spacing: 0.16em;
+  font-weight: 500;
+  letter-spacing: 0.05em;
   text-transform: uppercase;
   color: var(--er-ink-soft);
   text-decoration: none;
@@ -253,9 +257,10 @@ a { color: var(--er-accent); }
   display: flex;
   align-items: center;
   min-height: 48px;
-  font-family: var(--er-font-mono);
+  font-family: var(--er-font-sans);
   font-size: 13px;
-  letter-spacing: 0.16em;
+  font-weight: 500;
+  letter-spacing: 0.05em;
   text-transform: uppercase;
   text-decoration: none;
   border-bottom: 1px solid var(--er-rule);
@@ -271,9 +276,10 @@ a { color: var(--er-accent); }
   align-items: center;
   min-height: 40px;
   padding-top: 10px;
-  font-family: var(--er-font-mono);
+  font-family: var(--er-font-sans);
   font-size: 11px;
-  letter-spacing: 0.18em;
+  font-weight: 500;
+  letter-spacing: 0.05em;
   text-transform: uppercase;
   color: var(--er-ink-soft);
 }
@@ -309,9 +315,10 @@ a { color: var(--er-accent); }
 .site-footer a:hover { color: var(--er-accent); text-decoration: underline; }
 .site-footer .colophon {
   margin-top: var(--er-space-2);
-  font-family: var(--er-font-mono);
+  font-family: var(--er-font-sans);
   font-size: 12px;
-  letter-spacing: 0.08em;
+  font-weight: 500;
+  letter-spacing: 0.05em;
   text-transform: uppercase;
   /* --er-mute fails WCAG 4.5:1 at this size on --er-bg */
   color: var(--er-ink-soft);
@@ -379,9 +386,10 @@ a { color: var(--er-accent); }
   padding-left: var(--er-space-3);
 }
 .hero-trust-label {
-  font-family: var(--er-font-mono);
+  font-family: var(--er-font-sans);
   font-size: var(--er-text-eyebrow);
-  letter-spacing: 0.16em;
+  font-weight: 500;
+  letter-spacing: 0.05em;
   text-transform: uppercase;
   color: var(--er-ink-soft);
 }
@@ -447,7 +455,8 @@ a { color: var(--er-accent); }
   gap: var(--er-space-2);
 }
 .badge {
-  font-family: var(--er-font-mono);
+  font-family: var(--er-font-sans);
+  font-weight: 500;
   font-size: var(--er-text-small);
   color: var(--er-ink);
   padding: 10px 18px;
@@ -467,9 +476,10 @@ a { color: var(--er-accent); }
 }
 .stat-block .stat-label {
   margin-top: var(--er-space-2);
-  font-family: var(--er-font-mono);
+  font-family: var(--er-font-sans);
   font-size: 12px;
-  letter-spacing: 0.14em;
+  font-weight: 500;
+  letter-spacing: 0.05em;
   text-transform: uppercase;
   /* --er-mute fails WCAG 4.5:1 at label sizes; ink-soft reads as muted */
   color: var(--er-ink-soft);
