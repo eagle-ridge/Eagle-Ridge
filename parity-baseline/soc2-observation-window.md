@@ -18,31 +18,6 @@ customer asks today, the earliest credible Type II report is about
 
 Fig. 01 · Why the start date is the whole game
 
-mo 1mo 2
-mo 3mo 4
-mo 5mo 6
-mo 7mo 8
-mo 9
-
-readiness assessment
-remediation & design
-observation window
-CPA audit
-report
-Month 1: every criterion assessed, gaps identified
-Months 2–3: the heavy lift — policies, control design, evidence automation
-Months 4–6: controls operate and accrue evidence — fixed calendar time
-fixed · can’t compress
-Month 7: the independent CPA firm examines the window
-their exam, our prep
-Month 8: the signed Type II report
-report in hand
-
-start 2 months later
-
-report → mo 10
-The whole schedule slides with the start date — the window never shrinks.
-
 Representative schedule with the minimum three-month window; many
 customers ask for six. Only readiness and remediation can move faster.
 That’s where Eagle Ridge works.
@@ -55,33 +30,6 @@ customer who asks for the report reads those exceptions. The point of
 readiness work is to enter the window with no known failures left.
 
 Fig. 02 · Would-be exceptions, driven to zero before the window opens
-
-0
-
-Readiness assessment finds 23 controls that would fail an audit today
-23
-found at readiness
-
-Policies written, processes fixed −8
-−8
-policies & process
-
-Evidence collection automated −7
-−7
-evidence automation
-
-Access reviews and vendor reviews stood up −5
-−5
-access & vendors
-
-Final fixes and dry-run checks −3
-−3
-final fixes
-
-Zero known failure modes when the observation window opens
-0
-window opens
-no known failures left
 
 Representative SaaS company; counts are Eagle Ridge’s readiness
 findings, not audit results — 23 findings spread across 17 of the 38
@@ -97,20 +45,6 @@ to each one, across the whole window — so those controls have to be
 operating, and collecting their evidence, from day one of the window.
 
 Fig. 03 · 33 security · 3 availability · 2 confidentiality
-
-at readiness
-
-21 criteria already operating
-
-17 criteria with gaps to close
-21 operating
-17 gaps
-at window open
-
-All 38 criteria covered by controls that are operating and collecting evidence
-
-all 38 covered · controls operating
-Hatched = controls running and generating the audit trail the auditor will test.
 
 2017 Trust Services Criteria (2022 revised points of focus). Some
 companies add Processing

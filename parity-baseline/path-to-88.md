@@ -17,17 +17,6 @@ number, using a representative eight-person machine shop.
 
 Fig. 01 · The scale you are scored on
 
-−203
-worst case
-
-110
-perfect score
-
-88
-
-−12
-a typical first score
-
 The DoD scores all 110 NIST 800-171 controls. Each gap subtracts
 1, 3, or 5 points. Miss every one and you lose 313 — from 110 all the way
 down to −203.
@@ -42,41 +31,6 @@ rule recognizes (a POA&M).
 
 Fig. 02 · A representative engagement, start to submission
 
-88 · conditional-pass line
-
-0
-
-Every contractor starts at 110
-110
-start
-
-17 five-point gaps: MFA, FIPS encryption, logging −85
-−85
-5-pt gaps
-MFA, FIPS, logging
-
-6 three-point gaps −18
-−18
-3-pt gaps
-
-19 one-point gaps −19
-−19
-1-pt gaps
-
-Score after an honest gap assessment: −12
-−12
-week 2: the truth
-
-Remediation (weeks 2–4) closes the gaps: +103. SSP writing and review then prove the score holds.
-+103
-remediation
-weeks 2–4
-
-Submitted score: 91, with 19 small items on a POA&M
-91
-submitted
-19 pts on POA&M
-
 Representative eight-person shop: seventeen 5-point gaps, six
 3-point, nineteen 1-point. Weights come from the official DoD Assessment
 Methodology; the submitted score keeps 19 points of one-point items on a
@@ -90,21 +44,6 @@ first two weeks, fix what moves the score, and put the rest on the
 POA&M.
 
 Fig. 03 · Where the 110 controls stand
-
-week 2
-
-68 controls met
-
-42 controls not met
-68 met
-42 not met
-week 7
-
-91 controls met
-
-19 one-point items on the POA&M, each with a 180-day deadline
-91 met
-19 on POA&M
 
 Hatched items are open but accepted: a POA&M is the DoD’s
 formal way to let you certify now and close the small gaps inside 180 days.
@@ -121,27 +60,6 @@ reads first. Then we review it the way an assessor will, and keep reviewing
 until there are no critical findings left.
 
 Fig. 04 · The engagement, week by week
-
-wk 1wk 2
-wk 3wk 4
-wk 5wk 6
-wk 7wk 8+
-
-discovery
-gap assessment
-remediation
-SSP writing
-assessor-style review
-evidence & prep
-C3PAO assessment
-Week 1: intake, CUI determination, system boundary
-Week 2: all 110 controls assessed, honest score
-Weeks 2–4: the score-moving fixes
-Weeks 3–5: 110 control narratives
-Weeks 5–6: iterate until zero critical findings
-Weeks 6–7: evidence binder, interview prep, score submission
-Week 8+: the certified third-party assessment
-their exam, our prep
 
 Remediation (weeks 2–4) is the heaviest lift; the dashed bar at
 the end is the assessment itself, run by an independent certified
