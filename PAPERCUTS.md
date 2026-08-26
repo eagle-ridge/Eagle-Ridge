@@ -1,2 +1,3 @@
-- 2026-08-24: separating Bash output with `echo ====X` → zsh `=word` expansion errors ("====X not found"); use `printf "\n## X\n"`
-- 2026-08-24: Playwright screenshot to scratchpad → denied; only ~/.playwright-mcp and ~ are allowed roots
+- 2026-08-26: fixing PR #95 on its branch → PR was squash-merged 2 min before the push; fix had to be re-opened as #99. Check `gh pr view --json state` before pushing to a PR branch.
+- 2026-08-26: regenerating md mirrors in a fresh worktree → `npm run build` fails on missing bs4; needed `uv run --with-requirements scripts/requirements.txt`.
+- 2026-08-26: creating a worktree for a PR branch → branch already checked out at ~/GitHub/eagle-ridge-wt-004; run `git worktree list` first.
