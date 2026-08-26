@@ -1,6 +1,6 @@
 # 004 — Port the marketing explainers to eagleridge.io
 
-**Status:** planned · **Written:** 2026-08-24 · **Source pages:** `eagle-ridge-methodology/marketing/` (merged there via PR #191)
+**Status:** implemented (branch feat/port-marketing-explainers, 2026-08-24) · **Written:** 2026-08-24 · **Source pages:** `eagle-ridge-methodology/marketing/` (merged there via PR #191)
 
 ## Goal
 

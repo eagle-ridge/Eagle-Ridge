@@ -1,0 +1,280 @@
+---
+// Ported verbatim from eagle-ridge-methodology/marketing/path-to-88.html (plan 004).
+// Figure numbers are verified claims: do not change any number without rerunning
+// them against data/nist-800-171-controls.yaml and the sources in the footer note.
+// Copy fixes made here must be back-ported to the methodology repo.
+import BaseLayout from '../layouts/BaseLayout.astro';
+import '../styles/explainer.css';
+
+const title = 'The Path to 88';
+const description = 'What an eight-week CMMC Level 2 engagement does to your SPRS score: from an honest first score below zero to 91, above the 88 conditional-pass line. Representative eight-person machine shop.';
+---
+
+<BaseLayout title={title} description={description} path="/path-to-88">
+<div class="explainer">
+<div class="wrap">
+
+<section class="hero">
+  <p class="eyebrow">Eagle Ridge Advisory · CMMC Level 2</p>
+  <div class="prose">
+    <h1>The path to 88</h1>
+    <p class="dek">Every defense contractor handling CUI is required to have an SPRS score. It runs
+    from <strong>110</strong> down to <strong>&minus;203</strong>, and a conditional
+    CMMC certification requires at least <strong class="accent">88</strong>.
+    Score yourself honestly for the first time and you will probably land far
+    below it&thinsp;&mdash;&thinsp;often below zero.</p>
+    <p>This page shows what an eight-week Eagle Ridge engagement does to that
+    number, using a representative eight-person machine shop.</p>
+  </div>
+
+  <p class="figtag">Fig. 01 &middot; The scale you are scored on</p>
+  <figure>
+    <svg viewBox="0 0 820 92" width="820" height="92" role="img"
+         aria-label="Number line from minus 203 to 110 with the 88 conditional-pass threshold marked">
+      <line x1="30" y1="46" x2="790" y2="46" stroke="#D9D0BF" stroke-width="2"/>
+      <!-- ticks: scale x = 30 + (v+203)/313*760 -->
+      <line x1="30" y1="38" x2="30" y2="54" stroke="#9A8E7A" stroke-width="2"/>
+      <text x="30" y="76" text-anchor="middle" class="num">&#8722;203</text>
+      <text x="30" y="28" text-anchor="middle" class="ax">worst case</text>
+      <line x1="790" y1="38" x2="790" y2="54" stroke="#9A8E7A" stroke-width="2"/>
+      <text x="790" y="76" text-anchor="middle" class="num">110</text>
+      <text x="790" y="28" text-anchor="end" class="ax">perfect score</text>
+      <line x1="736.6" y1="32" x2="736.6" y2="60" stroke="#B14E26" stroke-width="3"/>
+      <text x="736.6" y="76" text-anchor="middle" class="num-t">88</text>
+      <circle cx="493.8" cy="46" r="7" fill="#44372F" stroke="#FAF7F0" stroke-width="2"/>
+      <text x="493.8" y="76" text-anchor="middle" class="num">&#8722;12</text>
+      <text x="493.8" y="28" text-anchor="middle" class="ax">a typical first score</text>
+    </svg>
+    <figcaption>The DoD scores all 110 NIST 800-171 controls. Each gap subtracts
+    1, 3, or 5 points. Miss every one and you lose 313&thinsp;&mdash;&thinsp;from 110 all the way
+    down to &minus;203.</figcaption>
+  </figure>
+</section>
+
+<section>
+  <div class="prose">
+    <h2>One engagement, one number</h2>
+    <p>Everything in the engagement moves one number. First we find out where
+    you actually stand&thinsp;&mdash;&thinsp;no sugarcoating, because the assessor won&rsquo;t
+    sugarcoat either. Then the rest of the engagement climbs the score back over
+    the line, with the few small items left over on a formal remediation plan the
+    rule recognizes (a&nbsp;POA&amp;M).</p>
+  </div>
+
+  <p class="figtag">Fig. 02 &middot; A representative engagement, start to submission</p>
+  <figure>
+    <svg viewBox="0 0 860 420" width="860" height="420" role="img"
+         aria-label="Waterfall chart: score starts at 110, gaps reduce it to minus 12, remediation raises it to 91, above the 88 threshold">
+      <!-- y(v) = 20 + (115 - v) * 2.345 ; baseline y(0)=289.7 -->
+      <!-- threshold 88 -> y 83.3 -->
+      <line x1="30" y1="83.3" x2="790" y2="83.3" stroke="#1A1614"
+            stroke-width="1.5" stroke-dasharray="6 5"/>
+      <text x="346" y="75" text-anchor="middle" class="thresh">88 &middot; conditional-pass line</text>
+      <!-- zero baseline -->
+      <line x1="30" y1="289.7" x2="790" y2="289.7" stroke="#D9D0BF" stroke-width="1.5"/>
+      <text x="24" y="293" text-anchor="end" class="ax">0</text>
+
+      <!-- 1: start 110  (0..110) -->
+      <rect x="40" y="31.7" width="72" height="258" rx="4" fill="#44372F">
+        <title>Every contractor starts at 110</title></rect>
+      <text x="76" y="24" text-anchor="middle" class="num">110</text>
+      <text x="76" y="308" text-anchor="middle" class="lbl">start</text>
+
+      <!-- 2: 5-pt gaps: 110 -> 25 -->
+      <rect x="148" y="31.7" width="72" height="199.4" rx="4" fill="#9A8E7A">
+        <title>17 five-point gaps: MFA, FIPS encryption, logging &#8722;85</title></rect>
+      <text x="184" y="24" text-anchor="middle" class="num">&#8722;85</text>
+      <text x="184" y="308" text-anchor="middle" class="lbl">5-pt gaps</text>
+      <text x="184" y="324" text-anchor="middle" class="ax">MFA, FIPS, logging</text>
+
+      <!-- 3: 3-pt gaps: 25 -> 7 -->
+      <rect x="256" y="231.1" width="72" height="42.2" rx="4" fill="#9A8E7A">
+        <title>6 three-point gaps &#8722;18</title></rect>
+      <text x="292" y="224" text-anchor="middle" class="num">&#8722;18</text>
+      <text x="292" y="308" text-anchor="middle" class="lbl">3-pt gaps</text>
+
+      <!-- 4: 1-pt gaps: 7 -> -12 -->
+      <rect x="364" y="273.3" width="72" height="44.5" rx="4" fill="#9A8E7A">
+        <title>19 one-point gaps &#8722;19</title></rect>
+      <text x="400" y="266" text-anchor="middle" class="num">&#8722;19</text>
+      <text x="400" y="336" text-anchor="middle" class="lbl">1-pt gaps</text>
+
+      <!-- 5: today total -12 (0 down to -12) -->
+      <rect x="472" y="289.7" width="72" height="28.1" rx="4" fill="#44372F">
+        <title>Score after an honest gap assessment: &#8722;12</title></rect>
+      <text x="508" y="334" text-anchor="middle" class="num">&#8722;12</text>
+      <text x="508" y="352" text-anchor="middle" class="lbl-b">week 2: the truth</text>
+
+      <!-- 6: remediation rise -12 -> 91 -->
+      <rect x="580" y="76.3" width="72" height="241.5" rx="4" fill="#B14E26">
+        <title>Remediation (weeks 2&#8211;4) closes the gaps: +103. SSP writing and review then prove the score holds.</title></rect>
+      <text x="616" y="68" text-anchor="middle" class="num-t">+103</text>
+      <text x="616" y="336" text-anchor="middle" class="lbl">remediation</text>
+      <text x="616" y="352" text-anchor="middle" class="ax">weeks 2&ndash;4</text>
+
+      <!-- 7: final 91 -->
+      <rect x="688" y="76.3" width="72" height="213.4" rx="4" fill="#44372F">
+        <title>Submitted score: 91, with 19 small items on a POA&amp;M</title></rect>
+      <text x="724" y="68" text-anchor="middle" class="num">91</text>
+      <text x="724" y="308" text-anchor="middle" class="lbl-b">submitted</text>
+      <text x="724" y="324" text-anchor="middle" class="ax">19 pts on POA&amp;M</text>
+
+      <!-- connectors -->
+      <g stroke="#B9B093" stroke-width="1" stroke-dasharray="3 3">
+        <line x1="112" y1="31.7" x2="148" y2="31.7"/>
+        <line x1="220" y1="231.1" x2="256" y2="231.1"/>
+        <line x1="328" y1="273.3" x2="364" y2="273.3"/>
+        <line x1="436" y1="317.8" x2="472" y2="317.8"/>
+        <line x1="544" y1="317.8" x2="580" y2="317.8"/>
+        <line x1="652" y1="76.3" x2="688" y2="76.3"/>
+      </g>
+    </svg>
+    <figcaption>Representative eight-person shop: seventeen 5-point gaps, six
+    3-point, nineteen 1-point. Weights come from the official DoD Assessment
+    Methodology; the submitted score keeps 19 points of one-point items on a
+    POA&amp;M, under the 22 points the 88 threshold leaves you.</figcaption>
+  </figure>
+</section>
+
+<section>
+  <div class="prose">
+    <h2>All 110 controls, accounted for</h2>
+    <p>An assessor marks each control met or not met&thinsp;&mdash;&thinsp;only two controls
+    (MFA and FIPS encryption) carry partial credit. We assess all 110 in the
+    first two weeks, fix what moves the score, and put the rest on the
+    POA&amp;M.</p>
+  </div>
+
+  <p class="figtag">Fig. 03 &middot; Where the 110 controls stand</p>
+  <figure>
+    <svg viewBox="0 0 860 190" width="860" height="190" role="img"
+         aria-label="Two stacked bars: at week 2, 68 of 110 controls met and 42 not met; at week 7, 91 met and 19 one-point items on the POA&amp;M">
+      <defs>
+        <pattern id="hatchT" width="7" height="7" patternTransform="rotate(45)"
+                 patternUnits="userSpaceOnUse">
+          <rect width="7" height="7" fill="#FAF7F0"/>
+          <line x1="0" y1="0" x2="0" y2="7" stroke="#B14E26" stroke-width="2.4"/>
+        </pattern>
+      </defs>
+      <!-- 6px per control, x0=150; 2px paper gaps between segments -->
+      <text x="140" y="52" text-anchor="end" class="lbl-b">week 2</text>
+      <rect x="150" y="30" width="406" height="34" rx="4" fill="#9A8E7A">
+        <title>68 controls met</title></rect>
+      <rect x="558" y="30" width="250" height="34" rx="4" fill="#B14E26">
+        <title>42 controls not met</title></rect>
+      <text x="353" y="52" text-anchor="middle" class="num">68 met</text>
+      <text x="683" y="52" text-anchor="middle" class="num" fill="#FAF7F0">42 not met</text>
+
+      <text x="140" y="122" text-anchor="end" class="lbl-b">week 7</text>
+      <rect x="150" y="100" width="544" height="34" rx="4" fill="#9A8E7A">
+        <title>91 controls met</title></rect>
+      <rect x="696" y="100" width="112" height="34" rx="4" fill="url(#hatchT)" stroke="#B14E26" stroke-width="1">
+        <title>19 one-point items on the POA&amp;M, each with a 180-day deadline</title></rect>
+      <text x="422" y="122" text-anchor="middle" class="num">91 met</text>
+      <text x="752" y="156" text-anchor="middle" class="ax">19 on POA&amp;M</text>
+      <line x1="752" y1="138" x2="752" y2="144" stroke="#B14E26" stroke-width="1.5"/>
+    </svg>
+    <figcaption>Hatched items are open but accepted: a POA&amp;M is the DoD&rsquo;s
+    formal way to let you certify now and close the small gaps inside 180 days.
+    Close them and the certification goes Final; miss the 180 days and it lapses.
+    Most one-point controls qualify, a few are excluded outright, and one
+    five-point control qualifies only at partial credit&thinsp;&mdash;&thinsp;we verify
+    eligibility item by item.</figcaption>
+  </figure>
+</section>
+
+<section>
+  <div class="prose">
+    <h2>Eight weeks, start to assessor</h2>
+    <p>The work overlaps on purpose. While you and your IT support close technical
+    gaps, we write the System Security Plan&thinsp;&mdash;&thinsp;the document the assessor
+    reads first. Then we review it the way an assessor will, and keep reviewing
+    until there are no critical findings left.</p>
+  </div>
+
+  <p class="figtag">Fig. 04 &middot; The engagement, week by week</p>
+  <figure>
+    <svg viewBox="0 0 860 330" width="860" height="330" role="img"
+         aria-label="Timeline of seven engagement phases across eight weeks: discovery week 1; gap assessment week 2; remediation weeks 2 to 4; SSP writing weeks 3 to 5; assessor-style review weeks 5 to 6; evidence and prep weeks 6 to 7; C3PAO assessment week 8 and after">
+      <!-- weeks: x = 166 + (w-1)*80, col width 80 -->
+      <g class="ax" text-anchor="middle">
+        <text x="206" y="20">wk 1</text><text x="286" y="20">wk 2</text>
+        <text x="366" y="20">wk 3</text><text x="446" y="20">wk 4</text>
+        <text x="526" y="20">wk 5</text><text x="606" y="20">wk 6</text>
+        <text x="686" y="20">wk 7</text><text x="766" y="20">wk 8+</text>
+      </g>
+      <g stroke="#EAE4D4" stroke-width="1">
+        <line x1="166" y1="30" x2="166" y2="300"/><line x1="246" y1="30" x2="246" y2="300"/>
+        <line x1="326" y1="30" x2="326" y2="300"/><line x1="406" y1="30" x2="406" y2="300"/>
+        <line x1="486" y1="30" x2="486" y2="300"/><line x1="566" y1="30" x2="566" y2="300"/>
+        <line x1="646" y1="30" x2="646" y2="300"/><line x1="726" y1="30" x2="726" y2="300"/>
+        <line x1="806" y1="30" x2="806" y2="300"/>
+      </g>
+      <!-- rows at y = 38 + i*38, band h 24 -->
+      <g class="lbl" text-anchor="end">
+        <text x="156" y="55">discovery</text>
+        <text x="156" y="93">gap assessment</text>
+        <text x="156" y="131">remediation</text>
+        <text x="156" y="169">SSP writing</text>
+        <text x="156" y="207">assessor-style review</text>
+        <text x="156" y="245">evidence &amp; prep</text>
+        <text x="156" y="283">C3PAO assessment</text>
+      </g>
+      <rect x="166" y="38"  width="78"  height="24" rx="4" fill="#9A8E7A"><title>Week 1: intake, CUI determination, system boundary</title></rect>
+      <rect x="246" y="76"  width="78"  height="24" rx="4" fill="#9A8E7A"><title>Week 2: all 110 controls assessed, honest score</title></rect>
+      <rect x="246" y="114" width="238" height="24" rx="4" fill="#B14E26"><title>Weeks 2&#8211;4: the score-moving fixes</title></rect>
+      <rect x="326" y="152" width="238" height="24" rx="4" fill="#9A8E7A"><title>Weeks 3&#8211;5: 110 control narratives</title></rect>
+      <rect x="486" y="190" width="158" height="24" rx="4" fill="#9A8E7A"><title>Weeks 5&#8211;6: iterate until zero critical findings</title></rect>
+      <rect x="566" y="228" width="158" height="24" rx="4" fill="#9A8E7A"><title>Weeks 6&#8211;7: evidence binder, interview prep, score submission</title></rect>
+      <rect x="726" y="266" width="78"  height="24" rx="4" fill="none"
+            stroke="#B14E26" stroke-width="2" stroke-dasharray="5 4"><title>Week 8+: the certified third-party assessment</title></rect>
+      <text x="765" y="316" text-anchor="middle" class="ax">their exam, our prep</text>
+    </svg>
+    <figcaption>Remediation (weeks 2&ndash;4) is the heaviest lift; the dashed bar at
+    the end is the assessment itself, run by an independent certified
+    assessor&thinsp;&mdash;&thinsp;a C3PAO. The seven weeks before it exist to make that week
+    boring.</figcaption>
+  </figure>
+</section>
+
+<section>
+  <div class="prose">
+    <h2>Your hours vs. ours</h2>
+    <p>You run a shop, not a security team. The engagement keeps your part short
+    and specific. We do the document-heavy work.</p>
+  </div>
+  <div class="cols">
+    <div class="you">
+      <h3>What you do</h3>
+      <ul>
+        <li>Answer the intake questionnaire and one structured call</li>
+        <li>Gather the evidence we list&thinsp;&mdash;&thinsp;screenshots, invoices, settings</li>
+        <li>Approve tool purchases and let IT apply the config changes</li>
+        <li>Sign policies and sit for a practice interview</li>
+      </ul>
+    </div>
+    <div class="us">
+      <h3>What Eagle Ridge does</h3>
+      <ul>
+        <li>Assess all 110 controls and score you the way the DoD will</li>
+        <li>Prioritize fixes by points-per-dollar for a small-shop budget</li>
+        <li>Draft the SSP&rsquo;s 110 control narratives and the POA&amp;M</li>
+        <li>Review it assessor-style, package evidence, prep your people</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<p class="note">Figures show a representative engagement, not a quote&thinsp;&mdash;&thinsp;your
+starting score and timeline depend on your systems. Scoring follows the DoD
+Assessment Methodology; a Registered Provider reviews every deliverable before
+it reaches you. The SSP is delivered gap-documented and becomes
+assessment-ready once policies are signed and tools are deployed.<br>
+Sources: DoD NIST SP 800-171 Assessment Methodology v1.2.1 (2020) &middot; 32 CFR
+Part 170 (CMMC Program, &sect;170.21) &middot; NIST SP 800-171 Rev 2.<br>
+Eagle Ridge Advisory &middot; <a href="mailto:chris@eagleridge.io">chris@eagleridge.io</a> &middot;
+<a href="https://eagleridge.io">eagleridge.io</a></p>
+
+</div>
+</div>
+</BaseLayout>

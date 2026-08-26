@@ -1,0 +1,241 @@
+---
+// Ported verbatim from eagle-ridge-methodology/marketing/soc2-observation-window.html (plan 004).
+// Figure numbers are verified claims: do not change any number without rerunning
+// them against data/nist-800-171-controls.yaml and the sources in the footer note.
+// Copy fixes made here must be back-ported to the methodology repo.
+import BaseLayout from '../layouts/BaseLayout.astro';
+import '../styles/explainer.css';
+
+const title = 'The Observation Window';
+const description = 'Why the SOC 2 Type II start date sets your report date: the three-to-six-month observation window is calendar time no platform compresses. What readiness work moves, and what it cannot.';
+---
+
+<BaseLayout title={title} description={description} path="/soc2-observation-window">
+<div class="explainer">
+<div class="wrap">
+
+<section class="hero">
+  <p class="eyebrow">Eagle Ridge Advisory · SOC 2 Type II</p>
+  <div class="prose">
+    <h1>The observation window</h1>
+    <p class="dek">When an enterprise customer asks for your SOC&nbsp;2, they mean a
+    <strong>Type&nbsp;II report</strong>&thinsp;&mdash;&thinsp;an independent CPA firm attesting that
+    your controls <em>operated</em> over a window of <strong class="accent">three to
+    six months of real time</strong>. That window is calendar time. No platform
+    and no budget compresses it.</p>
+    <p>So your start date sets the date you can hand a customer a report. If a
+    customer asks today, the earliest credible Type&nbsp;II report is about
+    <strong>eight months out</strong>&thinsp;&mdash;&thinsp;and every week of delay moves it a week.</p>
+  </div>
+
+  <p class="figtag">Fig. 01 &middot; Why the start date is the whole game</p>
+  <figure>
+    <svg viewBox="0 0 860 330" width="860" height="330" role="img"
+         aria-label="Timeline: readiness, remediation, a fixed three-month observation window, the CPA audit, and the report; a ghost copy shifted two months later shows the report slipping two months">
+      <defs>
+        <pattern id="win" width="7" height="7" patternTransform="rotate(45)"
+                 patternUnits="userSpaceOnUse">
+          <rect width="7" height="7" fill="#FAF7F0"/>
+          <line x1="0" y1="0" x2="0" y2="7" stroke="#9A8E7A" stroke-width="2.4"/>
+        </pattern>
+      </defs>
+      <!-- month grid: x = 150 + (m-1)*78 -->
+      <g class="ax" text-anchor="middle">
+        <text x="150" y="20">mo 1</text><text x="228" y="20">mo 2</text>
+        <text x="306" y="20">mo 3</text><text x="384" y="20">mo 4</text>
+        <text x="462" y="20">mo 5</text><text x="540" y="20">mo 6</text>
+        <text x="618" y="20">mo 7</text><text x="696" y="20">mo 8</text>
+        <text x="774" y="20">mo 9</text>
+      </g>
+      <g stroke="#EAE4D4" stroke-width="1">
+        <line x1="150" y1="28" x2="150" y2="216"/><line x1="228" y1="28" x2="228" y2="216"/>
+        <line x1="306" y1="28" x2="306" y2="216"/><line x1="384" y1="28" x2="384" y2="216"/>
+        <line x1="462" y1="28" x2="462" y2="216"/><line x1="540" y1="28" x2="540" y2="216"/>
+        <line x1="618" y1="28" x2="618" y2="216"/><line x1="696" y1="28" x2="696" y2="216"/>
+        <line x1="774" y1="28" x2="774" y2="216"/><line x1="852" y1="28" x2="852" y2="216"/>
+      </g>
+      <g class="lbl" text-anchor="end">
+        <text x="140" y="55">readiness assessment</text>
+        <text x="140" y="93">remediation &amp; design</text>
+        <text x="140" y="131">observation window</text>
+        <text x="140" y="169">CPA audit</text>
+        <text x="140" y="207">report</text>
+      </g>
+      <rect x="150" y="38" width="76" height="24" rx="4" fill="#9A8E7A"><title>Month 1: every criterion assessed, gaps identified</title></rect>
+      <rect x="228" y="76" width="154" height="24" rx="4" fill="#B14E26"><title>Months 2&#8211;3: the heavy lift &#8212; policies, control design, evidence automation</title></rect>
+      <rect x="384" y="114" width="232" height="24" rx="4" fill="url(#win)" stroke="#9A8E7A" stroke-width="1.5"><title>Months 4&#8211;6: controls operate and accrue evidence &#8212; fixed calendar time</title></rect>
+      <text x="500" y="131" text-anchor="middle" class="lbl-b">fixed &middot; can&rsquo;t compress</text>
+      <rect x="618" y="152" width="76" height="24" rx="4" fill="none"
+            stroke="#B14E26" stroke-width="2" stroke-dasharray="5 4"><title>Month 7: the independent CPA firm examines the window</title></rect>
+      <text x="656" y="145" text-anchor="middle" class="ax">their exam, our prep</text>
+      <path d="M 706 194 l 6 12 l 13 2 l -9.5 9 l 2.5 13 l -12 -6.5 l -12 6.5 l 2.5 -13 l -9.5 -9 l 13 -2 z"
+            fill="#B14E26"><title>Month 8: the signed Type II report</title></path>
+      <text x="742" y="207" class="num-t">report in hand</text>
+
+      <!-- ghost scenario: start two months later -->
+      <line x1="30" y1="240" x2="830" y2="240" stroke="#D9D0BF" stroke-width="1"/>
+      <text x="140" y="273" text-anchor="end" class="lbl">start 2 months later</text>
+      <g opacity="0.45">
+        <rect x="306" y="256" width="76" height="20" rx="4" fill="#9A8E7A"/>
+        <rect x="384" y="256" width="154" height="20" rx="4" fill="#B14E26"/>
+        <rect x="540" y="256" width="232" height="20" rx="4" fill="url(#win)" stroke="#9A8E7A"/>
+        <rect x="774" y="256" width="76" height="20" rx="4" fill="none"
+              stroke="#B14E26" stroke-width="2" stroke-dasharray="5 4"/>
+      </g>
+      <text x="820" y="294" text-anchor="end" class="num">report &rarr; mo 10</text>
+      <text x="150" y="310" class="ax">The whole schedule slides with the start date &mdash; the window never shrinks.</text>
+    </svg>
+    <figcaption>Representative schedule with the minimum three-month window; many
+    customers ask for six. Only readiness and remediation can move faster.
+    That&rsquo;s where Eagle Ridge works.</figcaption>
+  </figure>
+</section>
+
+<section>
+  <div class="prose">
+    <h2>Exceptions are the enemy</h2>
+    <p>A Type&nbsp;II report tells a story. The auditor writes every control that
+    failed during the window into it as an <strong>exception</strong>, and every
+    customer who asks for the report reads those exceptions. The point of
+    readiness work is to enter the window with no known failures left.</p>
+  </div>
+
+  <p class="figtag">Fig. 02 &middot; Would-be exceptions, driven to zero before the window opens</p>
+  <figure>
+    <svg viewBox="0 0 860 320" width="860" height="320" role="img"
+         aria-label="Waterfall: 23 would-be exceptions at readiness assessment reduced by four workstreams to zero at window open">
+      <!-- y(v) = 20 + (23-v)*10 ; baseline y(0)=250 -->
+      <line x1="40" y1="250" x2="820" y2="250" stroke="#D9D0BF" stroke-width="1.5"/>
+      <text x="34" y="254" text-anchor="end" class="ax">0</text>
+
+      <rect x="60" y="20" width="80" height="230" rx="4" fill="#44372F">
+        <title>Readiness assessment finds 23 controls that would fail an audit today</title></rect>
+      <text x="100" y="13" text-anchor="middle" class="num">23</text>
+      <text x="100" y="268" text-anchor="middle" class="lbl">found at readiness</text>
+
+      <rect x="180" y="20" width="80" height="80" rx="4" fill="#9A8E7A">
+        <title>Policies written, processes fixed &#8722;8</title></rect>
+      <text x="220" y="13" text-anchor="middle" class="num">&#8722;8</text>
+      <text x="220" y="268" text-anchor="middle" class="lbl">policies &amp; process</text>
+
+      <rect x="300" y="100" width="80" height="70" rx="4" fill="#9A8E7A">
+        <title>Evidence collection automated &#8722;7</title></rect>
+      <text x="340" y="93" text-anchor="middle" class="num">&#8722;7</text>
+      <text x="340" y="268" text-anchor="middle" class="lbl">evidence automation</text>
+
+      <rect x="420" y="170" width="80" height="50" rx="4" fill="#9A8E7A">
+        <title>Access reviews and vendor reviews stood up &#8722;5</title></rect>
+      <text x="460" y="163" text-anchor="middle" class="num">&#8722;5</text>
+      <text x="460" y="268" text-anchor="middle" class="lbl">access &amp; vendors</text>
+
+      <rect x="540" y="220" width="80" height="30" rx="4" fill="#9A8E7A">
+        <title>Final fixes and dry-run checks &#8722;3</title></rect>
+      <text x="580" y="213" text-anchor="middle" class="num">&#8722;3</text>
+      <text x="580" y="268" text-anchor="middle" class="lbl">final fixes</text>
+
+      <rect x="660" y="244" width="80" height="6" rx="3" fill="#B14E26">
+        <title>Zero known failure modes when the observation window opens</title></rect>
+      <text x="700" y="234" text-anchor="middle" class="num-t">0</text>
+      <text x="700" y="268" text-anchor="middle" class="lbl-b">window opens</text>
+      <text x="700" y="286" text-anchor="middle" class="ax">no known failures left</text>
+
+      <g stroke="#B9B093" stroke-width="1" stroke-dasharray="3 3">
+        <line x1="140" y1="20" x2="180" y2="20"/>
+        <line x1="260" y1="100" x2="300" y2="100"/>
+        <line x1="380" y1="170" x2="420" y2="170"/>
+        <line x1="500" y1="220" x2="540" y2="220"/>
+        <line x1="620" y1="250" x2="660" y2="250"/>
+      </g>
+    </svg>
+    <figcaption>Representative SaaS company; counts are Eagle Ridge&rsquo;s readiness
+    findings, not audit results&thinsp;&mdash;&thinsp;23 findings spread across 17 of the 38
+    criteria. Anything still open when the window starts, we raise with the
+    auditor before they find it.</figcaption>
+  </figure>
+</section>
+
+<section>
+  <div class="prose">
+    <h2>The criteria, accounted for</h2>
+    <p>A typical SaaS scope covers <strong>38 Trust Services criteria</strong>: all
+    33 common criteria (the required Security category) plus Availability and
+    Confidentiality. The auditor tests the controls you&rsquo;ve mapped
+    to each one, across the whole window&thinsp;&mdash;&thinsp;so those controls have to be
+    operating, and collecting their evidence, from day one of the window.</p>
+  </div>
+
+  <p class="figtag">Fig. 03 &middot; 33 security &middot; 3 availability &middot; 2 confidentiality</p>
+  <figure>
+    <svg viewBox="0 0 860 190" width="860" height="190" role="img"
+         aria-label="Two stacked bars: at readiness assessment, 21 of 38 criteria operating and 17 with gaps; at window open, all 38 covered by operating controls">
+      <defs>
+        <pattern id="hatchOp" width="7" height="7" patternTransform="rotate(45)"
+                 patternUnits="userSpaceOnUse">
+          <rect width="7" height="7" fill="#FAF7F0"/>
+          <line x1="0" y1="0" x2="0" y2="7" stroke="#9A8E7A" stroke-width="2.4"/>
+        </pattern>
+      </defs>
+      <!-- 16px per criterion, x0=150 -->
+      <text x="140" y="52" text-anchor="end" class="lbl-b">at readiness</text>
+      <rect x="150" y="30" width="334" height="34" rx="4" fill="#9A8E7A">
+        <title>21 criteria already operating</title></rect>
+      <rect x="486" y="30" width="270" height="34" rx="4" fill="#B14E26">
+        <title>17 criteria with gaps to close</title></rect>
+      <text x="317" y="52" text-anchor="middle" class="num">21 operating</text>
+      <text x="621" y="52" text-anchor="middle" class="num" fill="#FAF7F0">17 gaps</text>
+
+      <text x="140" y="122" text-anchor="end" class="lbl-b">at window open</text>
+      <rect x="150" y="100" width="606" height="34" rx="4" fill="url(#hatchOp)" stroke="#9A8E7A" stroke-width="1">
+        <title>All 38 criteria covered by controls that are operating and collecting evidence</title></rect>
+      <rect x="308" y="107" width="290" height="20" fill="#FAF7F0"/>
+      <text x="453" y="122" text-anchor="middle" class="num">all 38 covered &middot; controls operating</text>
+      <text x="150" y="160" class="ax">Hatched = controls running and generating the audit trail the auditor will test.</text>
+    </svg>
+    <figcaption>2017 Trust Services Criteria (2022 revised points of focus). Some
+    companies add Processing
+    Integrity or Privacy&thinsp;&mdash;&thinsp;scope is set in the readiness assessment, against
+    what your customers ask for.</figcaption>
+  </figure>
+</section>
+
+<section>
+  <div class="prose">
+    <h2>Who does what</h2>
+    <p>You are building a product, not an audit program. We keep your part small
+    and concrete. We build the program.</p>
+  </div>
+  <div class="cols">
+    <div class="you">
+      <h3>What you do</h3>
+      <ul>
+        <li>Answer the readiness questionnaire and one structured call</li>
+        <li>Approve tooling and let your engineers apply the config changes</li>
+        <li>Keep running the controls during the window&thinsp;&mdash;&thinsp;they&rsquo;re yours now</li>
+        <li>Sign policies and sit for the auditor&rsquo;s interviews</li>
+      </ul>
+    </div>
+    <div class="us">
+      <h3>What Eagle Ridge does</h3>
+      <ul>
+        <li>Assess all in-scope criteria and map every gap to a fix</li>
+        <li>Write the policies and design controls that fit how you work</li>
+        <li>Automate evidence collection so the window runs itself</li>
+        <li>Help select the CPA firm, then manage the audit request list through report</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<p class="note">Figures show a representative engagement, not a quote&thinsp;&mdash;&thinsp;your
+scope, window length, and timeline depend on your systems and what your customers
+require. The audit itself is performed by an independent licensed CPA firm that
+you engage; independence rules mean Eagle Ridge prepares you and never audits its
+own work. Preparation aims at a clean report. Only the auditor can issue one.<br>
+Sources: AICPA 2017 Trust Services Criteria (with revised points of focus, 2022)
+&middot; AICPA attestation standards (AT-C 205) and CPA independence rules.<br>
+Eagle Ridge Advisory &middot; <a href="mailto:chris@eagleridge.io">chris@eagleridge.io</a> &middot;
+<a href="https://eagleridge.io">eagleridge.io</a></p>
+
+</div>
+</div>
+</BaseLayout>

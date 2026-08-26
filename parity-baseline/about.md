@@ -1,4 +1,4 @@
-<!-- Markdown mirror of https://eagleridge.io/about.html -->
+<!-- Markdown mirror of https://eagleridge.io/about -->
 
 # About | Eagle Ridge Advisory
 
@@ -37,7 +37,7 @@ We bring deep experience in:
 Our clients are:
 
 * Small businesses that need CMMC to win or keep a government contract
-* Startups and SMBs pursuing SOC 2 or ISO 27001 to land enterprise customers
+* Startups and SMBs pursuing [SOC 2](/soc2-observation-window) or ISO 27001 to land enterprise customers
 * Founder-led teams without a dedicated security or compliance function
 
 ## Our Approach

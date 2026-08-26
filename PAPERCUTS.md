@@ -1,0 +1,2 @@
+- 2026-08-24: separating Bash output with `echo ====X` → zsh `=word` expansion errors ("====X not found"); use `printf "\n## X\n"`
+- 2026-08-24: Playwright screenshot to scratchpad → denied; only ~/.playwright-mcp and ~ are allowed roots
