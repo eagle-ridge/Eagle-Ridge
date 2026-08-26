@@ -1,0 +1,2 @@
+- 2026-08-25: opening a PR → guessed `--repo miqcie/Eagle-Ridge`; the remote is `eagle-ridge/Eagle-Ridge`. Check `git remote -v` before `gh pr create --repo`.
+- 2026-08-25: Playwright screenshot → `filename` must be relative (allowed roots = worktree); it also landed at the worktree root, not `.playwright-mcp/`, so had to `find` it.
