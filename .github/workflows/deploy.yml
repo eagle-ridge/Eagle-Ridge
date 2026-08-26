@@ -19,7 +19,7 @@ concurrency:
 
 jobs:
   deploy:
-    runs-on: latchkey-small
+    runs-on: ubuntu-latest
     permissions:
       contents: read
       deployments: write
@@ -36,24 +36,10 @@ jobs:
         with:
           python-version: "3.12"
 
-      - name: Restore npm cache (Latchkey)
-        uses: latchkey-dev/cache-action@v1
-        id: latchkey-cache-npm
-        with:
-          action: restore
-          key: npm-${{ hashFiles('**/package-lock.json') }}
-          path: ~/.npm
       - name: Install Node dependencies
         working-directory: site
         run: npm ci
 
-      - name: Save npm cache (Latchkey)
-        uses: latchkey-dev/cache-action@v1
-        if: steps.latchkey-cache-npm.outputs.cache-hit != 'true'
-        with:
-          action: save
-          key: npm-${{ hashFiles('**/package-lock.json') }}
-          path: ~/.npm
       - name: Install Python dependencies (pinned — see scripts/requirements.txt)
         working-directory: site
         run: python -m pip install -r scripts/requirements.txt

@@ -28,7 +28,7 @@ jobs:
           python-version: "3.12"
 
       - name: Restore npm cache (Latchkey)
-        uses: latchkey-dev/cache-action@v1
+        uses: latchkey-dev/cache-action@d0dd21912a57c7435649c77f689b68d348d8a662 # v1
         id: latchkey-cache-npm
         with:
           action: restore
@@ -40,7 +40,7 @@ jobs:
           python3 -m pip install -r scripts/requirements.txt
 
       - name: Save npm cache (Latchkey)
-        uses: latchkey-dev/cache-action@v1
+        uses: latchkey-dev/cache-action@d0dd21912a57c7435649c77f689b68d348d8a662 # v1
         if: steps.latchkey-cache-npm.outputs.cache-hit != 'true'
         with:
           action: save
