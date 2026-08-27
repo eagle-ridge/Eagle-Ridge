@@ -1,5 +1,6 @@
-// Unit tests for functions/_middleware.js (markdown content negotiation +
-// agent-friendly 404s). Run via `npm test` (node --test scripts/).
+// Unit tests for src/lib/negotiation.js (markdown content negotiation +
+// agent-friendly 404s, invoked from src/worker.ts). Run via `npm test`
+// (node --test scripts/).
 import test from 'node:test';
 import assert from 'node:assert/strict';
 
@@ -9,7 +10,7 @@ import {
   markdownMirrorPath,
   negotiateAllowsHtml,
   onRequest,
-} from '../functions/_middleware.js';
+} from '../src/lib/negotiation.js';
 
 // ---- negotiate / parseAccept -------------------------------------------
 
@@ -74,6 +75,11 @@ test('mirror path mapping', () => {
   assert.equal(markdownMirrorPath('/logo.png'), null);
   assert.equal(markdownMirrorPath('/sitemap.xml'), null);
   assert.equal(markdownMirrorPath('/llms.txt'), null);
+  // Runtime namespaces are extensionless but never negotiable — the EmDash
+  // admin/API and Astro's image endpoint must not get 406s or .md mirrors.
+  assert.equal(markdownMirrorPath('/_emdash/admin'), null);
+  assert.equal(markdownMirrorPath('/_emdash/api/content'), null);
+  assert.equal(markdownMirrorPath('/_image'), null);
 });
 
 // ---- onRequest integration (mocked Pages context) -----------------------

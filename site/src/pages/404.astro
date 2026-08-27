@@ -1,4 +1,7 @@
 ---
+// Static page: prerendered at build time (md-mirror parity pipeline
+// reads the emitted HTML). Only EmDash CMS routes render on demand.
+export const prerender = true;
 // Real 404 page. Its presence as dist/404.html makes Cloudflare Pages return
 // an actual HTTP 404 status for unknown paths instead of a soft-404 (200 +
 // app shell). Written for both humans and agents: short, with pointers to

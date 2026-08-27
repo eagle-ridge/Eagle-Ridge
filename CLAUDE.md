@@ -1,10 +1,10 @@
 # Eagle Ridge Advisory — eagleridge.io
 
-**Astro site in `site/`, hosted on Cloudflare Pages** (project `eagleridge` → `eagleridge-7z4.pages.dev`). DNS cut over from GitHub Pages on 2026-06-13. The live site is built **entirely** from `site/src/` — `site/` is the only source of truth. The legacy parallel root-HTML site (root `*.html`, `*.md` mirrors, `CNAME`, `.nojekyll`, root `scripts/`, root `AGENTS.md`/`llms.txt`/`robots.txt`/`sitemap.*`) was removed 2026-06-18; recover from git history if ever needed.
+**Astro + [EmDash CMS](https://github.com/emdash-cms/emdash) site in `site/`, deployed as a Cloudflare Worker** (`eagleridge`, D1 `eagleridge-emdash` + R2 `eagleridge-media`). Migrated from static Cloudflare Pages per [plans/006-migrate-to-emdash.md](plans/006-migrate-to-emdash.md) — check that plan's Phase 2 checklist for cutover status. The live site is built **entirely** from `site/src/` — `site/` is the only source of truth; EmDash CMS content (admin at `/_emdash/admin`) lives in D1. All pre-existing pages are prerendered (`export const prerender = true`) — keep that flag on new static pages or they silently leave the md-mirror/parity pipeline. The legacy parallel root-HTML site was removed 2026-06-18; recover from git history if ever needed.
 
 ## Deploy — automated via GitHub Actions
 
-Pushes to `main` that touch `site/**` trigger [`.github/workflows/deploy.yml`](.github/workflows/deploy.yml), which builds the Astro site and uploads `site/dist` to the `eagleridge` Pages project via `wrangler`. **The Pages project is direct-upload, NOT git-connected** — Cloudflare does not rebuild on push by itself; the Action is what deploys. Repo secrets `CLOUDFLARE_API_TOKEN` + `CLOUDFLARE_ACCOUNT_ID` drive it.
+Pushes to `main` that touch `site/**` trigger [`.github/workflows/deploy.yml`](.github/workflows/deploy.yml), which builds the Astro site (bundling `site/src/worker.ts`) and runs `wrangler deploy` — wrangler follows `site/.wrangler/deploy/config.json` to the build-emitted `site/dist/server/wrangler.json` (Worker + D1/R2/assets bindings; static assets from `site/dist/client`). Nothing rebuilds on the Cloudflare side by itself; the Action is what deploys. Repo secrets `CLOUDFLARE_API_TOKEN` + `CLOUDFLARE_ACCOUNT_ID` drive it. EmDash schema migrations apply automatically at runtime after deploy.
 
 ### Manual deploy / local repro
 
@@ -12,27 +12,34 @@ Pushes to `main` that touch `site/**` trigger [`.github/workflows/deploy.yml`](.
 npm install --prefix site
 env -C site npx astro build
 env -C site uv run --with markdownify==1.2.2 --with beautifulsoup4==4.14.3 \
-  python scripts/generate-md-mirrors.py            # regenerates site/dist/*.md + sitemaps
+  python scripts/generate-md-mirrors.py            # regenerates site/dist/client/*.md + sitemaps
 # (npm run build does astro build + the generator, but needs the python deps installed)
+
+env -C site npx wrangler dev        # full local runtime (Worker + local D1/R2 sims)
 
 CF_TOKEN=$(op item get "Dash Cloudflare API Credential" --vault "Developer Vault" --fields credential --reveal)
 CLOUDFLARE_API_TOKEN="$CF_TOKEN" CLOUDFLARE_ACCOUNT_ID=702342b70e150343381e0829834cbcc7 \
-  env -C site npx wrangler pages deploy dist --project-name eagleridge --branch main
+  env -C site npx wrangler deploy
 ```
 
 ### Cloudflare facts
 
 - Account `702342b70e150343381e0829834cbcc7`; zone `eagleridge.io` = `064d7b70f67f32d15f2afbeb10a915f6`.
-- API token: `op://Developer Vault/Dash Cloudflare API Credential/credential` (Zone DNS edit + Pages edit). The older `Cloudflare Worker API` item is Workers-scoped and will NOT work for DNS/Pages.
-- DNS: apex `eagleridge.io` + `www` are proxied CNAMEs → `eagleridge-7z4.pages.dev`. Custom domains are registered on the Pages project; a `deactivated` status means DNS isn't pointing at the project.
+- API token: `op://Developer Vault/Dash Cloudflare API Credential/credential` (historically Zone DNS edit + Pages edit; the Workers migration needs Workers Scripts/D1/R2 edit added — see plan 006 phase 2).
+- DNS: apex `eagleridge.io` + `www` are proxied CNAMEs; custom domains attach to the `eagleridge` Worker after cutover (previously the `eagleridge` Pages project → `eagleridge-7z4.pages.dev`).
+- `site/wrangler.jsonc` is the config wrangler + the Astro adapter read; the D1 `database_id` in it is a placeholder until phase-2 provisioning.
 - Legacy GitHub Pages (root HTML / `CNAME` / `.nojekyll`) is retired and no longer served; the root files were removed 2026-06-18 (see intro). Recover from git history if ever needed.
 
 ## Files & structure (all under `site/`)
 
 | Path | Purpose |
 |------|---------|
-| `site/src/pages/*.astro` | Routes. `index`, `about`, `contact`, `market-map`, `nobody-built-the-first-mile` (First Mile), `compliance-should-just-work` (Manifesto), `glossary`, `privacy`, `insights` (hub) + `insights/[...slug]`, `404` (real 404 status on Pages — do not add to PAGES/llms.txt, it's noindex) |
-| `site/functions/_middleware.js` | Cloudflare Pages Function: markdown content negotiation (`Accept: text/markdown` → serves the `.md` mirror with `Vary: Accept`; 406 for unsupported types) + markdown 404 bodies. Unit-tested by `site/scripts/middleware.test.mjs` (`npm test`). Deployed because wrangler runs from `site/` (CI sets `workingDirectory: site`) — keep it that way or Functions silently stop shipping |
+| `site/src/pages/*.astro` | Routes, all `prerender = true`. `index`, `about`, `contact`, `market-map`, `nobody-built-the-first-mile` (First Mile), `compliance-should-just-work` (Manifesto), `glossary`, `privacy`, `insights` (hub) + `insights/[...slug]`, `404` (served with real 404 status — do not add to PAGES/llms.txt, it's noindex) |
+| `site/src/worker.ts` | Cloudflare Worker entry (`wrangler.jsonc` `main`): legacy-URL 301s → markdown content negotiation → EmDash/Astro handler; plus the EmDash `scheduled()` cron handler |
+| `site/src/lib/negotiation.js` | Markdown content negotiation (`Accept: text/markdown` → serves the `.md` mirror with `Vary: Accept`; 406 for unsupported types) + markdown 404 bodies; `/_emdash/*` and other `/_*` runtime routes exempt. Unit-tested by `site/scripts/middleware.test.mjs` (`npm test`) |
+| `site/src/lib/redirects.js` | Parses `public/_redirects` (still the source of truth) into Worker-issued 301s — under `run_worker_first` the asset layer no longer surfaces them. Tested by `site/scripts/redirects.test.mjs` |
+| `site/wrangler.jsonc` | Worker config (D1 `DB`, R2 `MEDIA`, crons, `run_worker_first`). The Astro build merges it into `dist/server/wrangler.json`, which `wrangler deploy`/`dev` use |
+| `site/src/live.config.ts` | EmDash live-collection loader (`getEmDashCollection`); coexists with file-based `src/content.config.ts` |
 | `site/scripts/verify-agent-readiness.mjs` | Post-build gate (`npm run check:agent-readiness`): 404 page, homepage metadata/schema, contact page, llms.txt when-to-use section, sitemap coverage. Runs in both workflows |
 | `site/src/layouts/BaseLayout.astro` | Shared `<head>` (meta, canonical, favicon links, PostHog snippet) + page chrome |
 | `site/src/components/` | `Header.astro` (nav incl. Resources dropdown), `Footer.astro`, `ContactForm.astro` |
@@ -40,9 +47,9 @@ CLOUDFLARE_API_TOKEN="$CF_TOKEN" CLOUDFLARE_ACCOUNT_ID=702342b70e150343381e08298
 | `site/src/styles/` | `tokens.css` (brand `--er-*` design tokens) + `global.css` (chrome, nav/dropdown, layout) |
 | `site/public/` | Static passthrough: `favicon.svg`/`favicon.ico` (eagle mark), `logo.png`, `eagle-ridge-mark.png`, `AGENTS.md`, `robots.txt`, `_redirects` (old `.html` → clean URLs), `_headers` |
 | `site/public/llms.txt` | LLM-readable site summary ([llmstxt.org](https://llmstxt.org/) standard) — update when pages/services change |
-| `site/scripts/generate-md-mirrors.py` | Post-build: emits per-page `.md` mirrors + sitemaps into `dist/`. Runs as part of `npm run build`; locally needs `uv run --with markdownify --with beautifulsoup4 python scripts/generate-md-mirrors.py` from `site/` |
+| `site/scripts/generate-md-mirrors.py` | Post-build: emits per-page `.md` mirrors + sitemaps into `dist/client/`. Runs as part of `npm run build`; locally needs `uv run --with markdownify --with beautifulsoup4 python scripts/generate-md-mirrors.py` from `site/` |
 | `parity-baseline/*.md` (repo root) | **Live** — CI parity oracle. Every built `.md` mirror must byte-match its baseline (after stripping nav/footer/chrome). Do not move. |
-| `.github/workflows/deploy.yml` | Builds `site/` + `wrangler pages deploy` on push to `main` touching `site/**` |
+| `.github/workflows/deploy.yml` | Builds `site/` + `wrangler deploy` (Worker) on push to `main` touching `site/**` |
 | `.github/workflows/validate-llms-txt.yml` | PR check: llms.txt structure, URL liveness, and `.md`-mirror parity vs `parity-baseline/` |
 
 ## Do NOT Touch (during routine site edits)
@@ -114,8 +121,10 @@ reintroduce it without direction.
 
 ```bash
 npm install --prefix site          # first time
-npm run dev --prefix site          # local dev server (Astro, hot reload)
-npm run build --prefix site        # astro build + md-mirror/sitemap generation
+npm run dev --prefix site          # local dev server (Astro + EmDash, hot reload, local D1/R2)
+                                   # EmDash admin: http://localhost:4321/_emdash/admin
+npm run build --prefix site        # astro build (worker + prerendered pages) + md-mirror/sitemap generation
+env -C site npx wrangler dev       # production-shaped runtime against dist/ (negotiation, 301s, 404s)
 # Test contact form: submit manually in browser (Web3Forms blocks server-side requests)
 ```
 

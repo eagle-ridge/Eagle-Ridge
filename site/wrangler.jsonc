@@ -1,0 +1,36 @@
+{
+	"$schema": "node_modules/wrangler/config-schema.json",
+	// Cloudflare Workers config for the EmDash-backed site. `astro build`
+	// (via the @astrojs/cloudflare adapter) merges this with the adapter's
+	// own bindings and emits the deployable config alongside dist/.
+	"name": "eagleridge",
+	"main": "./src/worker.ts",
+	"compatibility_date": "2026-02-24",
+	"compatibility_flags": ["nodejs_compat"],
+	"d1_databases": [
+		{
+			"binding": "DB",
+			"database_name": "eagleridge-emdash",
+			// Set after provisioning: wrangler d1 create eagleridge-emdash
+			"database_id": "00000000-0000-0000-0000-000000000000",
+		},
+	],
+	// Route every request through the Worker (src/worker.ts) so markdown
+	// content negotiation sees extensionless page routes before the static
+	// asset layer answers them. The build fills in directory/binding.
+	"assets": {
+		"binding": "ASSETS",
+		"run_worker_first": true,
+	},
+	"r2_buckets": [
+		{
+			"binding": "MEDIA",
+			"bucket_name": "eagleridge-media",
+		},
+	],
+	// General maintenance plus the bounded Media Usage lane (see src/worker.ts).
+	// Scheduled publishing and plugin cron run from the first trigger.
+	"triggers": {
+		"crons": ["* * * * *", "*/2 * * * *"],
+	},
+}

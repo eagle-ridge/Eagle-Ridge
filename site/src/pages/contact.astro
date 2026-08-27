@@ -1,4 +1,7 @@
 ---
+// Static page: prerendered at build time (md-mirror parity pipeline
+// reads the emitted HTML). Only EmDash CMS routes render on demand.
+export const prerender = true;
 // Contact trust-anchor page: the canonical place to reach Eagle Ridge —
 // booking link first, Web3Forms message form as the alternative, plus
 // direct email/LinkedIn. Listed in PAGES (md mirror + sitemap) and llms.txt.

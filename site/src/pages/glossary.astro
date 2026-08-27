@@ -1,4 +1,7 @@
 ---
+// Static page: prerendered at build time (md-mirror parity pipeline
+// reads the emitted HTML). Only EmDash CMS routes render on demand.
+export const prerender = true;
 import { getEntry, render } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
 

@@ -1,4 +1,7 @@
 ---
+// Static page: prerendered at build time (md-mirror parity pipeline
+// reads the emitted HTML). Only EmDash CMS routes render on demand.
+export const prerender = true;
 // The GRC tools index — an evergreen, SEO/GEO-friendly directory of the
 // compliance tooling we track. Structure borrowed from terminalvalue.io
 // (status line, scannable rows, price tags, category + A→Z grouping) but

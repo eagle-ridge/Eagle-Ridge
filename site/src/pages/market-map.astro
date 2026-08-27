@@ -1,4 +1,7 @@
 ---
+// Static page: prerendered at build time (md-mirror parity pipeline
+// reads the emitted HTML). Only EmDash CMS routes render on demand.
+export const prerender = true;
 // The CMMC market map. Grid, legend, and mobile list are pre-rendered at
 // build time from src/data/market-map-entities.json; one client script adds
 // filter/search/detail-card interactivity.
