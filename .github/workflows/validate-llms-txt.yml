@@ -119,6 +119,11 @@ jobs:
 
           echo "llms.txt structure is valid"
 
+      - name: Free port 8080 if in use
+        shell: bash
+        run: |
+          fuser -k 8080/tcp 2>/dev/null || true
+          sleep 1
       - name: Verify referenced URLs resolve to built files
         run: |
           # Serve the build output and probe each referenced URL. Clean URLs
