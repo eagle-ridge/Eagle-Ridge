@@ -1,5 +1,8 @@
-// Cloudflare Pages Functions middleware: markdown content negotiation
-// (acceptmarkdown.com) + agent-friendly 404s.
+// Markdown content negotiation (acceptmarkdown.com) + agent-friendly 404s.
+// Formerly the Cloudflare Pages Functions middleware (site/functions/); now
+// runs inside the Worker entry (src/worker.ts), which wraps the EmDash/Astro
+// handler and passes a Pages-shaped context ({ request, next, env.ASSETS })
+// so the behavior and unit tests carry over unchanged.
 //
 // Behavior on extensionless page routes (GET/HEAD only):
 //   - Accept prefers text/markdown  -> serve the page's .md mirror with
@@ -12,9 +15,6 @@
 // Q-values are honored per RFC 9110 (specificity: exact > text/* > */*).
 // Requests for files with an extension (assets, .md mirrors, sitemaps, ...)
 // pass through untouched, as do non-GET/HEAD methods.
-//
-// Deployed because `wrangler pages deploy dist` runs from site/ (locally via
-// `env -C site`, in CI via workingDirectory: site) and picks up site/functions/.
 
 const OFFERED = ['text/html', 'text/markdown'];
 
@@ -74,6 +74,10 @@ export function negotiate(acceptHeader) {
  * Returns null for paths that are not negotiable (file extension present).
  */
 export function markdownMirrorPath(pathname) {
+  // Runtime namespaces (/_emdash admin+API, /_image, /_server-islands, ...)
+  // are extensionless but never negotiable — their clients send JSON/binary
+  // Accept headers that must not be answered with 406 or a .md mirror.
+  if (pathname.startsWith('/_')) return null;
   const last = pathname.split('/').pop();
   if (last.includes('.')) return null; // asset / mirror / sitemap etc.
   if (pathname === '/' || pathname === '') return '/index.md';

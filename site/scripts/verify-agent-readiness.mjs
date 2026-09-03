@@ -9,7 +9,7 @@ import { join, dirname } from 'node:path';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const SITE = join(__dirname, '..');
-const DIST = join(SITE, 'dist');
+const DIST = join(SITE, 'dist', 'client');
 
 let errors = 0;
 const fail = (msg) => { console.error(`FAIL: ${msg}`); errors++; };
@@ -29,7 +29,7 @@ const textOfMain = (html) => {
 // ---- 1. Real 404 page ----------------------------------------------------
 const notFound = join(DIST, '404.html');
 if (!existsSync(notFound)) {
-  fail('dist/404.html missing — Cloudflare Pages will soft-404 unknown paths');
+  fail('dist/client/404.html missing — unknown paths will soft-404');
 } else {
   const html = read(notFound);
   for (const needle of ['/llms.txt', '/sitemap.md', '/sitemap.xml']) {
@@ -97,8 +97,8 @@ if (/404/.test(sitemapXml)) fail('sitemap.xml must not list the 404 page');
 ok('sitemaps cover /contact and exclude 404');
 
 // ---- 7. Negotiation middleware ships ------------------------------------
-const middleware = join(SITE, 'functions', '_middleware.js');
-if (!existsSync(middleware)) fail('site/functions/_middleware.js missing — no markdown negotiation');
+const middleware = join(SITE, 'src', 'lib', 'negotiation.js');
+if (!existsSync(middleware)) fail('site/src/lib/negotiation.js missing — no markdown negotiation');
 else {
   const src = read(middleware);
   if (!src.includes('text/markdown')) fail('middleware does not negotiate text/markdown');

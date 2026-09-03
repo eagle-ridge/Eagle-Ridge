@@ -1,4 +1,7 @@
 ---
+// Static page: prerendered at build time (md-mirror parity pipeline
+// reads the emitted HTML). Only EmDash CMS routes render on demand.
+export const prerender = true;
 // "Compliance should just work" — a first-principles manifesto essay.
 // Standalone interactive page (the market-map.astro pattern): the essay body,
 // 6 interactive SVG figures, and a footnote apparatus live here directly, wrapped

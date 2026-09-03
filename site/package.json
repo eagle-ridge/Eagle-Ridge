@@ -15,9 +15,19 @@
     "check:agent-readiness": "node scripts/verify-agent-readiness.mjs"
   },
   "dependencies": {
+    "@astrojs/cloudflare": "^13.7.0",
+    "@astrojs/react": "^6.0.4",
+    "@emdash-cms/cloudflare": "^0.35.0",
     "@fontsource/ibm-plex-mono": "5.2.7",
     "@fontsource/ibm-plex-sans": "5.2.8",
     "@fontsource/newsreader": "5.2.10",
-    "astro": "6.4.5"
+    "astro": "6.4.5",
+    "emdash": "^0.35.0",
+    "react": "^19.2.4",
+    "react-dom": "^19.2.4"
+  },
+  "devDependencies": {
+    "@cloudflare/workers-types": "^5.20260826.1",
+    "wrangler": "^4.126.0"
   }
 }

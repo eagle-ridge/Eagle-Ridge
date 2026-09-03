@@ -1,9 +1,15 @@
-name: Deploy to Cloudflare Pages
+name: Deploy to Cloudflare Workers
 
-# The eagleridge Pages project is a direct-upload project (not git-connected),
-# so this workflow is what makes pushes to main actually deploy. It builds the
-# Astro site in site/ (Node + Python md-mirror generator) and uploads dist/ to
-# the `eagleridge` project via wrangler.
+# The site deploys as a Cloudflare Worker (EmDash CMS needs a server runtime;
+# see plans/006-migrate-to-emdash.md). `astro build` bundles src/worker.ts and
+# emits the deployable config at site/dist/server/wrangler.json (wrangler
+# follows site/.wrangler/deploy/config.json to find it), with prerendered
+# HTML + .md mirrors served from site/dist/client as static assets.
+# Pushes to main that touch site/** are what deploy — nothing rebuilds on
+# the Cloudflare side by itself.
+#
+# EmDash schema migrations run automatically at runtime on first request
+# after a deploy (the default runtime-migrations mode).
 
 on:
   push:
@@ -14,7 +20,7 @@ on:
   workflow_dispatch: {}
 
 concurrency:
-  group: pages-deploy
+  group: workers-deploy
   cancel-in-progress: true
 
 jobs:
@@ -52,19 +58,19 @@ jobs:
         working-directory: site
         run: npm run build
 
-      - name: Run tests (middleware + agent-readiness invariants)
+      - name: Run tests (negotiation/redirects + agent-readiness invariants)
         working-directory: site
         run: |
           npm test
           npm run check:agent-readiness
 
-      # workingDirectory matters: wrangler picks up the Pages Functions in
-      # site/functions/ (markdown content negotiation) only when it runs from
-      # site/ — same shape as the documented manual deploy (`env -C site ...`).
-      - name: Deploy dist to Cloudflare Pages
-        uses: cloudflare/wrangler-action@9acf94ace14e7dc412b076f2c5c20b8ce93c79cd # v3
-        with:
-          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          workingDirectory: site
-          command: pages deploy dist --project-name eagleridge --branch main
+      # Uses the wrangler pinned in site/package.json devDependencies so CI
+      # and local deploys agree. `wrangler deploy` follows the build-emitted
+      # config redirect (site/.wrangler/deploy/config.json -> dist/server/
+      # wrangler.json), which carries the D1/R2/assets bindings.
+      - name: Deploy Worker to Cloudflare
+        working-directory: site
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+        run: npx wrangler deploy

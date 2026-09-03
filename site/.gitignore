@@ -3,6 +3,16 @@ dist/
 # generated types
 .astro/
 
+# EmDash / Cloudflare local state
+.emdash/migrations.json
+.wrangler/
+data.db
+data.db-shm
+data.db-wal
+uploads/
+.dev.vars
+.dev.vars.*
+
 # dependencies
 node_modules/
 

@@ -4,9 +4,11 @@
 Adapted from the original repo-root scripts/generate-md-mirrors.py (the
 parity oracle's generator — extraction logic is kept byte-compatible).
 Changes from the original:
-  - reads built pages from dist/ and writes outputs into dist/
-  - PAGES uses clean public URLs (Cloudflare Pages serves dist/about.html
-    at /about)
+  - reads built pages from dist/client/ and writes outputs into dist/client/
+    (the Workers static-asset directory; server output moved prerendered
+    HTML from dist/ to dist/client/)
+  - PAGES uses clean public URLs (the Workers asset layer serves
+    dist/client/about.html at /about)
   - elements marked data-md-exclude are stripped (the market-map grid is
     pre-rendered at build time; the old page rendered it client-side, so it
     never appeared in mirrors)
@@ -25,7 +27,7 @@ import pathlib
 from bs4 import BeautifulSoup
 from markdownify import markdownify
 
-DIST = pathlib.Path(__file__).resolve().parent.parent / "dist"
+DIST = pathlib.Path(__file__).resolve().parent.parent / "dist" / "client"
 BASE_URL = "https://eagleridge.io"
 # Fallback when a page has no <title>. For fixed PAGES this is harmless, but a
 # discovered article should never legitimately be just the site name — see the

@@ -75,7 +75,7 @@ jobs:
 
           # Every built page should be referenced — by either its clean URL
           # or its .md mirror (llms.txt links to the Markdown mirrors).
-          for html_file in dist/*.html; do
+          for html_file in dist/client/*.html; do
             name=$(basename "$html_file")
             stem="${name%.html}"
             # Unlisted pages (noindex) are deliberately excluded from llms.txt,
@@ -110,7 +110,7 @@ jobs:
           # Serve the build output and probe each referenced URL. Clean URLs
           # (no extension) map to <path>.html, mirroring Cloudflare Pages'
           # pretty-URL serving of format:'file' output.
-          python3 -m http.server 8080 --directory dist &
+          python3 -m http.server 8080 --directory dist/client &
           server_pid=$!
           sleep 2
           urls=$(grep -oE 'https://eagleridge\.io[^)]*' public/llms.txt | sort -u)
@@ -148,7 +148,7 @@ jobs:
           errors=0
           for baseline in ../parity-baseline/*.md; do
             name=$(basename "$baseline")
-            built="dist/$name"
+            built="dist/client/$name"
             if [ ! -f "$built" ]; then
               echo "::error::$built missing from build output"
               errors=$((errors + 1))
