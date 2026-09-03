@@ -11,8 +11,8 @@
 		{
 			"binding": "DB",
 			"database_name": "eagleridge-emdash",
-			// Set after provisioning: wrangler d1 create eagleridge-emdash
-			"database_id": "00000000-0000-0000-0000-000000000000",
+			// Provisioned 2026-09-03 (Cloudflare dash). Binding name stays DB — astro.config.mjs reads d1({ binding: "DB" }).
+			"database_id": "4a4e72d6-921f-4825-84cd-0cf089439b72",
 		},
 	],
 	// Route every request through the Worker (src/worker.ts) so markdown

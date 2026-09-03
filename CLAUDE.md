@@ -27,7 +27,7 @@ CLOUDFLARE_API_TOKEN="$CF_TOKEN" CLOUDFLARE_ACCOUNT_ID=702342b70e150343381e08298
 - Account `702342b70e150343381e0829834cbcc7`; zone `eagleridge.io` = `064d7b70f67f32d15f2afbeb10a915f6`.
 - API token: `op://Developer Vault/Dash Cloudflare API Credential/credential` (historically Zone DNS edit + Pages edit; the Workers migration needs Workers Scripts/D1/R2 edit added — see plan 006 phase 2).
 - DNS: apex `eagleridge.io` + `www` are proxied CNAMEs; custom domains attach to the `eagleridge` Worker after cutover (previously the `eagleridge` Pages project → `eagleridge-7z4.pages.dev`).
-- `site/wrangler.jsonc` is the config wrangler + the Astro adapter read; the D1 `database_id` in it is a placeholder until phase-2 provisioning.
+- `site/wrangler.jsonc` is the config wrangler + the Astro adapter read; D1 `eagleridge-emdash` (`4a4e72d6-…`) is provisioned; R2 bucket `eagleridge-media` is pending R2 enablement (plan 006 phase 2).
 - Legacy GitHub Pages (root HTML / `CNAME` / `.nojekyll`) is retired and no longer served; the root files were removed 2026-06-18 (see intro). Recover from git history if ever needed.
 
 ## Files & structure (all under `site/`)

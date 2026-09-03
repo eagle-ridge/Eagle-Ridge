@@ -55,10 +55,13 @@ output + prerendered static assets)**.
 Merging this PR alone will make the deploy workflow fail until these are done
 — keep the PR open until you're ready.
 
-1. **Provision**, from `site/`:
-   `npx wrangler d1 create eagleridge-emdash` → paste the returned
-   `database_id` into `wrangler.jsonc` (replacing the zeros placeholder);
-   `npx wrangler r2 bucket create eagleridge-media`.
+1. **Provision**:
+   - [x] D1 `eagleridge-emdash` created 2026-09-03 (dash);
+     `database_id` `4a4e72d6-921f-4825-84cd-0cf089439b72` is in `wrangler.jsonc`.
+   - [ ] **Enable R2 on the account** (dash → R2 → Enable; needs a payment
+     method on file, free tier covers this site), then
+     `npx wrangler r2 bucket create eagleridge-media` from `site/`. Until this
+     exists `wrangler deploy` fails on the `MEDIA` binding.
 2. **Token scope:** the deploy token (repo secret `CLOUDFLARE_API_TOKEN`)
    needs Workers Scripts:Edit, D1:Edit, and R2:Edit in addition to its
    current scopes (it was Pages-scoped).
