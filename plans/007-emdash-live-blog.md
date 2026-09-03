@@ -35,7 +35,7 @@ deployed Worker after `wrangler deploy` (`SITE_URL=…workers.dev`).
 
 ## Rollout (in this order)
 
-1. **Import content into production first** (so the moment the new code
+1. **Import content into production first** — DONE 2026-09-03 (both posts published with original dates; tag terms cmmc/readiness/market created) (so the moment the new code
    deploys, `/insights` is populated): from `site/`,
    `npx emdash login --url https://eagleridge.mcconnell-chris.workers.dev`
    (OAuth device flow; approve in the browser as the admin), then

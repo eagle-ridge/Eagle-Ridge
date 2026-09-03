@@ -41,7 +41,7 @@ if (!token) {
 const client = new EmDashClient({ baseUrl: origin, token });
 
 const existing = new Map();
-for (const item of (await client.list('posts', { limit: 200 })).items ?? []) existing.set(item.slug, item);
+for (const item of (await client.list('posts', { limit: 100 })).items ?? []) existing.set(item.slug, item);
 
 const wanted = readdirSync(IMPORT_DIR)
   .filter((f) => f.endsWith('.json'))
@@ -49,7 +49,9 @@ const wanted = readdirSync(IMPORT_DIR)
 
 // Tag terms first (idempotent by slug).
 const termSlug = (t) => t.toLowerCase().replace(/[^a-z0-9]+/g, '-');
-const have = new Set((await client.terms('tag')).map((t) => t.slug));
+const termsRes = await client.terms('tag');
+const termList = Array.isArray(termsRes) ? termsRes : (termsRes.terms ?? termsRes.items ?? []);
+const have = new Set(termList.map((t) => t.slug));
 for (const label of new Set(wanted.flatMap((p) => p.tags))) {
   const slug = termSlug(label);
   if (have.has(slug)) continue;
@@ -64,14 +66,19 @@ for (const p of wanted) {
   }
   // client.create converts the markdown `content` string to Portable Text
   // from the collection's field schema. publishedAt/taxonomies are extra
-  // request-body fields the API accepts (content:publish_any = admin).
+  // request-body fields the API accepts (content:publish_any = admin). No
+  // status: create auto-publishes unless status:'draft' is passed.
   const item = await client.create('posts', {
     data: p.data,
     slug: p.slug,
-    status: 'published',
     publishedAt: p.publishedAt,
     taxonomies: { tag: p.tags.map(termSlug) },
   });
-  console.log(`post: created ${p.slug} (${item.id}) published ${item.publishedAt}`);
+  // The API creates a draft; publish it, then pin the original date (publish
+  // stamps "now" over the override otherwise).
+  await client.publish('posts', item.id);
+  const fresh = await client.get('posts', item.id);
+  await client.update('posts', item.id, { _rev: fresh._rev, publishedAt: p.publishedAt });
+  console.log(`post: created + published ${p.slug} (${item.id}) at ${p.publishedAt}`);
 }
 console.log('done');
