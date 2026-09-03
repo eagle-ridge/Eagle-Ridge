@@ -124,6 +124,22 @@ export async function onRequest(context) {
   if (method !== 'GET' && method !== 'HEAD') return context.next();
 
   const url = new URL(request.url);
+
+  // Direct requests for a .md mirror: a build-time mirror (static asset) wins
+  // over the runtime mirror routes. The Astro handler would route
+  // /insights/<slug>.md to the CMS route first, because mirrors generated after
+  // the build aren't in its asset manifest — so check the asset layer here.
+  if (url.pathname.endsWith('.md') && !url.pathname.startsWith('/_')) {
+    const asset = await context.env.ASSETS.fetch(new Request(url, { method }));
+    if (asset.ok) {
+      return new Response(method === 'HEAD' ? null : asset.body, {
+        status: 200,
+        headers: markdownHeaders(),
+      });
+    }
+    return context.next();
+  }
+
   const mirrorPath = markdownMirrorPath(url.pathname);
   if (mirrorPath === null) return context.next(); // non-negotiable: pass through
 

@@ -220,11 +220,25 @@ test('asset requests are untouched (no negotiation, no Vary)', async () => {
   assert.equal(res.headers.get('Vary'), null);
 });
 
-test('.md mirror requests are untouched', async () => {
-  const { context, calls } = makeContext({ path: '/about.md', accept: 'text/html' });
+test('direct .md request serves the static mirror when one was built', async () => {
+  const { context, calls } = makeContext({
+    path: '/insights/compliance-should-just-work.md',
+    accept: 'text/html',
+    assets: { '/insights/compliance-should-just-work.md': '# Manifesto' },
+  });
+  const res = await onRequest(context);
+  assert.equal(res.status, 200);
+  assert.equal(res.headers.get('Content-Type'), 'text/markdown; charset=utf-8');
+  assert.equal(calls.next, 0);
+  assert.deepEqual(calls.assetPaths, ['/insights/compliance-should-just-work.md']);
+  assert.match(await res.text(), /^# Manifesto/);
+});
+
+test('direct .md request with no static mirror falls through to the app', async () => {
+  const { context, calls } = makeContext({ path: '/insights/cms-article.md', accept: 'text/html' });
   await onRequest(context);
   assert.equal(calls.next, 1);
-  assert.equal(calls.assetPaths.length, 0);
+  assert.deepEqual(calls.assetPaths, ['/insights/cms-article.md']);
 });
 
 test('non-GET methods pass through', async () => {
