@@ -246,3 +246,39 @@ test('HEAD negotiates like GET but returns no body', async () => {
   assert.equal(res.headers.get('Content-Type'), 'text/markdown; charset=utf-8');
   assert.equal(await res.text(), '');
 });
+
+// ---- runtime mirrors (CMS-served pages) ---------------------------------
+
+test('mirror miss falls back to renderMirror for CMS-served pages', async () => {
+  const { context, calls } = makeContext({
+    path: '/insights/some-cms-article',
+    accept: 'text/markdown',
+  });
+  const rendered = [];
+  context.renderMirror = async (req) => {
+    rendered.push(new URL(req.url).pathname);
+    return new Response('# Some CMS article', {
+      status: 200,
+      headers: { 'Content-Type': 'text/markdown; charset=utf-8' },
+    });
+  };
+  const res = await onRequest(context);
+  assert.equal(res.status, 200);
+  assert.equal(res.headers.get('Content-Type'), 'text/markdown; charset=utf-8');
+  assert.equal(res.headers.get('Vary'), 'Accept');
+  assert.deepEqual(calls.assetPaths, ['/insights/some-cms-article.md']);
+  assert.deepEqual(rendered, ['/insights/some-cms-article.md']);
+  assert.match(await res.text(), /^# Some CMS article/);
+});
+
+test('renderMirror miss still yields the markdown 404', async () => {
+  const { context } = makeContext({
+    path: '/insights/nope',
+    accept: 'text/markdown',
+    nextResponse: new Response('not found html', { status: 404 }),
+  });
+  context.renderMirror = async () => new Response('Not found', { status: 404 });
+  const res = await onRequest(context);
+  assert.equal(res.status, 404);
+  assert.equal(res.headers.get('Content-Type'), 'text/markdown; charset=utf-8');
+});

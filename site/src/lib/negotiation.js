@@ -1,8 +1,10 @@
 // Markdown content negotiation (acceptmarkdown.com) + agent-friendly 404s.
 // Formerly the Cloudflare Pages Functions middleware (site/functions/); now
 // runs inside the Worker entry (src/worker.ts), which wraps the EmDash/Astro
-// handler and passes a Pages-shaped context ({ request, next, env.ASSETS })
-// so the behavior and unit tests carry over unchanged.
+// handler and passes a Pages-shaped context ({ request, next, env.ASSETS,
+// renderMirror }) so the behavior and unit tests carry over unchanged.
+// `renderMirror(request)` is the optional runtime fallback for mirrors that
+// are not build artifacts (CMS-served Insights articles).
 //
 // Behavior on extensionless page routes (GET/HEAD only):
 //   - Accept prefers text/markdown  -> serve the page's .md mirror with
@@ -139,7 +141,12 @@ export async function onRequest(context) {
 
   if (choice === 'markdown') {
     const mirrorUrl = new URL(mirrorPath, url.origin);
-    const mirror = await context.env.ASSETS.fetch(new Request(mirrorUrl, { method }));
+    let mirror = await context.env.ASSETS.fetch(new Request(mirrorUrl, { method }));
+    if (!mirror.ok && context.renderMirror) {
+      // Not a build-time mirror. CMS-served pages (Insights articles) render
+      // their .md twin at request time — ask the app for it.
+      mirror = await context.renderMirror(new Request(mirrorUrl, { method }));
+    }
     if (mirror.ok) {
       return new Response(method === 'HEAD' ? null : mirror.body, {
         status: 200,
