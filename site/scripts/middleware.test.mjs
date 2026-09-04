@@ -234,6 +234,19 @@ test('direct .md request serves the static mirror when one was built', async () 
   assert.match(await res.text(), /^# Manifesto/);
 });
 
+test('direct .md request keeps the asset layer headers (ETag/Cache-Control)', async () => {
+  const { context } = makeContext({ path: '/about.md', accept: 'text/html' });
+  context.env.ASSETS.fetch = async () =>
+    new Response('# About', {
+      status: 200,
+      headers: { 'Content-Type': 'text/markdown', ETag: '"abc"', 'Cache-Control': 'public, max-age=0, must-revalidate' },
+    });
+  const res = await onRequest(context);
+  assert.equal(res.headers.get('ETag'), '"abc"');
+  assert.equal(res.headers.get('Cache-Control'), 'public, max-age=0, must-revalidate');
+  assert.equal(res.headers.get('Content-Type'), 'text/markdown; charset=utf-8');
+});
+
 test('direct .md request with no static mirror falls through to the app', async () => {
   const { context, calls } = makeContext({ path: '/insights/cms-article.md', accept: 'text/html' });
   await onRequest(context);

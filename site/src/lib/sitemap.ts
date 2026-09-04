@@ -21,7 +21,15 @@ export function mdName(path: string): string {
 export async function sitemapEntries(): Promise<SitemapEntry[]> {
 	const today = isoDate(new Date());
 	const fixed = pages.map((p) => ({ path: p.path, label: p.label, lastmod: today }));
-	const insights = (await listInsights()).map((a) => ({
+	let articles: Awaited<ReturnType<typeof listInsights>> = [];
+	try {
+		articles = await listInsights();
+	} catch (error) {
+		// A sitemap with only the static pages beats a 500 for crawlers; the
+		// pages themselves still surface the outage.
+		console.error('[sitemap] listing Insights failed; serving static pages only', error);
+	}
+	const insights = articles.map((a) => ({
 		path: `/insights/${a.slug}`,
 		label: a.title,
 		lastmod: isoDate(a.updatedDate),

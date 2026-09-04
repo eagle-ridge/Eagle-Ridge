@@ -132,10 +132,12 @@ export async function onRequest(context) {
   if (url.pathname.endsWith('.md') && !url.pathname.startsWith('/_')) {
     const asset = await context.env.ASSETS.fetch(new Request(url, { method }));
     if (asset.ok) {
-      return new Response(method === 'HEAD' ? null : asset.body, {
-        status: 200,
-        headers: markdownHeaders(),
-      });
+      // Keep the asset layer's headers (ETag, Cache-Control from _headers);
+      // only pin the markdown content type.
+      const res = new Response(method === 'HEAD' ? null : asset.body, asset);
+      res.headers.set('Content-Type', 'text/markdown; charset=utf-8');
+      res.headers.set('X-Content-Type-Options', 'nosniff');
+      return res;
     }
     return context.next();
   }
