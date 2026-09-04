@@ -8,7 +8,7 @@
     "frameworks": ["SOC 2", "ISO 27001", "HIPAA", "GDPR", "CMMC"],
     "market": "Mid-market",
     "website": "https://www.vanta.com/",
-    "lastReviewed": "2026-07-20",
+    "lastReviewed": "2026-08-31",
     "published": true
   },
   {
@@ -32,7 +32,7 @@
     "frameworks": ["SOC 2", "ISO 27001", "HIPAA", "FedRAMP", "CMMC"],
     "market": "SMB",
     "website": "https://secureframe.com/",
-    "lastReviewed": "2026-07-20",
+    "lastReviewed": "2026-08-31",
     "published": true
   },
   {
@@ -44,7 +44,7 @@
     "frameworks": ["SOC 2", "ISO 27001", "HIPAA", "PCI DSS"],
     "market": "Mid-market",
     "website": "https://sprinto.com/",
-    "lastReviewed": "2026-07-20",
+    "lastReviewed": "2026-08-31",
     "published": true
   },
   {
@@ -92,7 +92,7 @@
     "frameworks": ["SOC 2", "ISO 27001", "HIPAA", "CMMC", "GDPR"],
     "market": "SMB",
     "website": "https://www.trustcloud.ai/",
-    "lastReviewed": "2026-07-27",
+    "lastReviewed": "2026-08-31",
     "published": true
   },
   {
@@ -248,7 +248,7 @@
     "frameworks": ["NIST 800-171", "CMMC", "ISO 27001"],
     "market": "SMB",
     "website": "https://complianceforge.com/",
-    "lastReviewed": "2026-07-27",
+    "lastReviewed": "2026-08-31",
     "published": true
   },
   {
@@ -296,7 +296,7 @@
     "frameworks": ["CMMC", "CUI/ITAR"],
     "market": "Mid-market",
     "website": "https://www.virtru.com/",
-    "lastReviewed": "2026-07-27",
+    "lastReviewed": "2026-08-31",
     "published": true
   },
   {
@@ -308,7 +308,7 @@
     "frameworks": ["CMMC", "CUI/ITAR"],
     "market": "SMB",
     "website": "https://www.preveil.com/",
-    "lastReviewed": "2026-07-27",
+    "lastReviewed": "2026-08-31",
     "published": true
   },
   {
@@ -380,7 +380,7 @@
     "frameworks": ["Vendor risk"],
     "market": "Mid-market",
     "website": "https://www.upguard.com/",
-    "lastReviewed": "2026-07-27",
+    "lastReviewed": "2026-08-31",
     "published": true
   },
   {
@@ -388,11 +388,11 @@
     "name": "Panorays",
     "type": "Third-party risk",
     "priceTag": "$$$",
-    "blurb": "Questionnaire automation for third-party risk; workflow-heavy.",
+    "blurb": "Outside-in security ratings platform with questionnaire automation and AI-powered third-party risk visibility; named a Forrester Wave Leader in Cybersecurity Risk Rating Platforms Q2 2026.",
     "frameworks": ["Vendor risk"],
     "market": "Enterprise",
     "website": "https://www.panorays.com/",
-    "lastReviewed": "2026-07-27",
+    "lastReviewed": "2026-08-31",
     "published": true
   },
   {
@@ -512,7 +512,7 @@
     "frameworks": ["Vendor risk"],
     "market": "Mid-market",
     "website": "https://www.simplerisk.com/",
-    "lastReviewed": "2026-07-27",
+    "lastReviewed": "2026-08-31",
     "published": true
   },
   {
