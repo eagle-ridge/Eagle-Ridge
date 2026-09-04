@@ -1,13 +1,13 @@
 ---
-title: Nobody Built the First Mile | Eagle Ridge Advisory
-description: The structural gap between CMMC assessors and the small defense contractors who need readiness work, and why the window to fix it is closing.
+title: "Nobody Built the First Mile"
+description: "The structural gap between CMMC assessors and the small defense contractors who need readiness work, and why the window to fix it is closing."
+pubDate: 2026-06-09
+tags: ["CMMC", "market"]
 ---
 
-# Nobody Built the First Mile
+*The structural gap between CMMC assessors and the small defense contractors who need readiness work. And why the window to fix it is closing.*
 
-<p class="deck">The structural gap between CMMC assessors and the small defense contractors who need readiness work. And why the window to fix it is closing.</p>
-
-<p class="lead">About 80,000 small defense contractors need CMMC Level 2 certification to keep doing the work they already do. Roughly one percent have it. The other 99 percent are stuck somewhere between knowing they need to start and knowing what starting means.</p>
+About 80,000 small defense contractors need CMMC Level 2 certification to keep doing the work they already do. Roughly one percent have it. The other 99 percent are stuck somewhere between knowing they need to start and knowing what starting means.
 
 The reason is not laziness, and it is not a software problem. It is structural.
 
@@ -63,9 +63,6 @@ For shops who want to keep the SSP current between assessments, every engagement
 
 We published a map of the CMMC services market at [eagleridge.io/market-map](/market-map). 89 firms, tools, and authorities. Filter by category, click any cell for details. The map is the inventory. This page is the argument.
 
-<div class="cta-box">
-<p>If you are the CEO of a 30-person shop with two primes asking when your SSP is ready, the next step is short. Write to <a href="mailto:contact@eagleridge.io">contact@eagleridge.io</a>.</p>
-<p>The reply will not be a pitch deck. It will be a short list of questions and an honest scope estimate.</p>
-</div>
+If you are the CEO of a 30-person shop with two primes asking when your SSP is ready, the next step is short. Write to [contact@eagleridge.io](mailto:contact@eagleridge.io). The reply will not be a pitch deck. It will be a short list of questions and an honest scope estimate.
 
-<p class="close">Nobody built the first mile. We are building it.</p>
+**Nobody built the first mile. We are building it.**

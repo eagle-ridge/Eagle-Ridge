@@ -1,0 +1,14 @@
+[
+  { "html": "index.html", "path": "/", "label": "Homepage" },
+  { "html": "cmmc-compliance-consultant.html", "path": "/cmmc-compliance-consultant", "label": "CMMC Compliance Consultant" },
+  { "html": "cmmc-readiness-checklist.html", "path": "/cmmc-readiness-checklist", "label": "CMMC Readiness Checklist" },
+  { "html": "about.html", "path": "/about", "label": "About" },
+  { "html": "contact.html", "path": "/contact", "label": "Contact" },
+  { "html": "insights.html", "path": "/insights", "label": "Insights" },
+  { "html": "market-map.html", "path": "/market-map", "label": "Market Map" },
+  { "html": "grc-tools.html", "path": "/grc-tools", "label": "GRC Tools Index" },
+  { "html": "path-to-88.html", "path": "/path-to-88", "label": "The Path to 88" },
+  { "html": "soc2-observation-window.html", "path": "/soc2-observation-window", "label": "The Observation Window" },
+  { "html": "glossary.html", "path": "/glossary", "label": "Glossary" },
+  { "html": "privacy.html", "path": "/privacy", "label": "Privacy Policy" }
+]

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Generate Markdown mirrors, sitemap.xml, and sitemap.md from the built site.
+"""Generate Markdown mirrors for the prerendered pages of the built site.
 
 Adapted from the original repo-root scripts/generate-md-mirrors.py (the
 parity oracle's generator — extraction logic is kept byte-compatible).
@@ -7,6 +7,11 @@ Changes from the original:
   - reads built pages from dist/client/ and writes outputs into dist/client/
     (the Workers static-asset directory; server output moved prerendered
     HTML from dist/ to dist/client/)
+  - sitemap.xml / sitemap.md are no longer written here: CMS-served Insights
+    articles only exist at request time, so src/pages/sitemap.{xml,md}.ts
+    build them from the same PAGES list (src/data/sitemap-pages.json) plus
+    EmDash. Likewise CMS articles get their .md mirror from
+    src/pages/insights/[slug].md.ts, not from this script.
   - PAGES uses clean public URLs (the Workers asset layer serves
     dist/client/about.html at /about)
   - elements marked data-md-exclude are stripped (the market-map grid is
@@ -21,7 +26,7 @@ Runs as part of `npm run build`. Dependencies pinned in requirements.txt
 
 from __future__ import annotations
 
-import datetime as dt
+import json
 import pathlib
 
 from bs4 import BeautifulSoup
@@ -34,34 +39,13 @@ BASE_URL = "https://eagleridge.io"
 # hard check in discover_insights().
 DEFAULT_TITLE = "Eagle Ridge Advisory"
 
-# (dist html filename, public path, sitemap label). Order = sitemap order.
+# (dist html filename, public path, sitemap label) for every prerendered page.
+# Shared with src/lib/sitemap.ts (the runtime sitemap routes) via one JSON file
+# so the two can't drift.
+_PAGES_JSON = pathlib.Path(__file__).resolve().parent.parent / "src" / "data" / "sitemap-pages.json"
 PAGES = [
-    ("index.html", "/", "Homepage"),
-    (
-        "cmmc-compliance-consultant.html",
-        "/cmmc-compliance-consultant",
-        "CMMC Compliance Consultant",
-    ),
-    (
-        "cmmc-readiness-checklist.html",
-        "/cmmc-readiness-checklist",
-        "CMMC Readiness Checklist",
-    ),
-    ("about.html", "/about", "About"),
-    ("contact.html", "/contact", "Contact"),
-    ("insights.html", "/insights", "Insights"),
-    ("market-map.html", "/market-map", "Market Map"),
-    ("grc-tools.html", "/grc-tools", "GRC Tools Index"),
-    ("path-to-88.html", "/path-to-88", "The Path to 88"),
-    (
-        "soc2-observation-window.html",
-        "/soc2-observation-window",
-        "The Observation Window",
-    ),
-    # nobody-built-the-first-mile + compliance-should-just-work now live under
-    # /insights/ and are auto-discovered by discover_insights() — no fixed entry.
-    ("glossary.html", "/glossary", "Glossary"),
-    ("privacy.html", "/privacy", "Privacy Policy"),
+    (p["html"], p["path"], p["label"])
+    for p in json.loads(_PAGES_JSON.read_text(encoding="utf-8"))
 ]
 
 
@@ -121,48 +105,12 @@ def write_mirror(html_name: str, public_path: str) -> bool:
     return True
 
 
-def write_sitemap_xml(built: list[tuple[str, str, str]], lastmod: str) -> None:
-    rows = []
-    for _, public_path, _ in built:
-        priority = "1.0" if public_path == "/" else "0.7"
-        rows.append(
-            "  <url>\n"
-            f"    <loc>{BASE_URL}{public_path}</loc>\n"
-            f"    <lastmod>{lastmod}</lastmod>\n"
-            f"    <priority>{priority}</priority>\n"
-            "  </url>"
-        )
-    xml = (
-        '<?xml version="1.0" encoding="UTF-8"?>\n'
-        '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
-        + "\n".join(rows)
-        + "\n</urlset>\n"
-    )
-    (DIST / "sitemap.xml").write_text(xml, encoding="utf-8")
-    print("  wrote sitemap.xml")
-
-
-def write_sitemap_md(built: list[tuple[str, str, str]]) -> None:
-    lines = [
-        "# Eagle Ridge Advisory — Sitemap",
-        "",
-        "Markdown sitemap for agents and readers. Each page also has a `.md` mirror.",
-        "",
-    ]
-    for _, public_path, label in built:
-        url = BASE_URL + public_path
-        mirror = BASE_URL + "/" + md_name(public_path)
-        lines.append(f"- [{label}]({url}) — Markdown: [{md_name(public_path)}]({mirror})")
-    (DIST / "sitemap.md").write_text("\n".join(lines) + "\n", encoding="utf-8")
-    print("  wrote sitemap.md")
-
-
 def discover_insights() -> list[tuple[str, str, str]]:
-    """Discover built Insights article pages under dist/insights/*.html.
+    """Discover prerendered Insights essays under dist/insights/*.html.
 
-    Each article gets a .md mirror + sitemap row automatically — no edits to
-    PAGES per post. Labelled by the page <title> (set by BaseLayout). The
-    /insights index itself is a fixed entry in PAGES.
+    Only standalone .astro essays land here (CMS-served articles are not built
+    files). Each gets a .md mirror automatically — no edits to PAGES per essay.
+    Labelled by the page <title> (set by BaseLayout).
     """
     insights_dir = DIST / "insights"
     if not insights_dir.is_dir():
@@ -186,14 +134,10 @@ def discover_insights() -> list[tuple[str, str, str]]:
 
 
 def main() -> None:
-    lastmod = dt.date.today().isoformat()
     print("Generating Markdown mirrors:")
     pages = PAGES + discover_insights()
     built = [page for page in pages if write_mirror(page[0], page[1])]
-    print("Generating sitemaps:")
-    write_sitemap_xml(built, lastmod)
-    write_sitemap_md(built)
-    print("Done.")
+    print(f"Done: {len(built)} mirror(s). Sitemaps are served at request time (src/lib/sitemap.ts).")
 
 
 if __name__ == "__main__":

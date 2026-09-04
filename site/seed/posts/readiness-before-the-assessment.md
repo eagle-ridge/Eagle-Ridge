@@ -2,7 +2,6 @@
 title: "Why Readiness Comes Before the Assessment"
 description: "The firm that gets you ready can't be the firm that grades you. Passing your CMMC assessment starts with the work you do before the assessor shows up."
 pubDate: 2026-06-12
-draft: false
 tags: ["CMMC", "readiness"]
 ---
 

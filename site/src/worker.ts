@@ -39,6 +39,8 @@ export default {
 			request,
 			env,
 			next: () => emdashFetch(request, env, ctx),
+			// .md mirrors for CMS-served pages are runtime routes, not assets.
+			renderMirror: (mirrorRequest: Request) => emdashFetch(mirrorRequest, env, ctx),
 		});
 	},
 	scheduled: createScheduledHandler(),

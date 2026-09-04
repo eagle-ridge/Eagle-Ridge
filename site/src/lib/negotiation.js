@@ -1,8 +1,10 @@
 // Markdown content negotiation (acceptmarkdown.com) + agent-friendly 404s.
 // Formerly the Cloudflare Pages Functions middleware (site/functions/); now
 // runs inside the Worker entry (src/worker.ts), which wraps the EmDash/Astro
-// handler and passes a Pages-shaped context ({ request, next, env.ASSETS })
-// so the behavior and unit tests carry over unchanged.
+// handler and passes a Pages-shaped context ({ request, next, env.ASSETS,
+// renderMirror }) so the behavior and unit tests carry over unchanged.
+// `renderMirror(request)` is the optional runtime fallback for mirrors that
+// are not build artifacts (CMS-served Insights articles).
 //
 // Behavior on extensionless page routes (GET/HEAD only):
 //   - Accept prefers text/markdown  -> serve the page's .md mirror with
@@ -122,6 +124,24 @@ export async function onRequest(context) {
   if (method !== 'GET' && method !== 'HEAD') return context.next();
 
   const url = new URL(request.url);
+
+  // Direct requests for a .md mirror: a build-time mirror (static asset) wins
+  // over the runtime mirror routes. The Astro handler would route
+  // /insights/<slug>.md to the CMS route first, because mirrors generated after
+  // the build aren't in its asset manifest — so check the asset layer here.
+  if (url.pathname.endsWith('.md') && !url.pathname.startsWith('/_')) {
+    const asset = await context.env.ASSETS.fetch(new Request(url, { method }));
+    if (asset.ok) {
+      // Keep the asset layer's headers (ETag, Cache-Control from _headers);
+      // only pin the markdown content type.
+      const res = new Response(method === 'HEAD' ? null : asset.body, asset);
+      res.headers.set('Content-Type', 'text/markdown; charset=utf-8');
+      res.headers.set('X-Content-Type-Options', 'nosniff');
+      return res;
+    }
+    return context.next();
+  }
+
   const mirrorPath = markdownMirrorPath(url.pathname);
   if (mirrorPath === null) return context.next(); // non-negotiable: pass through
 
@@ -139,7 +159,12 @@ export async function onRequest(context) {
 
   if (choice === 'markdown') {
     const mirrorUrl = new URL(mirrorPath, url.origin);
-    const mirror = await context.env.ASSETS.fetch(new Request(mirrorUrl, { method }));
+    let mirror = await context.env.ASSETS.fetch(new Request(mirrorUrl, { method }));
+    if (!mirror.ok && context.renderMirror) {
+      // Not a build-time mirror. CMS-served pages (Insights articles) render
+      // their .md twin at request time — ask the app for it.
+      mirror = await context.renderMirror(new Request(mirrorUrl, { method }));
+    }
     if (mirror.ok) {
       return new Response(method === 'HEAD' ? null : mirror.body, {
         status: 200,

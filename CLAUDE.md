@@ -1,6 +1,6 @@
 # Eagle Ridge Advisory — eagleridge.io
 
-**Astro + [EmDash CMS](https://github.com/emdash-cms/emdash) site in `site/`, deployed as a Cloudflare Worker** (`eagleridge`, D1 `eagleridge-emdash` + R2 `eagleridge-media`). Migrated from static Cloudflare Pages per [plans/006-migrate-to-emdash.md](plans/006-migrate-to-emdash.md) — check that plan's Phase 2 checklist for cutover status. The live site is built **entirely** from `site/src/` — `site/` is the only source of truth; EmDash CMS content (admin at `/_emdash/admin`) lives in D1. All pre-existing pages are prerendered (`export const prerender = true`) — keep that flag on new static pages or they silently leave the md-mirror/parity pipeline. The legacy parallel root-HTML site was removed 2026-06-18; recover from git history if ever needed.
+**Astro + [EmDash CMS](https://github.com/emdash-cms/emdash) site in `site/`, deployed as a Cloudflare Worker** (`eagleridge`, D1 `eagleridge-emdash` + R2 `eagleridge-media`). Migrated from static Cloudflare Pages per [plans/006-migrate-to-emdash.md](plans/006-migrate-to-emdash.md) — check that plan's Phase 2 checklist for cutover status. The live site is built **entirely** from `site/src/` — `site/` is the only source of truth; EmDash CMS content (admin at `/_emdash/admin`) lives in D1 — the Insights blog is served from it at request time (plans/007). All pre-existing pages are prerendered (`export const prerender = true`) — keep that flag on new static pages or they silently leave the md-mirror/parity pipeline. The legacy parallel root-HTML site was removed 2026-06-18; recover from git history if ever needed.
 
 ## Deploy — automated via GitHub Actions
 
@@ -34,20 +34,23 @@ CLOUDFLARE_API_TOKEN="$CF_TOKEN" CLOUDFLARE_ACCOUNT_ID=702342b70e150343381e08298
 
 | Path | Purpose |
 |------|---------|
-| `site/src/pages/*.astro` | Routes, all `prerender = true`. `index`, `about`, `contact`, `market-map`, `nobody-built-the-first-mile` (First Mile), `compliance-should-just-work` (Manifesto), `glossary`, `privacy`, `insights` (hub) + `insights/[...slug]`, `404` (served with real 404 status — do not add to PAGES/llms.txt, it's noindex) |
+| `site/src/pages/*.astro` | Routes. Static pages are `prerender = true`: `index`, `about`, `contact`, `market-map`, `glossary`, `privacy`, `insights/compliance-should-just-work` (Manifesto, bespoke layout), `404` (real 404 status — never add to PAGES/llms.txt). **CMS-served (`prerender = false`)**: `insights` (hub), `insights/[...slug]` (articles from EmDash `posts`), `insights/[slug].md.ts` (runtime `.md` mirror), `sitemap.xml.ts` + `sitemap.md.ts` |
+| `site/src/lib/insights.ts` | Read side of the blog: `listInsights()` (EmDash posts + the hand-maintained `STANDALONE` essay list), date/reading-time helpers, `articleMirror()` (runtime `.md` format). See plans/007 |
+| `site/src/data/sitemap-pages.json` | The one list of prerendered pages (html, path, label) — read by both the md-mirror generator and `src/lib/sitemap.ts`. Add new static pages here |
+| `site/seed/` | `posts/*.md` → `npm run build:seed` → `seed.json` (schema part auto-applied by EmDash to an empty local/CI DB; content via `npm run seed:local`; never prod) + `import/*.json` (`EMDASH_URL=… npm run seed:import` pushes to a real instance once). Never hand-edit `seed.json` |
 | `site/src/worker.ts` | Cloudflare Worker entry (`wrangler.jsonc` `main`): legacy-URL 301s → markdown content negotiation → EmDash/Astro handler; plus the EmDash `scheduled()` cron handler |
 | `site/src/lib/negotiation.js` | Markdown content negotiation (`Accept: text/markdown` → serves the `.md` mirror with `Vary: Accept`; 406 for unsupported types) + markdown 404 bodies; `/_emdash/*` and other `/_*` runtime routes exempt. Unit-tested by `site/scripts/middleware.test.mjs` (`npm test`) |
 | `site/src/lib/redirects.js` | Parses `public/_redirects` (still the source of truth) into Worker-issued 301s — under `run_worker_first` the asset layer no longer surfaces them. Tested by `site/scripts/redirects.test.mjs` |
 | `site/wrangler.jsonc` | Worker config (D1 `DB`, R2 `MEDIA`, crons, `run_worker_first`). The Astro build merges it into `dist/server/wrangler.json`, which `wrangler deploy`/`dev` use |
 | `site/src/live.config.ts` | EmDash live-collection loader (`getEmDashCollection`); coexists with file-based `src/content.config.ts` |
-| `site/scripts/verify-agent-readiness.mjs` | Post-build gate (`npm run check:agent-readiness`): 404 page, homepage metadata/schema, contact page, llms.txt when-to-use section, sitemap coverage. Runs in both workflows |
+| `site/scripts/verify-agent-readiness.mjs` | Readiness gate (`SITE_URL=http://localhost:8787 npm run check:agent-readiness`): 404 page, homepage metadata/schema, contact page, llms.txt, sitemap coverage fetched from a running worker. PR CI runs it against `wrangler dev`; deploy runs it post-deploy against the Worker |
 | `site/src/layouts/BaseLayout.astro` | Shared `<head>` (meta, canonical, favicon links, PostHog snippet) + page chrome |
 | `site/src/components/` | `Header.astro` (nav incl. Resources dropdown), `Footer.astro`, `ContactForm.astro` |
-| `site/src/content/` | Content collections: `pages` + `articles` (Insights hub) |
+| `site/src/content/` | File-based collections: `pages` (glossary, privacy prose) + `grcTools`. Insights articles are NOT here — they live in EmDash (D1) |
 | `site/src/styles/` | `tokens.css` (brand `--er-*` design tokens) + `global.css` (chrome, nav/dropdown, layout) |
 | `site/public/` | Static passthrough: `favicon.svg`/`favicon.ico` (eagle mark), `logo.png`, `eagle-ridge-mark.png`, `AGENTS.md`, `robots.txt`, `_redirects` (old `.html` → clean URLs), `_headers` |
 | `site/public/llms.txt` | LLM-readable site summary ([llmstxt.org](https://llmstxt.org/) standard) — update when pages/services change |
-| `site/scripts/generate-md-mirrors.py` | Post-build: emits per-page `.md` mirrors + sitemaps into `dist/client/`. Runs as part of `npm run build`; locally needs `uv run --with markdownify --with beautifulsoup4 python scripts/generate-md-mirrors.py` from `site/` |
+| `site/scripts/generate-md-mirrors.py` | Post-build: emits `.md` mirrors for prerendered pages into `dist/client/` (sitemaps and CMS-article mirrors are runtime routes now). Runs as part of `npm run build`; locally needs `uv run --with markdownify --with beautifulsoup4 python scripts/generate-md-mirrors.py` from `site/` |
 | `parity-baseline/*.md` (repo root) | **Live** — CI parity oracle. Every built `.md` mirror must byte-match its baseline (after stripping nav/footer/chrome). Do not move. |
 | `.github/workflows/deploy.yml` | Builds `site/` + `wrangler deploy` (Worker) on push to `main` touching `site/**` |
 | `.github/workflows/validate-llms-txt.yml` | PR check: llms.txt structure, URL liveness, and `.md`-mirror parity vs `parity-baseline/` |
@@ -125,6 +128,11 @@ npm run dev --prefix site          # local dev server (Astro + EmDash, hot reloa
                                    # EmDash admin: http://localhost:4321/_emdash/admin
 npm run build --prefix site        # astro build (worker + prerendered pages) + md-mirror/sitemap generation
 env -C site npx wrangler dev       # production-shaped runtime against dist/ (negotiation, 301s, 404s)
+npm run seed:local --prefix site   # after wrangler dev answered once: load the Insights articles into the
+                                   # local D1 (EmDash's auto-seed is schema-only). Idempotent.
+npm run build:seed --prefix site   # regenerate seed/seed.json + seed/import/ from seed/posts/*.md
+# seed:local needs the better-sqlite3 native binary. This Mac has npm ignore-scripts=true, so after
+# `npm install` run: (cd site/node_modules/better-sqlite3 && npx prebuild-install). CI builds it normally.
 # Test contact form: submit manually in browser (Web3Forms blocks server-side requests)
 ```
 
