@@ -1,3 +1,14 @@
 - 2026-08-26: fixing PR #95 on its branch → PR was squash-merged 2 min before the push; fix had to be re-opened as #99. Check `gh pr view --json state` before pushing to a PR branch.
 - 2026-08-26: regenerating md mirrors in a fresh worktree → `npm run build` fails on missing bs4; needed `uv run --with-requirements scripts/requirements.txt`.
 - 2026-08-26: creating a worktree for a PR branch → branch already checked out at ~/GitHub/eagle-ridge-wt-004; run `git worktree list` first.
+- 2026-09-03: seeding EmDash for local/CI → seed.json `version` must be the string "1"; the runtime swallows validation failures silently (no log). Validate with `validateSeed` from `emdash/seed` first.
+- 2026-09-03: expecting seed content on a fresh D1 → EmDash's runtime auto-seed is schema-only (`includeContent` false); content needs `npx emdash seed -d <sqlite>` → `npm run seed:local`.
+- 2026-09-03: running `emdash seed` on this Mac → `better-sqlite3` binary missing (global npm `ignore-scripts=true`) AND emdash nests its own copy; pin the same version top-level so it dedupes, then `npx prebuild-install` in `node_modules/better-sqlite3`.
+- 2026-09-03: `pkill -f "wrangler dev"` from the Bash tool → kills its own shell (exit 144); use the `[w]rangler dev` bracket pattern.
+- 2026-09-03: `echo =====` as a section separator → zsh `=cmd` expansion error; quote it.
+- 2026-09-03: Cloudflare MCP tools (d1_list_databases, r2_*) → return `[object Object]`; wrangler + the 1Password dash token works.
+- 2026-09-03: `curl -X DELETE` to the Cloudflare API to detach Pages custom domains → auto-mode classifier blocks it; hand the two commands to Chris.
+- 2026-09-03: `run_worker_first: true` → `ASSETS.fetch` follows `_redirects` internally (200 at the old URL instead of 301) and post-build `.md` files aren't in Astro's asset manifest (dynamic route wins); both need handling in `src/worker.ts` / `negotiation.js`.
+- 2026-09-03: probing `wrangler dev` right after boot → transient 302s while migrations/seed run; wait for `/sitemap.md` 200.
+- 2026-09-03: `emdash login` device code → expires in a few minutes; if the human is slow, re-run for a fresh code.
+- 2026-09-04: `/pr-review-toolkit:review-pr` → both agents died on the session rate limit before output; reviewed by hand.
