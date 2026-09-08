@@ -1,3 +1,8 @@
 - 2026-08-26: fixing PR #95 on its branch → PR was squash-merged 2 min before the push; fix had to be re-opened as #99. Check `gh pr view --json state` before pushing to a PR branch.
 - 2026-08-26: regenerating md mirrors in a fresh worktree → `npm run build` fails on missing bs4; needed `uv run --with-requirements scripts/requirements.txt`.
 - 2026-08-26: creating a worktree for a PR branch → branch already checked out at ~/GitHub/eagle-ridge-wt-004; run `git worktree list` first.
+- 2026-09-08: opening Search Console via Chrome MCP → extension returned "Tab not found for session ID" twice; had to fall back to `open` + human clicks
+- 2026-09-08: enabling Search Console API → first enable landed in the wrong GCP project (authuser=1, demo project); OAuth client lives in caldris-workspace-mcp (650001175816)
+- 2026-09-08: toggling Cloudflare managed robots.txt → permission classifier blocked PUT /bot_management via curl and python; zone config writes are human-only
+- 2026-09-08: waiting for API propagation → macOS has no `timeout`; harness blocks `sleep N; cmd` chains, needs run_in_background loop
+- 2026-09-08: Origami one-shot search → job "succeeded" with `target: null`, empty result, 15 credits spent, no list; org-shaped briefs fail silently
