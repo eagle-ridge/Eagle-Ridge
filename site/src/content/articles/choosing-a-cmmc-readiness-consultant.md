@@ -82,4 +82,4 @@ The Cyber AB registers readiness firms as Registered Provider Organizations. Reg
 Some MSPs offer it. Check whether they will own the scoping, the SSP, the policies, and the evidence inventory, not only the technical controls. If they only do the technical side, pair them with a readiness partner.
 
 **When do I need this?**
-CMMC Phase 2 begins in November 2026. From then, some solicitations require a Level 2 certification at award. Readiness for a small contractor typically takes months, so start before a contract forces the timeline.
+The Department of War suspended CMMC Phase 2 (the third-party certification requirement that was due in November 2026) on July 13, 2026, pending a reform review. Level 2 self-assessments, SPRS scores, annual affirmations, and DFARS 252.204-7012 remain in force, and primes still flow requirements down. Readiness for a small contractor typically takes months, so the sensible move is to keep your SPRS score honest and your documentation current while the rules settle.

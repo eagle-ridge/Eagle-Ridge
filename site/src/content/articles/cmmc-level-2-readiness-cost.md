@@ -76,4 +76,4 @@ Usually, because fewer systems are in scope. It is not free: it needs setup, and
 No. Level 1 covers a short list of basic safeguards for Federal Contract Information and is an annual self-assessment. There is no C3PAO line and no MFA requirement. Level 2 is the 110-control standard for CUI. Your contracts decide which one applies.
 
 **Is readiness cheaper than doing nothing?**
-Starting November 2026, some solicitations require a Level 2 certification at award. A contractor who cannot show one is not eligible for that work. Weigh the readiness cost against the revenue those contracts represent, not against zero.
+The third-party certification deadline was suspended in July 2026, but the underlying obligation was not. Every contractor handling CUI still self-attests to NIST 800-171 under DFARS 252.204-7012, posts an SPRS score, and can be held to it under the False Claims Act. Primes also flow requirements down regardless of the federal timeline. Weigh the readiness cost against the revenue those contracts represent, not against zero.
