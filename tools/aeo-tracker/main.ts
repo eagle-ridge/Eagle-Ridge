@@ -53,7 +53,7 @@ async function askClaude(q: string): Promise<Answer> {
       "content-type": "application/json",
     },
     body: JSON.stringify({
-      model: "claude-opus-5",
+      model: "claude-sonnet-5",
       max_tokens: 2048,
       output_config: { effort: "low" },
       tools: [{ type: "web_search_20260209", name: "web_search", max_uses: 3 }],
