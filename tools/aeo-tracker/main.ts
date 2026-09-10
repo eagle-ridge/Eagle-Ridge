@@ -1,6 +1,6 @@
 // AEO visibility tracker for eagleridge.io.
 //
-// Runs daily as a Val.town scheduled val (miqcie/aeo-tracker). For each buyer
+// Runs daily as a Cloudflare Worker cron (see wrangler.jsonc). For each buyer
 // prompt it asks an AI answer engine with web search on, then records three
 // independent signals to PostHog as one `ai_search_visibility` event per
 // (engine, prompt):
@@ -10,11 +10,14 @@
 // Retrieval moves with indexing and content; mention moves with training data
 // and third-party coverage. Tracking them apart tells you which lever to pull.
 //
-// Env vars (set in the Val.town UI): ANTHROPIC_API_KEY (required),
-// OPENAI_API_KEY (optional, adds the ChatGPT engine), POSTHOG_HOST (optional).
+// Secrets (set with `op read ... | npx wrangler secret put NAME`, never on a
+// command line): ANTHROPIC_API_KEY (required), OPENAI_API_KEY (optional, adds
+// the ChatGPT engine). Optional vars: POSTHOG_HOST, POSTHOG_API_KEY.
 // The PostHog project token below is the public phc_ key already shipped in
 // the site's HTML, so it is safe in code.
-// Source of truth: github.com/eagle-ridge/Eagle-Ridge tools/aeo-tracker/main.ts
+
+type Env = { ANTHROPIC_API_KEY?: string; OPENAI_API_KEY?: string; POSTHOG_HOST?: string; POSTHOG_API_KEY?: string };
+let ENV: Env = {};
 
 const BRAND = {
   domain: "eagleridge.io",
@@ -39,8 +42,8 @@ const QUERIES: { q: string; circle: string }[] = [
   { q: "What is CMMC Level 2?", circle: "table_stakes" },
 ];
 
-const POSTHOG_HOST = Deno.env.get("POSTHOG_HOST") ?? "https://us.i.posthog.com";
-const POSTHOG_KEY = Deno.env.get("POSTHOG_API_KEY") ?? "phc_gKgLr0iMjD1gnLV3yd8lEYWIUWmkIk8BuI6jUG3rTBg";
+const posthogHost = () => ENV.POSTHOG_HOST ?? "https://us.i.posthog.com";
+const posthogKey = () => ENV.POSTHOG_API_KEY ?? "phc_gKgLr0iMjD1gnLV3yd8lEYWIUWmkIk8BuI6jUG3rTBg";
 
 type Answer = { text: string; retrieved: string[]; cited: string[] };
 
@@ -48,7 +51,7 @@ async function askClaude(q: string): Promise<Answer> {
   const res = await fetch("https://api.anthropic.com/v1/messages", {
     method: "POST",
     headers: {
-      "x-api-key": Deno.env.get("ANTHROPIC_API_KEY") ?? "",
+      "x-api-key": ENV.ANTHROPIC_API_KEY ?? "",
       "anthropic-version": "2023-06-01",
       "content-type": "application/json",
     },
@@ -80,7 +83,7 @@ async function askOpenAI(q: string): Promise<Answer> {
   const res = await fetch("https://api.openai.com/v1/responses", {
     method: "POST",
     headers: {
-      Authorization: `Bearer ${Deno.env.get("OPENAI_API_KEY")}`,
+      Authorization: `Bearer ${ENV.OPENAI_API_KEY}`,
       "content-type": "application/json",
     },
     body: JSON.stringify({ model: "gpt-5-mini", tools: [{ type: "web_search" }], input: q }),
@@ -99,10 +102,10 @@ async function askOpenAI(q: string): Promise<Answer> {
   return { text: text.join(""), retrieved: cited, cited };
 }
 
-const ENGINES: Record<string, (q: string) => Promise<Answer>> = {
+const engines = (): Record<string, (q: string) => Promise<Answer>> => ({
   claude: askClaude,
-  ...(Deno.env.get("OPENAI_API_KEY") ? { chatgpt: askOpenAI } : {}),
-};
+  ...(ENV.OPENAI_API_KEY ? { chatgpt: askOpenAI } : {}),
+});
 
 export function analyze(a: Answer) {
   const lower = a.text.toLowerCase();
@@ -115,16 +118,17 @@ export function analyze(a: Answer) {
   };
 }
 
-export default async function (_interval?: unknown) {
+export async function run(env: Env) {
+  ENV = env;
   const runId = crypto.randomUUID();
-  const jobs = Object.entries(ENGINES).flatMap(([engine, ask]) =>
+  const jobs = Object.entries(engines()).flatMap(([engine, ask]) =>
     QUERIES.map(async ({ q, circle }) => {
       const props: Record<string, unknown> = { engine, query: q, circle, run_id: runId, $process_person_profile: false };
       try {
         const a = await ask(q);
         Object.assign(props, analyze(a), { raw_response: a.text.slice(0, 8000) });
       } catch (e) {
-        // Keep the gap visible in PostHog rather than only in Val.town logs.
+        // Keep the gap visible in PostHog rather than only in Worker logs.
         Object.assign(props, { error: String(e), retrieved: null, cited: null, mentioned: null });
         console.error(engine, q, e);
       }
@@ -133,10 +137,10 @@ export default async function (_interval?: unknown) {
   );
   const batch = await Promise.all(jobs);
 
-  const res = await fetch(`${POSTHOG_HOST}/batch/`, {
+  const res = await fetch(`${posthogHost()}/batch/`, {
     method: "POST",
     headers: { "content-type": "application/json" },
-    body: JSON.stringify({ api_key: POSTHOG_KEY, batch }),
+    body: JSON.stringify({ api_key: posthogKey(), batch }),
   });
   if (!res.ok) throw new Error(`posthog ${res.status}: ${await res.text()}`);
 
@@ -148,3 +152,9 @@ export default async function (_interval?: unknown) {
     `mentioned ${ok.filter((b) => b.properties.mentioned).length}`,
   );
 }
+
+export default {
+  scheduled(_event: unknown, env: Env, ctx: { waitUntil(p: Promise<unknown>): void }) {
+    ctx.waitUntil(run(env));
+  },
+};

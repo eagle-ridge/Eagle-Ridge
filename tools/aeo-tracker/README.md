@@ -2,16 +2,18 @@
 
 Daily check of whether AI answer engines retrieve, cite, or mention eagleridge.io for buyer prompts. Results land in PostHog as `ai_search_visibility` events.
 
-- **Runs on:** Val.town, val `miqcie/aeo-tracker`, cron `0 13 * * *` (09:00 US Eastern).
-- **Source of truth:** `main.ts` in this directory. After editing, paste it into the val (or use the Val.town MCP `update_file`).
+- **Runs on:** Cloudflare Worker `aeo-tracker` in the Eagle Ridge account, cron `0 13 * * *` (09:00 US Eastern). Private code, secrets in Worker bindings.
+- **Deploy:** from this directory, `npx wrangler deploy` with `CLOUDFLARE_API_TOKEN` and `CLOUDFLARE_ACCOUNT_ID` in the environment (same token as the site).
+- **Secrets:** pipe from 1Password so the value never touches a command line or transcript:
+  `op read 'op://Developer Vault/<item>/credential' | npx wrangler secret put ANTHROPIC_API_KEY`
 - **Self-check:** `deno test --allow-env --allow-net tools/aeo-tracker/`
-- **Run once locally:** put `ANTHROPIC_API_KEY` in the environment (from 1Password, never on the command line) and run a file containing `import main from "./main.ts"; await main();`
+- **Run once by hand:** `npx wrangler dev --test-scheduled` then `curl 'http://localhost:8787/__scheduled?cron=0+13+*+*+*'`
 
-## Env vars on the val
+## Secrets and vars on the Worker
 
 | Key | Required | Purpose |
 |---|---|---|
-| `ANTHROPIC_API_KEY` | yes | Claude with web search, the working engine |
+| `ANTHROPIC_API_KEY` | yes | Claude Sonnet 5 with web search, the working engine |
 | `OPENAI_API_KEY` | no | Adds a `chatgpt` engine via the Responses API web search tool |
 | `POSTHOG_HOST` | no | Defaults to `https://us.i.posthog.com` |
 | `POSTHOG_API_KEY` | no | Defaults to the site's public `phc_` project token |
