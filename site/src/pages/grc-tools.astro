@@ -390,6 +390,16 @@ const faqLd = JSON.stringify({
 
     search.addEventListener('input', applyFilters);
 
+    list.querySelectorAll<HTMLAnchorElement>('.tool-name').forEach((link) => {
+      link.addEventListener('click', () => {
+        const row = link.closest<HTMLElement>('.tool-row');
+        (window as any).posthog?.capture('grc_tool_opened', {
+          tool_name: link.textContent?.replace('↗', '').trim(),
+          tool_type: row?.dataset.type,
+        });
+      });
+    });
+
     legendItems.forEach((li) => {
       li.addEventListener('click', () => {
         const t = li.dataset.type ?? null;

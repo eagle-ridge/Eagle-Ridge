@@ -117,13 +117,12 @@
                         if (data.success) {
                             status.textContent = 'Message sent! We’ll be in touch shortly.';
                             status.className = 'ok';
-                            try {
-                                posthog.capture('contact_form_submitted', {
-                                    form: 'contact',
-                                    heard_from: heard.value || null,
-                                    ai_prompt: form.querySelector('#ai_prompt').value || null,
-                                });
-                            } catch (err) {}
+                            window.posthog?.capture('contact_form_submitted', {
+                                form: 'contact',
+                                path: window.location.pathname,
+                                heard_from: heard.value || null,
+                                ai_prompt: form.querySelector('#ai_prompt').value || null,
+                            });
                             form.reset();
                             promptWrap.hidden = true;
                         } else {
@@ -131,7 +130,8 @@
                             status.className = 'err';
                         }
                     })
-                    .catch(function() {
+                    .catch(function(error) {
+                        window.posthog?.captureException(error);
                         status.textContent = 'Network error. Please email contact@eagleridge.io.';
                         status.className = 'err';
                     })
