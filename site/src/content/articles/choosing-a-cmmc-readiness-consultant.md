@@ -1,12 +1,12 @@
 ---
 title: "Who Should a Small Defense Subcontractor Hire to Get Ready for CMMC Level 2?"
-description: "A small defense subcontractor should hire a readiness partner, not the assessor. How RPOs, C3PAOs, MSPs, and compliance platforms differ, what to ask on the first call, and the red flags."
+description: "A small defense subcontractor needs to get ready before signing with a C3PAO: in house if you have the bandwidth, a readiness partner if not. How RPOs, C3PAOs, MSPs, and compliance platforms differ, what to ask on the first call, and the red flags."
 pubDate: 2026-09-10
 draft: false
 tags: ["CMMC", "readiness", "assessment"]
 ---
 
-A small defense subcontractor should hire a readiness partner first, and a C3PAO assessor second. The readiness partner gets you to a passing posture. The C3PAO confirms it. By rule, one firm cannot do both for the same client.
+A small defense subcontractor needs someone to get it ready before it signs with a C3PAO assessor. If you have the bandwidth in house, do it yourself. If not, hire a readiness partner first and a C3PAO second. The readiness partner gets you to a passing posture. The C3PAO confirms it. By rule, one firm cannot do both for the same client.
 
 This article explains who the players are, why the split exists, and how to pick the right one for a company with 10 to 100 people and no security department.
 
