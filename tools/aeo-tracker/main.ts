@@ -14,6 +14,7 @@
 // OPENAI_API_KEY (optional, adds the ChatGPT engine), POSTHOG_HOST (optional).
 // The PostHog project token below is the public phc_ key already shipped in
 // the site's HTML, so it is safe in code.
+// Source of truth: github.com/eagle-ridge/Eagle-Ridge tools/aeo-tracker/main.ts
 
 const BRAND = {
   domain: "eagleridge.io",
