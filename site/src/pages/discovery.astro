@@ -165,13 +165,18 @@ import BaseLayout from '../layouts/BaseLayout.astro';
                         if (data.success) {
                             status.textContent = 'Thanks — we’ll be in touch before your call.';
                             status.className = 'ok';
+                            window.posthog?.capture('discovery_intake_submitted', {
+                                form: 'discovery_intake',
+                                path: window.location.pathname,
+                            });
                             form.reset();
                         } else {
                             status.textContent = 'Something went wrong. Please email contact@eagleridge.io.';
                             status.className = 'err';
                         }
                     })
-                    .catch(function() {
+                    .catch(function(error) {
+                        window.posthog?.captureException(error);
                         status.textContent = 'Network error. Please email contact@eagleridge.io.';
                         status.className = 'err';
                     })

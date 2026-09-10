@@ -91,13 +91,18 @@
                         if (data.success) {
                             status.textContent = 'Message sent! We’ll be in touch shortly.';
                             status.className = 'ok';
+                            window.posthog?.capture('contact_form_submitted', {
+                                form: 'contact',
+                                path: window.location.pathname,
+                            });
                             form.reset();
                         } else {
                             status.textContent = 'Something went wrong. Please email contact@eagleridge.io.';
                             status.className = 'err';
                         }
                     })
-                    .catch(function() {
+                    .catch(function(error) {
+                        window.posthog?.captureException(error);
                         status.textContent = 'Network error. Please email contact@eagleridge.io.';
                         status.className = 'err';
                     })
