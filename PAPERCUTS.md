@@ -1,3 +1,5 @@
 - 2026-08-26: fixing PR #95 on its branch → PR was squash-merged 2 min before the push; fix had to be re-opened as #99. Check `gh pr view --json state` before pushing to a PR branch.
 - 2026-08-26: regenerating md mirrors in a fresh worktree → `npm run build` fails on missing bs4; needed `uv run --with-requirements scripts/requirements.txt`.
 - 2026-08-26: creating a worktree for a PR branch → branch already checked out at ~/GitHub/eagle-ridge-wt-004; run `git worktree list` first.
+- 2026-09-11: manual Pages deploy for eagleridge.io → wrangler said "couldn't ascertain the final status"; deployment showed Active but served 404 on every path. Re-running the identical deploy fixed it. Always curl the apex after a Pages deploy.
+- 2026-09-11: publishing an Insights article → merge to main does not update eagleridge.io (deploy.yml only deploys the Worker; DNS still on Pages). Every article needs the manual Pages deploy until plan 006 phase 2 cuts DNS over.
