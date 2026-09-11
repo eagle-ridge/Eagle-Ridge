@@ -21,7 +21,7 @@ So the Certified Third-Party Assessment Organizations, the C3PAOs, lost their ma
 
 Every small defense contractor we talk to read the news as "we're off the hook." Read it again.
 
-You still self-attest to NIST SP 800-171 in SPRS. DOD still audits those attestations. And the False Claims Act still applies to a score you post and cannot prove. Logzone reported a near-perfect score. A DOD audit found it wildly inaccurate, and in June the company paid roughly $500,000 to settle with the Justice Department.
+You still self-attest to NIST SP 800-171 in SPRS. DOD still audits those attestations. And the False Claims Act still applies to a score you post and cannot prove. Logzone reported a near-perfect score. A DOD audit found it wildly inaccurate, and in June the company paid [$507,144 to settle with the Justice Department](https://www.justice.gov/opa/pr/alabama-defense-contractor-agrees-pay-507144-resolve-false-claims-act-liability-relating).
 
 The Pentagon fired the auditor. It kept the lawyer.
 
