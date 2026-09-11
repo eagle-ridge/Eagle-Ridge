@@ -3,3 +3,5 @@
 - 2026-08-26: creating a worktree for a PR branch → branch already checked out at ~/GitHub/eagle-ridge-wt-004; run `git worktree list` first.
 - 2026-09-11: manual Pages deploy for eagleridge.io → wrangler said "couldn't ascertain the final status"; deployment showed Active but served 404 on every path. Re-running the identical deploy fixed it. Always curl the apex after a Pages deploy.
 - 2026-09-11: publishing an Insights article → merge to main does not update eagleridge.io (deploy.yml only deploys the Worker; DNS still on Pages). Every article needs the manual Pages deploy until plan 006 phase 2 cuts DNS over.
+- 2026-09-11: building in a fresh worktree → `npm run build` died on bs4 again (3rd time today, 2nd logged); filed #123 to wrap the mirror step in uv run.
+- 2026-09-11: Pangram-scoring the article file → Claude-written frontmatter `description:` flagged as an AI window inside an otherwise human file; score the whole file, not just the body.
