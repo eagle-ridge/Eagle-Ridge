@@ -4,3 +4,5 @@
 - 2026-09-10: setting Cloudflare managed robots.txt off via API → auto-mode classifier blocks the PATCH; needs the dashboard toggle (GH #112)
 - 2026-09-10: op read on the Anthropic key → item name contains '<>' which op rejects as a secret reference; use the item ID instead
 - 2026-09-10: creating a private Val.town val → free tier caps private vals; the tracker had to be public
+- 2026-09-11: manual Pages deploy for eagleridge.io → wrangler said "couldn't ascertain the final status"; deployment showed Active but served 404 on every path. Re-running the identical deploy fixed it. Always curl the apex after a Pages deploy.
+- 2026-09-11: publishing an Insights article → merge to main does not update eagleridge.io (deploy.yml only deploys the Worker; DNS still on Pages). Every article needs the manual Pages deploy until plan 006 phase 2 cuts DNS over.
