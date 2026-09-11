@@ -64,7 +64,7 @@ const ogImage = SITE + '/logo.png'; // 512x512 eagle mark
     <meta name="twitter:title" content={title}>
     <meta name="twitter:description" content={description}>
     <meta name="twitter:image" content={ogImage}>
-    {!noindex && <link rel="alternate" type="text/markdown" href={mirror} />}
+    {!noindex && <link rel="alternate" type="text/plain" href={mirror} />}
     <link rel="preload" href={newsreader400} as="font" type="font/woff2" crossorigin />
     <link rel="preload" href={plexSans400} as="font" type="font/woff2" crossorigin />
     <link rel="preconnect" href="https://us-assets.i.posthog.com" crossorigin />

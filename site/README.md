@@ -71,5 +71,6 @@ provisioning live in `wrangler.jsonc` and `../plans/006-migrate-to-emdash.md`.
 
 `public/_redirects` 301s every legacy `.html` URL to its clean URL — served
 by the Worker (`src/lib/redirects.js`). `public/_headers` sets
-`text/markdown` for the `.md` mirrors and `text/plain` for `llms.txt`, applied
+`text/plain` for the `.md` mirrors (ChatGPT-style browsing tools refuse
+`text/markdown`) and for `llms.txt`, applied
 by the static-asset layer.

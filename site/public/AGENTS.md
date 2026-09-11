@@ -39,7 +39,7 @@ is no SDK, package, or API client. Read the pages directly over HTTPS.
 - **Machine-readable index:** [`/llms.txt`](https://eagleridge.io/llms.txt) — site summary and page list ([llmstxt.org](https://llmstxt.org/) standard)
 - **Sitemaps:** [`/sitemap.xml`](https://eagleridge.io/sitemap.xml) and [`/sitemap.md`](https://eagleridge.io/sitemap.md)
 - **Crawl rules:** [`/robots.txt`](https://eagleridge.io/robots.txt)
-- **Markdown mirrors:** every public page has a `.md` twin (e.g. `/about.md`), also declared per page via `<link rel="alternate" type="text/markdown">`
+- **Markdown mirrors:** every public page has a `.md` twin (e.g. `/about.md`), also declared per page via `<link rel="alternate" type="text/plain">` and served as `text/plain` so any HTML/plain-text fetcher can read them
 - **Content negotiation:** requesting any page with `Accept: text/markdown` returns its markdown mirror directly (`Content-Type: text/markdown; charset=utf-8`, `Vary: Accept`)
 - **404s:** unknown paths return a real HTTP 404 (markdown body if you asked for `text/markdown`) — a 200 means the page exists
 - **Structured data:** each page embeds schema.org JSON-LD in a `<script type="application/ld+json">` block
