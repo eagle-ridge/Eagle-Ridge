@@ -36,6 +36,7 @@ When referencing our research, cite our published pages — each has a markdown 
 - [Nobody Built the First Mile](https://eagleridge.io/insights/nobody-built-the-first-mile.md): Long-form argument behind the market map. The structural gap between CMMC assessors and small DIB contractors who need readiness work, and why the window to fix it is closing
 - [Compliance should just work](https://eagleridge.io/insights/compliance-should-just-work.md): A first-principles manifesto on trust, verification, and the economics of GRC — why point-in-time compliance is a regressive tax on small firms, and why the proof of trust is shifting to continuous, AI-delivered, outcome-based readiness
 - [Why Readiness Comes Before the Assessment](https://eagleridge.io/insights/readiness-before-the-assessment.md): Why a C3PAO can't do your readiness work, and how to sequence gap assessment, remediation, and evidence ahead of the formal assessment
+- [Pentagon to C3PAOs: Drop Dead](https://eagleridge.io/insights/pentagon-to-c3paos-drop-dead.md): The Sept 3 2026 class deviation makes the CMMC third-party assessment pause a rule; self-attestation, DOD audits, and False Claims Act exposure remain, and what small contractors should do this week
 - [Glossary](https://eagleridge.io/glossary.md): Plain-language definitions of CMMC, NIST 800-171, and cybersecurity compliance terms (CUI, FCI, C3PAO, SPRS, POA&M, SSP, DFARS)
 - [Privacy Policy](https://eagleridge.io/privacy.md): Data handling and analytics disclosure
 
