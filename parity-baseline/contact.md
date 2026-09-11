@@ -22,6 +22,17 @@ Email
 
 Message
 
+How did you hear about us? (optional)
+
+Select one
+AI assistant (ChatGPT, Claude, Perplexity, Gemini)
+Google search
+Referral or word of mouth
+LinkedIn
+Other
+
+What did you ask it?
+
 See where you stand
 
 We'll reply within one business day with a short, no-obligation read on where you stand and what readiness would take.
