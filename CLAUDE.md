@@ -4,6 +4,8 @@
 
 ## Deploy — automated via GitHub Actions
 
+**Until #107 cuts DNS over, a merge does NOT update eagleridge.io.** The apex still serves the Cloudflare Pages project; the Action below deploys only the Worker. After merging anything under `site/**`, run from `site/`: `npm run build`, regenerate mirrors (see table), then `npx wrangler pages deploy dist/client --project-name eagleridge --branch main`, then `curl` the live URL. If wrangler says "couldn't ascertain the final status", re-run the same deploy. Tracking: #122.
+
 Pushes to `main` that touch `site/**` trigger [`.github/workflows/deploy.yml`](.github/workflows/deploy.yml), which builds the Astro site (bundling `site/src/worker.ts`) and runs `wrangler deploy` — wrangler follows `site/.wrangler/deploy/config.json` to the build-emitted `site/dist/server/wrangler.json` (Worker + D1/R2/assets bindings; static assets from `site/dist/client`). Nothing rebuilds on the Cloudflare side by itself; the Action is what deploys. Repo secrets `CLOUDFLARE_API_TOKEN` + `CLOUDFLARE_ACCOUNT_ID` drive it. EmDash schema migrations apply automatically at runtime after deploy.
 
 ### Manual deploy / local repro
