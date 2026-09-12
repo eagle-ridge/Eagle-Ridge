@@ -43,6 +43,15 @@
 .explainer .note { font-family: var(--er-font-sans); font-size: 13.5px; color: var(--er-mute);
   border-top: 1px solid var(--er-rule); padding-top: 20px; margin-top: 56px; }
 .explainer .note a { color: var(--slate); }
+/* Footnotes: nuance that would clutter the narrative if inlined. */
+.explainer .fn-ref { font-size: .68em; font-weight: 600; line-height: 0; }
+.explainer .fn-ref a { color: var(--slate); text-decoration: none; }
+.explainer .footnotes { font-family: var(--er-font-sans); font-size: 13.5px; color: var(--er-mute);
+  border-top: 1px solid var(--er-rule); padding-top: 20px; margin-top: 48px; }
+.explainer .footnotes ol { max-width: 640px; margin: 0; padding-left: 1.5em; }
+.explainer .footnotes li { margin: 0 0 12px; line-height: 1.5; }
+.explainer .footnotes li:last-child { margin-bottom: 0; }
+.explainer .footnotes a.fn-back { color: var(--slate); text-decoration: none; margin-left: 4px; }
 /* SVG text classes */
 .explainer .ax { font-family: var(--er-font-sans); font-size: 12.5px; fill: var(--er-mute); }
 .explainer .lbl { font-family: var(--er-font-sans); font-size: 13px; fill: var(--er-ink-soft); }

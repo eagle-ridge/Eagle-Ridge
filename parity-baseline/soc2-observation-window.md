@@ -13,21 +13,27 @@ six months of real time**. That window is calendar time. No platform
 and no budget compresses it.
 
 So your start date sets the date you can hand a customer a report. If a
-customer asks today, the earliest credible Type II report is about
-**eight months out** — and every week of delay moves it a week.
+customer asks today, the earliest credible Type II report is roughly
+**eight months out with the minimum three-month window, and closer to
+eleven if they want six** — and every week of delay moves it a week.
 
 Fig. 01 · Why the start date is the whole game
 
 Representative schedule with the minimum three-month window; many
-customers ask for six. Only readiness and remediation can move faster.
-That’s where Eagle Ridge works.
+customers ask for six. Only readiness and remediation[1](#fn-1)
+can move faster. That’s where Eagle Ridge works.
 
 ## Exceptions are the enemy
 
 A Type II report tells a story. The auditor writes every control that
-failed during the window into it as an **exception**, and every
-customer who asks for the report reads those exceptions. The point of
+failed during the window into it as an **exception**[2](#fn-2),
+and every customer who asks for the report reads those exceptions. The point of
 readiness work is to enter the window with no known failures left.
+
+Entering clean is necessary but not sufficient: most Type II exceptions
+are controls that lapse *during* the window — a skipped access
+review, a missed scan — so the controls have to keep operating, on
+schedule, every month.
 
 Fig. 02 · Would-be exceptions, driven to zero before the window opens
 
@@ -40,9 +46,9 @@ auditor before they find it.
 
 A typical SaaS scope covers **38 Trust Services criteria**: all
 33 common criteria (the required Security category) plus Availability and
-Confidentiality. The auditor tests the controls you’ve mapped
-to each one, across the whole window — so those controls have to be
-operating, and collecting their evidence, from day one of the window.
+Confidentiality[3](#fn-3). The auditor tests the
+controls[4](#fn-4) you’ve mapped to each one across the
+whole window, so they have to be operating and collecting evidence from day one.
 
 Fig. 03 · 33 security · 3 availability · 2 confidentiality
 
@@ -69,6 +75,24 @@ and concrete. We build the program.
 * Write the policies and design controls that fit how you work
 * Automate evidence collection so the window runs itself
 * Help select the CPA firm, then manage the audit request list through report
+
+1. The two-month remediation shown assumes a managed engagement with
+   templates, automation, and dedicated support. Self-managed programs commonly take
+   three to five months for the same scope; the window can’t start until
+   remediation is genuinely done. [↩](#fnref-1)
+2. An exception is a documented instance where a control didn’t
+   operate as intended during the window. A few isolated exceptions with credible
+   management responses rarely change the auditor’s opinion; a pattern across a
+   criterion can lead to a qualified opinion. SOC 2 produces an opinion
+   (unqualified, qualified, adverse, or disclaimer), not a pass/fail. [↩](#fnref-2)
+3. Availability and Confidentiality are the two most commonly added
+   criteria beyond the mandatory Security baseline — appearing in roughly
+   75% and 64% of reports respectively (CBIZ 2024 SOC Benchmark Study). Processing
+   Integrity and Privacy are added when customer commitments require them. [↩](#fnref-3)
+4. Criteria are the Trust Services objectives; controls are what we
+   implement and the auditor tests against each one. A single criterion can carry
+   many controls — one failed control under a criterion is an exception, not
+   a failure of the whole criterion. [↩](#fnref-4)
 
 Figures show a representative engagement, not a quote — your
 scope, window length, and timeline depend on your systems and what your customers
