@@ -27,8 +27,9 @@ const description = 'Why the SOC 2 Type II start date sets your report date: the
     six months of real time</strong>. That window is calendar time. No platform
     and no budget compresses it.</p>
     <p>So your start date sets the date you can hand a customer a report. If a
-    customer asks today, the earliest credible Type&nbsp;II report is about
-    <strong>eight months out</strong>&thinsp;&mdash;&thinsp;and every week of delay moves it a week.</p>
+    customer asks today, the earliest credible Type&nbsp;II report is roughly
+    <strong>eight months out with the minimum three-month window, and closer to
+    eleven if they want six</strong>&thinsp;&mdash;&thinsp;and every week of delay moves it a week.</p>
   </div>
 
   <p class="figtag">Fig. 01 &middot; Why the start date is the whole game</p>
@@ -89,8 +90,8 @@ const description = 'Why the SOC 2 Type II start date sets your report date: the
       <text x="150" y="310" class="ax">The whole schedule slides with the start date &mdash; the window never shrinks.</text>
     </svg>
     <figcaption>Representative schedule with the minimum three-month window; many
-    customers ask for six. Only readiness and remediation can move faster.
-    That&rsquo;s where Eagle Ridge works.</figcaption>
+    customers ask for six. Only readiness and remediation<sup class="fn-ref"><a id="fnref-1" href="#fn-1">1</a></sup>
+    can move faster. That&rsquo;s where Eagle Ridge works.</figcaption>
   </figure>
 </section>
 
@@ -98,9 +99,13 @@ const description = 'Why the SOC 2 Type II start date sets your report date: the
   <div class="prose">
     <h2>Exceptions are the enemy</h2>
     <p>A Type&nbsp;II report tells a story. The auditor writes every control that
-    failed during the window into it as an <strong>exception</strong>, and every
-    customer who asks for the report reads those exceptions. The point of
+    failed during the window into it as an <strong>exception</strong><sup class="fn-ref"><a id="fnref-2" href="#fn-2">2</a></sup>,
+    and every customer who asks for the report reads those exceptions. The point of
     readiness work is to enter the window with no known failures left.</p>
+    <p>Entering clean is necessary but not sufficient: most Type&nbsp;II exceptions
+    are controls that lapse <em>during</em> the window&thinsp;&mdash;&thinsp;a skipped access
+    review, a missed scan&thinsp;&mdash;&thinsp;so the controls have to keep operating, on
+    schedule, every month.</p>
   </div>
 
   <p class="figtag">Fig. 02 &middot; Would-be exceptions, driven to zero before the window opens</p>
@@ -162,9 +167,9 @@ const description = 'Why the SOC 2 Type II start date sets your report date: the
     <h2>The criteria, accounted for</h2>
     <p>A typical SaaS scope covers <strong>38 Trust Services criteria</strong>: all
     33 common criteria (the required Security category) plus Availability and
-    Confidentiality. The auditor tests the controls you&rsquo;ve mapped
-    to each one, across the whole window&thinsp;&mdash;&thinsp;so those controls have to be
-    operating, and collecting their evidence, from day one of the window.</p>
+    Confidentiality<sup class="fn-ref"><a id="fnref-3" href="#fn-3">3</a></sup>. The auditor tests the
+    controls<sup class="fn-ref"><a id="fnref-4" href="#fn-4">4</a></sup> you&rsquo;ve mapped to each one across the
+    whole window, so they have to be operating and collecting evidence from day one.</p>
   </div>
 
   <p class="figtag">Fig. 03 &middot; 33 security &middot; 3 availability &middot; 2 confidentiality</p>
@@ -228,6 +233,28 @@ const description = 'Why the SOC 2 Type II start date sets your report date: the
     </div>
   </div>
 </section>
+
+<div class="footnotes">
+  <ol>
+    <li id="fn-1">The two-month remediation shown assumes a managed engagement with
+    templates, automation, and dedicated support. Self-managed programs commonly take
+    three to five months for the same scope; the window can&rsquo;t start until
+    remediation is genuinely done. <a class="fn-back" href="#fnref-1" aria-label="Back to reference 1">&#8617;</a></li>
+    <li id="fn-2">An exception is a documented instance where a control didn&rsquo;t
+    operate as intended during the window. A few isolated exceptions with credible
+    management responses rarely change the auditor&rsquo;s opinion; a pattern across a
+    criterion can lead to a qualified opinion. SOC&nbsp;2 produces an opinion
+    (unqualified, qualified, adverse, or disclaimer), not a pass/fail. <a class="fn-back" href="#fnref-2" aria-label="Back to reference 2">&#8617;</a></li>
+    <li id="fn-3">Availability and Confidentiality are the two most commonly added
+    criteria beyond the mandatory Security baseline&thinsp;&mdash;&thinsp;appearing in roughly
+    75% and 64% of reports respectively (CBIZ 2024 SOC Benchmark Study). Processing
+    Integrity and Privacy are added when customer commitments require them. <a class="fn-back" href="#fnref-3" aria-label="Back to reference 3">&#8617;</a></li>
+    <li id="fn-4">Criteria are the Trust Services objectives; controls are what we
+    implement and the auditor tests against each one. A single criterion can carry
+    many controls&thinsp;&mdash;&thinsp;one failed control under a criterion is an exception, not
+    a failure of the whole criterion. <a class="fn-back" href="#fnref-4" aria-label="Back to reference 4">&#8617;</a></li>
+  </ol>
+</div>
 
 <p class="note">Figures show a representative engagement, not a quote&thinsp;&mdash;&thinsp;your
 scope, window length, and timeline depend on your systems and what your customers
