@@ -6,6 +6,8 @@
 
 Pushes to `main` that touch `site/**` trigger [`.github/workflows/deploy.yml`](.github/workflows/deploy.yml), which builds the Astro site (bundling `site/src/worker.ts`) and runs `wrangler deploy` — wrangler follows `site/.wrangler/deploy/config.json` to the build-emitted `site/dist/server/wrangler.json` (Worker + D1/R2/assets bindings; static assets from `site/dist/client`). Nothing rebuilds on the Cloudflare side by itself; the Action is what deploys. Repo secrets `CLOUDFLARE_API_TOKEN` + `CLOUDFLARE_ACCOUNT_ID` drive it. EmDash schema migrations apply automatically at runtime after deploy.
 
+**A merge alone does NOT put content on eagleridge.io.** `deploy.yml` only deploys the Worker, but DNS still points `eagleridge.io` at the `eagleridge-7z4.pages.dev` Cloudflare Pages project (cutover not done, see plan 006 phase 2 / GH #107). Every content change needs a manual Pages deploy after merging: `npx wrangler pages deploy site/dist/client --project-name eagleridge --branch main` (build first with `npm run build` in `site/`). Confirm live with `curl -s eagleridge.io/<path> | grep <expected text>` — a 200 alone isn't proof, a stale cached page can also return 200. Tracked in GH #122; hit 4+ times in one day (2026-09-11).
+
 ### Manual deploy / local repro
 
 ```bash
@@ -28,6 +30,7 @@ CLOUDFLARE_API_TOKEN="$CF_TOKEN" CLOUDFLARE_ACCOUNT_ID=702342b70e150343381e08298
 - API token: `op://Developer Vault/Dash Cloudflare API Credential/credential` (historically Zone DNS edit + Pages edit; the Workers migration needs Workers Scripts/D1/R2 edit added — see plan 006 phase 2).
 - DNS: apex `eagleridge.io` + `www` are proxied CNAMEs; custom domains attach to the `eagleridge` Worker after cutover (previously the `eagleridge` Pages project → `eagleridge-7z4.pages.dev`).
 - `site/wrangler.jsonc` is the config wrangler + the Astro adapter read; D1 `eagleridge-emdash` (`4a4e72d6-…`) is provisioned; R2 bucket `eagleridge-media` is pending R2 enablement (plan 006 phase 2).
+- Cloudflare's Bot Management API object (`/zones/:id/bot_management`) is readable with a scoped API token, but two of its fields — the AI-bot-block toggle and `is_robots_txt_managed` (the "Managed robots.txt" switch) — always reject a PATCH (403, regardless of token scope). Dashboard-only: zone → AI Crawl Control → Overview → the toggle in the top-right card.
 - Legacy GitHub Pages (root HTML / `CNAME` / `.nojekyll`) is retired and no longer served; the root files were removed 2026-06-18 (see intro). Recover from git history if ever needed.
 
 ## Files & structure (all under `site/`)

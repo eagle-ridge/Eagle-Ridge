@@ -30,18 +30,28 @@ const REDIRECTS = parseRedirects(redirectsText);
 
 export default {
 	...handler,
-	fetch(request: Request, env: unknown, ctx: ExecutionContext): Promise<Response> {
+	async fetch(request: Request, env: unknown, ctx: ExecutionContext): Promise<Response> {
+		const url = new URL(request.url);
 		// Legacy-URL 301s first (see src/lib/redirects.js for why the asset
 		// layer can't be left to answer these under run_worker_first).
-		const redirect = matchRedirect(REDIRECTS, new URL(request.url));
-		if (redirect) return Promise.resolve(redirect);
-		return onRequest({
+		const redirect = matchRedirect(REDIRECTS, url);
+		if (redirect) return redirect;
+		const response: Response = await onRequest({
 			request,
 			env,
 			next: () => emdashFetch(request, env, ctx),
 			// .md mirrors for CMS-served pages are runtime routes, not assets.
 			renderMirror: (mirrorRequest: Request) => emdashFetch(mirrorRequest, env, ctx),
 		});
+		// The workers.dev preview host is a duplicate of eagleridge.io (GH #110).
+		// Keep it reachable (EmDash admin lives here until DNS cutover) but out
+		// of search and AI indexes; <link rel=canonical> already points at eagleridge.io.
+		if (url.hostname.endsWith('.workers.dev')) {
+			const noindexed = new Response(response.body, response);
+			noindexed.headers.set('X-Robots-Tag', 'noindex, nofollow');
+			return noindexed;
+		}
+		return response;
 	},
 	scheduled: createScheduledHandler(),
 };

@@ -20,7 +20,7 @@ export const GET: APIRoute = async ({ params }) => {
 	const body = portableTextToMarkdown((data.content ?? []) as never);
 	return new Response(articleMirror(toSummary(data), body), {
 		headers: {
-			'Content-Type': 'text/markdown; charset=utf-8',
+			'Content-Type': 'text/plain; charset=utf-8',
 			'X-Content-Type-Options': 'nosniff',
 		},
 	});

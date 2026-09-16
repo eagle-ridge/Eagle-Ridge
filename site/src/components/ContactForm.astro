@@ -14,6 +14,19 @@
     <input type="email" id="email" name="email" required aria-required="true" autocomplete="email">
     <label for="message">Message</label>
     <textarea id="message" name="message" required aria-required="true"></textarea>
+    <label for="heard_from">How did you hear about us? <span class="optional">(optional)</span></label>
+    <select id="heard_from" name="heard_from">
+        <option value="">Select one</option>
+        <option>AI assistant (ChatGPT, Claude, Perplexity, Gemini)</option>
+        <option>Google search</option>
+        <option>Referral or word of mouth</option>
+        <option>LinkedIn</option>
+        <option>Other</option>
+    </select>
+    <div id="ai-prompt-wrap" hidden>
+        <label for="ai_prompt">What did you ask it?</label>
+        <input type="text" id="ai_prompt" name="ai_prompt" autocomplete="off" placeholder="e.g. who can get a small defense contractor ready for CMMC">
+    </div>
     <button type="submit" class="btn">See where you stand</button>
     <p class="form-note">We'll reply within one business day with a short, no-obligation read on where you stand and what readiness would take.</p>
     <p id="form-status" role="alert" aria-live="polite"></p>
@@ -35,7 +48,13 @@
         /* --er-mute fails WCAG 4.5:1 at label sizes */
         color: var(--er-ink-soft);
     }
+    .contact-form label .optional {
+        text-transform: none;
+        letter-spacing: 0;
+        font-weight: 400;
+    }
     .contact-form input,
+    .contact-form select,
     .contact-form textarea {
         width: 100%;
         padding: 12px 16px;
@@ -48,6 +67,7 @@
         font-family: var(--er-font-sans);
     }
     .contact-form input:focus,
+    .contact-form select:focus,
     .contact-form textarea:focus {
         outline: 2px solid var(--er-accent);
         outline-offset: 1px;
@@ -76,6 +96,12 @@
         // Contact form: submit via fetch to keep user on page
         var form = document.querySelector('.contact-form');
         if (form) {
+            // AEO attribution: self-reported source, plus the prompt when it was an AI assistant.
+            var heard = form.querySelector('#heard_from');
+            var promptWrap = form.querySelector('#ai-prompt-wrap');
+            heard.addEventListener('change', function() {
+                promptWrap.hidden = heard.value.indexOf('AI assistant') !== 0;
+            });
             form.addEventListener('submit', function(e) {
                 e.preventDefault();
                 var btn = form.querySelector('button[type="submit"]');
@@ -91,13 +117,21 @@
                         if (data.success) {
                             status.textContent = 'Message sent! We’ll be in touch shortly.';
                             status.className = 'ok';
+                            window.posthog?.capture('contact_form_submitted', {
+                                form: 'contact',
+                                path: window.location.pathname,
+                                heard_from: heard.value || null,
+                                ai_prompt: form.querySelector('#ai_prompt').value || null,
+                            });
                             form.reset();
+                            promptWrap.hidden = true;
                         } else {
                             status.textContent = 'Something went wrong. Please email contact@eagleridge.io.';
                             status.className = 'err';
                         }
                     })
-                    .catch(function() {
+                    .catch(function(error) {
+                        window.posthog?.captureException(error);
                         status.textContent = 'Network error. Please email contact@eagleridge.io.';
                         status.className = 'err';
                     })

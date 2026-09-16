@@ -380,7 +380,7 @@ Software helps you track and document controls. It does not, by itself, get you 
 43. [Panorays↗](https://www.panorays.com/)
     Third-party risk
 
-    Questionnaire automation for third-party risk; workflow-heavy.
+    Outside-in security ratings platform with questionnaire automation and AI-powered third-party risk visibility; named a Forrester Wave Leader in Cybersecurity Risk Rating Platforms Q2 2026.
 
     Enterprise
     Vendor risk

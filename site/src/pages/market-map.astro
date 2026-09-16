@@ -776,6 +776,12 @@ const cta = `<p>If you are trying to work out where your firm fits in this marke
     }
 
     function showDetail(e: Entity) {
+      (window as any).posthog?.capture('market_map_entity_viewed', {
+        entity_name: e.name,
+        entity_category: CATS[e.cat].label,
+        confidence: e.conf,
+        is_gap: Boolean(e.gap),
+      });
       allCells.forEach((node) => {
         node.classList.toggle('selected', Number(node.dataset.num) === e.n);
       });
