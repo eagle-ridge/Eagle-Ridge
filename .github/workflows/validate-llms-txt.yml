@@ -10,7 +10,7 @@ on:
 jobs:
   validate:
     name: Validate llms.txt
-    runs-on: ubuntu-latest
+    runs-on: latchkey-small
     defaults:
       run:
         working-directory: site
@@ -27,11 +27,25 @@ jobs:
         with:
           python-version: "3.12"
 
+      - name: Restore npm cache (Latchkey)
+        uses: latchkey-dev/cache-action@v1
+        id: latchkey-cache-npm
+        with:
+          action: restore
+          key: npm-${{ hashFiles('**/package-lock.json') }}
+          path: ~/.npm
       - name: Install dependencies
         run: |
           npm ci
           python3 -m pip install -r scripts/requirements.txt
 
+      - name: Save npm cache (Latchkey)
+        uses: latchkey-dev/cache-action@v1
+        if: steps.latchkey-cache-npm.outputs.cache-hit != 'true'
+        with:
+          action: save
+          key: npm-${{ hashFiles('**/package-lock.json') }}
+          path: ~/.npm
       - name: Build site (includes mirror + sitemap generation)
         run: npm run build
 
@@ -178,7 +192,7 @@ jobs:
 
   drift-check:
     name: Check llms.txt freshness
-    runs-on: ubuntu-latest
+    runs-on: latchkey-small
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
         with:
