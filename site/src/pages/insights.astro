@@ -1,50 +1,11 @@
 ---
-// Static page: prerendered at build time (md-mirror parity pipeline
-// reads the emitted HTML). Only EmDash CMS routes render on demand.
-export const prerender = true;
-import { getCollection } from 'astro:content';
+// CMS-served: the article list comes from EmDash at request time (plus the
+// standalone essays in src/lib/insights.ts), so nothing here is prerendered.
+export const prerender = false;
 import BaseLayout from '../layouts/BaseLayout.astro';
+import { listInsights, dateFmt, isoDate } from '../lib/insights';
 
-// Bespoke essays that live as standalone .astro pages under src/pages/insights/
-// (interactive figures / custom layout) aren't in the `articles` collection, so
-// they'd never appear here. List them so the index is complete.
-// ponytail: 2 hand-maintained entries — keep title/description/pubDate in sync
-// with each page's jsonLd. Promote to the collection only if these multiply.
-const standalone = [
-	{
-		id: 'compliance-should-just-work',
-		data: {
-			title: 'Compliance should just work',
-			description:
-				'A first-principles essay on trust, verification, and why the proof of trust is about to be rebuilt.',
-			pubDate: new Date('2026-06-12'),
-		},
-	},
-	{
-		id: 'nobody-built-the-first-mile',
-		data: {
-			title: 'Nobody Built the First Mile',
-			description:
-				'The structural gap between CMMC assessors and the small defense contractors who need readiness work, and why the window to fix it is closing.',
-			pubDate: new Date('2026-06-09'),
-		},
-	},
-];
-
-const articles = [
-	...(await getCollection('articles')).filter((entry) => !entry.data.draft),
-	...standalone,
-].sort((a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime());
-
-// timeZone:'UTC' so a date-only pubDate (parsed as UTC midnight) displays as
-// the day the author typed, regardless of the build machine's timezone.
-const dateFmt = new Intl.DateTimeFormat('en-US', {
-	year: 'numeric',
-	month: 'long',
-	day: 'numeric',
-	timeZone: 'UTC',
-});
-const isoDate = (d: Date) => d.toISOString().slice(0, 10);
+const articles = await listInsights();
 
 const jsonLd = JSON.stringify({
 	"@context": "https://schema.org",
@@ -54,10 +15,10 @@ const jsonLd = JSON.stringify({
 	"description": "Plain-language thinking on CMMC, SOC 2, and ISO 27001 readiness for small-business CEOs who need to win and keep contracts.",
 	"blogPost": articles.map((entry) => ({
 		"@type": "BlogPosting",
-		"headline": entry.data.title,
-		"description": entry.data.description,
-		"datePublished": isoDate(entry.data.pubDate),
-		"url": `https://eagleridge.io/insights/${entry.id}`,
+		"headline": entry.title,
+		"description": entry.description,
+		"datePublished": isoDate(entry.pubDate),
+		"url": `https://eagleridge.io/insights/${entry.slug}`,
 	})),
 });
 ---
@@ -93,14 +54,14 @@ const jsonLd = JSON.stringify({
 			<ul class="article-list">
 				{articles.map((entry) => (
 					<li class="article-card">
-						<time class="meta" datetime={isoDate(entry.data.pubDate)}>
-							{dateFmt.format(entry.data.pubDate)}
+						<time class="meta" datetime={isoDate(entry.pubDate)}>
+							{dateFmt.format(entry.pubDate)}
 						</time>
 						<h2 class="card-title">
-							<a href={`/insights/${entry.id}`}>{entry.data.title}</a>
+							<a href={`/insights/${entry.slug}`}>{entry.title}</a>
 						</h2>
-						<p class="card-desc">{entry.data.description}</p>
-						<a class="read-more" href={`/insights/${entry.id}`}>
+						<p class="card-desc">{entry.description}</p>
+						<a class="read-more" href={`/insights/${entry.slug}`}>
 							Read <span aria-hidden="true">→</span>
 						</a>
 					</li>

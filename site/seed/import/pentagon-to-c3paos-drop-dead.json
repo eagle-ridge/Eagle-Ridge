@@ -1,0 +1,16 @@
+{
+  "slug": "pentagon-to-c3paos-drop-dead",
+  "publishedAt": "2026-09-11T12:00:00Z",
+  "tags": [
+    "CMMC",
+    "class deviation",
+    "C3PAO",
+    "SPRS",
+    "False Claims Act"
+  ],
+  "data": {
+    "title": "Pentagon to C3PAOs: Drop Dead",
+    "excerpt": "The Pentagon has all but decided to fire the 3rd party auditors they asked the industry to set up to make sure CMMC had teeth. The lawyers are still around.",
+    "content": "The Pentagon has all but decided to fire the 3rd party auditors they asked the industry to set up to make sure CMMC had teeth.\n\nThe lawyers are still around.\n\n[A Sept 3 memo from John Tenaglia, DOD's principal director for defense pricing,](https://www.acq.osd.mil/dpap/dars/classdev/DFARS_RFO/Part-240/2026-O0025_Rev3_TAB_A_Deviation_Memo.pdf) reinforces the suspension of the CMMC Phase 2 deadline that would have required contractors to get an auditor to confirm they comply with CMMC Level 2. \n\nThe CMMC Reform Task Force is slated to send its recommendations on Friday Sept. 11. \n\nUnfortunately, too many small shops read this as \"we’re off the hook.\"\n\nMy friends, you are not off the hook.\n\nContractors still must self-attest to NIST 800-171 in SPRS. They still need to have a passing score. The DIBCAC can still audit. The False Claims Act still eats people. Logzone got cute, faked a near-perfect score, got caught, and paid about $500K to settle.\n\nThe onus remains on companies to prove compliance, whether or not they had an outsider give them a stamp of approval. This is no different than cheating on your taxes and hoping you don’t get caught.\n\nYes this is an annoying problem. But here’s what you can do today.\n\n- Dust off your System Security Plan\n- Write the policies your SSP references\n- Collect fresh evidence of the controls (ie screenshots and logs)\n- Score it against the official CMMC methodology.\n- Update in SPRS.\n- Create a calendar reminder for 90 days to update and keep current (until further notice)\n\n\nIf you haven’t started, then reach out. That’s what we’re here for.\n"
+  }
+}

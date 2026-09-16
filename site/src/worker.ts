@@ -40,6 +40,8 @@ export default {
 			request,
 			env,
 			next: () => emdashFetch(request, env, ctx),
+			// .md mirrors for CMS-served pages are runtime routes, not assets.
+			renderMirror: (mirrorRequest: Request) => emdashFetch(mirrorRequest, env, ctx),
 		});
 		// The workers.dev preview host is a duplicate of eagleridge.io (GH #110).
 		// Keep it reachable (EmDash admin lives here until DNS cutover) but out

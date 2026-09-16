@@ -12,7 +12,10 @@
     "astro": "astro",
     "test": "node --test scripts/*.test.mjs",
     "check:entities": "node scripts/check-entity-fields.mjs",
-    "check:agent-readiness": "node scripts/verify-agent-readiness.mjs"
+    "check:agent-readiness": "node scripts/verify-agent-readiness.mjs",
+    "build:seed": "node scripts/build-seed.mjs",
+    "seed:local": "node scripts/seed-local.mjs",
+    "seed:import": "node scripts/seed-import.mjs"
   },
   "dependencies": {
     "@astrojs/cloudflare": "^13.7.0",
@@ -28,6 +31,10 @@
   },
   "devDependencies": {
     "@cloudflare/workers-types": "^5.20260826.1",
+    "better-sqlite3": "^12.11.1",
     "wrangler": "^4.126.0"
+  },
+  "emdash": {
+    "seed": "seed/seed.json"
   }
 }

@@ -220,11 +220,38 @@ test('asset requests are untouched (no negotiation, no Vary)', async () => {
   assert.equal(res.headers.get('Vary'), null);
 });
 
-test('.md mirror requests are untouched', async () => {
-  const { context, calls } = makeContext({ path: '/about.md', accept: 'text/html' });
+test('direct .md request serves the static mirror when one was built', async () => {
+  const { context, calls } = makeContext({
+    path: '/insights/compliance-should-just-work.md',
+    accept: 'text/html',
+    assets: { '/insights/compliance-should-just-work.md': '# Manifesto' },
+  });
+  const res = await onRequest(context);
+  assert.equal(res.status, 200);
+  assert.equal(res.headers.get('Content-Type'), 'text/markdown; charset=utf-8');
+  assert.equal(calls.next, 0);
+  assert.deepEqual(calls.assetPaths, ['/insights/compliance-should-just-work.md']);
+  assert.match(await res.text(), /^# Manifesto/);
+});
+
+test('direct .md request keeps the asset layer headers (ETag/Cache-Control)', async () => {
+  const { context } = makeContext({ path: '/about.md', accept: 'text/html' });
+  context.env.ASSETS.fetch = async () =>
+    new Response('# About', {
+      status: 200,
+      headers: { 'Content-Type': 'text/markdown', ETag: '"abc"', 'Cache-Control': 'public, max-age=0, must-revalidate' },
+    });
+  const res = await onRequest(context);
+  assert.equal(res.headers.get('ETag'), '"abc"');
+  assert.equal(res.headers.get('Cache-Control'), 'public, max-age=0, must-revalidate');
+  assert.equal(res.headers.get('Content-Type'), 'text/markdown; charset=utf-8');
+});
+
+test('direct .md request with no static mirror falls through to the app', async () => {
+  const { context, calls } = makeContext({ path: '/insights/cms-article.md', accept: 'text/html' });
   await onRequest(context);
   assert.equal(calls.next, 1);
-  assert.equal(calls.assetPaths.length, 0);
+  assert.deepEqual(calls.assetPaths, ['/insights/cms-article.md']);
 });
 
 test('non-GET methods pass through', async () => {
@@ -245,4 +272,40 @@ test('HEAD negotiates like GET but returns no body', async () => {
   assert.equal(res.status, 200);
   assert.equal(res.headers.get('Content-Type'), 'text/markdown; charset=utf-8');
   assert.equal(await res.text(), '');
+});
+
+// ---- runtime mirrors (CMS-served pages) ---------------------------------
+
+test('mirror miss falls back to renderMirror for CMS-served pages', async () => {
+  const { context, calls } = makeContext({
+    path: '/insights/some-cms-article',
+    accept: 'text/markdown',
+  });
+  const rendered = [];
+  context.renderMirror = async (req) => {
+    rendered.push(new URL(req.url).pathname);
+    return new Response('# Some CMS article', {
+      status: 200,
+      headers: { 'Content-Type': 'text/markdown; charset=utf-8' },
+    });
+  };
+  const res = await onRequest(context);
+  assert.equal(res.status, 200);
+  assert.equal(res.headers.get('Content-Type'), 'text/markdown; charset=utf-8');
+  assert.equal(res.headers.get('Vary'), 'Accept');
+  assert.deepEqual(calls.assetPaths, ['/insights/some-cms-article.md']);
+  assert.deepEqual(rendered, ['/insights/some-cms-article.md']);
+  assert.match(await res.text(), /^# Some CMS article/);
+});
+
+test('renderMirror miss still yields the markdown 404', async () => {
+  const { context } = makeContext({
+    path: '/insights/nope',
+    accept: 'text/markdown',
+    nextResponse: new Response('not found html', { status: 404 }),
+  });
+  context.renderMirror = async () => new Response('Not found', { status: 404 });
+  const res = await onRequest(context);
+  assert.equal(res.status, 404);
+  assert.equal(res.headers.get('Content-Type'), 'text/markdown; charset=utf-8');
 });

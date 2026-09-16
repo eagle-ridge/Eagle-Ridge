@@ -1,5 +1,5 @@
 // Post-build agent-readiness invariants. Run after `npm run build`
-// (needs dist/ + mirrors). Guards the behaviors behind the Is Agentic
+// (needs dist/ + mirrors, and SITE_URL for the runtime sitemap check). Guards the behaviors behind the Is Agentic
 // checks: real 404 page, homepage metadata + Organization schema, contact
 // trust page, llms.txt when-to-use guidance, sitemap coverage, and the
 // presence of the content-negotiation middleware.
@@ -89,12 +89,30 @@ if (!llms.includes('/contact')) fail('llms.txt does not reference the contact pa
 ok('llms.txt carries when-to-use guidance');
 
 // ---- 6. Sitemap coverage -------------------------------------------------
-const sitemapXml = read(join(DIST, 'sitemap.xml'));
-const sitemapMd = read(join(DIST, 'sitemap.md'));
-if (!sitemapXml.includes('https://eagleridge.io/contact</loc>')) fail('sitemap.xml missing /contact');
-if (!sitemapMd.includes('/contact.md')) fail('sitemap.md missing contact mirror');
-if (/404/.test(sitemapXml)) fail('sitemap.xml must not list the 404 page');
-ok('sitemaps cover /contact and exclude 404');
+// Sitemaps are served at request time (they merge static pages with EmDash
+// articles), so this check reads them over HTTP. SITE_URL points at a running
+// worker: `wrangler dev` in CI, the deployed Worker post-deploy.
+const siteUrl = process.env.SITE_URL?.replace(/\/$/, '');
+if (!siteUrl) {
+  fail('SITE_URL not set — sitemap coverage needs a running site (e.g. SITE_URL=http://localhost:8787)');
+} else {
+  const fetchText = async (path) => {
+    const res = await fetch(siteUrl + path);
+    if (!res.ok) throw new Error(`${path} -> HTTP ${res.status}`);
+    return res.text();
+  };
+  try {
+    const sitemapXml = await fetchText('/sitemap.xml');
+    const sitemapMd = await fetchText('/sitemap.md');
+    if (!sitemapXml.includes('https://eagleridge.io/contact</loc>')) fail('sitemap.xml missing /contact');
+    if (!sitemapMd.includes('/contact.md')) fail('sitemap.md missing contact mirror');
+    if (!sitemapXml.includes('https://eagleridge.io/insights/')) fail('sitemap.xml lists no Insights articles');
+    if (/404/.test(sitemapXml)) fail('sitemap.xml must not list the 404 page');
+    ok(`sitemaps (${siteUrl}) cover /contact + Insights and exclude 404`);
+  } catch (e) {
+    fail(`could not fetch sitemaps from ${siteUrl}: ${e.message}`);
+  }
+}
 
 // ---- 7. Negotiation middleware ships ------------------------------------
 const middleware = join(SITE, 'src', 'lib', 'negotiation.js');

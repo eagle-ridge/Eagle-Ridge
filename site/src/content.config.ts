@@ -11,27 +11,8 @@ const pages = defineCollection({
   }),
 });
 
-// Dated long-form articles, auto-listed by the Insights hub. Each .md lives in
-// src/content/articles/ and renders via src/pages/insights/[...slug].astro.
-const articles = defineCollection({
-  loader: glob({ pattern: '**/*.md', base: './src/content/articles' }),
-  schema: z
-    .object({
-      // .min(1): title/description feed <title>, <h1>, meta, OG, and JSON-LD —
-      // an empty string passes z.string() but ships a broken page. Fail loud.
-      title: z.string().min(1),
-      description: z.string().min(1),
-      pubDate: z.date(),
-      updatedDate: z.date().optional(),
-      author: z.string().default('Eagle Ridge Advisory'),
-      draft: z.boolean().default(false),
-      tags: z.array(z.string()).default([]),
-    })
-    .refine((d) => !d.updatedDate || d.updatedDate >= d.pubDate, {
-      message: 'updatedDate must be on or after pubDate',
-      path: ['updatedDate'],
-    }),
-});
+// Insights articles live in EmDash (D1) — see src/lib/insights.ts. The
+// markdown under seed/posts/ only seeds fresh local/CI databases.
 
 // The GRC tools index. One JSON file (src/data/grc-tools.json) is the build's
 // source of truth; this Zod schema IS the validation gate — bad/missing data or
@@ -78,4 +59,4 @@ const grcTools = defineCollection({
   }),
 });
 
-export const collections = { pages, articles, grcTools };
+export const collections = { pages, grcTools };

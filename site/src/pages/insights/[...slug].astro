@@ -1,49 +1,52 @@
 ---
-// Static page: prerendered at build time (md-mirror parity pipeline
-// reads the emitted HTML). Only EmDash CMS routes render on demand.
-export const prerender = true;
-import { getCollection, render } from 'astro:content';
-import type { GetStaticPaths } from 'astro';
+// CMS-served: rendered on demand from EmDash's `posts` collection. The
+// standalone essay pages in this directory (static routes) take precedence
+// over this catch-all.
+export const prerender = false;
+import { getEmDashEntry } from 'emdash';
+import { PortableText } from 'emdash/ui';
+import { portableTextToMarkdown } from 'emdash/client';
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import {
+	AUTHOR,
+	SITE_URL,
+	dateFmt,
+	isNotFound,
+	isoDate,
+	readingMinutes,
+	toSummary,
+	type PostData,
+} from '../../lib/insights';
 
-export const getStaticPaths = (async () => {
-	const articles = await getCollection('articles');
-	return articles
-		.filter((entry) => !entry.data.draft)
-		.map((entry) => ({
-			params: { slug: entry.id },
-			props: { entry },
-		}));
-}) satisfies GetStaticPaths;
+const slug = Astro.params.slug ?? '';
+const { entry, error } = await getEmDashEntry('posts', slug);
+// A missing slug surfaces as a LiveEntryNotFoundError, not a null entry.
+// A 404 Response makes Astro render src/pages/404.astro with a real 404 status.
+if (!entry && isNotFound(error)) return new Response(null, { status: 404 });
+if (error) {
+	console.error('[insights] getEmDashEntry failed for', slug, error);
+	return new Response('Server error', { status: 500 });
+}
+if (!entry) return new Response(null, { status: 404 });
 
-const { entry } = Astro.props;
-const { Content } = await render(entry);
+const data = entry.data as unknown as PostData;
+const summary = toSummary(data);
+const content = (data.content ?? []) as never;
 
-// timeZone:'UTC' so a date-only pubDate (parsed as UTC midnight) displays as
-// the day the author typed, regardless of the build machine's timezone.
-const dateFmt = new Intl.DateTimeFormat('en-US', {
-	year: 'numeric',
-	month: 'long',
-	day: 'numeric',
-	timeZone: 'UTC',
-});
-const isoDate = (d: Date) => d.toISOString().slice(0, 10);
-
-const published = entry.data.pubDate;
-const modified = entry.data.updatedDate ?? entry.data.pubDate;
-const path = `/insights/${entry.id}`;
-const url = `https://eagleridge.io${path}`;
-// The .md twin: generated at build time by scripts/generate-md-mirrors.py
-// (auto-discovers dist/insights/*.html). "Send to LLM" hands over this URL;
-// the in-page markdown view below is a styled preview of the same artifact.
+const published = summary.pubDate;
+const modified = summary.updatedDate;
+const path = `/insights/${slug}`;
+const url = `${SITE_URL}${path}`;
+// The .md twin: served at request time by [slug].md.ts from the same Portable
+// Text. "Send to LLM" hands over this URL; the in-page markdown view below is
+// a styled preview of the same artifact.
 const mdUrl = `${url}.md`;
 
-// ~200 wpm reading estimate from the raw markdown body.
-const words = entry.body?.trim().split(/\s+/).filter(Boolean).length ?? 0;
-const readingMin = Math.max(1, Math.round(words / 200));
+const bodyMarkdown = portableTextToMarkdown(content);
+const readingMin = readingMinutes(bodyMarkdown);
 
-// Light, build-time syntax styling for the markdown preview. Escape first,
-// then wrap headings / links / emphasis — the markdown metacharacters survive
+// Light syntax styling for the markdown preview. Escape first, then wrap
+// headings / links / emphasis — the markdown metacharacters survive
 // HTML-escaping (only & < > are replaced), so the regexes stay safe.
 const esc = (s: string) =>
 	s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
@@ -58,26 +61,26 @@ const highlightMd = (src: string) =>
 				.replace(/\*\*([^*]+)\*\*/g, '<span class="md-strong">**$1**</span>');
 		})
 		.join('\n');
-const mdBody = highlightMd(entry.body ?? '');
+const mdBody = highlightMd(bodyMarkdown);
 
 const jsonLd = JSON.stringify({
 	"@context": "https://schema.org",
 	"@type": "BlogPosting",
-	"headline": entry.data.title,
-	"description": entry.data.description,
+	"headline": summary.title,
+	"description": summary.description,
 	"datePublished": isoDate(published),
 	"dateModified": isoDate(modified),
 	"author": {
 		"@type": "Organization",
-		"name": "Eagle Ridge Advisory",
+		"name": AUTHOR,
 	},
 	"url": url,
 });
 ---
 
 <BaseLayout
-	title={`${entry.data.title} — Eagle Ridge Advisory`}
-	description={entry.data.description}
+	title={`${summary.title} — Eagle Ridge Advisory`}
+	description={summary.description}
 	path={path}
 	ogType="article"
 >
@@ -87,11 +90,11 @@ const jsonLd = JSON.stringify({
 
 	<article class="prose container article" data-md-url={mdUrl}>
 		<p class="eyebrow-mono">Insights</p>
-		<h1>{entry.data.title}</h1>
+		<h1>{summary.title}</h1>
 
 		<!-- meta block: byline (tier 1) + AI affordances (tier 2), riding a hairline -->
 		<div class="meta">
-			<p class="byline">By {entry.data.author}<span class="sep"> · </span><time datetime={isoDate(published)}>{dateFmt.format(published)}</time><span class="sep"> · </span>{readingMin} min read</p>
+			<p class="byline">By {AUTHOR}<span class="sep"> · </span><time datetime={isoDate(published)}>{dateFmt.format(published)}</time><span class="sep"> · </span>{readingMin} min read</p>
 
 			<div class="controls" data-md-exclude>
 				<button type="button" class="ctl md-toggle" aria-pressed="false">
@@ -125,7 +128,7 @@ const jsonLd = JSON.stringify({
 
 		<!-- page view -->
 		<div class="view view-page">
-			<Content />
+			<PortableText value={content} />
 			<p class="back" data-md-exclude>
 				<a href="/insights"><span aria-hidden="true">←</span> Back to Insights</a>
 			</p>
@@ -140,9 +143,9 @@ const jsonLd = JSON.stringify({
 			</div>
 			<div class="md-panel">
 				<div class="md-fence">---</div>
-				<div><span class="md-key">title:</span> {entry.data.title}</div>
+				<div><span class="md-key">title:</span> {summary.title}</div>
 				<div><span class="md-key">date:</span> {isoDate(published)}</div>
-				<div><span class="md-key">author:</span> {entry.data.author}</div>
+				<div><span class="md-key">author:</span> {AUTHOR}</div>
 				<div><span class="md-key">url:</span> {path}</div>
 				<div class="md-fence">---</div>
 				<pre class="md-content" set:html={mdBody} />
