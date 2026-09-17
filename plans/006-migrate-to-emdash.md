@@ -58,28 +58,34 @@ Merging this PR alone will make the deploy workflow fail until these are done
 1. **Provision**:
    - [x] D1 `eagleridge-emdash` created 2026-09-03 (dash);
      `database_id` `4a4e72d6-921f-4825-84cd-0cf089439b72` is in `wrangler.jsonc`.
-   - [ ] **Enable R2 on the account** (dash → R2 → Enable; needs a payment
+   - [x] R2 bucket `eagleridge-media` created 2026-09-03. (Original step:) **Enable R2 on the account** (dash → R2 → Enable; needs a payment
      method on file, free tier covers this site), then
      `npx wrangler r2 bucket create eagleridge-media` from `site/`. Until this
      exists `wrangler deploy` fails on the `MEDIA` binding.
 2. **Token scope:** the deploy token (repo secret `CLOUDFLARE_API_TOKEN`)
+   **2026-09-16: this token is revoked** (`Invalid access token [code: 9109]`; last green CI deploy 2026-09-11). Re-issue with Workers Scripts + D1 + R2 edit, update the repo secret and the 1Password item `Dash Cloudflare API Credential`. Until then deploys are manual: `npx wrangler deploy` from `site/` on the wrangler OAuth login.
+   (Original note:)
    needs Workers Scripts:Edit, D1:Edit, and R2:Edit in addition to its
    current scopes (it was Pages-scoped).
-3. **First deploy:** merge (or `npx wrangler deploy` from `site/` locally).
+3. **First deploy:** DONE 2026-09-03 (admin set up; #105 deployed 2026-09-16).
+   (Original:) merge (or `npx wrangler deploy` from `site/` locally).
    Schema migrations apply automatically at runtime; the DB being empty
    triggers EmDash's built-in seed. Visit
    `https://eagleridge.<subdomain>.workers.dev/_emdash/admin` and complete
    the setup wizard (passkey-first admin account) BEFORE pointing DNS —
    don't leave an unclaimed admin on the public domain.
-4. **Domain move (Pages → Workers):** add custom domains `eagleridge.io` +
+4. **Domain move (Pages → Workers):** DONE 2026-09-17 in the dashboard (delete the two pages.dev CNAMEs under DNS → Records first, then Worker → Domains → Add Domain for apex and `www`; the API and dash both refuse while the CNAMEs exist). Not declared in `wrangler.jsonc` `routes` on purpose: the CI token would need DNS scope to re-assert them on every deploy.
+   (Original:) add custom domains `eagleridge.io` +
    `www.eagleridge.io` to the `eagleridge` Worker (dash → Workers → Settings
    → Domains & Routes), removing them from the `eagleridge` Pages project
    first. DNS records themselves stay proxied CNAMEs; Cloudflare rewires the
    targets when the custom domain attaches.
-5. **Verify prod:** spot-check `curl -H "Accept: text/markdown"
+5. **Verify prod:** DONE 2026-09-17 (all checks green on www + apex).
+   (Original:) spot-check `curl -H "Accept: text/markdown"
    https://eagleridge.io/about`, a legacy 301 (`/about.html`), a 404, and
    `/_emdash/admin` login.
-6. **Retire Pages:** once stable, delete the `eagleridge` Pages project and
+6. **Retire Pages:** PENDING — delete the `eagleridge` Pages project once stable.
+   (Original:) once stable, delete the `eagleridge` Pages project and
    update CLAUDE.md's Cloudflare facts (already partially updated in this PR).
 7. **Optional (recommended for plugins later):** paid Workers plan +
    `worker_loaders` block in `wrangler.jsonc` for sandboxed plugins.

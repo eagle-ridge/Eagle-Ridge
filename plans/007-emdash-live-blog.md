@@ -1,6 +1,6 @@
 # 007 — Insights blog served live from EmDash (plan 006, phase 3)
 
-**Status:** implemented on `feat/emdash-live-blog`; rollout order below.
+**Status:** merged 2026-09-16 (#105, `800bf75`). Rollout steps 1–3 done and verified on workers.dev; step 4 (domain move) is GH #107.
 **Decision (2026-09-03):** "Live CMS" — articles render from EmDash at
 request time; publish/edit/schedule/preview in the admin show on the site
 immediately, no deploy. Alternatives considered: publish-on-deploy (build-time

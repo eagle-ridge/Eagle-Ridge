@@ -6,7 +6,7 @@
 
 Pushes to `main` that touch `site/**` trigger [`.github/workflows/deploy.yml`](.github/workflows/deploy.yml), which builds the Astro site (bundling `site/src/worker.ts`) and runs `wrangler deploy` — wrangler follows `site/.wrangler/deploy/config.json` to the build-emitted `site/dist/server/wrangler.json` (Worker + D1/R2/assets bindings; static assets from `site/dist/client`). Nothing rebuilds on the Cloudflare side by itself; the Action is what deploys. Repo secrets `CLOUDFLARE_API_TOKEN` + `CLOUDFLARE_ACCOUNT_ID` drive it. EmDash schema migrations apply automatically at runtime after deploy.
 
-**A merge alone does NOT put content on eagleridge.io.** `deploy.yml` only deploys the Worker, but DNS still points `eagleridge.io` at the `eagleridge-7z4.pages.dev` Cloudflare Pages project (cutover not done, see plan 006 phase 2 / GH #107). Every content change needs a manual Pages deploy after merging: `npx wrangler pages deploy site/dist/client --project-name eagleridge --branch main` (build first with `npm run build` in `site/`). Confirm live with `curl -s eagleridge.io/<path> | grep <expected text>` — a 200 alone isn't proof, a stale cached page can also return 200. Tracked in GH #122; hit 4+ times in one day (2026-09-11).
+**Cutover done 2026-09-17:** `eagleridge.io` + `www` are custom domains on the `eagleridge` Worker (Worker → Domains tab). A merge to `main` touching `site/**` deploys the live site once the CI token is re-issued (plan 006 § phase 2 step 2); until then deploy by hand with `npx wrangler deploy` from `site/` on the wrangler OAuth login. Do NOT run `wrangler pages deploy` any more — the Pages project no longer serves the domain. Confirm live with `curl -s eagleridge.io/<path> | grep <expected text>`.
 
 ### Manual deploy / local repro
 
