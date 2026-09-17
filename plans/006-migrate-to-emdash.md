@@ -74,16 +74,18 @@ Merging this PR alone will make the deploy workflow fail until these are done
    `https://eagleridge.<subdomain>.workers.dev/_emdash/admin` and complete
    the setup wizard (passkey-first admin account) BEFORE pointing DNS —
    don't leave an unclaimed admin on the public domain.
-4. **Domain move (Pages → Workers):** PENDING — the only remaining step (GH #107). Human action: the auto-mode classifier denies the API calls.
+4. **Domain move (Pages → Workers):** DONE 2026-09-17 in the dashboard (delete the two pages.dev CNAMEs under DNS → Records first, then Worker → Domains → Add Domain for apex and `www`; the API and dash both refuse while the CNAMEs exist). Not declared in `wrangler.jsonc` `routes` on purpose: the CI token would need DNS scope to re-assert them on every deploy.
    (Original:) add custom domains `eagleridge.io` +
    `www.eagleridge.io` to the `eagleridge` Worker (dash → Workers → Settings
    → Domains & Routes), removing them from the `eagleridge` Pages project
    first. DNS records themselves stay proxied CNAMEs; Cloudflare rewires the
    targets when the custom domain attaches.
-5. **Verify prod:** spot-check `curl -H "Accept: text/markdown"
+5. **Verify prod:** DONE 2026-09-17 (all checks green on www + apex).
+   (Original:) spot-check `curl -H "Accept: text/markdown"
    https://eagleridge.io/about`, a legacy 301 (`/about.html`), a 404, and
    `/_emdash/admin` login.
-6. **Retire Pages:** once stable, delete the `eagleridge` Pages project and
+6. **Retire Pages:** PENDING — delete the `eagleridge` Pages project once stable.
+   (Original:) once stable, delete the `eagleridge` Pages project and
    update CLAUDE.md's Cloudflare facts (already partially updated in this PR).
 7. **Optional (recommended for plugins later):** paid Workers plan +
    `worker_loaders` block in `wrangler.jsonc` for sandboxed plugins.
