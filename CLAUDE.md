@@ -19,7 +19,7 @@ env -C site uv run --with markdownify==1.2.2 --with beautifulsoup4==4.14.3 \
 
 env -C site npx wrangler dev        # full local runtime (Worker + local D1/R2 sims)
 
-CF_TOKEN=$(op item get "Dash Cloudflare API Credential" --vault "Developer Vault" --fields credential --reveal)
+CF_TOKEN=$(op read "op://Developer Vault/Cloudflare Workers API/credential")
 CLOUDFLARE_API_TOKEN="$CF_TOKEN" CLOUDFLARE_ACCOUNT_ID=702342b70e150343381e0829834cbcc7 \
   env -C site npx wrangler deploy
 ```
@@ -27,7 +27,7 @@ CLOUDFLARE_API_TOKEN="$CF_TOKEN" CLOUDFLARE_ACCOUNT_ID=702342b70e150343381e08298
 ### Cloudflare facts
 
 - Account `702342b70e150343381e0829834cbcc7`; zone `eagleridge.io` = `064d7b70f67f32d15f2afbeb10a915f6`.
-- API token: `op://Developer Vault/Dash Cloudflare API Credential/credential` (historically Zone DNS edit + Pages edit; the Workers migration needs Workers Scripts/D1/R2 edit added — see plan 006 phase 2).
+- API token: `op://Developer Vault/Cloudflare Workers API/credential` (issued 2026-09-17: Workers Scripts + D1 + R2 edit; also the repo secret `CLOUDFLARE_API_TOKEN`). The old `Dash Cloudflare API Credential` item is retired..
 - DNS: apex `eagleridge.io` + `www` are proxied CNAMEs; custom domains attach to the `eagleridge` Worker after cutover (previously the `eagleridge` Pages project → `eagleridge-7z4.pages.dev`).
 - `site/wrangler.jsonc` is the config wrangler + the Astro adapter read; D1 `eagleridge-emdash` (`4a4e72d6-…`) is provisioned; R2 bucket `eagleridge-media` is pending R2 enablement (plan 006 phase 2).
 - Cloudflare's Bot Management API object (`/zones/:id/bot_management`) is readable with a scoped API token, but two of its fields — the AI-bot-block toggle and `is_robots_txt_managed` (the "Managed robots.txt" switch) — always reject a PATCH (403, regardless of token scope). Dashboard-only: zone → AI Crawl Control → Overview → the toggle in the top-right card.
