@@ -1,8 +1,8 @@
 # 006 — Migrate to EmDash CMS
 
-**Status:** Phase 1 implemented (this PR). Phase 2 (production cutover) needs
-owner-side Cloudflare provisioning — checklist below. Phase 3 (content into
-the CMS) follows after cutover.
+**Status:** COMPLETE 2026-09-17. Phase 1 merged as #103 (2026-09-03), phase 2
+finished 2026-09-17 (checklist below kept as the record), phase 3 delivered by
+plan 007 (#105, 2026-09-16).
 
 **What:** Adopt [EmDash](https://github.com/emdash-cms/emdash) (v0.35.0, beta) —
 a full-stack TypeScript CMS built as an Astro integration — so site content can
@@ -52,8 +52,7 @@ output + prerendered static assets)**.
 
 ## Phase 2 — production cutover (owner actions)
 
-Merging this PR alone will make the deploy workflow fail until these are done
-— keep the PR open until you're ready.
+All done as of 2026-09-17; kept as the record of what was needed and when.
 
 1. **Provision**:
    - [x] D1 `eagleridge-emdash` created 2026-09-03 (dash);
@@ -63,7 +62,7 @@ Merging this PR alone will make the deploy workflow fail until these are done
      `npx wrangler r2 bucket create eagleridge-media` from `site/`. Until this
      exists `wrangler deploy` fails on the `MEDIA` binding.
 2. **Token scope:** the deploy token (repo secret `CLOUDFLARE_API_TOKEN`)
-   **2026-09-16: this token is revoked** (`Invalid access token [code: 9109]`; last green CI deploy 2026-09-11). Re-issue with Workers Scripts + D1 + R2 edit, update the repo secret and the 1Password item. DONE 2026-09-17: new item `Cloudflare Workers API` (Developer Vault), secret updated, CI deploy green. Until then deploys are manual: `npx wrangler deploy` from `site/` on the wrangler OAuth login.
+   **2026-09-16: this token is revoked** (`Invalid access token [code: 9109]`; last green CI deploy 2026-09-11). Re-issue with Workers Scripts + D1 + R2 edit, update the repo secret and the 1Password item. DONE 2026-09-17: new item `Cloudflare Workers API` (Developer Vault), secret updated, CI deploy green.
    (Original note:)
    needs Workers Scripts:Edit, D1:Edit, and R2:Edit in addition to its
    current scopes (it was Pages-scoped).

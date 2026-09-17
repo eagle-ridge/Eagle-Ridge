@@ -28,8 +28,8 @@ CLOUDFLARE_API_TOKEN="$CF_TOKEN" CLOUDFLARE_ACCOUNT_ID=702342b70e150343381e08298
 
 - Account `702342b70e150343381e0829834cbcc7`; zone `eagleridge.io` = `064d7b70f67f32d15f2afbeb10a915f6`.
 - API token: `op://Developer Vault/Cloudflare Workers API/credential` (issued 2026-09-17: Workers Scripts + D1 + R2 edit; also the repo secret `CLOUDFLARE_API_TOKEN`). The old `Dash Cloudflare API Credential` item is retired..
-- DNS: apex `eagleridge.io` + `www` are proxied CNAMEs; custom domains attach to the `eagleridge` Worker after cutover (previously the `eagleridge` Pages project → `eagleridge-7z4.pages.dev`).
-- `site/wrangler.jsonc` is the config wrangler + the Astro adapter read; D1 `eagleridge-emdash` (`4a4e72d6-…`) is provisioned; R2 bucket `eagleridge-media` is pending R2 enablement (plan 006 phase 2).
+- DNS: apex `eagleridge.io` + `www` are proxied CNAMEs; both are custom domains on the `eagleridge` Worker since 2026-09-17 (the `eagleridge` Pages project is deleted).
+- `site/wrangler.jsonc` is the config wrangler + the Astro adapter read; D1 `eagleridge-emdash` (`4a4e72d6-…`) is provisioned; R2 bucket `eagleridge-media` is provisioned.
 - Cloudflare's Bot Management API object (`/zones/:id/bot_management`) is readable with a scoped API token, but two of its fields — the AI-bot-block toggle and `is_robots_txt_managed` (the "Managed robots.txt" switch) — always reject a PATCH (403, regardless of token scope). Dashboard-only: zone → AI Crawl Control → Overview → the toggle in the top-right card.
 - Legacy GitHub Pages (root HTML / `CNAME` / `.nojekyll`) is retired and no longer served; the root files were removed 2026-06-18 (see intro). Recover from git history if ever needed.
 
