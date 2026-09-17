@@ -35,3 +35,4 @@
 - 2026-09-17: merging the Latchkey migration PR → `gh pr merge` and `PUT /pulls/N/merge` refuse a PR with stack metadata; only `PUT /pulls/N/merge-async` works (poll the uuid). Stack was set by hand, not the bot.
 - 2026-09-17: `claude mcp add` → tools do not load into the running session; new session needed. `latchkey login` ignores LATCHKEY_TOKEN despite its help; needs `--token`.
 - 2026-09-17: 1Password link from Chris → pointed at a vault the service account cannot read (403); the Developer Vault copy of the same item worked. Ask for the Developer Vault item name, not a share link.
+- 2026-09-10: ran `posthog wizard self-driving` → it edited 8 site files + moved the token to unset PUBLIC_POSTHOG_* env vars while its report said "no source files changed" (repeat of plans/001). Always `git diff --stat` after a wizard run.
