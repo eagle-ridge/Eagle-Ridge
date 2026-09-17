@@ -63,7 +63,7 @@ Merging this PR alone will make the deploy workflow fail until these are done
      `npx wrangler r2 bucket create eagleridge-media` from `site/`. Until this
      exists `wrangler deploy` fails on the `MEDIA` binding.
 2. **Token scope:** the deploy token (repo secret `CLOUDFLARE_API_TOKEN`)
-   **2026-09-16: this token is revoked** (`Invalid access token [code: 9109]`; last green CI deploy 2026-09-11). Re-issue with Workers Scripts + D1 + R2 edit, update the repo secret and the 1Password item `Dash Cloudflare API Credential`. Until then deploys are manual: `npx wrangler deploy` from `site/` on the wrangler OAuth login.
+   **2026-09-16: this token is revoked** (`Invalid access token [code: 9109]`; last green CI deploy 2026-09-11). Re-issue with Workers Scripts + D1 + R2 edit, update the repo secret and the 1Password item. DONE 2026-09-17: new item `Cloudflare Workers API` (Developer Vault), secret updated, CI deploy green. Until then deploys are manual: `npx wrangler deploy` from `site/` on the wrangler OAuth login.
    (Original note:)
    needs Workers Scripts:Edit, D1:Edit, and R2:Edit in addition to its
    current scopes (it was Pages-scoped).
