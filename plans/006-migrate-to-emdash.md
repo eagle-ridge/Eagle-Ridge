@@ -84,7 +84,7 @@ Merging this PR alone will make the deploy workflow fail until these are done
    (Original:) spot-check `curl -H "Accept: text/markdown"
    https://eagleridge.io/about`, a legacy 301 (`/about.html`), a 404, and
    `/_emdash/admin` login.
-6. **Retire Pages:** PENDING — delete the `eagleridge` Pages project once stable.
+6. **Retire Pages:** DONE 2026-09-17 — `eagleridge` Pages project deleted; `eagleridge-7z4.pages.dev` no longer resolves.
    (Original:) once stable, delete the `eagleridge` Pages project and
    update CLAUDE.md's Cloudflare facts (already partially updated in this PR).
 7. **Optional (recommended for plugins later):** paid Workers plan +
