@@ -36,10 +36,10 @@ Software helps you track and document controls. It does not, by itself, get you 
 4. [Scrut Automation↗](https://scrut.io/)
    Compliance automation
 
-   Aggressively priced global compliance automation; CMMC support announced in 2024, with DIB-specific depth still building.
+   Aggressively priced global compliance automation across 70+ frameworks including SOC 2, ISO 27001, HIPAA, and GDPR; agentic AI ‘Scrut Teammates’ for evidence collection, policy drafting, and vendor risk; CMMC is no longer listed as a supported framework.
 
    Mid-market
-   SOC 2 ISO 27001 HIPAA CMMC GDPR
+   SOC 2 ISO 27001 HIPAA GDPR
 
    $
 5. [Scytale↗](https://scytale.ai/)
@@ -272,7 +272,7 @@ Software helps you track and document controls. It does not, by itself, get you 
 31. [FutureFeed↗](https://futurefeed.co/)
     CMMC-native
 
-    CMMC-native tool strong on 110-control mapping and SPRS score tracking; lighter on broader GRC and continuous monitoring.
+    CMMC-native platform that achieved FedRAMP High (Class D) authorization in 2026; strong on 110-control mapping and SPRS score tracking with a Teramis integration for automated CUI discovery; lighter on broader GRC than multi-framework peers.
 
     Mid-market
     NIST 800-171 CMMC
