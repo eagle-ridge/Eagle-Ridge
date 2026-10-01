@@ -241,7 +241,7 @@
       "family": "AT",
       "weight": 5,
       "poamEligible": false,
-      "plain": "Make sure managers and users know the security risks of their jobs and the rules that apply."
+      "plain": "Make sure managers, system administrators, and users know the security risks of their work and the security rules that apply."
     },
     {
       "id": "3.2.2",
@@ -443,7 +443,7 @@
       "family": "IA",
       "weight": 1,
       "poamEligible": true,
-      "plain": "Do not reuse user identifiers for a set period after they are retired."
+      "plain": "Do not reuse identifiers for people, groups, roles, or devices for a set period after they are retired."
     },
     {
       "id": "3.5.6",
@@ -539,7 +539,7 @@
       "family": "MA",
       "weight": 1,
       "poamEligible": true,
-      "plain": "Clean any equipment of sensitive defense data before sending it out for repair."
+      "plain": "Wipe sensitive defense data from equipment so it cannot be recovered before sending it off-site for maintenance or repair."
     },
     {
       "id": "3.7.4",
@@ -707,7 +707,7 @@
       "family": "RA",
       "weight": 3,
       "poamEligible": false,
-      "plain": "Regularly assess the risks to your operations, assets, and people from using your systems."
+      "plain": "Regularly assess risks to your operations, assets, and people from running your systems and handling sensitive defense data on them."
     },
     {
       "id": "3.11.2",
@@ -715,7 +715,7 @@
       "family": "RA",
       "weight": 5,
       "poamEligible": false,
-      "plain": "Scan your systems and applications for weaknesses on a schedule, and when new threats appear."
+      "plain": "Scan your systems and applications for weaknesses on a schedule, and whenever new weaknesses affecting them are announced."
     },
     {
       "id": "3.11.3",
@@ -877,7 +877,7 @@
       "family": "SC",
       "weight": 5,
       "poamEligible": false,
-      "plain": "Protect the trustworthiness of network communications, so people know who they are talking to."
+      "plain": "Protect network sessions so each side can trust who it is connected to and that the session is not hijacked or faked."
     },
     {
       "id": "3.13.16",
