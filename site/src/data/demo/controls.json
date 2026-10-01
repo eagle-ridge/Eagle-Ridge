@@ -755,7 +755,7 @@
       "family": "CA",
       "weight": 0,
       "poamEligible": false,
-      "plain": "Write and keep updated a security plan describing your systems, their boundaries, connections to other systems, and how each control is met."
+      "plain": "Write, and regularly update, security plans describing your systems’ boundaries, operating environments, connections to other systems, and how each requirement is met."
     },
     {
       "id": "3.13.1",
