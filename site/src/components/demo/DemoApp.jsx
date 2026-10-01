@@ -116,13 +116,30 @@ export default function DemoApp() {
   const base = useMemo(() => readiness(controls, (id) => client.controls[id].status), []);
   const whatIfCount = Object.keys(overrides).length;
 
+  const mainSecRef = useRef(null);
   function go(v, opts = {}) {
+    if (v !== view && !opts.keepOpen) setOpenControl(null);
     setView(v);
     if (opts.tab) setTab((t) => ({ ...t, [v]: opts.tab }));
     track('demo_view', { view: v });
     if (v === 'controls' && opts.focusSearch) setTimeout(() => searchRef.current?.focus(), 0);
+    // Stacked (phone) layout: the main pane sits below the rail and sidebar, so bring it into view.
+    if (!opts.keepScroll && window.matchMedia?.('(max-width: 760px)').matches) {
+      setTimeout(() => mainSecRef.current?.scrollIntoView({ block: 'start' }), 0);
+    }
   }
   function setTabFor(v, t) { setTab((x) => ({ ...x, [v]: t })); }
+  function openDoc(id) { setDocSel(id); go('documents', { tab: 'preview' }); }
+  // WAI-ARIA tabs: roving tabindex, arrows/Home/End move and select.
+  function onTabKey(e, keys) {
+    const i = keys.indexOf(tab[view]);
+    const j = { ArrowRight: i + 1, ArrowLeft: i - 1, Home: 0, End: keys.length - 1 }[e.key];
+    if (j == null) return;
+    e.preventDefault();
+    const k = keys[(j + keys.length) % keys.length];
+    setTabFor(view, k);
+    e.currentTarget.parentElement.querySelector(`[data-tab="${k}"]`)?.focus();
+  }
   function setWhatIf(id, status) {
     const next = { ...overrides };
     if (status === client.controls[id].status) delete next[id]; else next[id] = status;
@@ -131,7 +148,7 @@ export default function DemoApp() {
   }
   function resetWhatIf() { setOverrides({}); saveOverrides({}); track('demo_whatif_reset', {}); }
   function openInControls(id) {
-    setFamily('ALL'); setQuery(''); setOpenControl(id); go('controls', { tab: 'all' });
+    setFamily('ALL'); setQuery(''); setOpenControl(id); go('controls', { tab: 'all', keepOpen: true, keepScroll: true });
     setTimeout(() => document.getElementById(`dm-c-${id}`)?.scrollIntoView({ block: 'center' }), 50);
   }
 
@@ -145,7 +162,7 @@ export default function DemoApp() {
 
   const TABS = {
     home: [['overview', 'Overview'], ['roadmap', 'Roadmap'], ['team', 'Team']],
-    controls: [['all', 'All controls'], ['gaps', `Open gaps (${r.counts.partial + r.counts.not_met})`], ['poam', `POA&M (${r.poamable.length})`]],
+    controls: [['all', 'All'], ['gaps', `Open gaps (${r.counts.partial + r.counts.not_met})`], ['poam', `POA&M (${r.poamable.length})`]],
     activity: [['all', 'All'], ['Eagle Ridge', 'Eagle Ridge'], ['Kestrel', 'Your team']],
     documents: [['preview', 'Preview'], ['details', 'Details']],
     settings: [['demo', 'About this demo']],
@@ -175,15 +192,16 @@ export default function DemoApp() {
       </aside>
 
       {/* ---------------- tabs + main ---------------- */}
-      <section className="dm-main" aria-label="Main content">
-        <div className="dm-tabs" role="tablist">
+      <section className="dm-main" aria-label="Main content" ref={mainSecRef}>
+        <div className="dm-tabs" role="tablist" aria-label="Sections">
           {TABS[view].map(([k, label]) => (
-            <button key={k} type="button" role="tab" aria-selected={tab[view] === k} className="dm-tab"
-              onClick={() => setTabFor(view, k)}>{label}</button>
+            <button key={k} type="button" role="tab" id={`dm-tab-${k}`} data-tab={k} aria-selected={tab[view] === k}
+              aria-controls="dm-panel" tabIndex={tab[view] === k ? 0 : -1} className="dm-tab"
+              onClick={() => setTabFor(view, k)} onKeyDown={(e) => onTabKey(e, TABS[view].map(([x]) => x))}>{label}</button>
           ))}
         </div>
-        <div className="dm-main__body" ref={mainRef}>
-          {view === 'home' && <Home {...{ tab: tab.home, r, base, phaseSel, setPhaseSel, go, openInControls }} />}
+        <div className="dm-main__body" ref={mainRef} id="dm-panel" role="tabpanel" aria-labelledby={`dm-tab-${tab[view]}`}>
+          {view === 'home' && <Home {...{ tab: tab.home, r, base, phaseSel, setPhaseSel, go, openInControls, openDoc, whatIfCount }} />}
           {view === 'controls' && <Controls {...{ tab: tab.controls, family, query, setQuery, searchRef, openControl, setOpenControl, statusOf, setWhatIf, overrides }} />}
           {view === 'activity' && <Activity {...{ tab: tab.activity, personSel, openInControls }} />}
           {view === 'documents' && <Documents {...{ tab: tab.documents, docSel, r }} />}
@@ -255,6 +273,12 @@ export default function DemoApp() {
       </aside>
 
       {/* ---------------- bottom bar ---------------- */}
+      <div className="dm-mbar" aria-hidden="true">
+        <span className="dm-mbar__score"><b>{signed(r.score)}</b> SPRS</span>
+        {whatIfCount > 0 && <button type="button" tabIndex={-1} className="dm-link" onClick={resetWhatIf}>Reset {whatIfCount} what-if{whatIfCount === 1 ? '' : 's'}</button>}
+        <a className="dm-btn" tabIndex={-1} href="/discovery" data-cta="demo-book-call" data-cta-loc="demo-mobile-bar">Book a call</a>
+      </div>
+
       <footer className="dm-bottom">
         <span><b>Demo.</b> {client.company.name} and its people are fictional.</span>
         <span className="dm-bottom__right">
@@ -383,7 +407,7 @@ function phaseStatusText(p) {
 }
 
 /* ---------- Home ---------- */
-function Home({ tab, r, base, phaseSel, setPhaseSel, go, openInControls }) {
+function Home({ tab, r, base, phaseSel, setPhaseSel, go, openInControls, openDoc, whatIfCount }) {
   const active = client.phases.find((p) => p.status === 'active');
   const days = daysUntil(client.company.assessmentDate);
   if (tab === 'roadmap') {
@@ -444,14 +468,14 @@ function Home({ tab, r, base, phaseSel, setPhaseSel, go, openInControls }) {
     <div className="dm-pad">
       <h2 className="dm-h">Good morning, {firstName}.</h2>
       <p className="dm-lede">
-        You are in phase {active?.n} of 7: <b>{active?.name}</b>. Your score has moved from {signed(client.baseline.sprs)} to {signed(r.score)} since the gap assessment.
+        You are in phase {active?.n} of 7: <b>{active?.name}</b>. Your score has moved from {signed(client.baseline.sprs)} to {signed(r.score)} since the gap assessment{whatIfCount > 0 ? ', counting your what-if changes' : ''}.
       </p>
 
       <div className="dm-cards">
-        <button type="button" className="dm-card dm-kpi" onClick={() => go('documents')}>
+        <button type="button" className="dm-card dm-kpi" onClick={() => openDoc(client.documents.find((d) => d.kind === 'SPRS')?.id ?? client.documents[0].id)}>
           <div className="dm-eyebrow">SPRS score</div>
           <div className="dm-kpi__num">{signed(r.score)}</div>
-          <div className="dm-small">Up {r.score - client.baseline.sprs} points since {fmtDate(client.baseline.date, { month: 'short', day: 'numeric' })}</div>
+          <div className="dm-small">{whatIfCount > 0 ? 'With what-ifs: ' : ''}Up {r.score - client.baseline.sprs} points since {fmtDate(client.baseline.date, { month: 'short', day: 'numeric' })}</div>
         </button>
         <button type="button" className="dm-card dm-kpi" onClick={() => go('controls', { tab: 'gaps' })}>
           <div className="dm-eyebrow">Controls met</div>
@@ -503,7 +527,8 @@ function Home({ tab, r, base, phaseSel, setPhaseSel, go, openInControls }) {
 function Controls({ tab, family, query, setQuery, searchRef, openControl, setOpenControl, statusOf, setWhatIf, overrides }) {
   const q = query.trim().toLowerCase();
   const list = controls.filter((c) => {
-    if (c.id === openControl && (family === 'ALL' || c.family === family)) return true;
+    const hit = !q || `${c.id} ${c.title} ${c.plain} ${familyName[c.family]}`.toLowerCase().includes(q);
+    if (c.id === openControl && hit && (family === 'ALL' || c.family === family)) return true;
     const st = statusOf(c.id);
     if (family !== 'ALL' && c.family !== family) return false;
     if (tab === 'gaps' && st === 'met') return false;
@@ -550,10 +575,10 @@ function Controls({ tab, family, query, setQuery, searchRef, openControl, setOpe
                   </dl>
                   <fieldset className="dm-whatif">
                     <legend>What if this control were…</legend>
-                    {['met', 'partial', 'not_met'].map((s) => (
+                    {['met', 'partial', 'not_met'].filter((s) => s !== 'partial' || c.partialWeight != null || info.status === 'partial').map((s) => (
                       <label key={s} className={st === s ? 'is-on' : ''}>
                         <input type="radio" name={`wi-${c.id}`} checked={st === s} onChange={() => setWhatIf(c.id, s)} />
-                        {STATUS_LABEL[s]}{s !== 'met' && <small> −{deduction(c, s)}</small>}
+                        {STATUS_LABEL[s]}{s !== 'met' && <small> −{deduction(c, s)}</small>}{s === 'partial' && c.partialWeight == null && <small> (no partial credit)</small>}
                       </label>
                     ))}
                   </fieldset>

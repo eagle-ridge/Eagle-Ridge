@@ -11,7 +11,9 @@
 
 .dm-app {
   --dm-ok: #3F6B4A;
-  --dm-warn: #A8792C;
+  --dm-warn: #7F5F26;
+  --dm-gold-text: #7F5F26;
+  --dm-gold-fill: #8A6A2C;
   --dm-bad: #9B3B2E;
   --dm-hover: color-mix(in srgb, var(--er-accent) 7%, transparent);
   --dm-sel: color-mix(in srgb, var(--er-accent) 12%, transparent);
@@ -55,7 +57,7 @@
 .dm-rail__label { display: none; }
 .dm-rail__badge {
   position: absolute; top: 6px; right: 6px; min-width: 16px; height: 16px; padding: 0 4px; border-radius: 8px;
-  background: var(--er-gold); color: #fff; font-size: 10px; line-height: 16px; text-align: center; font-weight: 600;
+  background: var(--dm-gold-fill); color: #fff; font-size: 10px; line-height: 16px; text-align: center; font-weight: 600;
 }
 .dm-rail__me { margin-top: auto; }
 
@@ -198,7 +200,7 @@
 .dm-ctl__w { font: 0.75rem var(--er-font-mono); color: var(--er-mute); flex: none; }
 .dm-whatif-tag {
   font-style: normal; font: 600 0.65rem var(--er-font-mono); text-transform: uppercase; margin-left: 8px; padding: 1px 5px;
-  border-radius: var(--er-radius-sm); background: var(--er-gold); color: #fff; vertical-align: 2px;
+  border-radius: var(--er-radius-sm); background: var(--dm-gold-fill); color: #fff; vertical-align: 2px;
 }
 .dm-ctl__body { padding: 4px 14px 16px 30px; }
 .dm-ctl__plain { font-family: var(--er-font-serif); font-size: 1.1rem; line-height: 1.4; }
@@ -209,21 +211,21 @@
 .dm-facts--wide > div { grid-template-columns: 160px 1fr; padding: 8px 0; border-bottom: 1px solid var(--er-rule); }
 .dm-owner { display: flex; align-items: center; gap: 8px; }
 .dm-whatif { border: 1px dashed var(--er-gold); border-radius: var(--er-radius-md); padding: 10px 12px; margin: 0; display: flex; flex-wrap: wrap; gap: 8px; }
-.dm-whatif legend { font: 500 0.72rem var(--er-font-mono); text-transform: uppercase; color: var(--er-gold); padding: 0 4px; }
+.dm-whatif legend { font: 500 0.72rem var(--er-font-mono); text-transform: uppercase; color: var(--dm-gold-text); padding: 0 4px; }
 .dm-whatif label {
   display: inline-flex; align-items: center; gap: 6px; padding: 6px 12px; border-radius: 999px; cursor: pointer;
   border: 1px solid var(--er-rule); background: var(--er-paper); font-size: 0.875rem;
 }
 .dm-whatif label.is-on { border-color: var(--er-accent); background: var(--dm-sel); font-weight: 500; }
 .dm-whatif input { accent-color: var(--er-accent); margin: 0; }
-.dm-whatif small { color: var(--er-mute); }
+.dm-whatif small { color: var(--er-ink-soft); }
 
 /* activity */
 .dm-feed > li { display: flex; gap: 12px; padding: 12px 0; border-bottom: 1px solid var(--er-rule); }
 .dm-feed > li > div { min-width: 0; }
 .dm-feed p { margin: 2px 0 6px; }
 .dm-feed > li.is-new { position: relative; }
-.dm-feed > li.is-new::after { content: "New"; position: absolute; right: 0; top: 14px; font: 600 0.65rem var(--er-font-mono); color: var(--er-gold); }
+.dm-feed > li.is-new::after { content: "New"; position: absolute; right: 0; top: 14px; font: 600 0.65rem var(--er-font-mono); color: var(--dm-gold-text); }
 .dm-chip { font-size: 0.78rem; padding: 3px 8px; border-radius: 999px; border: 1px solid var(--er-rule) !important; background: var(--er-bg) !important; }
 .dm-chip:hover { border-color: var(--er-accent) !important; }
 
@@ -286,7 +288,8 @@
   .dm-app {
     grid-template-columns: minmax(0, 1fr);
     grid-template-rows: auto auto auto auto auto;
-    grid-template-areas: "rail" "side" "main" "right" "bottom";
+    grid-template-rows: auto;
+    grid-template-areas: "rail" "side" "main" "right" "mbar" "bottom";
   }
   .dm-rail { flex-direction: row; justify-content: space-around; border-right: 0; border-bottom: 1px solid var(--er-ink); padding: 6px; position: sticky; top: 0; z-index: 2; }
   .dm-rail__brand, .dm-rail__me { display: none; }
@@ -303,4 +306,40 @@
   .dm-ctl__body { padding-left: 14px; }
   .dm-facts > div, .dm-facts--wide > div { grid-template-columns: minmax(0, 1fr); gap: 2px; }
   .dm-paper { padding: 18px; }
+}
+
+/* Muted text on selected/hover fills drops below 4.5:1 — use the softer ink there. */
+.dm-list__row[aria-current="true"] .dm-list__meta,
+.dm-tl.is-sel .dm-tl__head small,
+.dm-controls > li.is-open .dm-ctl__w { color: var(--er-ink-soft); }
+.dm-list__name { white-space: normal; }
+
+/* Desktop: keep the CTA in view at the foot of the right pane. */
+@media (min-width: 1181px) {
+  .dm-cta { position: sticky; bottom: -16px; box-shadow: 0 -10px 18px -10px var(--er-paper); }
+}
+@media (max-width: 1180px) and (min-width: 761px) {
+  .dm-right { display: block; columns: 2; column-gap: 16px; }
+  .dm-right__block { break-inside: avoid; margin-bottom: 14px; }
+}
+
+/* Phone-only sticky score strip (hidden elsewhere). */
+.dm-mbar { display: none; }
+@media (max-width: 760px) {
+  .dm-app { overflow: clip; }
+  .dm-rail { border-radius: var(--er-radius-lg) var(--er-radius-lg) 0 0; }
+  .dm-main { scroll-margin-top: 64px; }
+  .dm-mbar {
+    grid-area: mbar; display: flex; align-items: center; gap: 12px; justify-content: space-between;
+    position: sticky; bottom: 0; z-index: 2; padding: 8px 12px; background: var(--er-paper);
+    border-top: 1px solid var(--er-ink); box-shadow: 0 -6px 16px -10px rgba(26, 22, 20, 0.3);
+  }
+  .dm-mbar__score b { font: 500 1.4rem var(--er-font-serif); }
+  .dm-mbar .dm-btn { padding: 10px 14px; }
+  .dm-action__text { flex: 1 1 100%; }
+  .dm-app .dm-action .dm-btn { width: 100%; }
+  .dm-ctl, .dm-mini__row, .dm-list__row, .dm-whatif label, .dm-tab, .dm-app .dm-link, .dm-chip { min-height: 44px; }
+  .dm-app .dm-link { display: inline-flex; align-items: center; }
+  .dm-steps input { width: 20px; height: 20px; }
+  .dm-tab { padding: 8px 8px !important; font-size: 0.8rem; }
 }
