@@ -107,6 +107,16 @@ never built.
   drop real leads. Cloudflare Turnstile follow-up: issue #46.
 - **Tracking event:** `discovery_page_viewed` (inline PostHog capture).
 
+### Demo Workspace (`/demo`)
+`site/src/pages/demo.astro` — unlisted (`noindex`, not in `sitemap-pages.json`, so no `.md` mirror)
+interactive demo of the client workspace, filled with a **fictional** client (Kestrel Precision
+Machining) mid-way through CMMC L2. React island `src/components/demo/DemoApp.jsx`; scoring in
+`src/lib/sprs.js` (tested by `scripts/sprs.test.mjs`). `src/data/demo/controls.json` is generated
+from the methodology repo's `data/nist-800-171-controls.yaml` — never hand-edit weights
+(`scripts/demo-controls.test.mjs` pins the DoD tiers). "What-if" edits stay in the viewer's
+localStorage. PostHog events: `demo_opened`, `demo_view`, `demo_whatif`, `demo_whatif_reset`;
+CTA `data-cta="demo-book-call"` → `/discovery`.
+
 ## Audience
 
 Primary buyer persona: **small-business CEOs** — founder-led teams without a dedicated

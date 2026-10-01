@@ -1,0 +1,947 @@
+{
+  "source": "NIST SP 800-171 Rev 2; weights per DoD Assessment Methodology v1.2.1",
+  "families": [
+    {
+      "code": "AC",
+      "name": "Access Control"
+    },
+    {
+      "code": "AT",
+      "name": "Awareness and Training"
+    },
+    {
+      "code": "AU",
+      "name": "Audit and Accountability"
+    },
+    {
+      "code": "CM",
+      "name": "Configuration Management"
+    },
+    {
+      "code": "IA",
+      "name": "Identification and Authentication"
+    },
+    {
+      "code": "IR",
+      "name": "Incident Response"
+    },
+    {
+      "code": "MA",
+      "name": "Maintenance"
+    },
+    {
+      "code": "MP",
+      "name": "Media Protection"
+    },
+    {
+      "code": "PS",
+      "name": "Personnel Security"
+    },
+    {
+      "code": "PE",
+      "name": "Physical Protection"
+    },
+    {
+      "code": "RA",
+      "name": "Risk Assessment"
+    },
+    {
+      "code": "CA",
+      "name": "Security Assessment"
+    },
+    {
+      "code": "SC",
+      "name": "System and Communications Protection"
+    },
+    {
+      "code": "SI",
+      "name": "System and Information Integrity"
+    }
+  ],
+  "controls": [
+    {
+      "id": "3.1.1",
+      "title": "Authorized Access Control",
+      "family": "AC",
+      "weight": 5,
+      "poamEligible": false,
+      "plain": "Only let approved people, devices, and programs into systems that hold sensitive defense data."
+    },
+    {
+      "id": "3.1.2",
+      "title": "Transaction & Function Control",
+      "family": "AC",
+      "weight": 5,
+      "poamEligible": false,
+      "plain": "Limit each user to the kinds of actions and transactions their job actually requires."
+    },
+    {
+      "id": "3.1.3",
+      "title": "CUI Flow Enforcement",
+      "family": "AC",
+      "weight": 1,
+      "poamEligible": true,
+      "plain": "Control where sensitive defense data is allowed to travel, following rules you have set."
+    },
+    {
+      "id": "3.1.4",
+      "title": "Separation of Duties",
+      "family": "AC",
+      "weight": 1,
+      "poamEligible": true,
+      "plain": "Split key job duties among different people so no one person can misuse the systems alone."
+    },
+    {
+      "id": "3.1.5",
+      "title": "Least Privilege",
+      "family": "AC",
+      "weight": 3,
+      "poamEligible": false,
+      "plain": "Give people only the minimum access they need, including for powerful administrator accounts."
+    },
+    {
+      "id": "3.1.6",
+      "title": "Non-Privileged Account Use",
+      "family": "AC",
+      "weight": 1,
+      "poamEligible": true,
+      "plain": "Require administrators to use a separate, everyday account when they are not doing administrator work."
+    },
+    {
+      "id": "3.1.7",
+      "title": "Privileged Functions",
+      "family": "AC",
+      "weight": 1,
+      "poamEligible": true,
+      "plain": "Stop ordinary users from running administrator functions, and record each time someone runs one."
+    },
+    {
+      "id": "3.1.8",
+      "title": "Unsuccessful Login Attempts",
+      "family": "AC",
+      "weight": 1,
+      "poamEligible": true,
+      "plain": "Lock accounts or slow down sign-in after too many wrong password attempts."
+    },
+    {
+      "id": "3.1.9",
+      "title": "Privacy & Security Notices",
+      "family": "AC",
+      "weight": 1,
+      "poamEligible": true,
+      "plain": "Show users a notice about privacy and security rules before they sign in to your systems."
+    },
+    {
+      "id": "3.1.10",
+      "title": "Session Lock",
+      "family": "AC",
+      "weight": 1,
+      "poamEligible": true,
+      "plain": "Lock the screen after a period of inactivity, and hide what was on it."
+    },
+    {
+      "id": "3.1.11",
+      "title": "Session Termination",
+      "family": "AC",
+      "weight": 1,
+      "poamEligible": true,
+      "plain": "Automatically end user sessions after a set period of inactivity."
+    },
+    {
+      "id": "3.1.12",
+      "title": "Remote Access Control",
+      "family": "AC",
+      "weight": 5,
+      "poamEligible": false,
+      "plain": "Monitor and control remote access to your systems."
+    },
+    {
+      "id": "3.1.13",
+      "title": "Remote Access Confidentiality",
+      "family": "AC",
+      "weight": 5,
+      "poamEligible": false,
+      "plain": "Use encryption to protect remote access sessions so outsiders cannot read the traffic."
+    },
+    {
+      "id": "3.1.14",
+      "title": "Remote Access Routing",
+      "family": "AC",
+      "weight": 1,
+      "poamEligible": true,
+      "plain": "Send all remote access through a small number of managed, secured access points."
+    },
+    {
+      "id": "3.1.15",
+      "title": "Privileged Remote Access",
+      "family": "AC",
+      "weight": 1,
+      "poamEligible": true,
+      "plain": "Allow remote administrator commands only for approved reasons, and write down why they are allowed."
+    },
+    {
+      "id": "3.1.16",
+      "title": "Wireless Access Authorization",
+      "family": "AC",
+      "weight": 5,
+      "poamEligible": false,
+      "plain": "Approve wireless access before anyone connects to your network over Wi-Fi."
+    },
+    {
+      "id": "3.1.17",
+      "title": "Wireless Authentication & Encryption",
+      "family": "AC",
+      "weight": 5,
+      "poamEligible": false,
+      "plain": "Protect wireless networks by checking who connects and encrypting the traffic."
+    },
+    {
+      "id": "3.1.18",
+      "title": "Mobile Device Connection",
+      "family": "AC",
+      "weight": 5,
+      "poamEligible": false,
+      "plain": "Monitor and control phones, tablets, and other mobile devices that connect to your systems."
+    },
+    {
+      "id": "3.1.19",
+      "title": "Encrypt CUI on Mobile",
+      "family": "AC",
+      "weight": 3,
+      "poamEligible": false,
+      "plain": "Encrypt sensitive defense data stored on phones, tablets, and other mobile devices."
+    },
+    {
+      "id": "3.1.20",
+      "title": "External Connections",
+      "family": "AC",
+      "weight": 1,
+      "poamEligible": false,
+      "plain": "Check and limit connections between your systems and outside systems, such as partners and cloud services."
+    },
+    {
+      "id": "3.1.21",
+      "title": "Portable Storage",
+      "family": "AC",
+      "weight": 1,
+      "poamEligible": true,
+      "plain": "Limit or ban the use of personal USB drives and similar storage on company systems."
+    },
+    {
+      "id": "3.1.22",
+      "title": "Public Information",
+      "family": "AC",
+      "weight": 1,
+      "poamEligible": false,
+      "plain": "Check what gets posted on public websites so sensitive defense data never appears there."
+    },
+    {
+      "id": "3.2.1",
+      "title": "Role-Based Risk Awareness",
+      "family": "AT",
+      "weight": 5,
+      "poamEligible": false,
+      "plain": "Make sure managers and users know the security risks of their jobs and the rules that apply."
+    },
+    {
+      "id": "3.2.2",
+      "title": "Role-Based Training",
+      "family": "AT",
+      "weight": 5,
+      "poamEligible": false,
+      "plain": "Train staff to carry out their security duties, with training matched to each role."
+    },
+    {
+      "id": "3.2.3",
+      "title": "Insider Threat Awareness",
+      "family": "AT",
+      "weight": 1,
+      "poamEligible": true,
+      "plain": "Teach staff to recognize and report warning signs of insider threats."
+    },
+    {
+      "id": "3.3.1",
+      "title": "System Auditing",
+      "family": "AU",
+      "weight": 5,
+      "poamEligible": false,
+      "plain": "Keep records of system activity so you can find, study, and report unlawful or unauthorized actions."
+    },
+    {
+      "id": "3.3.2",
+      "title": "User Accountability",
+      "family": "AU",
+      "weight": 3,
+      "poamEligible": false,
+      "plain": "Record enough detail in your logs to trace each action back to the person who did it."
+    },
+    {
+      "id": "3.3.3",
+      "title": "Event Review",
+      "family": "AU",
+      "weight": 1,
+      "poamEligible": true,
+      "plain": "Review the activity you log, and update what you log when needs change."
+    },
+    {
+      "id": "3.3.4",
+      "title": "Audit Failure Alerting",
+      "family": "AU",
+      "weight": 1,
+      "poamEligible": true,
+      "plain": "Send an alert when logging stops working."
+    },
+    {
+      "id": "3.3.5",
+      "title": "Audit Correlation",
+      "family": "AU",
+      "weight": 5,
+      "poamEligible": false,
+      "plain": "Bring log reviews together, so you can spot suspicious activity across your systems."
+    },
+    {
+      "id": "3.3.6",
+      "title": "Reduction & Reporting",
+      "family": "AU",
+      "weight": 1,
+      "poamEligible": true,
+      "plain": "Provide tools that sort and summarize logs so reviews and reports are quick."
+    },
+    {
+      "id": "3.3.7",
+      "title": "Authoritative Time Source",
+      "family": "AU",
+      "weight": 1,
+      "poamEligible": true,
+      "plain": "Set all system clocks from a trusted time source so log timestamps match."
+    },
+    {
+      "id": "3.3.8",
+      "title": "Audit Protection",
+      "family": "AU",
+      "weight": 1,
+      "poamEligible": true,
+      "plain": "Protect log records and logging tools from unauthorized access, changes, and deletion."
+    },
+    {
+      "id": "3.3.9",
+      "title": "Audit Management",
+      "family": "AU",
+      "weight": 1,
+      "poamEligible": true,
+      "plain": "Let only a few trusted administrators manage your logging tools."
+    },
+    {
+      "id": "3.4.1",
+      "title": "System Baselining",
+      "family": "CM",
+      "weight": 5,
+      "poamEligible": false,
+      "plain": "Keep a current list of your computers and software, and record how each one is set up."
+    },
+    {
+      "id": "3.4.2",
+      "title": "Security Configuration Enforcement",
+      "family": "CM",
+      "weight": 5,
+      "poamEligible": false,
+      "plain": "Set computers and software to secure settings, and make sure those settings stay in place."
+    },
+    {
+      "id": "3.4.3",
+      "title": "System Change Management",
+      "family": "CM",
+      "weight": 1,
+      "poamEligible": true,
+      "plain": "Track, review, approve, and record changes to your systems before they happen."
+    },
+    {
+      "id": "3.4.4",
+      "title": "Security Impact Analysis",
+      "family": "CM",
+      "weight": 1,
+      "poamEligible": true,
+      "plain": "Check how a planned change could affect security before you make it."
+    },
+    {
+      "id": "3.4.5",
+      "title": "Access Restrictions for Change",
+      "family": "CM",
+      "weight": 5,
+      "poamEligible": false,
+      "plain": "Control who can change system settings, and enforce those limits."
+    },
+    {
+      "id": "3.4.6",
+      "title": "Least Functionality",
+      "family": "CM",
+      "weight": 5,
+      "poamEligible": false,
+      "plain": "Set systems to run only the features and services people truly need."
+    },
+    {
+      "id": "3.4.7",
+      "title": "Nonessential Functionality",
+      "family": "CM",
+      "weight": 5,
+      "poamEligible": false,
+      "plain": "Turn off or block programs, ports, and services that you do not need."
+    },
+    {
+      "id": "3.4.8",
+      "title": "Application Execution Policy",
+      "family": "CM",
+      "weight": 5,
+      "poamEligible": false,
+      "plain": "Use a list of approved programs, and block everything else from running."
+    },
+    {
+      "id": "3.4.9",
+      "title": "User-Installed Software",
+      "family": "CM",
+      "weight": 1,
+      "poamEligible": true,
+      "plain": "Control and monitor software that users install themselves."
+    },
+    {
+      "id": "3.5.1",
+      "title": "Identify System Users",
+      "family": "IA",
+      "weight": 5,
+      "poamEligible": false,
+      "plain": "Give every user, process, and device its own identity so you know who is who."
+    },
+    {
+      "id": "3.5.2",
+      "title": "Authenticate Users",
+      "family": "IA",
+      "weight": 5,
+      "poamEligible": false,
+      "plain": "Verify the identity of each user, process, or device before it gets access to your systems."
+    },
+    {
+      "id": "3.5.3",
+      "title": "Multifactor Authentication",
+      "family": "IA",
+      "weight": 5,
+      "poamEligible": false,
+      "partialWeight": 3,
+      "poamIfPartial": false,
+      "plain": "Require more than a password, such as a code from a phone, for everyone who signs in."
+    },
+    {
+      "id": "3.5.4",
+      "title": "Replay-Resistant Auth",
+      "family": "IA",
+      "weight": 1,
+      "poamEligible": true,
+      "plain": "Use sign-in methods that cannot be recorded and replayed by an attacker."
+    },
+    {
+      "id": "3.5.5",
+      "title": "Identifier Management",
+      "family": "IA",
+      "weight": 1,
+      "poamEligible": true,
+      "plain": "Do not reuse user identifiers for a set period after they are retired."
+    },
+    {
+      "id": "3.5.6",
+      "title": "Identifier Handling",
+      "family": "IA",
+      "weight": 1,
+      "poamEligible": true,
+      "plain": "Turn off user identifiers after a set period of inactivity."
+    },
+    {
+      "id": "3.5.7",
+      "title": "Password Complexity",
+      "family": "IA",
+      "weight": 1,
+      "poamEligible": true,
+      "plain": "Require passwords of a minimum length and mix of characters, and change a few characters when updating."
+    },
+    {
+      "id": "3.5.8",
+      "title": "Password Reuse",
+      "family": "IA",
+      "weight": 1,
+      "poamEligible": true,
+      "plain": "Stop people from reusing recent passwords."
+    },
+    {
+      "id": "3.5.9",
+      "title": "Temporary Passwords",
+      "family": "IA",
+      "weight": 1,
+      "poamEligible": true,
+      "plain": "Make temporary passwords work only once, and require a new password at first sign-in."
+    },
+    {
+      "id": "3.5.10",
+      "title": "Cryptographic Key-Based Auth",
+      "family": "IA",
+      "weight": 5,
+      "poamEligible": false,
+      "plain": "Store and send only scrambled versions of passwords, never the passwords themselves."
+    },
+    {
+      "id": "3.5.11",
+      "title": "Obscure Authentication Feedback",
+      "family": "IA",
+      "weight": 1,
+      "poamEligible": true,
+      "plain": "Hide typed passwords on screen so people nearby cannot read them."
+    },
+    {
+      "id": "3.6.1",
+      "title": "Incident Handling",
+      "family": "IR",
+      "weight": 5,
+      "poamEligible": false,
+      "plain": "Build a plan to prepare for, detect, respond to, and recover from security incidents."
+    },
+    {
+      "id": "3.6.2",
+      "title": "Incident Reporting",
+      "family": "IR",
+      "weight": 5,
+      "poamEligible": false,
+      "plain": "Track and document security incidents, and report them to the right people inside and outside the company."
+    },
+    {
+      "id": "3.6.3",
+      "title": "Incident Response Testing",
+      "family": "IR",
+      "weight": 1,
+      "poamEligible": true,
+      "plain": "Test your incident response plan to see whether it works."
+    },
+    {
+      "id": "3.7.1",
+      "title": "Perform Maintenance",
+      "family": "MA",
+      "weight": 3,
+      "poamEligible": false,
+      "plain": "Keep your systems maintained and in good working order."
+    },
+    {
+      "id": "3.7.2",
+      "title": "System Maintenance Control",
+      "family": "MA",
+      "weight": 5,
+      "poamEligible": false,
+      "plain": "Control the tools, methods, and people that perform maintenance on your systems."
+    },
+    {
+      "id": "3.7.3",
+      "title": "Equipment Sanitization",
+      "family": "MA",
+      "weight": 1,
+      "poamEligible": true,
+      "plain": "Clean any equipment of sensitive defense data before sending it out for repair."
+    },
+    {
+      "id": "3.7.4",
+      "title": "Media Inspection",
+      "family": "MA",
+      "weight": 3,
+      "poamEligible": false,
+      "plain": "Scan maintenance diagnostic and test media for harmful programs before using it on your systems."
+    },
+    {
+      "id": "3.7.5",
+      "title": "Nonlocal Maintenance",
+      "family": "MA",
+      "weight": 5,
+      "poamEligible": false,
+      "plain": "Require extra sign-in checks for remote maintenance, and end the session when the work is done."
+    },
+    {
+      "id": "3.7.6",
+      "title": "Maintenance Personnel",
+      "family": "MA",
+      "weight": 1,
+      "poamEligible": true,
+      "plain": "Supervise maintenance staff who do not already have approved access."
+    },
+    {
+      "id": "3.8.1",
+      "title": "Media Protection",
+      "family": "MP",
+      "weight": 3,
+      "poamEligible": false,
+      "plain": "Protect paper and digital media that hold sensitive defense data, and store it securely."
+    },
+    {
+      "id": "3.8.2",
+      "title": "Media Access",
+      "family": "MP",
+      "weight": 3,
+      "poamEligible": false,
+      "plain": "Let only authorized people use media that holds sensitive defense data."
+    },
+    {
+      "id": "3.8.3",
+      "title": "Media Sanitization",
+      "family": "MP",
+      "weight": 5,
+      "poamEligible": false,
+      "plain": "Wipe or destroy media that held sensitive defense data before you throw it away or reuse it."
+    },
+    {
+      "id": "3.8.4",
+      "title": "Media Marking",
+      "family": "MP",
+      "weight": 1,
+      "poamEligible": true,
+      "plain": "Label media that holds sensitive defense data with the rules for handling it."
+    },
+    {
+      "id": "3.8.5",
+      "title": "Media Accountability",
+      "family": "MP",
+      "weight": 1,
+      "poamEligible": true,
+      "plain": "Control media that holds sensitive defense data, and keep track of it whenever it leaves secured areas."
+    },
+    {
+      "id": "3.8.6",
+      "title": "Portable Storage Encryption",
+      "family": "MP",
+      "weight": 1,
+      "poamEligible": true,
+      "plain": "Encrypt sensitive defense data on portable drives and media during transport, unless other protection is in place."
+    },
+    {
+      "id": "3.8.7",
+      "title": "Removable Media",
+      "family": "MP",
+      "weight": 5,
+      "poamEligible": false,
+      "plain": "Control the use of removable media, such as USB drives, on company systems."
+    },
+    {
+      "id": "3.8.8",
+      "title": "Shared Media",
+      "family": "MP",
+      "weight": 3,
+      "poamEligible": false,
+      "plain": "Ban portable storage devices that have no known owner."
+    },
+    {
+      "id": "3.8.9",
+      "title": "Protect Backups",
+      "family": "MP",
+      "weight": 1,
+      "poamEligible": true,
+      "plain": "Protect the confidentiality of backup copies that hold sensitive defense data."
+    },
+    {
+      "id": "3.9.1",
+      "title": "Screen Individuals",
+      "family": "PS",
+      "weight": 3,
+      "poamEligible": false,
+      "plain": "Screen people before you give them access to systems that hold sensitive defense data."
+    },
+    {
+      "id": "3.9.2",
+      "title": "Personnel Actions",
+      "family": "PS",
+      "weight": 5,
+      "poamEligible": false,
+      "plain": "Protect sensitive defense data when people leave or move jobs, including removing their access promptly."
+    },
+    {
+      "id": "3.10.1",
+      "title": "Limit Physical Access",
+      "family": "PE",
+      "weight": 5,
+      "poamEligible": false,
+      "plain": "Limit physical access to your systems, equipment, and work areas to authorized people."
+    },
+    {
+      "id": "3.10.2",
+      "title": "Monitor Facility",
+      "family": "PE",
+      "weight": 5,
+      "poamEligible": false,
+      "plain": "Protect and monitor the physical places where your systems are kept."
+    },
+    {
+      "id": "3.10.3",
+      "title": "Escort Visitors",
+      "family": "PE",
+      "weight": 1,
+      "poamEligible": false,
+      "plain": "Escort visitors and watch what they do while they are in your facility."
+    },
+    {
+      "id": "3.10.4",
+      "title": "Physical Access Logs",
+      "family": "PE",
+      "weight": 1,
+      "poamEligible": false,
+      "plain": "Keep logs of who enters and leaves areas with your systems."
+    },
+    {
+      "id": "3.10.5",
+      "title": "Manage Physical Access",
+      "family": "PE",
+      "weight": 1,
+      "poamEligible": false,
+      "plain": "Control keys, badges, and other physical access devices, and keep track of who has them."
+    },
+    {
+      "id": "3.10.6",
+      "title": "Alternative Work Sites",
+      "family": "PE",
+      "weight": 1,
+      "poamEligible": true,
+      "plain": "Apply security safeguards at alternate work sites, such as home offices."
+    },
+    {
+      "id": "3.11.1",
+      "title": "Risk Assessments",
+      "family": "RA",
+      "weight": 3,
+      "poamEligible": false,
+      "plain": "Regularly assess the risks to your operations, assets, and people from using your systems."
+    },
+    {
+      "id": "3.11.2",
+      "title": "Vulnerability Scan",
+      "family": "RA",
+      "weight": 5,
+      "poamEligible": false,
+      "plain": "Scan your systems and applications for weaknesses on a schedule, and when new threats appear."
+    },
+    {
+      "id": "3.11.3",
+      "title": "Vulnerability Remediation",
+      "family": "RA",
+      "weight": 1,
+      "poamEligible": true,
+      "plain": "Fix weaknesses found in scans, following your risk assessments."
+    },
+    {
+      "id": "3.12.1",
+      "title": "Security Control Assessment",
+      "family": "CA",
+      "weight": 5,
+      "poamEligible": false,
+      "plain": "Check your security controls on a regular schedule to confirm they work."
+    },
+    {
+      "id": "3.12.2",
+      "title": "Plan of Action",
+      "family": "CA",
+      "weight": 3,
+      "poamEligible": false,
+      "plain": "Write plans to fix security gaps, and keep them updated as you make progress."
+    },
+    {
+      "id": "3.12.3",
+      "title": "Security Control Monitoring",
+      "family": "CA",
+      "weight": 5,
+      "poamEligible": false,
+      "plain": "Keep watching your security controls over time to be sure they keep working."
+    },
+    {
+      "id": "3.12.4",
+      "title": "System Security Plan",
+      "family": "CA",
+      "weight": 0,
+      "poamEligible": false,
+      "plain": "Write and maintain a security plan that describes your systems, boundaries, and how controls are met."
+    },
+    {
+      "id": "3.13.1",
+      "title": "Boundary Protection",
+      "family": "SC",
+      "weight": 5,
+      "poamEligible": false,
+      "plain": "Watch and protect the points where your systems connect to outside networks and inside zones."
+    },
+    {
+      "id": "3.13.2",
+      "title": "Architectural Design",
+      "family": "SC",
+      "weight": 5,
+      "poamEligible": false,
+      "plain": "Design your systems and teams so good security practices are built in."
+    },
+    {
+      "id": "3.13.3",
+      "title": "Role Separation",
+      "family": "SC",
+      "weight": 1,
+      "poamEligible": true,
+      "plain": "Keep user functions separate from system management functions."
+    },
+    {
+      "id": "3.13.4",
+      "title": "Shared Resource Control",
+      "family": "SC",
+      "weight": 1,
+      "poamEligible": true,
+      "plain": "Stop information from leaking between users who share the same system resources."
+    },
+    {
+      "id": "3.13.5",
+      "title": "Public-Access System Separation",
+      "family": "SC",
+      "weight": 5,
+      "poamEligible": false,
+      "plain": "Place public-facing systems on separate networks from your internal systems."
+    },
+    {
+      "id": "3.13.6",
+      "title": "Network Communication by Exception",
+      "family": "SC",
+      "weight": 5,
+      "poamEligible": false,
+      "plain": "Block all network traffic by default, and allow only the traffic you have approved."
+    },
+    {
+      "id": "3.13.7",
+      "title": "Split Tunneling",
+      "family": "SC",
+      "weight": 1,
+      "poamEligible": true,
+      "plain": "Stop remote devices from connecting to your network and to outside networks at the same time."
+    },
+    {
+      "id": "3.13.8",
+      "title": "CUI in Transit",
+      "family": "SC",
+      "weight": 3,
+      "poamEligible": false,
+      "plain": "Encrypt sensitive defense data while it travels over networks, unless other protection is in place."
+    },
+    {
+      "id": "3.13.9",
+      "title": "Network Disconnect",
+      "family": "SC",
+      "weight": 1,
+      "poamEligible": true,
+      "plain": "End network connections after a set period of inactivity, or when the session ends."
+    },
+    {
+      "id": "3.13.10",
+      "title": "Key Management",
+      "family": "SC",
+      "weight": 1,
+      "poamEligible": true,
+      "plain": "Set up and manage the keys used for encryption."
+    },
+    {
+      "id": "3.13.11",
+      "title": "CUI Encryption",
+      "family": "SC",
+      "weight": 5,
+      "poamEligible": false,
+      "partialWeight": 3,
+      "poamIfPartial": true,
+      "plain": "Use encryption approved under federal standards, called FIPS-validated, whenever you encrypt sensitive defense data."
+    },
+    {
+      "id": "3.13.12",
+      "title": "Collaborative Device Control",
+      "family": "SC",
+      "weight": 1,
+      "poamEligible": true,
+      "plain": "Block remote turning on of cameras and microphones, and tell users when they are in use."
+    },
+    {
+      "id": "3.13.13",
+      "title": "Mobile Code",
+      "family": "SC",
+      "weight": 1,
+      "poamEligible": true,
+      "plain": "Set rules for, and monitor, code that downloads and runs in browsers or email."
+    },
+    {
+      "id": "3.13.14",
+      "title": "Voice-over-IP",
+      "family": "SC",
+      "weight": 1,
+      "poamEligible": true,
+      "plain": "Set rules for, and monitor, internet phone calls (VoIP)."
+    },
+    {
+      "id": "3.13.15",
+      "title": "Communications Authenticity",
+      "family": "SC",
+      "weight": 5,
+      "poamEligible": false,
+      "plain": "Protect the trustworthiness of network communications, so people know who they are talking to."
+    },
+    {
+      "id": "3.13.16",
+      "title": "Data at Rest",
+      "family": "SC",
+      "weight": 1,
+      "poamEligible": true,
+      "plain": "Protect sensitive defense data while it is stored, such as on disks and in cloud storage."
+    },
+    {
+      "id": "3.14.1",
+      "title": "Flaw Remediation",
+      "family": "SI",
+      "weight": 5,
+      "poamEligible": false,
+      "plain": "Find and fix software flaws quickly, and track the time it takes."
+    },
+    {
+      "id": "3.14.2",
+      "title": "Malicious Code Protection",
+      "family": "SI",
+      "weight": 5,
+      "poamEligible": false,
+      "plain": "Protect your systems from viruses and other harmful programs at the places where they can enter."
+    },
+    {
+      "id": "3.14.3",
+      "title": "Security Alerts & Advisories",
+      "family": "SI",
+      "weight": 5,
+      "poamEligible": false,
+      "plain": "Watch for security alerts and advisories, and act on them."
+    },
+    {
+      "id": "3.14.4",
+      "title": "Update Malicious Code Protection",
+      "family": "SI",
+      "weight": 5,
+      "poamEligible": false,
+      "plain": "Keep your anti-virus and malicious code protection up to date as new releases come out."
+    },
+    {
+      "id": "3.14.5",
+      "title": "System & File Scanning",
+      "family": "SI",
+      "weight": 3,
+      "poamEligible": false,
+      "plain": "Scan your systems regularly, and scan files from outside sources as they are opened or downloaded."
+    },
+    {
+      "id": "3.14.6",
+      "title": "Monitor Inbound Communications",
+      "family": "SI",
+      "weight": 5,
+      "poamEligible": false,
+      "plain": "Watch your network traffic, coming in and going out, for attacks and signs of trouble."
+    },
+    {
+      "id": "3.14.7",
+      "title": "Identify Unauthorized Use",
+      "family": "SI",
+      "weight": 3,
+      "poamEligible": false,
+      "plain": "Identify any use of your systems that is not authorized."
+    }
+  ]
+}

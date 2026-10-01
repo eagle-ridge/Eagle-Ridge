@@ -1,0 +1,1428 @@
+{
+  "fictional": true,
+  "company": {
+    "name": "Kestrel Precision Machining",
+    "shortName": "Kestrel",
+    "location": "Dayton, Ohio",
+    "employees": 38,
+    "industry": "CNC machining for aerospace",
+    "contract": "Subcontractor on an Air Force sustainment contract",
+    "environment": [
+      "Microsoft 365 GCC High",
+      "One on-site file server",
+      "CNC machines on the shop floor (OT)",
+      "Part-time outsourced IT from Brightline IT"
+    ],
+    "assessmentDate": "2027-03-15",
+    "engagementStart": "2026-08-17"
+  },
+  "people": [
+    {
+      "id": "dana",
+      "name": "Dana Whitfield",
+      "role": "CEO",
+      "org": "Kestrel",
+      "initials": "DW"
+    },
+    {
+      "id": "linda",
+      "name": "Linda Okafor",
+      "role": "Office Manager",
+      "org": "Kestrel",
+      "initials": "LO"
+    },
+    {
+      "id": "ray",
+      "name": "Ray Delgado",
+      "role": "Shop Foreman",
+      "org": "Kestrel",
+      "initials": "RD"
+    },
+    {
+      "id": "marcus",
+      "name": "Marcus Tran",
+      "role": "IT Lead, outsourced",
+      "org": "Brightline IT",
+      "initials": "MT"
+    },
+    {
+      "id": "chris",
+      "name": "Chris McConnell",
+      "role": "Engagement Lead",
+      "org": "Eagle Ridge",
+      "initials": "CM"
+    }
+  ],
+  "viewer": "dana",
+  "phases": [
+    {
+      "n": 1,
+      "name": "Discovery & scoping",
+      "status": "done",
+      "start": "2026-08-17",
+      "end": "2026-08-21",
+      "summary": "We learned how Kestrel handles CUI and drew the system boundary. The scope is the office, the file server, GCC High and the CNC network.",
+      "deliverables": [
+        "CUI determination memo",
+        "System boundary diagram",
+        "Asset inventory"
+      ]
+    },
+    {
+      "n": 2,
+      "name": "Gap assessment",
+      "status": "done",
+      "start": "2026-08-24",
+      "end": "2026-09-04",
+      "summary": "We checked all 110 controls against how Kestrel works today. The starting SPRS score was -38.",
+      "deliverables": [
+        "Gap Assessment Report",
+        "SPRS worksheet",
+        "Tiered action plan"
+      ]
+    },
+    {
+      "n": 3,
+      "name": "Remediation",
+      "status": "active",
+      "start": "2026-09-07",
+      "end": "2026-11-06",
+      "summary": "Brightline IT and Kestrel staff are fixing the gaps in order of score impact. Week 6 of about 10.",
+      "deliverables": [
+        "Configuration checklists",
+        "Policies and procedures",
+        "Updated SPRS score"
+      ]
+    },
+    {
+      "n": 4,
+      "name": "SSP writing",
+      "status": "started",
+      "start": "2026-09-21",
+      "end": "2026-12-04",
+      "summary": "We are writing the System Security Plan as fixes land. Some control narratives are already drafted.",
+      "deliverables": [
+        "System Security Plan",
+        "POA&M entries"
+      ]
+    },
+    {
+      "n": 5,
+      "name": "Pre-assessment review",
+      "status": "upcoming",
+      "start": "2026-12-07",
+      "end": "2027-01-15",
+      "summary": "We review the SSP and evidence the way a C3PAO would. We list anything an assessor might flag.",
+      "deliverables": [
+        "Review findings report",
+        "Final SPRS score"
+      ]
+    },
+    {
+      "n": 6,
+      "name": "Evidence & interview prep",
+      "status": "upcoming",
+      "start": "2027-01-18",
+      "end": "2027-03-05",
+      "summary": "We build the evidence binder and practice assessor interviews with your team.",
+      "deliverables": [
+        "Evidence binder",
+        "Interview prep guides",
+        "Assessment day plan"
+      ]
+    },
+    {
+      "n": 7,
+      "name": "Continuous monitoring",
+      "status": "upcoming",
+      "start": "2027-03-15",
+      "end": "2027-12-31",
+      "summary": "After the assessment, we help Kestrel keep controls working and close any POA&M items within 180 days.",
+      "deliverables": [
+        "Monthly review notes",
+        "Annual affirmation support"
+      ]
+    }
+  ],
+  "baseline": {
+    "date": "2026-09-04",
+    "sprs": -38
+  },
+  "controls": {
+    "3.1.1": {
+      "status": "met",
+      "owner": "marcus",
+      "note": "Only named employees have Microsoft 365 GCC High accounts. Shared logins were removed in August.",
+      "evidence": [
+        "Entra ID user list",
+        "Account review sign-off"
+      ],
+      "poam": false
+    },
+    "3.1.2": {
+      "status": "met",
+      "owner": "marcus",
+      "note": "Roles in GCC High limit what each person can do. Engineering can see CUI drawings; sales cannot.",
+      "evidence": [
+        "Role matrix",
+        "SharePoint permission export"
+      ],
+      "poam": false
+    },
+    "3.1.3": {
+      "status": "not_met",
+      "owner": "marcus",
+      "note": "CUI moves only inside GCC High today. Rules for email to outside parties are still being written.",
+      "evidence": [],
+      "due": "2027-01-08",
+      "poam": false
+    },
+    "3.1.4": {
+      "status": "met",
+      "owner": "linda",
+      "note": "Ordering, approving and paying for CUI jobs are split between two people. Written in the access policy.",
+      "evidence": [
+        "Access Control Policy"
+      ],
+      "poam": false
+    },
+    "3.1.5": {
+      "status": "met",
+      "owner": "marcus",
+      "note": "Staff get the least access needed for their job. Quarterly review is on the calendar.",
+      "evidence": [
+        "Role matrix"
+      ],
+      "poam": false
+    },
+    "3.1.6": {
+      "status": "met",
+      "owner": "marcus",
+      "note": "IT staff use separate admin accounts. Daily work uses normal accounts.",
+      "evidence": [
+        "Admin account list"
+      ],
+      "poam": false
+    },
+    "3.1.7": {
+      "status": "met",
+      "owner": "marcus",
+      "note": "Normal users cannot install software or change settings. Admin actions are logged.",
+      "evidence": [
+        "Intune policy export"
+      ],
+      "poam": false
+    },
+    "3.1.8": {
+      "status": "met",
+      "owner": "marcus",
+      "note": "Accounts lock after five failed sign-ins in GCC High and on the file server.",
+      "evidence": [
+        "Entra lockout settings"
+      ],
+      "poam": false
+    },
+    "3.1.9": {
+      "status": "not_met",
+      "owner": "linda",
+      "note": "The sign-in warning banner is on laptops and the file server, but not yet on shop-floor kiosks.",
+      "evidence": [],
+      "due": "2026-12-18",
+      "poam": false
+    },
+    "3.1.10": {
+      "status": "met",
+      "owner": "marcus",
+      "note": "Laptops lock after 10 minutes idle through Intune. Kiosks lock after 15 minutes.",
+      "evidence": [
+        "Intune compliance policy export"
+      ],
+      "poam": false
+    },
+    "3.1.11": {
+      "status": "met",
+      "owner": "marcus",
+      "note": "Remote and VPN sessions end after 30 minutes idle.",
+      "evidence": [
+        "VPN settings export"
+      ],
+      "poam": false
+    },
+    "3.1.12": {
+      "status": "met",
+      "owner": "marcus",
+      "note": "Remote work uses the company VPN with named users and logging. Remote desktop from the internet is blocked.",
+      "evidence": [
+        "VPN settings export",
+        "Firewall rule export"
+      ],
+      "poam": false
+    },
+    "3.1.13": {
+      "status": "met",
+      "owner": "marcus",
+      "note": "The VPN encrypts all remote traffic with approved settings.",
+      "evidence": [
+        "VPN settings export"
+      ],
+      "poam": false
+    },
+    "3.1.14": {
+      "status": "not_met",
+      "owner": "marcus",
+      "note": "Remote users go through the VPN. Two older laptops still allow direct cloud access and are being moved.",
+      "evidence": [],
+      "due": "2027-01-22",
+      "poam": false
+    },
+    "3.1.15": {
+      "status": "met",
+      "owner": "marcus",
+      "note": "Brightline IT staff reach admin tools only through the VPN with MFA and a ticket.",
+      "evidence": [
+        "Remote admin procedure"
+      ],
+      "poam": false
+    },
+    "3.1.16": {
+      "status": "met",
+      "owner": "marcus",
+      "note": "Office Wi-Fi needs approval for each device. Guest Wi-Fi is separate from the office network.",
+      "evidence": [
+        "Wi-Fi controller config"
+      ],
+      "poam": false
+    },
+    "3.1.17": {
+      "status": "met",
+      "owner": "marcus",
+      "note": "Wi-Fi uses WPA3 Enterprise with user sign-in and encryption.",
+      "evidence": [
+        "Wi-Fi controller config"
+      ],
+      "poam": false
+    },
+    "3.1.18": {
+      "status": "met",
+      "owner": "marcus",
+      "note": "Only company phones and laptops enrolled in Intune can reach CUI. Personal phones are blocked.",
+      "evidence": [
+        "Intune enrollment report"
+      ],
+      "poam": false
+    },
+    "3.1.19": {
+      "status": "met",
+      "owner": "marcus",
+      "note": "Company laptops and phones are encrypted with BitLocker or device encryption and checked by Intune.",
+      "evidence": [
+        "Intune compliance policy export"
+      ],
+      "poam": false
+    },
+    "3.1.20": {
+      "status": "met",
+      "owner": "dana",
+      "note": "Outside systems that touch CUI are listed. Only the prime contractor portal is approved.",
+      "evidence": [
+        "External connections list"
+      ],
+      "poam": false
+    },
+    "3.1.21": {
+      "status": "partial",
+      "owner": "marcus",
+      "note": "USB drives are blocked on office PCs. CNC controllers still accept USB for loading programs.",
+      "evidence": [
+        "Intune policy export"
+      ],
+      "due": "2026-12-18",
+      "poam": false
+    },
+    "3.1.22": {
+      "status": "met",
+      "owner": "linda",
+      "note": "Dana approves anything posted on the website. CUI is not allowed there.",
+      "evidence": [
+        "Public posting procedure"
+      ],
+      "poam": false
+    },
+    "3.2.1": {
+      "status": "met",
+      "owner": "linda",
+      "note": "All 38 staff finished CUI awareness training in September. Records are saved.",
+      "evidence": [
+        "Training completion report"
+      ],
+      "poam": false
+    },
+    "3.2.2": {
+      "status": "met",
+      "owner": "linda",
+      "note": "IT, managers and CUI handlers took role-based training. Foreman Ray Delgado took the shop-floor version.",
+      "evidence": [
+        "Training completion report"
+      ],
+      "poam": false
+    },
+    "3.2.3": {
+      "status": "not_met",
+      "owner": "linda",
+      "note": "Insider threat training is not in the course yet. Linda is adding a short module.",
+      "evidence": [],
+      "due": "2027-01-22",
+      "poam": false
+    },
+    "3.3.1": {
+      "status": "met",
+      "owner": "marcus",
+      "note": "GCC High audit logs run for 12 months. The file server logs are sent to a log store.",
+      "evidence": [
+        "Audit log settings export",
+        "Log retention config"
+      ],
+      "poam": false
+    },
+    "3.3.2": {
+      "status": "partial",
+      "owner": "marcus",
+      "note": "Actions map to named users. Shop-floor kiosks use one shared operator login until kiosks get individual sign-ins.",
+      "evidence": [
+        "Entra sign-in logs"
+      ],
+      "due": "2026-11-20",
+      "poam": false
+    },
+    "3.3.3": {
+      "status": "not_met",
+      "owner": "marcus",
+      "note": "Logs are kept but nobody reviews them on a schedule yet. A weekly review step is in draft.",
+      "evidence": [],
+      "due": "2026-11-06",
+      "poam": false
+    },
+    "3.3.4": {
+      "status": "not_met",
+      "owner": "marcus",
+      "note": "The log store does not yet send an alert when logging stops. Brightline plans to add one.",
+      "evidence": [],
+      "due": "2026-11-13",
+      "poam": false
+    },
+    "3.3.5": {
+      "status": "not_met",
+      "owner": "marcus",
+      "note": "Logs from Microsoft 365, the file server and the firewall sit in separate places. Brightline is setting up one view.",
+      "evidence": [],
+      "due": "2026-12-04",
+      "poam": false
+    },
+    "3.3.6": {
+      "status": "not_met",
+      "owner": "marcus",
+      "note": "Report and search tools are not set up yet. They depend on the single log view.",
+      "evidence": [],
+      "due": "2026-12-04",
+      "poam": false
+    },
+    "3.3.7": {
+      "status": "met",
+      "owner": "marcus",
+      "note": "All devices get time from an approved source. The shop-floor controllers are checked monthly.",
+      "evidence": [
+        "NTP settings export"
+      ],
+      "poam": false
+    },
+    "3.3.8": {
+      "status": "met",
+      "owner": "marcus",
+      "note": "Only Brightline admins can change or delete logs. Access is limited and tracked.",
+      "evidence": [
+        "Log store permissions"
+      ],
+      "poam": false
+    },
+    "3.3.9": {
+      "status": "not_met",
+      "owner": "marcus",
+      "note": "Log management rights are limited to two Brightline admins. The written procedure is not final.",
+      "evidence": [],
+      "due": "2027-04-30",
+      "poam": true
+    },
+    "3.4.1": {
+      "status": "met",
+      "owner": "marcus",
+      "note": "A list of computers, servers, network gear and CNC machines is kept in the asset inventory.",
+      "evidence": [
+        "Asset inventory",
+        "Baseline configuration doc"
+      ],
+      "poam": false
+    },
+    "3.4.2": {
+      "status": "met",
+      "owner": "marcus",
+      "note": "Intune pushes locked-down settings to all laptops. Drift is flagged.",
+      "evidence": [
+        "Intune compliance policy export"
+      ],
+      "poam": false
+    },
+    "3.4.3": {
+      "status": "met",
+      "owner": "marcus",
+      "note": "Changes now go through a ticket and approval by Brightline and Dana. A change log exists.",
+      "evidence": [
+        "Change log"
+      ],
+      "poam": false
+    },
+    "3.4.4": {
+      "status": "met",
+      "owner": "marcus",
+      "note": "Security checks before changes are written into the change form. Used on the last four changes.",
+      "evidence": [
+        "Change request form"
+      ],
+      "poam": false
+    },
+    "3.4.5": {
+      "status": "met",
+      "owner": "marcus",
+      "note": "Only Brightline admins can change system settings. Changes need a ticket.",
+      "evidence": [
+        "Admin account list"
+      ],
+      "poam": false
+    },
+    "3.4.6": {
+      "status": "met",
+      "owner": "marcus",
+      "note": "Unneeded programs and ports are turned off on laptops and the server.",
+      "evidence": [
+        "Intune policy export",
+        "Port scan report"
+      ],
+      "poam": false
+    },
+    "3.4.7": {
+      "status": "met",
+      "owner": "marcus",
+      "note": "Games, file sharing tools and unused services are removed or blocked.",
+      "evidence": [
+        "Intune policy export"
+      ],
+      "poam": false
+    },
+    "3.4.8": {
+      "status": "met",
+      "owner": "marcus",
+      "note": "Laptops use an approved software list. The file server and kiosks do not have allow-listing yet.",
+      "evidence": [
+        "Allowed software list"
+      ],
+      "poam": false
+    },
+    "3.4.9": {
+      "status": "not_met",
+      "owner": "marcus",
+      "note": "Staff cannot install software on laptops. The same rule is not yet applied to kiosks.",
+      "evidence": [],
+      "due": "2026-11-06",
+      "poam": false
+    },
+    "3.5.1": {
+      "status": "met",
+      "owner": "marcus",
+      "note": "Each person has a unique user ID. Shared accounts on office PCs are gone.",
+      "evidence": [
+        "Entra ID user list"
+      ],
+      "poam": false
+    },
+    "3.5.2": {
+      "status": "met",
+      "owner": "marcus",
+      "note": "Sign-in is checked for each user and device before access to CUI.",
+      "evidence": [
+        "Conditional access policy export"
+      ],
+      "poam": false
+    },
+    "3.5.3": {
+      "status": "partial",
+      "owner": "marcus",
+      "note": "MFA is on for all office and remote sign-ins. Shop-floor kiosks sign in with a password only.",
+      "evidence": [
+        "Conditional access policy export"
+      ],
+      "due": "2026-11-20",
+      "poam": false
+    },
+    "3.5.4": {
+      "status": "met",
+      "owner": "marcus",
+      "note": "Sign-in uses modern methods that block replay attacks. Older sign-in methods are off.",
+      "evidence": [
+        "Conditional access policy export"
+      ],
+      "poam": false
+    },
+    "3.5.5": {
+      "status": "met",
+      "owner": "marcus",
+      "note": "User IDs are never reused. HR and IT follow the onboarding checklist.",
+      "evidence": [
+        "Onboarding checklist"
+      ],
+      "poam": false
+    },
+    "3.5.6": {
+      "status": "met",
+      "owner": "marcus",
+      "note": "Accounts unused for 90 days are disabled. The check runs monthly.",
+      "evidence": [
+        "Inactive account report"
+      ],
+      "poam": false
+    },
+    "3.5.7": {
+      "status": "met",
+      "owner": "marcus",
+      "note": "Passwords need 14 characters. Common passwords are blocked.",
+      "evidence": [
+        "Entra password policy"
+      ],
+      "poam": false
+    },
+    "3.5.8": {
+      "status": "met",
+      "owner": "marcus",
+      "note": "Users cannot reuse their last 24 passwords.",
+      "evidence": [
+        "Entra password policy"
+      ],
+      "poam": false
+    },
+    "3.5.9": {
+      "status": "met",
+      "owner": "marcus",
+      "note": "New accounts get a one-time password that must be changed at first sign-in.",
+      "evidence": [
+        "Onboarding checklist"
+      ],
+      "poam": false
+    },
+    "3.5.10": {
+      "status": "met",
+      "owner": "marcus",
+      "note": "Passwords are stored as protected hashes. They are never sent in clear text.",
+      "evidence": [
+        "Entra configuration export"
+      ],
+      "poam": false
+    },
+    "3.5.11": {
+      "status": "not_met",
+      "owner": "marcus",
+      "note": "Sign-in screens hide passwords on laptops. The shop kiosk software shows characters briefly.",
+      "evidence": [],
+      "due": "2026-11-06",
+      "poam": false
+    },
+    "3.6.1": {
+      "status": "met",
+      "owner": "dana",
+      "note": "The Incident Response Plan is approved. It names who to call and how to handle an incident.",
+      "evidence": [
+        "Incident Response Plan"
+      ],
+      "poam": false
+    },
+    "3.6.2": {
+      "status": "met",
+      "owner": "dana",
+      "note": "The plan lists DoD reporting within 72 hours. Contacts for the Air Force prime are in the plan.",
+      "evidence": [
+        "Incident Response Plan",
+        "Contact list"
+      ],
+      "poam": false
+    },
+    "3.6.3": {
+      "status": "not_met",
+      "owner": "dana",
+      "note": "No tabletop exercise has been run yet. One is booked for November.",
+      "evidence": [],
+      "due": "2026-12-04",
+      "poam": false
+    },
+    "3.7.1": {
+      "status": "met",
+      "owner": "ray",
+      "note": "Maintenance on CNC machines and PCs is logged. Ray's team and Brightline both follow the log.",
+      "evidence": [
+        "Maintenance log"
+      ],
+      "poam": false
+    },
+    "3.7.2": {
+      "status": "met",
+      "owner": "ray",
+      "note": "Tools used for service are approved. Outside techs are escorted and logged.",
+      "evidence": [
+        "Maintenance procedure",
+        "Visitor log"
+      ],
+      "poam": false
+    },
+    "3.7.3": {
+      "status": "not_met",
+      "owner": "ray",
+      "note": "Machines that leave for repair are not wiped first. A cleaning step is being added.",
+      "evidence": [],
+      "due": "2026-12-18",
+      "poam": false
+    },
+    "3.7.4": {
+      "status": "not_met",
+      "owner": "marcus",
+      "note": "Diagnostic tools and media from vendors are not scanned before use yet.",
+      "evidence": [],
+      "due": "2026-12-18",
+      "poam": false
+    },
+    "3.7.5": {
+      "status": "met",
+      "owner": "marcus",
+      "note": "Remote vendor support needs approval, MFA and a session log. Sessions end when the work ends.",
+      "evidence": [
+        "Remote admin procedure"
+      ],
+      "poam": false
+    },
+    "3.7.6": {
+      "status": "not_met",
+      "owner": "linda",
+      "note": "Vendor techs are not yet checked for access. A sign-in and approval sheet is in draft.",
+      "evidence": [],
+      "due": "2027-04-30",
+      "poam": true
+    },
+    "3.8.1": {
+      "status": "met",
+      "owner": "linda",
+      "note": "CUI drawings are printed only in the front office. Paper is locked in a cabinet.",
+      "evidence": [
+        "Media handling procedure"
+      ],
+      "poam": false
+    },
+    "3.8.2": {
+      "status": "met",
+      "owner": "linda",
+      "note": "Only approved staff can reach CUI paper and drives. Key control is logged.",
+      "evidence": [
+        "Key log"
+      ],
+      "poam": false
+    },
+    "3.8.3": {
+      "status": "not_met",
+      "owner": "marcus",
+      "note": "Old drives and printed CUI have no approved disposal method yet. Brightline is getting a shredding and wipe vendor.",
+      "evidence": [],
+      "due": "2026-11-13",
+      "poam": false
+    },
+    "3.8.4": {
+      "status": "partial",
+      "owner": "linda",
+      "note": "CUI marking is in use on new drawings. Older files still lack markings.",
+      "evidence": [
+        "Marked drawing sample"
+      ],
+      "due": "2027-01-22",
+      "poam": false
+    },
+    "3.8.5": {
+      "status": "not_met",
+      "owner": "linda",
+      "note": "Paper and drive logs track who has CUI media. Not yet applied to all older media.",
+      "evidence": [],
+      "due": "2026-11-06",
+      "poam": false
+    },
+    "3.8.6": {
+      "status": "partial",
+      "owner": "marcus",
+      "note": "CUI on portable drives must be encrypted. The check is manual, not yet automated.",
+      "evidence": [
+        "Portable media log"
+      ],
+      "due": "2026-11-13",
+      "poam": false
+    },
+    "3.8.7": {
+      "status": "met",
+      "owner": "marcus",
+      "note": "USB storage is blocked on office PCs. Only company-issued encrypted drives are allowed.",
+      "evidence": [
+        "Intune policy export"
+      ],
+      "poam": false
+    },
+    "3.8.8": {
+      "status": "not_met",
+      "owner": "marcus",
+      "note": "Personal USB drives are banned in policy. Technical blocks are not on the shop floor.",
+      "evidence": [],
+      "due": "2026-12-11",
+      "poam": false
+    },
+    "3.8.9": {
+      "status": "not_met",
+      "owner": "marcus",
+      "note": "Backups are encrypted and kept off site in GCC High. The server backup test is not complete.",
+      "evidence": [],
+      "due": "2026-12-18",
+      "poam": false
+    },
+    "3.9.1": {
+      "status": "met",
+      "owner": "linda",
+      "note": "New hires get a background check before CUI access. Records are on file.",
+      "evidence": [
+        "Screening records"
+      ],
+      "poam": false
+    },
+    "3.9.2": {
+      "status": "met",
+      "owner": "linda",
+      "note": "When someone leaves, access ends the same day. Linda and Marcus use a shared exit checklist.",
+      "evidence": [
+        "Offboarding checklist"
+      ],
+      "poam": false
+    },
+    "3.10.1": {
+      "status": "met",
+      "owner": "linda",
+      "note": "The building has badge locks. Only approved staff can enter the office and CUI areas.",
+      "evidence": [
+        "Badge access list"
+      ],
+      "poam": false
+    },
+    "3.10.2": {
+      "status": "met",
+      "owner": "linda",
+      "note": "Cameras and alarms cover doors and the server closet. Footage is kept 30 days.",
+      "evidence": [
+        "Camera system config"
+      ],
+      "poam": false
+    },
+    "3.10.3": {
+      "status": "met",
+      "owner": "linda",
+      "note": "Visitors sign in and wear badges. A staff member escorts them.",
+      "evidence": [
+        "Visitor log"
+      ],
+      "poam": false
+    },
+    "3.10.4": {
+      "status": "met",
+      "owner": "linda",
+      "note": "Badge and visitor logs are kept for one year. Logs are reviewed monthly.",
+      "evidence": [
+        "Badge logs",
+        "Visitor log"
+      ],
+      "poam": false
+    },
+    "3.10.5": {
+      "status": "met",
+      "owner": "linda",
+      "note": "Keys, badges and codes are issued and removed by Linda. Records are current.",
+      "evidence": [
+        "Key log",
+        "Badge access list"
+      ],
+      "poam": false
+    },
+    "3.10.6": {
+      "status": "not_met",
+      "owner": "linda",
+      "note": "The remote-work rules for staff who open CUI at home are in draft. Only three people do this.",
+      "evidence": [],
+      "due": "2026-11-06",
+      "poam": false
+    },
+    "3.11.1": {
+      "status": "met",
+      "owner": "dana",
+      "note": "Dana approved the first risk assessment in September. It covers the CUI systems and shop floor.",
+      "evidence": [
+        "Risk assessment"
+      ],
+      "poam": false
+    },
+    "3.11.2": {
+      "status": "met",
+      "owner": "marcus",
+      "note": "Brightline scans laptops and the server each month. The first full scan ran on September 12.",
+      "evidence": [
+        "Vulnerability scan report"
+      ],
+      "poam": false
+    },
+    "3.11.3": {
+      "status": "met",
+      "owner": "marcus",
+      "note": "Scan findings are fixed within 30 days for high risks. A tracker lists open items.",
+      "evidence": [
+        "Vulnerability tracker"
+      ],
+      "poam": false
+    },
+    "3.12.1": {
+      "status": "met",
+      "owner": "chris",
+      "note": "Eagle Ridge assessed all 110 controls in the gap assessment. The next check is the pre-assessment review.",
+      "evidence": [
+        "Gap Assessment Report"
+      ],
+      "poam": false
+    },
+    "3.12.2": {
+      "status": "met",
+      "owner": "chris",
+      "note": "Open gaps are tracked in a plan of action. Dates and owners are set for each item.",
+      "evidence": [
+        "POA&M"
+      ],
+      "poam": false
+    },
+    "3.12.3": {
+      "status": "met",
+      "owner": "chris",
+      "note": "Monthly status reviews with Dana are on the calendar. Control checks are logged.",
+      "evidence": [
+        "Status review notes"
+      ],
+      "poam": false
+    },
+    "3.12.4": {
+      "status": "partial",
+      "owner": "chris",
+      "note": "The SSP draft v0.3 is in progress. About half of the control narratives are written.",
+      "evidence": [
+        "SSP draft v0.3"
+      ],
+      "due": "2027-01-15",
+      "poam": false
+    },
+    "3.13.1": {
+      "status": "met",
+      "owner": "marcus",
+      "note": "The firewall guards the office edge. Rules are reviewed each quarter.",
+      "evidence": [
+        "Firewall rule export"
+      ],
+      "poam": false
+    },
+    "3.13.2": {
+      "status": "met",
+      "owner": "marcus",
+      "note": "The network design is documented. Office, guest and server traffic are split by VLAN.",
+      "evidence": [
+        "Network diagram"
+      ],
+      "poam": false
+    },
+    "3.13.3": {
+      "status": "met",
+      "owner": "marcus",
+      "note": "User and admin functions are split by role. Admin tools are not on regular PCs.",
+      "evidence": [
+        "Role matrix"
+      ],
+      "poam": false
+    },
+    "3.13.4": {
+      "status": "not_met",
+      "owner": "marcus",
+      "note": "Folder access is by role. The old file server still has some open shared folders.",
+      "evidence": [],
+      "due": "2026-11-13",
+      "poam": false
+    },
+    "3.13.5": {
+      "status": "met",
+      "owner": "marcus",
+      "note": "Public web pages and email are hosted outside the CUI network.",
+      "evidence": [
+        "Network diagram"
+      ],
+      "poam": false
+    },
+    "3.13.6": {
+      "status": "not_met",
+      "owner": "ray",
+      "note": "CNC machines still share a network with office PCs. A separate OT network with deny-by-default rules is planned.",
+      "evidence": [],
+      "due": "2027-01-22",
+      "poam": false
+    },
+    "3.13.7": {
+      "status": "met",
+      "owner": "marcus",
+      "note": "VPN split tunneling is turned off. Remote traffic goes through company controls.",
+      "evidence": [
+        "VPN settings export"
+      ],
+      "poam": false
+    },
+    "3.13.8": {
+      "status": "met",
+      "owner": "marcus",
+      "note": "Email, files and VPN traffic are encrypted in transit. Weak protocols are turned off.",
+      "evidence": [
+        "TLS settings scan"
+      ],
+      "poam": false
+    },
+    "3.13.9": {
+      "status": "not_met",
+      "owner": "marcus",
+      "note": "Sessions time out on firewall and Wi-Fi. Settings on the older shop switch are still being checked.",
+      "evidence": [],
+      "due": "2027-04-30",
+      "poam": true
+    },
+    "3.13.10": {
+      "status": "met",
+      "owner": "marcus",
+      "note": "Keys for encryption are stored in GCC High and rotated each year.",
+      "evidence": [
+        "Key management procedure"
+      ],
+      "poam": false
+    },
+    "3.13.11": {
+      "status": "partial",
+      "owner": "marcus",
+      "note": "GCC High and laptops use FIPS-validated encryption. The file server drive still needs a FIPS-validated mode.",
+      "evidence": [
+        "Intune compliance policy export"
+      ],
+      "due": "2026-12-11",
+      "poam": false
+    },
+    "3.13.12": {
+      "status": "not_met",
+      "owner": "ray",
+      "note": "Conference room cameras and microphones are not yet controlled. Policy and a physical cover are planned.",
+      "evidence": [],
+      "due": "2027-04-30",
+      "poam": true
+    },
+    "3.13.13": {
+      "status": "not_met",
+      "owner": "marcus",
+      "note": "Browser rules are set on laptops. Kiosk browsers and the file server are not covered yet.",
+      "evidence": [],
+      "due": "2026-11-06",
+      "poam": false
+    },
+    "3.13.14": {
+      "status": "met",
+      "owner": "marcus",
+      "note": "Phones use Teams in GCC High. Old desk phones are being retired.",
+      "evidence": [],
+      "poam": false
+    },
+    "3.13.15": {
+      "status": "met",
+      "owner": "marcus",
+      "note": "Email, Teams and web sessions use certificates to prove who they come from.",
+      "evidence": [
+        "TLS settings scan"
+      ],
+      "poam": false
+    },
+    "3.13.16": {
+      "status": "partial",
+      "owner": "marcus",
+      "note": "Laptops are encrypted. The file server data drive is not encrypted at rest yet.",
+      "evidence": [
+        "BitLocker status report"
+      ],
+      "due": "2026-12-04",
+      "poam": false
+    },
+    "3.14.1": {
+      "status": "met",
+      "owner": "marcus",
+      "note": "Windows updates install within 14 days. Brightline reports patch status monthly.",
+      "evidence": [
+        "Patch compliance report"
+      ],
+      "poam": false
+    },
+    "3.14.2": {
+      "status": "met",
+      "owner": "marcus",
+      "note": "Defender runs on laptops and the server. Reports go to Brightline.",
+      "evidence": [
+        "Defender status report"
+      ],
+      "poam": false
+    },
+    "3.14.3": {
+      "status": "met",
+      "owner": "marcus",
+      "note": "Brightline gets security alerts from Microsoft and CISA. Dana gets a monthly summary.",
+      "evidence": [
+        "Advisory subscription list"
+      ],
+      "poam": false
+    },
+    "3.14.4": {
+      "status": "met",
+      "owner": "marcus",
+      "note": "Antivirus rules update every day. Brightline reviews failures.",
+      "evidence": [
+        "Defender status report"
+      ],
+      "poam": false
+    },
+    "3.14.5": {
+      "status": "met",
+      "owner": "marcus",
+      "note": "Defender scans files on a schedule and on open. Full scans run weekly.",
+      "evidence": [
+        "Defender status report"
+      ],
+      "poam": false
+    },
+    "3.14.6": {
+      "status": "met",
+      "owner": "marcus",
+      "note": "Email filtering blocks risky messages. Firewall alerts cover inbound traffic.",
+      "evidence": [
+        "Email filter config",
+        "Firewall rule export"
+      ],
+      "poam": false
+    },
+    "3.14.7": {
+      "status": "met",
+      "owner": "marcus",
+      "note": "Alerts flag odd sign-ins. Brightline checks them within one business day.",
+      "evidence": [
+        "Alert rule export"
+      ],
+      "poam": false
+    }
+  },
+  "activity": [
+    {
+      "date": "2026-09-30",
+      "who": "marcus",
+      "text": "Turned on MFA enforcement for two remaining admin accounts.",
+      "control": "3.5.3"
+    },
+    {
+      "date": "2026-09-29",
+      "who": "chris",
+      "text": "Reviewed Brightline's firewall rules and sent three change requests.",
+      "control": "3.13.6"
+    },
+    {
+      "date": "2026-09-26",
+      "who": "linda",
+      "text": "Finished CUI training records for the last four employees.",
+      "control": "3.2.1"
+    },
+    {
+      "date": "2026-09-24",
+      "who": "ray",
+      "text": "Mapped all 14 CNC machines and their network ports for OT planning.",
+      "control": "3.13.6"
+    },
+    {
+      "date": "2026-09-22",
+      "who": "chris",
+      "text": "Drafted SSP narratives for the Access Control family.",
+      "control": "3.1.1"
+    },
+    {
+      "date": "2026-09-19",
+      "who": "marcus",
+      "text": "Set Windows update rings to patch laptops within 14 days.",
+      "control": "3.14.1"
+    },
+    {
+      "date": "2026-09-17",
+      "who": "dana",
+      "text": "Approved the Incident Response Plan.",
+      "control": "3.6.1"
+    },
+    {
+      "date": "2026-09-12",
+      "who": "marcus",
+      "text": "Ran the first full vulnerability scan of laptops and the file server.",
+      "control": "3.11.2"
+    },
+    {
+      "date": "2026-09-10",
+      "who": "chris",
+      "text": "Held the Phase 3 kickoff and ranked fixes by score impact."
+    },
+    {
+      "date": "2026-09-09",
+      "who": "linda",
+      "text": "Started the visitor sign-in and badge log review.",
+      "control": "3.10.4"
+    },
+    {
+      "date": "2026-09-04",
+      "who": "chris",
+      "text": "Delivered the Gap Assessment Report. Starting SPRS score is -38."
+    },
+    {
+      "date": "2026-09-02",
+      "who": "marcus",
+      "text": "Exported Intune and conditional access settings as evidence.",
+      "control": "3.5.2"
+    },
+    {
+      "date": "2026-08-28",
+      "who": "ray",
+      "text": "Walked the shop floor with Chris to list CUI handling points.",
+      "control": "3.8.1"
+    },
+    {
+      "date": "2026-08-20",
+      "who": "dana",
+      "text": "Signed the scope memo that defines the CUI boundary."
+    },
+    {
+      "date": "2026-08-17",
+      "who": "chris",
+      "text": "Kicked off the engagement with Dana and the Kestrel team."
+    }
+  ],
+  "documents": [
+    {
+      "id": "gap-report",
+      "name": "Gap Assessment Report",
+      "kind": "Report",
+      "version": "v1.0",
+      "updated": "2026-09-04",
+      "status": "Final",
+      "summary": "Results of the 110-control review, ranked by score impact. Starting SPRS score: -38.",
+      "sections": [
+        {
+          "heading": "What we found",
+          "body": "Kestrel had strong cloud basics in GCC High. The biggest gaps were on the shop floor, in audit logging and in written procedures. We rated each control met, partial or not met."
+        },
+        {
+          "heading": "Biggest score risks",
+          "body": "The five-point gaps came first: MFA on kiosks, FIPS encryption on the file server, log correlation, media disposal and OT network separation. Fixing these moves the score the most."
+        },
+        {
+          "heading": "How we ranked the work",
+          "body": "We sorted fixes by score points, effort and cost. Quick policy wins went first so Brightline could focus on technical changes."
+        }
+      ]
+    },
+    {
+      "id": "sprs",
+      "name": "SPRS Score Worksheet",
+      "kind": "SPRS",
+      "version": "v0.4",
+      "updated": "2026-09-30",
+      "status": "Draft",
+      "summary": "Running score from current control status. Today's estimate is 56, up from -38.",
+      "sections": [
+        {
+          "heading": "Current score",
+          "body": "Kestrel's estimated SPRS score is 56 out of 110. 77 controls are met and 33 are open. The score is calculated from the DoD method."
+        },
+        {
+          "heading": "What moves it next",
+          "body": "Closing media disposal, log correlation and OT network separation adds 15 points. MFA on kiosks and FIPS mode on the file server add 6 more."
+        },
+        {
+          "heading": "Score rules",
+          "body": "Each unmet control subtracts its weight from 110. Two controls, 3.5.3 and 3.13.11, give partial credit. You must post a final score before the assessment."
+        }
+      ]
+    },
+    {
+      "id": "ssp",
+      "name": "System Security Plan (SSP)",
+      "kind": "SSP",
+      "version": "v0.3",
+      "updated": "2026-09-28",
+      "status": "Draft",
+      "summary": "The plan that describes how Kestrel meets each control. About half of the narratives are drafted.",
+      "sections": [
+        {
+          "heading": "System description",
+          "body": "Describes Kestrel's CUI boundary: Microsoft 365 GCC High, one file server and the CNC network. It lists the Air Force sustainment contract that brings CUI in."
+        },
+        {
+          "heading": "Drafted so far",
+          "body": "Access Control, Awareness and Training, and Identification and Authentication are drafted. Chris wrote them from Marcus's exports and Linda's records."
+        },
+        {
+          "heading": "Still to write",
+          "body": "Audit, Media Protection and System Communications wait on fixes in Phase 3. We write each narrative after the fix is in place."
+        }
+      ]
+    },
+    {
+      "id": "poam",
+      "name": "Plan of Action & Milestones (POA&M)",
+      "kind": "POA&M",
+      "version": "v0.2",
+      "updated": "2026-09-25",
+      "status": "Draft",
+      "summary": "Four low-risk items we plan to finish after the assessment. Each has an owner and date.",
+      "sections": [
+        {
+          "heading": "What can go on a POA&M",
+          "body": "Only one-point controls that the rules allow. Five-point controls and most others must be met before the assessment."
+        },
+        {
+          "heading": "Current items",
+          "body": "Log management procedure (3.3.9), vendor personnel checks (3.7.6), conference room device control (3.13.12) and network session timeouts (3.13.9). Each is due within 180 days of assessment."
+        },
+        {
+          "heading": "Watching the clock",
+          "body": "After the assessment, the 180-day clock starts. We track each item monthly with Dana."
+        }
+      ]
+    },
+    {
+      "id": "acp",
+      "name": "Access Control Policy",
+      "kind": "Policy",
+      "version": "v1.1",
+      "updated": "2026-09-15",
+      "status": "In review",
+      "summary": "Plain-language rules for who gets access to CUI and how.",
+      "sections": [
+        {
+          "heading": "Who gets access",
+          "body": "Access to CUI is given by job need. Dana approves each request and Marcus sets it up. Linda records it."
+        },
+        {
+          "heading": "Remote and mobile",
+          "body": "Remote work uses the company VPN and MFA. Only enrolled company devices can reach CUI."
+        },
+        {
+          "heading": "Reviews",
+          "body": "Marcus and Linda review all accounts every quarter. Leavers lose access the same day."
+        }
+      ]
+    },
+    {
+      "id": "irp",
+      "name": "Incident Response Plan",
+      "kind": "Policy",
+      "version": "v1.0",
+      "updated": "2026-09-17",
+      "status": "Final",
+      "summary": "Steps to follow when something goes wrong, including DoD reporting.",
+      "sections": [
+        {
+          "heading": "First hour",
+          "body": "Anyone who spots a problem calls Marcus or Dana. Marcus isolates the device and starts a ticket."
+        },
+        {
+          "heading": "Reporting",
+          "body": "If CUI may be affected, Kestrel reports to DoD within 72 hours. The plan has the form, the contacts and who sends it."
+        },
+        {
+          "heading": "Practice",
+          "body": "A tabletop exercise is set for November. It will test the plan with a mock phishing event."
+        }
+      ]
+    },
+    {
+      "id": "evidence",
+      "name": "Evidence Index",
+      "kind": "Evidence",
+      "version": "v0.3",
+      "updated": "2026-09-30",
+      "status": "Draft",
+      "summary": "A list of proof for each control: exports, logs, records and signed policies.",
+      "sections": [
+        {
+          "heading": "What we have",
+          "body": "Evidence is saved for 77 met controls. Most items are Intune and Entra exports, training records and logs."
+        },
+        {
+          "heading": "What is missing",
+          "body": "Open controls have no final evidence yet. We collect it after each fix, with a date and the person who captured it."
+        }
+      ]
+    },
+    {
+      "id": "remediation",
+      "name": "Remediation Checklist",
+      "kind": "Report",
+      "version": "v0.6",
+      "updated": "2026-09-30",
+      "status": "Draft",
+      "summary": "Step-by-step fixes for Brightline IT and Kestrel staff, ordered by score impact.",
+      "sections": [
+        {
+          "heading": "This phase",
+          "body": "Brightline is working on log correlation, FIPS mode on the file server and kiosk MFA. Ray's team is planning the OT network."
+        },
+        {
+          "heading": "Policy tasks",
+          "body": "Linda is writing the media disposal and CUI marking procedures. Dana approves each one before it goes live."
+        }
+      ]
+    }
+  ],
+  "nextSteps": [
+    {
+      "text": "Pick a shredding and drive-wipe vendor for CUI media",
+      "owner": "linda",
+      "due": "2026-10-07"
+    },
+    {
+      "text": "Approve the OT network design with Ray and Brightline",
+      "owner": "dana",
+      "due": "2026-10-06"
+    },
+    {
+      "text": "Turn on FIPS mode on the file server and test file access",
+      "owner": "marcus",
+      "due": "2026-10-09"
+    },
+    {
+      "text": "Set up one log view for Microsoft 365, the server and the firewall",
+      "owner": "marcus",
+      "due": "2026-10-09"
+    },
+    {
+      "text": "Send the November tabletop exercise invite to managers",
+      "owner": "chris",
+      "due": "2026-10-02"
+    }
+  ]
+}
