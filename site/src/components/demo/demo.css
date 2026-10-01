@@ -21,7 +21,8 @@
   grid-template-columns: 64px 264px minmax(0, 1fr) 300px;
   grid-template-rows: minmax(0, 1fr) auto;
   grid-template-areas: "rail side main right" "bottom bottom bottom bottom";
-  height: min(860px, calc(100vh - 120px));
+  /* fits under the page intro on a 900px-tall screen so the right-pane CTA is in view */
+  height: min(860px, max(620px, calc(100vh - 300px)));
   min-height: 620px;
   border: 1px solid var(--er-ink);
   border-radius: var(--er-radius-lg);
@@ -335,11 +336,15 @@
     border-top: 1px solid var(--er-ink); box-shadow: 0 -6px 16px -10px rgba(26, 22, 20, 0.3);
   }
   .dm-mbar__score b { font: 500 1.4rem var(--er-font-serif); }
-  .dm-mbar .dm-btn { padding: 10px 14px; }
+  .dm-mbar .dm-btn { padding: 10px 14px; min-height: 44px; display: inline-flex; align-items: center; }
   .dm-action__text { flex: 1 1 100%; }
   .dm-app .dm-action .dm-btn { width: 100%; }
   .dm-ctl, .dm-mini__row, .dm-list__row, .dm-whatif label, .dm-tab, .dm-app .dm-link, .dm-chip { min-height: 44px; }
   .dm-app .dm-link { display: inline-flex; align-items: center; }
   .dm-steps input { width: 20px; height: 20px; }
   .dm-tab { padding: 8px 8px !important; font-size: 0.8rem; }
+}
+@media (max-width: 360px) {
+  .dm-tabs { gap: 4px; padding: 8px 8px 0; }
+  .dm-tab { padding: 8px 6px !important; font-size: 0.75rem; }
 }
