@@ -201,7 +201,7 @@
       "family": "AC",
       "weight": 5,
       "poamEligible": false,
-      "plain": "Monitor and control phones, tablets, and other mobile devices that connect to your systems."
+      "plain": "Control the connection of mobile devices, such as phones and tablets."
     },
     {
       "id": "3.1.19",
@@ -233,7 +233,7 @@
       "family": "AC",
       "weight": 1,
       "poamEligible": false,
-      "plain": "Check what gets posted on public websites so sensitive defense data never appears there."
+      "plain": "Control sensitive defense data posted or processed on publicly accessible systems, which anyone can reach."
     },
     {
       "id": "3.2.1",
@@ -297,7 +297,7 @@
       "family": "AU",
       "weight": 5,
       "poamEligible": false,
-      "plain": "Bring log reviews together, so you can spot suspicious activity across your systems."
+      "plain": "Link audit record review, analysis, and reporting so they work together to investigate and respond to unlawful, unauthorized, suspicious, or unusual activity."
     },
     {
       "id": "3.3.6",
@@ -337,7 +337,7 @@
       "family": "CM",
       "weight": 5,
       "poamEligible": false,
-      "plain": "Keep a current inventory of hardware and software, and a written standard setup for each that you keep up to date."
+      "plain": "Create and maintain standard setups and inventories of your systems, including hardware, software, firmware, and documents, through each system's life cycle."
     },
     {
       "id": "3.4.2",
@@ -345,7 +345,7 @@
       "family": "CM",
       "weight": 5,
       "poamEligible": false,
-      "plain": "Set computers and software to secure settings, and make sure those settings stay in place."
+      "plain": "Set and enforce security settings for the technology products your systems use, such as computers, routers, printers, and software."
     },
     {
       "id": "3.4.3",
@@ -353,7 +353,7 @@
       "family": "CM",
       "weight": 1,
       "poamEligible": true,
-      "plain": "Track, review, approve, and record changes to your systems before they happen."
+      "plain": "Track, review, approve or reject, and log changes to your systems."
     },
     {
       "id": "3.4.4",
@@ -385,7 +385,7 @@
       "family": "CM",
       "weight": 5,
       "poamEligible": false,
-      "plain": "Turn off or block programs, ports, and services that you do not need."
+      "plain": "Restrict, turn off, or block the use of programs, functions, ports (network doors), protocols, and services you do not need."
     },
     {
       "id": "3.4.8",
@@ -435,7 +435,7 @@
       "family": "IA",
       "weight": 1,
       "poamEligible": true,
-      "plain": "Use sign-in methods that cannot be recorded and replayed by an attacker."
+      "plain": "Use sign-in methods that cannot be recorded and replayed, for network access to admin and regular user accounts."
     },
     {
       "id": "3.5.5",
@@ -467,7 +467,7 @@
       "family": "IA",
       "weight": 1,
       "poamEligible": true,
-      "plain": "Stop people from reusing recent passwords."
+      "plain": "Block people from reusing a password for a set number of password changes."
     },
     {
       "id": "3.5.9",
@@ -595,7 +595,7 @@
       "family": "MP",
       "weight": 1,
       "poamEligible": true,
-      "plain": "Label media that holds sensitive defense data with the rules for handling it."
+      "plain": "Mark media, such as drives and paper, with the needed sensitive defense data markings and limits on sharing."
     },
     {
       "id": "3.8.5",
@@ -683,7 +683,7 @@
       "family": "PE",
       "weight": 1,
       "poamEligible": false,
-      "plain": "Keep logs of who enters and leaves areas with your systems."
+      "plain": "Keep audit logs of physical access, such as a sign-in sheet or badge records."
     },
     {
       "id": "3.10.5",
@@ -699,7 +699,7 @@
       "family": "PE",
       "weight": 1,
       "poamEligible": true,
-      "plain": "Apply security safeguards at alternate work sites, such as home offices."
+      "plain": "Enforce safeguards for sensitive defense data at alternate work sites, such as home offices."
     },
     {
       "id": "3.11.1",
@@ -723,7 +723,7 @@
       "family": "RA",
       "weight": 1,
       "poamEligible": true,
-      "plain": "Fix weaknesses found in scans, following your risk assessments."
+      "plain": "Fix vulnerabilities, meaning security weaknesses, in line with your risk assessments."
     },
     {
       "id": "3.12.1",
@@ -739,7 +739,7 @@
       "family": "CA",
       "weight": 3,
       "poamEligible": false,
-      "plain": "Write a plan to fix each security gap, carry it out, and keep it updated as you make progress."
+      "plain": "Write and carry out plans of action designed to correct gaps and reduce or eliminate weaknesses in your systems."
     },
     {
       "id": "3.12.3",
@@ -763,7 +763,7 @@
       "family": "SC",
       "weight": 5,
       "poamEligible": false,
-      "plain": "Watch and protect the points where your systems connect to outside networks and inside zones."
+      "plain": "Monitor, control, and protect the information your systems send or receive at the external boundaries and key internal boundaries."
     },
     {
       "id": "3.13.2",
@@ -893,7 +893,7 @@
       "family": "SI",
       "weight": 5,
       "poamEligible": false,
-      "plain": "Find, report, and fix software flaws within set time limits."
+      "plain": "Find, report, and fix flaws in your systems in a timely manner."
     },
     {
       "id": "3.14.2",
