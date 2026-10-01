@@ -16,6 +16,11 @@ export function deduction(control, status) {
   return control.weight;
 }
 
+// Lowest possible score: every control not met (-203 with the DoD weights).
+export function minScore(controls) {
+  return controls.reduce((s, c) => s - c.weight, MAX_SCORE);
+}
+
 export function score(controls, statusOf) {
   let s = MAX_SCORE;
   for (const c of controls) s -= deduction(c, statusOf(c.id));

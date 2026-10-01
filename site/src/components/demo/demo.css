@@ -153,6 +153,7 @@
 .dm-tab:hover { background: var(--dm-hover) !important; }
 .dm-tab[aria-selected="true"] { background: var(--dm-sel) !important; color: var(--er-ink) !important; border-color: var(--er-ink) !important; }
 .dm-main__body { flex: 1; overflow-y: auto; min-height: 0; }
+.dm-app .dm-main__body:focus-visible { outline-offset: -2px; }
 .dm-pad { padding: 22px 24px 32px; max-width: 920px; }
 .dm-h { font: 500 1.65rem/1.15 var(--er-font-serif); letter-spacing: var(--er-tracking-tight); margin: 0 0 6px; }
 .dm-h3 { font: 600 1rem/1.3 var(--er-font-sans); margin: 22px 0 8px; }

@@ -6,7 +6,7 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
 import controlsData from '../../data/demo/controls.json';
 import client from '../../data/demo/client.json';
-import { readiness, deduction, poamAllowed, CONDITIONAL_MIN, MAX_SCORE } from '../../lib/sprs.js';
+import { readiness, deduction, poamAllowed, minScore, CONDITIONAL_MIN, MAX_SCORE } from '../../lib/sprs.js';
 import './demo.css';
 
 const { controls, families } = controlsData;
@@ -16,7 +16,8 @@ const familyName = Object.fromEntries(families.map((f) => [f.code, f.name]));
 // The demo's "today" is pinned so the story (dates, countdown) stays coherent.
 const TODAY = new Date('2026-10-01T12:00:00');
 const STORE_KEY = 'er-demo-whatif-v1';
-const WORST = -203;
+const WORST = minScore(controls); // -203 with the DoD weights
+const STATUSES = ['met', 'partial', 'not_met'];
 
 const ver = (v) => `v${String(v).replace(/^v/i, '')}`;
 const STATUS_LABEL = { met: 'Met', partial: 'Partly met', not_met: 'Not met' };
@@ -24,8 +25,18 @@ const STATUS_LABEL = { met: 'Met', partial: 'Partly met', not_met: 'Not met' };
 function track(event, props) {
   try { window.posthog?.capture(event, props); } catch { /* analytics is optional */ }
 }
+// Keep only overrides that still make sense: a known control, a known status,
+// and different from the client's real status (stale or hand-edited storage
+// would otherwise inflate the what-if count and skew the tallies).
 function loadOverrides() {
-  try { return JSON.parse(localStorage.getItem(STORE_KEY)) || {}; } catch { return {}; }
+  let raw;
+  try { raw = JSON.parse(localStorage.getItem(STORE_KEY)); } catch { return {}; }
+  if (!raw || typeof raw !== 'object' || Array.isArray(raw)) return {};
+  const clean = {};
+  for (const [id, st] of Object.entries(raw)) {
+    if (client.controls[id] && STATUSES.includes(st) && st !== client.controls[id].status) clean[id] = st;
+  }
+  return clean;
 }
 function saveOverrides(o) {
   try { localStorage.setItem(STORE_KEY, JSON.stringify(o)); } catch { /* private mode */ }
@@ -38,6 +49,8 @@ function daysUntil(iso) {
   return Math.round((new Date(iso + 'T12:00:00') - TODAY) / 86400000);
 }
 function signed(n) { return n > 0 ? `+${n}` : `${n}`; }
+// Tab keys can contain spaces ("Eagle Ridge"); ids and aria-labelledby cannot.
+const tabId = (k) => `dm-tab-${k.replace(/\s+/g, '-')}`;
 
 /* ---------- icons (stroke, 24px) ---------- */
 const ICONS = {
@@ -129,6 +142,8 @@ export default function DemoApp() {
     }
   }
   function setTabFor(v, t) { setTab((x) => ({ ...x, [v]: t })); }
+  // Open gaps across every family, with no leftover search narrowing the list.
+  function showGaps() { setFamily('ALL'); setQuery(''); go('controls', { tab: 'gaps' }); }
   function openDoc(id) { setDocSel(id); go('documents', { tab: 'preview' }); }
   // WAI-ARIA tabs: roving tabindex, arrows/Home/End move and select.
   function onTabKey(e, keys) {
@@ -195,13 +210,13 @@ export default function DemoApp() {
       <section className="dm-main" aria-label="Main content" ref={mainSecRef}>
         <div className="dm-tabs" role="tablist" aria-label="Sections">
           {TABS[view].map(([k, label]) => (
-            <button key={k} type="button" role="tab" id={`dm-tab-${k}`} data-tab={k} aria-selected={tab[view] === k}
+            <button key={k} type="button" role="tab" id={tabId(k)} data-tab={k} aria-selected={tab[view] === k}
               aria-controls="dm-panel" tabIndex={tab[view] === k ? 0 : -1} className="dm-tab"
               onClick={() => setTabFor(view, k)} onKeyDown={(e) => onTabKey(e, TABS[view].map(([x]) => x))}>{label}</button>
           ))}
         </div>
-        <div className="dm-main__body" ref={mainRef} id="dm-panel" role="tabpanel" aria-labelledby={`dm-tab-${tab[view]}`}>
-          {view === 'home' && <Home {...{ tab: tab.home, r, base, phaseSel, setPhaseSel, go, openInControls, openDoc, whatIfCount }} />}
+        <div className="dm-main__body" ref={mainRef} id="dm-panel" role="tabpanel" tabIndex={0} aria-labelledby={tabId(tab[view])}>
+          {view === 'home' && <Home {...{ tab: tab.home, r, base, phaseSel, setPhaseSel, go, showGaps, openInControls, openDoc, statusOf, whatIfCount }} />}
           {view === 'controls' && <Controls {...{ tab: tab.controls, family, query, setQuery, searchRef, openControl, setOpenControl, statusOf, setWhatIf, overrides }} />}
           {view === 'activity' && <Activity {...{ tab: tab.activity, personSel, openInControls }} />}
           {view === 'documents' && <Documents {...{ tab: tab.documents, docSel, r }} />}
@@ -253,7 +268,7 @@ export default function DemoApp() {
             {r.blocking.slice(0, 4).map((id) => (
               <li key={id}>
                 <button type="button" className="dm-mini__row" onClick={() => openInControls(id)}>
-                  <span className="dm-dot dm-dot--not_met" aria-hidden="true" />
+                  <span className={`dm-dot dm-dot--${statusOf(id)}`} aria-hidden="true" />
                   <span><b>{id}</b> {byId[id].title}</span>
                   <span className="dm-mini__w">−{deduction(byId[id], statusOf(id))}</span>
                 </button>
@@ -262,7 +277,7 @@ export default function DemoApp() {
             {r.blocking.length === 0 && <li className="dm-small">Nothing blocking. Nice work.</li>}
           </ul>
           {r.blocking.length > 4 && (
-            <button type="button" className="dm-link" onClick={() => go('controls', { tab: 'gaps' })}>See all {r.blocking.length}</button>
+            <button type="button" className="dm-link" onClick={showGaps}>See all open gaps</button>
           )}
         </div>
 
@@ -407,7 +422,7 @@ function phaseStatusText(p) {
 }
 
 /* ---------- Home ---------- */
-function Home({ tab, r, base, phaseSel, setPhaseSel, go, openInControls, openDoc, whatIfCount }) {
+function Home({ tab, r, base, phaseSel, setPhaseSel, go, showGaps, openInControls, openDoc, statusOf, whatIfCount }) {
   const active = client.phases.find((p) => p.status === 'active');
   const days = daysUntil(client.company.assessmentDate);
   if (tab === 'roadmap') {
@@ -445,8 +460,8 @@ function Home({ tab, r, base, phaseSel, setPhaseSel, go, openInControls, openDoc
             <div className="dm-eyebrow">{o === 'Kestrel' ? 'Your team' : o}</div>
             <div className="dm-cards dm-cards--auto">
               {client.people.filter((p) => p.org === o).map((p) => {
-                const owned = Object.values(client.controls).filter((c) => c.owner === p.id);
-                const open = owned.filter((c) => c.status !== 'met').length;
+                const owned = Object.keys(client.controls).filter((id) => client.controls[id].owner === p.id);
+                const open = owned.filter((id) => statusOf(id) !== 'met').length;
                 return (
                   <div key={p.id} className="dm-card dm-person">
                     <Avatar id={p.id} size={44} />
@@ -475,9 +490,9 @@ function Home({ tab, r, base, phaseSel, setPhaseSel, go, openInControls, openDoc
         <button type="button" className="dm-card dm-kpi" onClick={() => openDoc(client.documents.find((d) => d.kind === 'SPRS')?.id ?? client.documents[0].id)}>
           <div className="dm-eyebrow">SPRS score</div>
           <div className="dm-kpi__num">{signed(r.score)}</div>
-          <div className="dm-small">{whatIfCount > 0 ? 'With what-ifs: ' : ''}Up {r.score - client.baseline.sprs} points since {fmtDate(client.baseline.date, { month: 'short', day: 'numeric' })}</div>
+          <div className="dm-small">{whatIfCount > 0 ? 'With what-ifs: ' : ''}{r.score >= client.baseline.sprs ? 'Up' : 'Down'} {Math.abs(r.score - client.baseline.sprs)} points since {fmtDate(client.baseline.date, { month: 'short', day: 'numeric' })}</div>
         </button>
-        <button type="button" className="dm-card dm-kpi" onClick={() => go('controls', { tab: 'gaps' })}>
+        <button type="button" className="dm-card dm-kpi" onClick={showGaps}>
           <div className="dm-eyebrow">Controls met</div>
           <div className="dm-kpi__num">{r.counts.met}<small>/110</small></div>
           <div className="dm-small">{r.counts.partial + r.counts.not_met} still open</div>
@@ -527,13 +542,13 @@ function Home({ tab, r, base, phaseSel, setPhaseSel, go, openInControls, openDoc
 function Controls({ tab, family, query, setQuery, searchRef, openControl, setOpenControl, statusOf, setWhatIf, overrides }) {
   const q = query.trim().toLowerCase();
   const list = controls.filter((c) => {
-    const hit = !q || `${c.id} ${c.title} ${c.plain} ${familyName[c.family]}`.toLowerCase().includes(q);
-    if (c.id === openControl && hit && (family === 'ALL' || c.family === family)) return true;
-    const st = statusOf(c.id);
     if (family !== 'ALL' && c.family !== family) return false;
+    if (q && !`${c.id} ${c.title} ${c.plain} ${familyName[c.family]}`.toLowerCase().includes(q)) return false;
+    // The open control stays put while its status is being changed.
+    if (c.id === openControl) return true;
+    const st = statusOf(c.id);
     if (tab === 'gaps' && st === 'met') return false;
     if (tab === 'poam' && (st === 'met' || !poamAllowed(c, st))) return false;
-    if (q && !(`${c.id} ${c.title} ${c.plain} ${familyName[c.family]}`.toLowerCase().includes(q))) return false;
     return true;
   });
   return (
@@ -542,7 +557,7 @@ function Controls({ tab, family, query, setQuery, searchRef, openControl, setOpe
       <p className="dm-lede">
         {tab === 'poam'
           ? 'These open items are small enough to fix after the assessment, on a 180-day plan.'
-          : 'NIST SP 800-171 has 110 controls. Each one is worth 1, 3, or 5 points. Open one and change its status to see the score move.'}
+          : 'NIST SP 800-171 has 110 controls. Most are worth 1, 3, or 5 points. Open one and change its status to see the score move.'}
       </p>
       <div className="dm-search">
         <Icon name="search" size={18} />
@@ -575,7 +590,7 @@ function Controls({ tab, family, query, setQuery, searchRef, openControl, setOpe
                   </dl>
                   <fieldset className="dm-whatif">
                     <legend>What if this control were…</legend>
-                    {['met', 'partial', 'not_met'].filter((s) => s !== 'partial' || c.partialWeight != null || info.status === 'partial').map((s) => (
+                    {STATUSES.filter((s) => s !== 'partial' || c.partialWeight != null || info.status === 'partial').map((s) => (
                       <label key={s} className={st === s ? 'is-on' : ''}>
                         <input type="radio" name={`wi-${c.id}`} checked={st === s} onChange={() => setWhatIf(c.id, s)} />
                         {STATUS_LABEL[s]}{s !== 'met' && <small> −{deduction(c, s)}</small>}{s === 'partial' && c.partialWeight == null && <small> (no partial credit)</small>}
@@ -670,7 +685,7 @@ function Settings({ whatIfCount, resetWhatIf, r, base }) {
         <button type="button" className="dm-btn dm-btn--ghost" onClick={resetWhatIf} disabled={whatIfCount === 0}>Reset all changes</button>
       </div>
       <h3 className="dm-h3">How the score works</h3>
-      <p>The Department of Defense scores each company from {WORST} to {MAX_SCORE}. You start at {MAX_SCORE} and lose 1, 3, or 5 points for each control you have not met. The weights here come straight from the DoD Assessment Methodology.</p>
+      <p>The Department of Defense scores each company from {WORST} to {MAX_SCORE}. You start at {MAX_SCORE} and lose up to 5 points for each control you have not met. The weights here come straight from the DoD Assessment Methodology.</p>
       <p>To pass with a short fix-it plan, you need {CONDITIONAL_MIN} or more, and every open item must be one the rules let you fix later. Big items, like multifactor sign-in, must be done before the assessment.</p>
       <h3 className="dm-h3">What is real and what is not</h3>
       <p>The 110 controls, their point values, and the pass rules are real. {client.company.name}, its people, and its IT provider are invented.</p>

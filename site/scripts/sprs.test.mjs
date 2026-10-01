@@ -4,7 +4,7 @@ import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { join, dirname } from 'node:path';
-import { score, readiness, deduction, MAX_SCORE } from '../src/lib/sprs.js';
+import { score, minScore, readiness, deduction, MAX_SCORE } from '../src/lib/sprs.js';
 
 const here = dirname(fileURLToPath(import.meta.url));
 const data = (f) => JSON.parse(readFileSync(join(here, '..', 'src', 'data', 'demo', f), 'utf8'));
@@ -19,6 +19,7 @@ test('all met scores 110 and is final-ready', () => {
 
 test('nothing met scores the DoD worst case, -203', () => {
   assert.equal(score(controls, () => 'not_met'), -203);
+  assert.equal(minScore(controls), -203);
 });
 
 test('partial credit only on 3.5.3 and 3.13.11', () => {
@@ -49,6 +50,12 @@ test('fictional client data is complete and scores as the page claims', () => {
   for (const c of controls) assert.ok(client.controls[c.id], `missing ${c.id}`);
   const r = readiness(controls, (id) => client.controls[id].status);
   assert.ok(r.score > client.baseline.sprs, 'current score should beat the baseline');
+  // The SPRS document's prose quotes the live numbers; keep them in step.
+  const sprsDoc = client.documents.find((d) => d.kind === 'SPRS');
+  const prose = [sprsDoc.summary, ...sprsDoc.sections.map((s) => s.body)].join(' ');
+  assert.match(prose, new RegExp(`${r.score} out of ${MAX_SCORE}\\b`));
+  assert.match(prose, new RegExp(`${r.counts.met} controls are met and ${r.counts.partial + r.counts.not_met} are open\\b`));
+  assert.match(prose, new RegExp(`up from ${client.baseline.sprs}\\b`));
   const people = new Set(client.people.map((p) => p.id));
   for (const [id, c] of Object.entries(client.controls)) {
     assert.ok(people.has(c.owner), `${id} owner ${c.owner} unknown`);
