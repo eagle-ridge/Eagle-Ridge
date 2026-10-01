@@ -97,7 +97,7 @@
       "family": "AC",
       "weight": 3,
       "poamEligible": false,
-      "plain": "Give people only the minimum access they need, including for powerful administrator accounts."
+      "plain": "Give each person only the minimum access their job needs, including for administrator accounts and security tools."
     },
     {
       "id": "3.1.6",
@@ -129,7 +129,7 @@
       "family": "AC",
       "weight": 1,
       "poamEligible": true,
-      "plain": "Show users a notice about privacy and security rules before they sign in to your systems."
+      "plain": "Show a sign-in notice that states the privacy and security rules that apply to your sensitive defense data."
     },
     {
       "id": "3.1.10",
@@ -177,7 +177,7 @@
       "family": "AC",
       "weight": 1,
       "poamEligible": true,
-      "plain": "Allow remote administrator commands only for approved reasons, and write down why they are allowed."
+      "plain": "Approve in advance any remote administrator commands and any remote access to security settings and logs."
     },
     {
       "id": "3.1.16",
@@ -217,7 +217,7 @@
       "family": "AC",
       "weight": 1,
       "poamEligible": false,
-      "plain": "Check and limit connections between your systems and outside systems, such as partners and cloud services."
+      "plain": "Check and limit any connection to, or use of, outside systems such as personal devices and cloud services."
     },
     {
       "id": "3.1.21",
@@ -225,7 +225,7 @@
       "family": "AC",
       "weight": 1,
       "poamEligible": true,
-      "plain": "Limit or ban the use of personal USB drives and similar storage on company systems."
+      "plain": "Limit when staff may plug company USB drives and similar portable storage into outside computers."
     },
     {
       "id": "3.1.22",
@@ -281,7 +281,7 @@
       "family": "AU",
       "weight": 1,
       "poamEligible": true,
-      "plain": "Review the activity you log, and update what you log when needs change."
+      "plain": "Review, on a set schedule, which events your systems log, and update that list when needs change."
     },
     {
       "id": "3.3.4",
@@ -337,7 +337,7 @@
       "family": "CM",
       "weight": 5,
       "poamEligible": false,
-      "plain": "Keep a current list of your computers and software, and record how each one is set up."
+      "plain": "Keep a current inventory of hardware and software, and a written standard setup for each that you keep up to date."
     },
     {
       "id": "3.4.2",
@@ -369,7 +369,7 @@
       "family": "CM",
       "weight": 5,
       "poamEligible": false,
-      "plain": "Control who can change system settings, and enforce those limits."
+      "plain": "Write down and approve who may change your systems, physically or through software, and enforce those limits."
     },
     {
       "id": "3.4.6",
@@ -393,7 +393,7 @@
       "family": "CM",
       "weight": 5,
       "poamEligible": false,
-      "plain": "Use a list of approved programs, and block everything else from running."
+      "plain": "Use a block list of banned software, or an allow list of approved programs that blocks everything else."
     },
     {
       "id": "3.4.9",
@@ -427,7 +427,7 @@
       "poamEligible": false,
       "partialWeight": 3,
       "poamIfPartial": false,
-      "plain": "Require more than a password, such as a code from a phone, for everyone who signs in."
+      "plain": "Require a second sign-in step, like a phone code, for all network sign-ins and for every administrator sign-in, including local ones."
     },
     {
       "id": "3.5.4",
@@ -459,7 +459,7 @@
       "family": "IA",
       "weight": 1,
       "poamEligible": true,
-      "plain": "Require passwords of a minimum length and mix of characters, and change a few characters when updating."
+      "plain": "Require a minimum password length and mix of characters, and require new passwords to differ from old ones by several characters."
     },
     {
       "id": "3.5.8",
@@ -499,7 +499,7 @@
       "family": "IR",
       "weight": 5,
       "poamEligible": false,
-      "plain": "Build a plan to prepare for, detect, respond to, and recover from security incidents."
+      "plain": "Set up a working way to handle security incidents: prepare, detect, analyze, contain, recover, and help affected users."
     },
     {
       "id": "3.6.2",
@@ -555,7 +555,7 @@
       "family": "MA",
       "weight": 5,
       "poamEligible": false,
-      "plain": "Require extra sign-in checks for remote maintenance, and end the session when the work is done."
+      "plain": "Require a second sign-in step, like a phone code, for remote maintenance, and end the connection when the work is done."
     },
     {
       "id": "3.7.6",
@@ -611,7 +611,7 @@
       "family": "MP",
       "weight": 1,
       "poamEligible": true,
-      "plain": "Encrypt sensitive defense data on portable drives and media during transport, unless other protection is in place."
+      "plain": "Encrypt sensitive defense data on drives and media you transport, unless physical safeguards like a locked case protect them."
     },
     {
       "id": "3.8.7",
@@ -667,7 +667,7 @@
       "family": "PE",
       "weight": 5,
       "poamEligible": false,
-      "plain": "Protect and monitor the physical places where your systems are kept."
+      "plain": "Protect and monitor your building and the power, cooling, and wiring that keep your systems running."
     },
     {
       "id": "3.10.3",
@@ -739,7 +739,7 @@
       "family": "CA",
       "weight": 3,
       "poamEligible": false,
-      "plain": "Write plans to fix security gaps, and keep them updated as you make progress."
+      "plain": "Write a plan to fix each security gap, carry it out, and keep it updated as you make progress."
     },
     {
       "id": "3.12.3",
@@ -755,7 +755,7 @@
       "family": "CA",
       "weight": 0,
       "poamEligible": false,
-      "plain": "Write and maintain a security plan that describes your systems, boundaries, and how controls are met."
+      "plain": "Write and keep updated a security plan describing your systems, their boundaries, connections to other systems, and how each control is met."
     },
     {
       "id": "3.13.1",
@@ -771,7 +771,7 @@
       "family": "SC",
       "weight": 5,
       "poamEligible": false,
-      "plain": "Design your systems and teams so good security practices are built in."
+      "plain": "Build security into how you design your systems and write software, rather than adding it afterward."
     },
     {
       "id": "3.13.3",
@@ -819,7 +819,7 @@
       "family": "SC",
       "weight": 3,
       "poamEligible": false,
-      "plain": "Encrypt sensitive defense data while it travels over networks, unless other protection is in place."
+      "plain": "Encrypt sensitive defense data while it travels over networks, unless physical safeguards protect the connection."
     },
     {
       "id": "3.13.9",
@@ -845,7 +845,7 @@
       "poamEligible": false,
       "partialWeight": 3,
       "poamIfPartial": true,
-      "plain": "Use encryption approved under federal standards, called FIPS-validated, whenever you encrypt sensitive defense data."
+      "plain": "Whenever you encrypt sensitive defense data, use encryption modules the government has tested and certified, called FIPS-validated."
     },
     {
       "id": "3.13.12",
@@ -893,7 +893,7 @@
       "family": "SI",
       "weight": 5,
       "poamEligible": false,
-      "plain": "Find and fix software flaws quickly, and track the time it takes."
+      "plain": "Find, report, and fix software flaws within set time limits."
     },
     {
       "id": "3.14.2",
@@ -933,7 +933,7 @@
       "family": "SI",
       "weight": 5,
       "poamEligible": false,
-      "plain": "Watch your network traffic, coming in and going out, for attacks and signs of trouble."
+      "plain": "Watch your systems and network traffic, coming in and going out, for attacks and signs of trouble."
     },
     {
       "id": "3.14.7",
