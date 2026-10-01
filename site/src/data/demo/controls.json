@@ -853,7 +853,7 @@
       "family": "SC",
       "weight": 1,
       "poamEligible": true,
-      "plain": "Block remote turning on of cameras and microphones, and tell users when they are in use."
+      "plain": "Block remote turning on of cameras, microphones, networked whiteboards, and similar devices, and show people nearby when they are on."
     },
     {
       "id": "3.13.13",
