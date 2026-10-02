@@ -149,6 +149,9 @@ npm run build:seed --prefix site   # regenerate seed/seed.json + seed/import/ fr
 # Test contact form: submit manually in browser (Web3Forms blocks server-side requests)
 ```
 
+- **Killing a local server from the Bash tool:** use a bracket pattern (`pkill -f "[w]rangler dev"`, `pkill -f "[h]ttp.server"`). A plain pattern matches the tool's own shell and kills it (exit 144). This happened twice (PAPERCUTS 2026-09-03, 2026-10-02).
+- **Static server over `site/dist`:** restart it after every `astro build`. The build replaces `dist/`, and a running server keeps serving the old directory.
+
 ## Plans (`plans/`)
 
 - Filenames: `<hex>-<slug>.md`, hex ID is 3 lowercase digits (`004`, `005` … `009`, `00a`, `00b` … `0ff`).
