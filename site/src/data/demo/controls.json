@@ -439,7 +439,7 @@
     },
     {
       "id": "3.5.5",
-      "title": "Identifier Management",
+      "title": "Identifier Reuse",
       "family": "IA",
       "weight": 1,
       "poamEligible": true,
@@ -479,7 +479,7 @@
     },
     {
       "id": "3.5.10",
-      "title": "Cryptographic Key-Based Auth",
+      "title": "Cryptographically-Protected Passwords",
       "family": "IA",
       "weight": 5,
       "poamEligible": false,
@@ -929,7 +929,7 @@
     },
     {
       "id": "3.14.6",
-      "title": "Monitor Inbound Communications",
+      "title": "Monitor Communications for Attacks",
       "family": "SI",
       "weight": 5,
       "poamEligible": false,
