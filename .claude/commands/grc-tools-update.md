@@ -61,7 +61,7 @@ published`); the JSON `id` is the url slug.
      data; a bad enum or missing field **fails the build**. Fix and rebuild.
    - Regenerate mirrors: from `site/`, `uv run --with markdownify==1.2.2 --with
      beautifulsoup4==4.14.3 python scripts/generate-md-mirrors.py`.
-   - Refresh the parity baseline: `cp site/dist/grc-tools.md
+   - Refresh the parity baseline: `cp site/dist/client/grc-tools.md
      parity-baseline/grc-tools.md` (the new content is intended, so the baseline
      moves with it).
    - If the indexed count changed, update the count wording is automatic (derived),
