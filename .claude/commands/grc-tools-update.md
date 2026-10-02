@@ -1,5 +1,5 @@
 ---
-description: Weekly GRC tools index refresh — discover, enrich, re-check, regenerate JSON, open a draft PR. Master = the Notion "GRC Vendors & Competitors" DB; you stay the approval gate.
+description: Weekly GRC tools index refresh — discover, enrich, re-check, regenerate JSON, open a PR that auto-merges on green CI. Master = the Notion "GRC Vendors & Competitors" DB; the human gate is the Published checkbox.
 ---
 
 # /grc-tools-update — keep the GRC tools index evergreen
@@ -9,10 +9,12 @@ The **master source of truth is the Notion database "GRC Vendors & Competitors"*
 (id `0976fb7428e44fed847c5efc77b2716b`). The committed file
 `site/src/data/grc-tools.json` is a generated snapshot of the **Published** rows.
 
-Work on branch `claude/grc-tools-index-*` (create one if needed). Never publish or
-merge — open a **draft PR** and stop. The human flips `Published` in Notion and
-merges. This command is idempotent: running it twice should produce no spurious
-changes.
+Work on branch `claude/grc-tools-update-<YYYYMMDD>` — the prefix matters: the
+`data-pr-guard` CI job only arms on `claude/grc-tools-update*` branches, and
+auto-merge (step 7) is only allowed when that guard runs and passes. The human
+gate is the **Published checkbox in Notion** — never check it yourself; rows you
+add stay unchecked until a human reviews them. This command is idempotent:
+running it twice should produce no spurious changes.
 
 ## Schema (Notion master)
 
@@ -65,12 +67,38 @@ published`); the JSON `id` is the url slug.
    - If the indexed count changed, update the count wording is automatic (derived),
      but update `site/public/llms.txt` if the description should change.
 
-6. **Open a draft PR** to `main` summarizing: tools added, enriched, re-checked,
-   and any flagged as dead/acquired. Then stop. Do not merge.
+6. **Self-review, then open the PR (ready, not draft).** Before opening it, run
+   this review checklist against `git diff origin/main`:
+   - **Scope:** the diff touches ONLY `site/src/data/grc-tools.json`,
+     `parity-baseline/grc-tools.md`, and (optionally) `site/public/llms.txt`.
+   - **Shape:** every entry has a unique kebab-case `id`, an https `website`,
+     valid enums, a one-sentence blurb; no duplicate normalized name+domain.
+   - **Delta sanity:** the entry count shrank by at most 3 (bigger shrinks mean
+     a Notion accident, not editorial intent); every removed entry corresponds
+     to a row deliberately unpublished in Notion; every added entry's Published
+     box was ticked by a human, not you.
+   - Write the checklist outcome + the week's summary (added / enriched /
+     re-checked / flagged dead) into the PR body.
+   If every item passes, open the PR **ready for review**. If anything fails,
+   open it as a **draft** instead, say what failed in the body, and stop.
+
+7. **Auto-merge on green.** Subscribe to the PR's activity
+   (`subscribe_pr_activity`) and wait for CI. All checks green — including
+   `data-pr-guard`, which independently re-verifies scope and shrink — →
+   **squash-merge** the PR (deploy to eagleridge.io follows automatically on
+   merge). A check fails → fix mechanically if it's yours to fix (e.g. stale
+   parity baseline), push, and wait again; if it isn't mechanical, convert the
+   PR to draft, comment what's wrong, and stop. Never merge a PR whose
+   `data-pr-guard` job did not run.
 
 ## Guardrails
 
 - Quality over quantity. A vague or unverifiable entry is worse than none.
 - Tools/platforms only. Firms, assessors, MSSPs, and authorities stay on `/market-map`.
 - Keep enums exact; the build is the validation gate.
-- Never auto-publish or auto-merge. The human is the approval gate.
+- **The human gate is the Notion `Published` checkbox — never tick it yourself.**
+  Auto-merge is allowed only under step 7's conditions (data-only diff, bounded
+  shrink, all CI green including `data-pr-guard`). Anything outside those
+  conditions goes to a draft PR for a human.
+- Rollback story: a bad merge is one `git revert` PR away, and the site data is
+  regenerated from Notion on the next run anyway.
