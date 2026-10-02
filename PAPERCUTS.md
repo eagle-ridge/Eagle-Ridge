@@ -39,3 +39,8 @@
 - 2026-09-17: running gh/git one-liners from a worktree session → the worktree guard rejects any command with `$(...)`, loops, or a `for id in …` that mentions git/gh; had to write each to a script under $CLAUDE_JOB_DIR/tmp and run that (4 rejections in one session)
 - 2026-09-17: waiting on the #147 deploy → push run sat queued on latchkey-small 20 min with no runner while `latchkey run` answered instantly; cancel + fresh dispatch attached in <1 min (key rotation is not the fix)
 - 2026-09-17: skl query for a past draft → `-n` is not a flag; use `skl search "<question>"` then `skl view <id>#<from>-<to>`
+- 2026-10-02: `pkill -f "http.server"` from the Bash tool → killed its own shell again (exit 144), a repeat of the 2026-09-03 `wrangler dev` entry; use the bracket pattern (`pkill -f "[h]ttp.server"`). Now a CLAUDE.md rule.
+- 2026-10-02: serving `site/dist/client` with `python3 -m http.server`, then running `astro build` → the server keeps the deleted directory and serves the old page; screenshots looked unchanged. Restart the server after every build.
+- 2026-10-02: merging #154 → no job had started on `latchkey-small` since 09-17 (deploy #46 sat queued 24h, then cancelled); nothing failed, everything just queued. Third Latchkey entry → sanded: #156 moved every job to `ubuntu-latest` (closes #155), and CLAUDE.md says to check `runs-on` first.
+- 2026-10-02: deleting a merged branch from a cloud session → the git proxy hangs up (`the remote end hung up unexpectedly`); use GitHub's "Delete branch" button.
+- 2026-10-02: a Sonnet subagent writing its report into a scratchpad subfolder → the Write tool refused; it returned the report inline instead. Ask subagents to reply inline.
