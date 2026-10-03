@@ -40,8 +40,12 @@ published`); the JSON `id` is the url slug.
    Notion row with Vendor + Website + Source and **Published unchecked**. Do not
    invent tools; only add ones you can verify exist.
 
-2. **Enrich.** For any row that is new or missing fields (Blurb, Type, Market,
-   Price tag, Frameworks), do a quick research pass and fill them. Blurb = one
+2. **Enrich.** Scan **every** row — published or not — and for any row that is
+   new or has a blank Blurb, Type, Market, Price tag, or Frameworks, do a quick
+   research pass and fill them. Unpublished rows matter most here: they are the
+   ones waiting on a human review, and that review needs the fields filled.
+   Write values in the exact formats the schema shows (plain strings, checkbox
+   `__YES__`/`__NO__`, dates under `date:Last reviewed:start`). Blurb = one
    neutral sentence that says what it is and who it's for, ideally noting where it
    fits the readiness-vs-assessment journey. Keep enum values exactly as listed
    above (the build's Zod schema rejects anything else). Set Last reviewed = today.
@@ -52,7 +56,10 @@ published`); the JSON `id` is the url slug.
    Published unchecked (or uncheck it).
 
 4. **Regenerate the snapshot.** Read every **Published** row via the Notion MCP and
-   rewrite `site/src/data/grc-tools.json` (array sorted however; the page re-sorts).
+   rebuild `site/src/data/grc-tools.json` **from scratch** from those rows — do not
+   patch the existing file, or Published rows it never had get silently missed
+   (array sorted however; the page re-sorts). Afterwards, confirm the entry count
+   equals the number of Published rows (after dedupe).
    Dedupe by normalized name + domain. Ensure each object has a unique kebab-case
    `id` slug and valid enum values.
 
