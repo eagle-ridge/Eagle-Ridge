@@ -108,8 +108,8 @@ never built.
 - **Tracking event:** `discovery_page_viewed` (inline PostHog capture).
 
 ### Demo Workspace (`/demo`)
-`site/src/pages/demo.astro` — unlisted (`noindex`, not in `sitemap-pages.json`, so no `.md` mirror)
-interactive demo of the client workspace, filled with a **fictional** client (Kestrel Precision
+`site/src/pages/demo.astro` — public (Resources nav, `sitemap-pages.json`, `llms.txt`, `.md` mirror +
+`parity-baseline/demo.md`) interactive demo of the client workspace, filled with a **fictional** client (Kestrel Precision
 Machining) mid-way through CMMC L2. React island `src/components/demo/DemoApp.jsx`; scoring in
 `src/lib/sprs.js` (tested by `scripts/sprs.test.mjs`). `src/data/demo/controls.json` is generated
 from the methodology repo's `data/nist-800-171-controls.yaml` — never hand-edit weights
