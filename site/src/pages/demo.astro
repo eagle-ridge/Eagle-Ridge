@@ -1,10 +1,9 @@
 ---
 // Static page: prerendered at build time.
 export const prerender = true;
-// Unlisted interactive demo: a fictional client mid-way through a CMMC Level 2
-// engagement, in the Eagle Ridge workspace layout. noindex and kept out of
-// sitemap-pages.json (so no .md mirror, no sitemap row) — same convention as
-// /discovery. Share by direct link. Data: src/data/demo/*.json; scoring:
+// Public interactive demo: a fictional client mid-way through a CMMC Level 2
+// engagement, in the Eagle Ridge workspace layout. Linked from the Resources
+// nav and listed in sitemap-pages.json (sitemap row + .md mirror). Data: src/data/demo/*.json; scoring:
 // src/lib/sprs.js; app: src/components/demo/DemoApp.jsx (React island).
 import BaseLayout from '../layouts/BaseLayout.astro';
 import DemoApp from '../components/demo/DemoApp.jsx';
@@ -14,7 +13,6 @@ import DemoApp from '../components/demo/DemoApp.jsx';
   title="Try the workspace | Eagle Ridge Advisory"
   description="Click through a sample CMMC Level 2 engagement: the roadmap, all 110 controls, a live SPRS score, and the documents you get."
   path="/demo"
-  noindex
 >
   <div class="dm-wrap">
     <div class="dm-intro">
