@@ -133,6 +133,15 @@ Copy guidance: lead with plain language for the CEO (avoid jargon like "GRC", "r
 in partner/industry contexts. PE/VC and due-diligence framing was removed June 2026 — do not
 reintroduce it without direction.
 
+### Publishing an unlisted page
+To move a page from unlisted to public, change all five in one PR, or CI fails:
+1. Remove the `noindex` prop on `BaseLayout` in the page.
+2. Add the page to `site/src/data/sitemap-pages.json` (sitemap row + `.md` mirror).
+3. Add a `## Pages` entry to `site/public/llms.txt` (CI fails on an indexable page that is not listed).
+4. Build, then copy `site/dist/client/<page>.md` to `parity-baseline/<page>.md`. Check that the page has no build-date text first.
+5. Add the nav link in `site/src/components/Header.astro` (one array feeds desktop and mobile).
+To find every point, grep a public sibling page (for example `path-to-88`).
+
 ## Dev Workflow
 
 ```bash
