@@ -41,4 +41,4 @@
 - #158: a sync script and drift check between the demo's controls and the register.
 - #159: commit the plain-language eval (rubric and item builder) so future edits get re-graded.
 - #141: watch the next few merges on GitHub-hosted runners, then close it.
-- Decide when to promote `/demo` into the nav or onto the homepage. Check PostHog `demo_*` events first.
+- ~~Decide when to promote `/demo` into the nav or onto the homepage.~~ Done 2026-10-23: `/demo` is public and in the Resources nav (#164).

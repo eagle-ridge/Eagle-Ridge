@@ -188,6 +188,51 @@ jobs:
 
           echo "All mirrors match the parity baseline"
 
+  # Safety gate for the weekly automated GRC-tools PRs (auto-merged by the
+  # playbook in .claude/commands/grc-tools-update.md). Only arms on the
+  # playbook's branch prefix; the playbook must never merge unless this job
+  # ran and passed. Human PRs on other branches are unaffected.
+  data-pr-guard:
+    name: GRC data PR guard
+    if: startsWith(github.head_ref, 'claude/grc-tools-update')
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          fetch-depth: 0
+
+      - name: Diff must touch only generated data files
+        env:
+          BASE_SHA: ${{ github.event.pull_request.base.sha }}
+          HEAD_SHA: ${{ github.event.pull_request.head.sha }}
+        run: |
+          allowed='^(site/src/data/grc-tools\.json|parity-baseline/grc-tools\.md|site/public/llms\.txt)$'
+          bad=$(git diff --name-only "$BASE_SHA" "$HEAD_SHA" | grep -vE "$allowed" || true)
+          if [ -n "$bad" ]; then
+            echo "::error::auto-merge branch touches files outside the generated-data allowlist:"
+            echo "$bad"
+            exit 1
+          fi
+          echo "Diff is confined to generated data files"
+
+      - name: Index must not shrink sharply
+        env:
+          BASE_SHA: ${{ github.event.pull_request.base.sha }}
+          HEAD_SHA: ${{ github.event.pull_request.head.sha }}
+        run: |
+          base_count=$(git show "$BASE_SHA:site/src/data/grc-tools.json" | jq 'length')
+          head_count=$(git show "$HEAD_SHA:site/src/data/grc-tools.json" | jq 'length')
+          echo "entries: base=$base_count head=$head_count"
+          if [ "$head_count" -lt $((base_count - 3)) ]; then
+            echo "::error::index shrank from $base_count to $head_count entries (max allowed shrink: 3) — looks like a Notion accident, needs a human"
+            exit 1
+          fi
+          if [ "$head_count" -lt 20 ]; then
+            echo "::error::index has only $head_count entries — refusing to auto-merge"
+            exit 1
+          fi
+          echo "Entry-count delta is within bounds"
+
   drift-check:
     name: Check llms.txt freshness
     runs-on: ubuntu-latest

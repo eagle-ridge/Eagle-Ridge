@@ -36,7 +36,7 @@ Software helps you track and document controls. It does not, by itself, get you 
 4. [Scrut Automation↗](https://scrut.io/)
    Compliance automation
 
-   Aggressively priced global compliance automation across 70+ frameworks including SOC 2, ISO 27001, HIPAA, and GDPR; agentic AI ‘Scrut Teammates’ for evidence collection, policy drafting, and vendor risk; CMMC is no longer listed as a supported framework.
+   Aggressively priced global compliance automation across 70+ frameworks including SOC 2, ISO 27001, HIPAA, and GDPR; agentic AI 'Scrut Teammates' for evidence collection, policy drafting, and vendor risk; CMMC is no longer listed as a supported framework.
 
    Mid-market
    SOC 2 ISO 27001 HIPAA GDPR

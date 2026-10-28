@@ -108,8 +108,8 @@ never built.
 - **Tracking event:** `discovery_page_viewed` (inline PostHog capture).
 
 ### Demo Workspace (`/demo`)
-`site/src/pages/demo.astro` — unlisted (`noindex`, not in `sitemap-pages.json`, so no `.md` mirror)
-interactive demo of the client workspace, filled with a **fictional** client (Kestrel Precision
+`site/src/pages/demo.astro` — public (Resources nav, `sitemap-pages.json`, `llms.txt`, `.md` mirror +
+`parity-baseline/demo.md`) interactive demo of the client workspace, filled with a **fictional** client (Kestrel Precision
 Machining) mid-way through CMMC L2. React island `src/components/demo/DemoApp.jsx`; scoring in
 `src/lib/sprs.js` (tested by `scripts/sprs.test.mjs`). `src/data/demo/controls.json` is generated
 from the methodology repo's `data/nist-800-171-controls.yaml` — never hand-edit weights
@@ -132,6 +132,15 @@ Copy guidance: lead with plain language for the CEO (avoid jargon like "GRC", "r
 "POA&M" in headline copy); "GRC readiness" is fine as a category label in service/SEO copy and
 in partner/industry contexts. PE/VC and due-diligence framing was removed June 2026 — do not
 reintroduce it without direction.
+
+### Publishing an unlisted page
+To move a page from unlisted to public, change all five in one PR, or CI fails:
+1. Remove the `noindex` prop on `BaseLayout` in the page.
+2. Add the page to `site/src/data/sitemap-pages.json` (sitemap row + `.md` mirror).
+3. Add a `## Pages` entry to `site/public/llms.txt` (CI fails on an indexable page that is not listed).
+4. Build, then copy `site/dist/client/<page>.md` to `parity-baseline/<page>.md`. Check that the page has no build-date text first.
+5. Add the nav link in `site/src/components/Header.astro` (one array feeds desktop and mobile).
+To find every point, grep a public sibling page (for example `path-to-88`).
 
 ## Dev Workflow
 
