@@ -1,12 +1,12 @@
 /* Marketing explainer pages (/path-to-88, /soc2-observation-window).
    Ported from the methodology repo's inline CSS; page vars remapped to the
-   site tokens. --terra / --slate / --mark-gray stay page-scoped: no --er-*
+   site tokens. --terra / --slate / --mark-gray stay page-scoped (--terra now carries Klein blue; the name is historical): no --er-*
    equivalent, and --er-gold fails WCAG as a chart mark. Everything nests
    under .explainer so the generic SVG classes (.ax, .lbl, .num) can't leak.
-   Background is --er-paper (not --er-bg): the SVGs hardcode #FAF7F0 for
+   Background is --er-paper (not --er-bg): the SVGs hardcode #FAF6EE for
    pattern fills and knockouts, and the chart palette was validated on it. */
 .explainer {
-  --terra: #B14E26; --slate: #2D5F78; --mark-gray: #9A8E7A;
+  --terra: #002FA7; --slate: #002FA7; --mark-gray: #9A8E7A;
   background: var(--er-paper); color: var(--er-ink);
   font-family: var(--er-font-serif); font-size: 18px; line-height: 1.55;
 }

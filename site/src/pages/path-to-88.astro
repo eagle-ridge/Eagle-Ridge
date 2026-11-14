@@ -34,7 +34,7 @@ const description = 'What an eight-week CMMC Level 2 engagement does to your SPR
   <figure>
     <svg data-md-exclude viewBox="0 0 820 92" width="820" height="92" role="img"
          aria-label="Number line from minus 203 to 110 with the 88 conditional-pass threshold marked">
-      <line x1="30" y1="46" x2="790" y2="46" stroke="#D9D0BF" stroke-width="2"/>
+      <line x1="30" y1="46" x2="790" y2="46" stroke="#DCD3C3" stroke-width="2"/>
       <!-- ticks: scale x = 30 + (v+203)/313*760 -->
       <line x1="30" y1="38" x2="30" y2="54" stroke="#9A8E7A" stroke-width="2"/>
       <text x="30" y="76" text-anchor="middle" class="num">&#8722;203</text>
@@ -42,9 +42,9 @@ const description = 'What an eight-week CMMC Level 2 engagement does to your SPR
       <line x1="790" y1="38" x2="790" y2="54" stroke="#9A8E7A" stroke-width="2"/>
       <text x="790" y="76" text-anchor="middle" class="num">110</text>
       <text x="790" y="28" text-anchor="end" class="ax">perfect score</text>
-      <line x1="736.6" y1="32" x2="736.6" y2="60" stroke="#B14E26" stroke-width="3"/>
+      <line x1="736.6" y1="32" x2="736.6" y2="60" stroke="#002FA7" stroke-width="3"/>
       <text x="736.6" y="76" text-anchor="middle" class="num-t">88</text>
-      <circle cx="493.8" cy="46" r="7" fill="#44372F" stroke="#FAF7F0" stroke-width="2"/>
+      <circle cx="493.8" cy="46" r="7" fill="#3B3833" stroke="#FAF6EE" stroke-width="2"/>
       <text x="493.8" y="76" text-anchor="middle" class="num">&#8722;12</text>
       <text x="493.8" y="28" text-anchor="middle" class="ax">a typical first score</text>
     </svg>
@@ -70,15 +70,15 @@ const description = 'What an eight-week CMMC Level 2 engagement does to your SPR
          aria-label="Waterfall chart: score starts at 110, gaps reduce it to minus 12, remediation raises it to 91, above the 88 threshold">
       <!-- y(v) = 20 + (115 - v) * 2.345 ; baseline y(0)=289.7 -->
       <!-- threshold 88 -> y 83.3 -->
-      <line x1="30" y1="83.3" x2="790" y2="83.3" stroke="#1A1614"
+      <line x1="30" y1="83.3" x2="790" y2="83.3" stroke="#0E1230"
             stroke-width="1.5" stroke-dasharray="6 5"/>
       <text x="346" y="75" text-anchor="middle" class="thresh">88 &middot; conditional-pass line</text>
       <!-- zero baseline -->
-      <line x1="30" y1="289.7" x2="790" y2="289.7" stroke="#D9D0BF" stroke-width="1.5"/>
+      <line x1="30" y1="289.7" x2="790" y2="289.7" stroke="#DCD3C3" stroke-width="1.5"/>
       <text x="24" y="293" text-anchor="end" class="ax">0</text>
 
       <!-- 1: start 110  (0..110) -->
-      <rect x="40" y="31.7" width="72" height="258" rx="4" fill="#44372F">
+      <rect x="40" y="31.7" width="72" height="258" rx="4" fill="#3B3833">
         <title>Every contractor starts at 110</title></rect>
       <text x="76" y="24" text-anchor="middle" class="num">110</text>
       <text x="76" y="308" text-anchor="middle" class="lbl">start</text>
@@ -103,20 +103,20 @@ const description = 'What an eight-week CMMC Level 2 engagement does to your SPR
       <text x="400" y="336" text-anchor="middle" class="lbl">1-pt gaps</text>
 
       <!-- 5: today total -12 (0 down to -12) -->
-      <rect x="472" y="289.7" width="72" height="28.1" rx="4" fill="#44372F">
+      <rect x="472" y="289.7" width="72" height="28.1" rx="4" fill="#3B3833">
         <title>Score after an honest gap assessment: &#8722;12</title></rect>
       <text x="508" y="334" text-anchor="middle" class="num">&#8722;12</text>
       <text x="508" y="352" text-anchor="middle" class="lbl-b">week 2: the truth</text>
 
       <!-- 6: remediation rise -12 -> 91 -->
-      <rect x="580" y="76.3" width="72" height="241.5" rx="4" fill="#B14E26">
+      <rect x="580" y="76.3" width="72" height="241.5" rx="4" fill="#002FA7">
         <title>Remediation (weeks 2&#8211;4) closes the gaps: +103. SSP writing and review then prove the score holds.</title></rect>
       <text x="616" y="68" text-anchor="middle" class="num-t">+103</text>
       <text x="616" y="336" text-anchor="middle" class="lbl">remediation</text>
       <text x="616" y="352" text-anchor="middle" class="ax">weeks 2&ndash;4</text>
 
       <!-- 7: final 91 -->
-      <rect x="688" y="76.3" width="72" height="213.4" rx="4" fill="#44372F">
+      <rect x="688" y="76.3" width="72" height="213.4" rx="4" fill="#3B3833">
         <title>Submitted score: 91, with 19 small items on a POA&amp;M</title></rect>
       <text x="724" y="68" text-anchor="middle" class="num">91</text>
       <text x="724" y="308" text-anchor="middle" class="lbl-b">submitted</text>
@@ -155,27 +155,27 @@ const description = 'What an eight-week CMMC Level 2 engagement does to your SPR
       <defs>
         <pattern id="hatchT" width="7" height="7" patternTransform="rotate(45)"
                  patternUnits="userSpaceOnUse">
-          <rect width="7" height="7" fill="#FAF7F0"/>
-          <line x1="0" y1="0" x2="0" y2="7" stroke="#B14E26" stroke-width="2.4"/>
+          <rect width="7" height="7" fill="#FAF6EE"/>
+          <line x1="0" y1="0" x2="0" y2="7" stroke="#002FA7" stroke-width="2.4"/>
         </pattern>
       </defs>
       <!-- 6px per control, x0=150; 2px paper gaps between segments -->
       <text x="140" y="52" text-anchor="end" class="lbl-b">week 2</text>
       <rect x="150" y="30" width="406" height="34" rx="4" fill="#9A8E7A">
         <title>68 controls met</title></rect>
-      <rect x="558" y="30" width="250" height="34" rx="4" fill="#B14E26">
+      <rect x="558" y="30" width="250" height="34" rx="4" fill="#002FA7">
         <title>42 controls not met</title></rect>
       <text x="353" y="52" text-anchor="middle" class="num">68 met</text>
-      <text x="683" y="52" text-anchor="middle" class="num" fill="#FAF7F0">42 not met</text>
+      <text x="683" y="52" text-anchor="middle" class="num" fill="#FAF6EE">42 not met</text>
 
       <text x="140" y="122" text-anchor="end" class="lbl-b">week 7</text>
       <rect x="150" y="100" width="544" height="34" rx="4" fill="#9A8E7A">
         <title>91 controls met</title></rect>
-      <rect x="696" y="100" width="112" height="34" rx="4" fill="url(#hatchT)" stroke="#B14E26" stroke-width="1">
+      <rect x="696" y="100" width="112" height="34" rx="4" fill="url(#hatchT)" stroke="#002FA7" stroke-width="1">
         <title>19 one-point items on the POA&amp;M, each with a 180-day deadline</title></rect>
       <text x="422" y="122" text-anchor="middle" class="num">91 met</text>
       <text x="752" y="156" text-anchor="middle" class="ax">19 on POA&amp;M</text>
-      <line x1="752" y1="138" x2="752" y2="144" stroke="#B14E26" stroke-width="1.5"/>
+      <line x1="752" y1="138" x2="752" y2="144" stroke="#002FA7" stroke-width="1.5"/>
     </svg>
     <figcaption>Hatched items are open but accepted: a POA&amp;M is the DoD&rsquo;s
     formal way to let you certify now and close the small gaps inside 180 days.
@@ -206,7 +206,7 @@ const description = 'What an eight-week CMMC Level 2 engagement does to your SPR
         <text x="526" y="20">wk 5</text><text x="606" y="20">wk 6</text>
         <text x="686" y="20">wk 7</text><text x="766" y="20">wk 8+</text>
       </g>
-      <g stroke="#EAE4D4" stroke-width="1">
+      <g stroke="#EAE2D3" stroke-width="1">
         <line x1="166" y1="30" x2="166" y2="300"/><line x1="246" y1="30" x2="246" y2="300"/>
         <line x1="326" y1="30" x2="326" y2="300"/><line x1="406" y1="30" x2="406" y2="300"/>
         <line x1="486" y1="30" x2="486" y2="300"/><line x1="566" y1="30" x2="566" y2="300"/>
@@ -225,12 +225,12 @@ const description = 'What an eight-week CMMC Level 2 engagement does to your SPR
       </g>
       <rect x="166" y="38"  width="78"  height="24" rx="4" fill="#9A8E7A"><title>Week 1: intake, CUI determination, system boundary</title></rect>
       <rect x="246" y="76"  width="78"  height="24" rx="4" fill="#9A8E7A"><title>Week 2: all 110 controls assessed, honest score</title></rect>
-      <rect x="246" y="114" width="238" height="24" rx="4" fill="#B14E26"><title>Weeks 2&#8211;4: the score-moving fixes</title></rect>
+      <rect x="246" y="114" width="238" height="24" rx="4" fill="#002FA7"><title>Weeks 2&#8211;4: the score-moving fixes</title></rect>
       <rect x="326" y="152" width="238" height="24" rx="4" fill="#9A8E7A"><title>Weeks 3&#8211;5: 110 control narratives</title></rect>
       <rect x="486" y="190" width="158" height="24" rx="4" fill="#9A8E7A"><title>Weeks 5&#8211;6: iterate until zero critical findings</title></rect>
       <rect x="566" y="228" width="158" height="24" rx="4" fill="#9A8E7A"><title>Weeks 6&#8211;7: evidence binder, interview prep, score submission</title></rect>
       <rect x="726" y="266" width="78"  height="24" rx="4" fill="none"
-            stroke="#B14E26" stroke-width="2" stroke-dasharray="5 4"><title>Week 8+: the certified third-party assessment</title></rect>
+            stroke="#002FA7" stroke-width="2" stroke-dasharray="5 4"><title>Week 8+: the certified third-party assessment</title></rect>
       <text x="765" y="316" text-anchor="middle" class="ax">their exam, our prep</text>
     </svg>
     <figcaption>Remediation (weeks 2&ndash;4) is the heaviest lift; the dashed bar at
