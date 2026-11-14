@@ -3,20 +3,20 @@
    Drop-in CSS custom properties for eagleridge.io
    ------------------------------------------------------------
    Source of truth: institutional pitch deck.
-   Default theme is "Parchment". Three alternates are provided
+   Default theme is "Klein & Linen" (Yves Klein blue on linen). Three alternates are provided
    as [data-theme] blocks — set on <html> or <body>.
    ============================================================ */
 
 :root {
-  /* ---- Color · Parchment (default / light) ---- */
-  --er-bg:        #F6F2EA;  /* page background — warm paper      */
-  --er-paper:     #FAF7F0;  /* raised surfaces, cards            */
-  --er-ink:       #1A1614;  /* primary text, headlines           */
-  --er-ink-soft:  #44372F;  /* body copy, secondary text         */
-  --er-mute:      #756857;  /* captions, labels, meta — ~4.8:1 on --er-bg (WCAG AA) */
-  --er-rule:      #D9D0BF;  /* hairlines, borders, dividers      */
-  --er-accent:    #4A2F22;  /* deep umber — brand primary        */
-  --er-gold:      #B08A4E;  /* gold — sparingly, for emphasis    */
+  /* ---- Color · Klein & Linen (default / light) ---- */
+  --er-bg:        #F3ECE0;  /* page background — linen           */
+  --er-paper:     #FAF6EE;  /* raised surfaces, cards — pale linen */
+  --er-ink:       #0E1230;  /* primary text, headlines — blue-black */
+  --er-ink-soft:  #2E3352;  /* body copy, secondary text         */
+  --er-mute:      #5E6178;  /* captions, labels, meta — ~5.2:1 on --er-bg (WCAG AA) */
+  --er-rule:      #DCD3C3;  /* hairlines, borders, dividers      */
+  --er-accent:    #002FA7;  /* Yves Klein blue — brand primary   */
+  --er-gold:      #9C7A45;  /* flax — sparingly, for emphasis    */
 
   /* ---- Type families ---- */
   --er-font-serif: "Newsreader", Georgia, "Times New Roman", serif;          /* display / editorial */
@@ -57,15 +57,15 @@
 
   /* ---- Borders & shadows ---- */
   --er-border:   1px solid var(--er-rule);
-  --er-shadow-sm: 0 1px 2px rgba(26, 22, 20, 0.05);
-  --er-shadow-md: 0 8px 28px rgba(26, 22, 20, 0.08);
+  --er-shadow-sm: 0 1px 2px rgba(14, 18, 48, 0.05);
+  --er-shadow-md: 0 8px 28px rgba(14, 18, 48, 0.08);
 
   /* ---- Layout ---- */
   --er-maxw: 1200px;
   --er-gutter: clamp(1.25rem, 5vw, 5rem);
 
   /* ---- Surfaces ---- */
-  --surface-sunken: #EFE9DC;  /* recessed panel — markdown view, code wells */
+  --surface-sunken: #EAE2D3;  /* recessed panel — markdown view, code wells */
 
   /* ---- Motion ---- */
   --er-ease: cubic-bezier(0.4, 0, 0.2, 1);

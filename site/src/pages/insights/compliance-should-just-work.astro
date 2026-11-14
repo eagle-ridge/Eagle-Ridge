@@ -203,9 +203,9 @@ const jsonLd = JSON.stringify({
         <div class="fig-label">// Fig. 5 &nbsp;·&nbsp; The Overlap</div>
         <svg viewBox="0 0 700 320" xmlns="http://www.w3.org/2000/svg" aria-label="Overlapping frameworks share a common core of controls">
           <g id="vennG">
-            <circle cx="290" cy="140" r="95" fill="rgba(74,47,34,.07)" stroke="var(--ink)" stroke-width="1.1"/>
-            <circle cx="410" cy="140" r="95" fill="rgba(74,47,34,.07)" stroke="var(--ink)" stroke-width="1.1"/>
-            <circle cx="350" cy="225" r="95" fill="rgba(74,47,34,.07)" stroke="var(--ink)" stroke-width="1.1"/>
+            <circle cx="290" cy="140" r="95" fill="rgba(0,47,167,.07)" stroke="var(--ink)" stroke-width="1.1"/>
+            <circle cx="410" cy="140" r="95" fill="rgba(0,47,167,.07)" stroke="var(--ink)" stroke-width="1.1"/>
+            <circle cx="350" cy="225" r="95" fill="rgba(0,47,167,.07)" stroke="var(--ink)" stroke-width="1.1"/>
             <circle cx="350" cy="168" r="26" fill="var(--accent)" opacity=".85"/>
             <text x="350" y="173" text-anchor="middle" font-size="11" fill="var(--paper)" font-family="var(--mono)" letter-spacing=".1em">CORE</text>
           </g>
@@ -301,7 +301,7 @@ const jsonLd = JSON.stringify({
       const r = document.createElementNS(ns,'rect');
       r.setAttribute('x',x); r.setAttribute('y',y);
       r.setAttribute('width',xMax-x); r.setAttribute('height',layerH-4);
-      r.setAttribute('fill', i%2 ? 'rgba(43,35,22,.05)' : 'rgba(74,47,34,.06)');
+      r.setAttribute('fill', i%2 ? 'rgba(14,18,48,.05)' : 'rgba(0,47,167,.06)');
       r.setAttribute('stroke','var(--line)'); r.setAttribute('stroke-width','0.9');
       const t = document.createElementNS(ns,'text');
       t.setAttribute('x',x+12); t.setAttribute('y',y+18);
@@ -314,8 +314,8 @@ const jsonLd = JSON.stringify({
       note.setAttribute('fill','var(--accent)');
       note.style.opacity='0'; note.style.transition='opacity .25s';
       note.textContent = s.note;
-      grp.addEventListener('mouseenter',()=>{note.style.opacity='1'; r.setAttribute('fill','rgba(74,47,34,.13)')});
-      grp.addEventListener('mouseleave',()=>{note.style.opacity='0'; r.setAttribute('fill', i%2 ? 'rgba(43,35,22,.05)' : 'rgba(74,47,34,.06)')});
+      grp.addEventListener('mouseenter',()=>{note.style.opacity='1'; r.setAttribute('fill','rgba(0,47,167,.13)')});
+      grp.addEventListener('mouseleave',()=>{note.style.opacity='0'; r.setAttribute('fill', i%2 ? 'rgba(14,18,48,.05)' : 'rgba(0,47,167,.06)')});
       grp.addEventListener('click',()=>{const v=note.style.opacity==='1';note.style.opacity=v?'0':'1'});
       grp.appendChild(r); grp.appendChild(t); grp.appendChild(note);
       g.appendChild(grp);
@@ -457,14 +457,14 @@ const jsonLd = JSON.stringify({
      (createElementNS), which Astro's scoped-style hashing would not reach.
      Token values are kept literal: they already equal the brand tokens. */
   .manifesto{
-    --paper:#F6F2EA;
-    --paper-deep:#EFE9DC;
-    --ink:#1A1614;
-    --ink-soft:#44372F;
-    --accent:#4A2F22;
-    --gold:#B08A4E;
-    --line:#D9D0BF;
-    --line-soft:rgba(26,22,20,.12);
+    --paper:#F3ECE0;
+    --paper-deep:#EAE2D3;
+    --ink:#0E1230;
+    --ink-soft:#2E3352;
+    --accent:#002FA7;
+    --gold:#9C7A45;
+    --line:#DCD3C3;
+    --line-soft:rgba(14,18,48,.12);
     --serif:"Newsreader",Georgia,"Times New Roman",serif;
     --sans:"IBM Plex Sans",system-ui,-apple-system,sans-serif;
     --mono:"IBM Plex Mono","SFMono-Regular",ui-monospace,monospace;
@@ -511,7 +511,7 @@ const jsonLd = JSON.stringify({
   .manifesto p{margin-bottom:24px}
   .manifesto p em{font-style:italic}
   .manifesto .small{font-size:15px;color:var(--ink-soft)}
-  .manifesto a{color:var(--accent);text-decoration:none;border-bottom:1px solid rgba(74,47,34,.35)}
+  .manifesto a{color:var(--accent);text-decoration:none;border-bottom:1px solid rgba(0,47,167,.35)}
   .manifesto a:hover{border-bottom-color:var(--accent)}
   .manifesto a:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:2px}
 
@@ -600,7 +600,7 @@ const jsonLd = JSON.stringify({
   .manifesto .notes li b{color:var(--ink);font-weight:600}
   .manifesto .notes a.back{border-bottom:none;font-family:var(--mono);font-size:11px;margin-left:6px;opacity:.7}
   .manifesto .notes a.back:hover{opacity:1}
-  .manifesto .notes li:target{background:rgba(176,138,78,.12);outline:1px solid var(--line);outline-offset:6px}
-  .manifesto .notes p.note-form:target{background:rgba(176,138,78,.12);outline:1px solid var(--line);outline-offset:6px}
+  .manifesto .notes li:target{background:rgba(156,122,69,.12);outline:1px solid var(--line);outline-offset:6px}
+  .manifesto .notes p.note-form:target{background:rgba(156,122,69,.12);outline:1px solid var(--line);outline-offset:6px}
   </style>
 </BaseLayout>

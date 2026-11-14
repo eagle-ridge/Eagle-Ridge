@@ -32,7 +32,7 @@
   font-size: 0.9375rem;
   line-height: 1.45;
   overflow: hidden;
-  box-shadow: 0 18px 50px -24px rgba(26, 22, 20, 0.35);
+  box-shadow: 0 18px 50px -24px rgba(14, 18, 48, 0.35);
 }
 .dm-app *, .dm-app *::before, .dm-app *::after { box-sizing: border-box; }
 .dm-app button { font: inherit; color: inherit; background: none; border: 0; padding: 0; cursor: pointer; text-align: left; }
@@ -334,7 +334,7 @@
   .dm-mbar {
     grid-area: mbar; display: flex; align-items: center; gap: 12px; justify-content: space-between;
     position: sticky; bottom: 0; z-index: 2; padding: 8px 12px; background: var(--er-paper);
-    border-top: 1px solid var(--er-ink); box-shadow: 0 -6px 16px -10px rgba(26, 22, 20, 0.3);
+    border-top: 1px solid var(--er-ink); box-shadow: 0 -6px 16px -10px rgba(14, 18, 48, 0.3);
   }
   .dm-mbar__score b { font: 500 1.4rem var(--er-font-serif); }
   .dm-mbar .dm-btn { padding: 10px 14px; min-height: 44px; display: inline-flex; align-items: center; }
