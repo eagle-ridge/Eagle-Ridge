@@ -476,6 +476,12 @@ const jsonLd = JSON.stringify({
     font-weight:400;
     -webkit-font-smoothing:antialiased;
   }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme]) .manifesto {
+      --paper:#0B0F24; --paper-deep:#080B1C; --ink:#F1EADC; --ink-soft:#CFC8B8;
+      --accent:#8DA6FF; --gold:#C9A66B; --line:#262B4A; --line-soft:rgba(241,234,220,.12);
+    }
+  }
   .manifesto *{margin:0;padding:0;box-sizing:border-box}
   .manifesto p b{color:var(--ink);font-weight:600}
   .manifesto .spine{

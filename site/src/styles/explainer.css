@@ -10,6 +10,20 @@
   background: var(--er-paper); color: var(--er-ink);
   font-family: var(--er-font-serif); font-size: 18px; line-height: 1.55;
 }
+/* Dark: the figures hardcode light-palette hex as SVG attributes; CSS
+   outranks presentation attributes, so remap by attribute value here. */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme]) .explainer { --terra: var(--er-accent); --slate: var(--er-accent); }
+  :root:not([data-theme]) .explainer svg [fill="#FAF6EE"] { fill: var(--er-paper); }
+  :root:not([data-theme]) .explainer svg [stroke="#FAF6EE"] { stroke: var(--er-paper); }
+  :root:not([data-theme]) .explainer svg [stroke="#DCD3C3"],
+  :root:not([data-theme]) .explainer svg [stroke="#EAE2D3"] { stroke: var(--er-rule); }
+  :root:not([data-theme]) .explainer svg [fill="#3B3833"] { fill: #D8D0C0; }
+  :root:not([data-theme]) .explainer svg [stroke="#0E1230"] { stroke: var(--er-ink); }
+  :root:not([data-theme]) .explainer svg [fill="#002FA7"] { fill: var(--er-accent); }
+  :root:not([data-theme]) .explainer svg [stroke="#002FA7"] { stroke: var(--er-accent); }
+  :root:not([data-theme]) .explainer svg [stroke="#B9B093"] { stroke: #4A4A5E; }
+}
 .explainer .wrap { max-width: 860px; margin: 0 auto; padding: 64px 28px 80px; }
 .explainer .prose { max-width: 640px; padding: 0; }
 .explainer .eyebrow { font-family: var(--er-font-mono); font-size: 12px; letter-spacing: .14em;

@@ -8,6 +8,7 @@
    ============================================================ */
 
 :root {
+  color-scheme: light;
   /* ---- Color · Klein & Linen (default / light) ---- */
   --er-bg:        #F3ECE0;  /* page background — linen           */
   --er-paper:     #FAF6EE;  /* raised surfaces, cards — pale linen */
@@ -71,6 +72,27 @@
   --er-ease: cubic-bezier(0.4, 0, 0.2, 1);
   --er-dur-fast: 0.15s;  /* hovers, menus */
   --er-dur-base: 0.25s;  /* view cross-fade */
+}
+
+/* ---- Color · Klein Night (dark) ----
+   Follows the visitor's OS setting. Pure IKB is too dark to read on a
+   dark ground (~2:1), so the accent lifts to a lighter Klein blue.
+   :not([data-theme]) lets an explicit theme attribute win. */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme]) {
+    color-scheme: dark;
+    --er-bg:        #0B0F24;  /* Klein night — page background     */
+    --er-paper:     #12173A;  /* raised surfaces, cards            */
+    --er-ink:       #F1EADC;  /* linen — primary text              */
+    --er-ink-soft:  #CFC8B8;  /* body copy                         */
+    --er-mute:      #9C9AAE;  /* captions — ~6.9:1 on --er-bg      */
+    --er-rule:      #262B4A;  /* hairlines                         */
+    --er-accent:    #8DA6FF;  /* Klein blue, lifted for dark ground — 8.2:1 */
+    --er-gold:      #C9A66B;  /* flax                              */
+    --er-shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.3);
+    --er-shadow-md: 0 8px 28px rgba(0, 0, 0, 0.4);
+    --surface-sunken: #080B1C;
+  }
 }
 
 /* ---- Theme · Slate (cool, institutional) ---- */

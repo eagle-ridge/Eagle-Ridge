@@ -414,6 +414,10 @@ const cta = `<p>If you are trying to work out where your firm fits in this marke
   .map-body .table-row:hover { background: var(--er-bg); }
   .map-body .table-row.dim { opacity: 0.3; pointer-events: none; }
   .map-body .table-row.selected { background: #FAEEDA; }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme]) .map-body .table-row.selected,
+    :root:not([data-theme]) .map-body section.sources li:target { background: #2A2440; }
+  }
   .map-body .table-row td { padding: 9px 12px; vertical-align: middle; color: var(--er-ink-soft); }
   .map-body .table-row td:first-child { color: var(--er-ink); }
   .map-body .table-row td:first-child > * { vertical-align: middle; }

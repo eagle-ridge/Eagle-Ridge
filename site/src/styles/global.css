@@ -11,6 +11,14 @@
   --status-ok: #27500A;
   --status-err: #B14E26;
 }
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme]) {
+    --status-ok: #8FC48A;
+    --status-err: #F08A5D;
+  }
+  /* the eagle mark is dark line art; invert it rather than ship a second file */
+  :root:not([data-theme]) .lockup img { filter: invert(1) sepia(0.15); }
+}
 
 *, *::before, *::after { box-sizing: border-box; }
 
