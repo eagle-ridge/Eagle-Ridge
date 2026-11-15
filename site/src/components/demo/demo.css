@@ -232,7 +232,7 @@
 .dm-chip:hover { border-color: var(--er-accent) !important; }
 
 /* documents */
-.dm-paper { background: #fff; border: 1px solid var(--er-rule); box-shadow: var(--er-shadow-sm); padding: 28px 32px; border-radius: var(--er-radius-sm); }
+.dm-paper { background: var(--er-paper); border: 1px solid var(--er-rule); box-shadow: var(--er-shadow-sm); padding: 28px 32px; border-radius: var(--er-radius-sm); }
 .dm-paper__meta { display: flex; align-items: center; gap: 8px; font-size: 0.8rem; color: var(--er-mute); margin-bottom: 12px; }
 .dm-paper__foot { border-top: 1px solid var(--er-rule); padding-top: 12px; margin-top: 20px !important; }
 .dm-callout { padding: 10px 14px; border-left: 3px solid var(--er-gold); background: var(--er-bg); }
@@ -348,4 +348,13 @@
 @media (max-width: 360px) {
   .dm-tabs { gap: 4px; padding: 8px 8px 0; }
   .dm-tab { padding: 8px 6px !important; font-size: 0.75rem; }
+}
+
+/* Dark (OS setting): lift status hues so they read on the night ground */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme]) .dm-app, :root:not([data-theme]) .dm-root {
+    --dm-ok: #8FC48A; --dm-warn: #D9B26A; --dm-gold-text: #D9B26A; --dm-bad: #EE8A7A;
+  }
+  :root:not([data-theme]) .dm-app .dm-btn:not(.dm-btn--ghost) { color: var(--er-bg) !important; }
+  :root:not([data-theme]) .dm-phase-dot--done { color: var(--er-bg); }
 }
