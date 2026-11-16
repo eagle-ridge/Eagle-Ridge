@@ -148,7 +148,7 @@ Software helps you track and document controls. It does not, by itself, get you 
     Enterprise
 
     $$$
-17. [LogicGate↗](https://www.logicgate.com/)
+17. [LogicGate↗](https://www.logicgate.ai/)
     Enterprise GRC
 
     Modern, configurable no-code IRM; more flexible than Archer and enterprise-priced.
@@ -386,7 +386,7 @@ Software helps you track and document controls. It does not, by itself, get you 
     Vendor risk
 
     $$$
-44. [Prevalent↗](https://www.prevalent.net/)
+44. [Prevalent↗](https://mitratech.com/products/prevalent/)
     Third-party risk
 
     Program-led, enterprise-focused third-party risk management.
@@ -497,7 +497,7 @@ Software helps you track and document controls. It does not, by itself, get you 
 
 ## All tools, A→Z
 
-[Anecdotes](https://www.anecdotes.ai/) · [Apptega](https://www.apptega.com/) · [Archer](https://www.archerirm.com/) · [BigID](https://bigid.com/) · [BitSight](https://www.bitsight.com/) · [Centraleyes](https://www.centraleyes.com/) · [CISO Assistant](https://intuitem.com/ciso-assistant/) · [ComplianceForge](https://complianceforge.com/) · [Cyturus](https://cyturus.com/) · [DataGrail](https://www.datagrail.io/) · [Diligent](https://www.diligent.com/) · [Drata](https://drata.com/) · [Duo Security](https://duo.com/) · [eramba](https://www.eramba.org/) · [Exostar](https://www.exostar.com/) · [FutureFeed](https://futurefeed.co/) · [Greypike](https://greypike.com/) · [Hyperproof](https://hyperproof.io/) · [IBM OpenPages](https://www.ibm.com/products/openpages) · [IntelliGRC](https://intelligrc.com/) · [LogicGate](https://www.logicgate.com/) · [MetricStream](https://www.metricstream.com/) · [Microsoft GCC High](https://www.microsoft.com/en-us/microsoft-365/government) · [Mycroft](https://www.mycroft.io/) · [Oneleet](https://www.oneleet.com/) · [OneTrust](https://www.onetrust.com/) · [OpenGRC](https://opengrc.com/) · [Optro](https://optro.ai/) · [Osano](https://www.osano.com/) · [Panorays](https://www.panorays.com/) · [Paramify](https://www.paramify.com/) · [Prevalent](https://www.prevalent.net/) · [PreVeil](https://www.preveil.com/) · [Proofpoint](https://www.proofpoint.com/) · [Risk Cognizance](https://riskcognizance.com/) · [SAP GRC](https://www.sap.com/products/financial-management/grc.html) · [Scrut Automation](https://scrut.io/) · [Scytale](https://scytale.ai/) · [Secureframe](https://secureframe.com/) · [Securiti](https://securiti.ai/) · [SecurityScorecard](https://securityscorecard.com/) · [ServiceNow GRC](https://www.servicenow.com/products/governance-risk-and-compliance.html) · [SimpleRisk](https://www.simplerisk.com/) · [SmartSuite](https://www.smartsuite.com/) · [Sprinto](https://sprinto.com/) · [Thoropass](https://thoropass.com/) · [Totem](https://www.totem.tech/) · [TrustArc](https://trustarc.com/) · [TrustCloud](https://www.trustcloud.ai/) · [UpGuard](https://www.upguard.com/) · [Vanta](https://www.vanta.com/) · [Virtru](https://www.virtru.com/) · [Workiva](https://www.workiva.com/) · [ZenGRC](https://www.zengrc.com/)
+[Anecdotes](https://www.anecdotes.ai/) · [Apptega](https://www.apptega.com/) · [Archer](https://www.archerirm.com/) · [BigID](https://bigid.com/) · [BitSight](https://www.bitsight.com/) · [Centraleyes](https://www.centraleyes.com/) · [CISO Assistant](https://intuitem.com/ciso-assistant/) · [ComplianceForge](https://complianceforge.com/) · [Cyturus](https://cyturus.com/) · [DataGrail](https://www.datagrail.io/) · [Diligent](https://www.diligent.com/) · [Drata](https://drata.com/) · [Duo Security](https://duo.com/) · [eramba](https://www.eramba.org/) · [Exostar](https://www.exostar.com/) · [FutureFeed](https://futurefeed.co/) · [Greypike](https://greypike.com/) · [Hyperproof](https://hyperproof.io/) · [IBM OpenPages](https://www.ibm.com/products/openpages) · [IntelliGRC](https://intelligrc.com/) · [LogicGate](https://www.logicgate.ai/) · [MetricStream](https://www.metricstream.com/) · [Microsoft GCC High](https://www.microsoft.com/en-us/microsoft-365/government) · [Mycroft](https://www.mycroft.io/) · [Oneleet](https://www.oneleet.com/) · [OneTrust](https://www.onetrust.com/) · [OpenGRC](https://opengrc.com/) · [Optro](https://optro.ai/) · [Osano](https://www.osano.com/) · [Panorays](https://www.panorays.com/) · [Paramify](https://www.paramify.com/) · [Prevalent](https://mitratech.com/products/prevalent/) · [PreVeil](https://www.preveil.com/) · [Proofpoint](https://www.proofpoint.com/) · [Risk Cognizance](https://riskcognizance.com/) · [SAP GRC](https://www.sap.com/products/financial-management/grc.html) · [Scrut Automation](https://scrut.io/) · [Scytale](https://scytale.ai/) · [Secureframe](https://secureframe.com/) · [Securiti](https://securiti.ai/) · [SecurityScorecard](https://securityscorecard.com/) · [ServiceNow GRC](https://www.servicenow.com/products/governance-risk-and-compliance.html) · [SimpleRisk](https://www.simplerisk.com/) · [SmartSuite](https://www.smartsuite.com/) · [Sprinto](https://sprinto.com/) · [Thoropass](https://thoropass.com/) · [Totem](https://www.totem.tech/) · [TrustArc](https://trustarc.com/) · [TrustCloud](https://www.trustcloud.ai/) · [UpGuard](https://www.upguard.com/) · [Vanta](https://www.vanta.com/) · [Virtru](https://www.virtru.com/) · [Workiva](https://www.workiva.com/) · [ZenGRC](https://www.zengrc.com/)
 
 ## Frequently asked questions
 

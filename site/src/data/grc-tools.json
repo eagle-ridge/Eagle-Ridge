@@ -164,7 +164,7 @@
     "frameworks": ["GDPR", "Privacy", "Vendor risk"],
     "market": "Enterprise",
     "website": "https://www.onetrust.com/",
-    "lastReviewed": "2026-09-14",
+    "lastReviewed": "2026-11-16",
     "published": true
   },
   {
@@ -175,8 +175,8 @@
     "blurb": "Modern, configurable no-code IRM; more flexible than Archer and enterprise-priced.",
     "frameworks": ["Vendor risk", "SOC 2", "ISO 27001"],
     "market": "Enterprise",
-    "website": "https://www.logicgate.com/",
-    "lastReviewed": "2026-09-14",
+    "website": "https://www.logicgate.ai/",
+    "lastReviewed": "2026-11-16",
     "published": true
   },
   {
@@ -200,7 +200,7 @@
     "frameworks": [],
     "market": "Enterprise",
     "website": "https://www.diligent.com/",
-    "lastReviewed": "2026-09-14",
+    "lastReviewed": "2026-11-16",
     "published": true
   },
   {
@@ -344,7 +344,7 @@
     "frameworks": ["NIST 800-171", "CMMC"],
     "market": "SMB",
     "website": "https://duo.com/",
-    "lastReviewed": "2026-09-14",
+    "lastReviewed": "2026-11-16",
     "published": true
   },
   {
@@ -356,7 +356,7 @@
     "frameworks": ["Vendor risk"],
     "market": "Enterprise",
     "website": "https://www.bitsight.com/",
-    "lastReviewed": "2026-09-14",
+    "lastReviewed": "2026-11-16",
     "published": true
   },
   {
@@ -368,7 +368,7 @@
     "frameworks": ["Vendor risk"],
     "market": "Enterprise",
     "website": "https://securityscorecard.com/",
-    "lastReviewed": "2026-09-14",
+    "lastReviewed": "2026-11-16",
     "published": true
   },
   {
@@ -403,8 +403,8 @@
     "blurb": "Program-led, enterprise-focused third-party risk management.",
     "frameworks": ["Vendor risk"],
     "market": "Enterprise",
-    "website": "https://www.prevalent.net/",
-    "lastReviewed": "2026-09-14",
+    "website": "https://mitratech.com/products/prevalent/",
+    "lastReviewed": "2026-11-16",
     "published": true
   },
   {
@@ -416,7 +416,7 @@
     "frameworks": ["Privacy", "GDPR"],
     "market": "Enterprise",
     "website": "https://trustarc.com/",
-    "lastReviewed": "2026-09-14",
+    "lastReviewed": "2026-11-16",
     "published": true
   },
   {
@@ -428,7 +428,7 @@
     "frameworks": ["Privacy", "GDPR"],
     "market": "Enterprise",
     "website": "https://securiti.ai/",
-    "lastReviewed": "2026-09-14",
+    "lastReviewed": "2026-11-16",
     "published": true
   },
   {
@@ -452,7 +452,7 @@
     "frameworks": ["Privacy", "GDPR"],
     "market": "Mid-market",
     "website": "https://www.datagrail.io/",
-    "lastReviewed": "2026-09-14",
+    "lastReviewed": "2026-11-16",
     "published": true
   },
   {
@@ -464,7 +464,7 @@
     "frameworks": ["Privacy", "GDPR"],
     "market": "Mid-market",
     "website": "https://www.osano.com/",
-    "lastReviewed": "2026-09-14",
+    "lastReviewed": "2026-11-16",
     "published": true
   },
   {
